@@ -1,6 +1,6 @@
+import { SunIcon, MoonIcon } from "@heroicons/react/solid";
 import { useTheme } from "next-themes";
 import React from "react";
-import { SunIcon, MoonIcon } from "@heroicons/react/solid";
 
 const ThemeToggleButton = () => {
   const { theme, setTheme } = useTheme();
