@@ -40,6 +40,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
           <Form>
             <label htmlFor="name">Name:</label>
             <Field
+              id="name"
               name="name"
               placeholder="name"
               type="text"
@@ -48,6 +49,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
             <ErrorMessage name="name" />
             <label htmlFor="password">Password:</label>
             <Field
+              id="password"
               name="password"
               placeholder="password"
               type="password"
