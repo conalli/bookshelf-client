@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { rest } from "msw";
+import { PathParams, rest } from "msw";
 import { DelACCReq, DelACCRes, DelCMDReq, DelCMDRes, ErrRes, LogInReq, LogInRes, SetCMDReq, SetCMDRes, SignUpReq, SignUpRes} from "./mockTypes";
 import { mockUsers } from "./mockUserData";
 // import { ReqURL } from "../components/Auth/endpoints";
@@ -17,7 +17,7 @@ const ReqURL = () => {
 }
 
 export const handlers = [
-  rest.post<LogInReq, {}, LogInRes | ErrRes>(`${ReqURL().base}login`, (req, res, ctx) => {
+  rest.post<LogInReq, PathParams, LogInRes | ErrRes>(`${ReqURL().base}login`, (req, res, ctx) => {
     const {name, password} = req.body;
     const found = mockUsers.find((user) => user.name === name && user.password === password)
     if (found) {
@@ -32,7 +32,7 @@ export const handlers = [
     )
     }
   ),
-  rest.post<SignUpReq, {}, SignUpRes | ErrRes>(`${ReqURL().base}signup`, (req, res, ctx) => {
+  rest.post<SignUpReq, PathParams, SignUpRes | ErrRes>(`${ReqURL().base}signup`, (req, res, ctx) => {
     const {name, password} = req.body;
     const found = mockUsers.find((user) => user.name === name && user.password === password)
     if (!found) {
@@ -46,7 +46,7 @@ export const handlers = [
       ctx.json({"status": "error"}),
     )
     }),
-  rest.get(`${ReqURL().get!}:apiKey`, (req, res, ctx) => {
+  rest.get(`${ReqURL().get}:apiKey`, (req, res, ctx) => {
     const { apiKey } = req.params;
     const found = mockUsers.find((user) => user.apiKey === apiKey)
     if (!found) {
@@ -60,7 +60,7 @@ export const handlers = [
       ctx.json(found.commands),
     )
     }),
-  rest.put<SetCMDReq, {apiKey: string}, SetCMDRes | ErrRes>(`${ReqURL().set!}:apiKey`, (req, res, ctx) => {
+  rest.put<SetCMDReq, {apiKey: string}, SetCMDRes | ErrRes>(`${ReqURL().set}:apiKey`, (req, res, ctx) => {
     const { apiKey } = req.params;
     const {cmd, url} = req.body;
     const found = mockUsers.find((user) => user.apiKey === apiKey)
@@ -76,7 +76,7 @@ export const handlers = [
       ctx.json({numUpdated: 1}),
     )
     }),
-  rest.put<DelCMDReq, {apiKey: string}, DelCMDRes | ErrRes>(`${ReqURL().del!}:apiKey`, (req, res, ctx) => {
+  rest.put<DelCMDReq, {apiKey: string}, DelCMDRes | ErrRes>(`${ReqURL().del}:apiKey`, (req, res, ctx) => {
     const { apiKey } = req.params;
     const {id, cmd} = req.body;
     const found = mockUsers.find((user) => user.apiKey === apiKey && user.id === id)
@@ -92,7 +92,7 @@ export const handlers = [
       ctx.json({numUpdated: 1}),
     )
     }),
-  rest.delete<DelACCReq, {apiKey: string}, DelACCRes | ErrRes>(`${ReqURL().delAcc!}:apiKey`, (req, res, ctx) => {
+  rest.delete<DelACCReq, {apiKey: string}, DelACCRes | ErrRes>(`${ReqURL().delAcc}:apiKey`, (req, res, ctx) => {
     const { apiKey } = req.params;
     const {id, name, password} = req.body;
     const found = mockUsers.find((user) => user.apiKey === apiKey && user.id === id && user.password === password)
