@@ -39,7 +39,9 @@ const BookshelfLogo: React.FC<BookshelfLogoProps> = ({ darkMode, colors }) => {
         viewBox="0 0 800 270"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        role="img"
       >
+        <title>Bookshelf Logo</title>
         <rect width="800" height="270" fill="none" />
         <rect y="244" width="800" height="25" fill={logoColors.shelf} />
         <path
