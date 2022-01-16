@@ -38,7 +38,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <label htmlFor="name"></label>
+            <label htmlFor="name">Name:</label>
             <Field
               name="name"
               placeholder="name"
@@ -46,7 +46,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
               disabled={isSubmitting}
             />
             <ErrorMessage name="name" />
-            <label htmlFor="password"></label>
+            <label htmlFor="password">Password:</label>
             <Field
               name="password"
               placeholder="password"
