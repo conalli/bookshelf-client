@@ -15,6 +15,8 @@ const ThemeToggleButton = () => {
     <button
       onClick={toggleColorMode}
       className="inline-flex items-center justify-center w-10 h-10 mr-2 transition duration-150 focus:shadow-outline"
+      type="button"
+      aria-label="dark mode"
     >
       {theme === "dark" ? (
         <SunIcon className="p-2 text-orange-200 hover:text-orange-300 hover:bg-gray-700 rounded-sm transition duration-300" />
