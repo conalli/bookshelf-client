@@ -17,9 +17,9 @@ const ThemeToggleButton = () => {
       className="inline-flex items-center justify-center w-10 h-10 mr-2 transition duration-150 focus:shadow-outline"
     >
       {theme === "dark" ? (
-        <SunIcon className="text-orange-300 p-2 hover:bg-gray-600 rounded-md" />
+        <SunIcon className="p-2 text-orange-200 hover:text-orange-300 hover:bg-gray-700 rounded-sm transition duration-300" />
       ) : (
-        <MoonIcon className="text-gray-600 p-2 hover:bg-gray-300 rounded-md" />
+        <MoonIcon className="p-2 text-gray-500 hover:text-gray-50 hover:bg-gray-300 rounded-sm transition duration-300" />
       )}
     </button>
   );

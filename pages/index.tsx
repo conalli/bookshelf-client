@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import BookshelfLogo from "../components/BookshelfLogo";
-import ThemeToggleButton from "../components/ToggleTheme";
+import ThemeToggleButton from "../components/ThemeToggleButton";
 
 const Home: NextPage = () => {
   const router = useRouter();
