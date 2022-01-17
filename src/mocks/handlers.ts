@@ -1,17 +1,17 @@
 import { PathParams, rest } from "msw";
+import { ErrRes } from "./mockTypes";
 import {
   DelACCReq,
   DelACCRes,
   DelCMDReq,
   DelCMDRes,
-  ErrRes,
   LogInReq,
   LogInRes,
-  SetCMDReq,
-  SetCMDRes,
+  AddCMDReq,
+  AddCMDRes,
   SignUpReq,
   SignUpRes,
-} from "./mockTypes";
+} from "../utils/APITypes";
 import { mockUsers } from "./mockUserData";
 import { ReqURL } from "../utils/APIEndpoints";
 
@@ -56,8 +56,8 @@ export const handlers = [
     }
     return res(ctx.status(200), ctx.json(found.commands));
   }),
-  rest.put<SetCMDReq, { apiKey: string }, SetCMDRes | ErrRes>(
-    `${ReqURL.setCmd}:apiKey`,
+  rest.put<AddCMDReq, { apiKey: string }, AddCMDRes | ErrRes>(
+    `${ReqURL.addCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
       const { cmd, url } = req.body;
