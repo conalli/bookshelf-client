@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { PathParams, rest } from "msw";
 import {
   DelACCReq,
@@ -14,23 +13,11 @@ import {
   SignUpRes,
 } from "./mockTypes";
 import { mockUsers } from "./mockUserData";
-// import { ReqURL } from "../components/Auth/endpoints";
-
-// TODO: Fix URLs
-
-const ReqURL = () => {
-  return {
-    base: "",
-    get: "",
-    set: "",
-    del: "",
-    delAcc: "",
-  };
-};
+import { ReqURL } from "../utils/APIEndpoints";
 
 export const handlers = [
-  rest.post<LogInReq, {}, LogInRes | ErrRes>(
-    `${ReqURL().base}login`,
+  rest.post<LogInReq, PathParams, LogInRes | ErrRes>(
+    `${ReqURL.base}login`,
     (req, res, ctx) => {
       const { name, password } = req.body;
       const found = mockUsers.find(
@@ -46,7 +33,7 @@ export const handlers = [
     }
   ),
   rest.post<SignUpReq, PathParams, SignUpRes | ErrRes>(
-    `${ReqURL().base}signup`,
+    `${ReqURL.base}signup`,
     (req, res, ctx) => {
       const { name, password } = req.body;
       const found = mockUsers.find(
@@ -61,7 +48,7 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  rest.get(`${ReqURL().get}:apiKey`, (req, res, ctx) => {
+  rest.get(`${ReqURL.getCmds}:apiKey`, (req, res, ctx) => {
     const { apiKey } = req.params;
     const found = mockUsers.find((user) => user.apiKey === apiKey);
     if (!found) {
@@ -70,7 +57,7 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(found.commands));
   }),
   rest.put<SetCMDReq, { apiKey: string }, SetCMDRes | ErrRes>(
-    `${ReqURL().set}:apiKey`,
+    `${ReqURL.setCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
       const { cmd, url } = req.body;
@@ -83,7 +70,7 @@ export const handlers = [
     }
   ),
   rest.put<DelCMDReq, { apiKey: string }, DelCMDRes | ErrRes>(
-    `${ReqURL().del}:apiKey`,
+    `${ReqURL.delCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
       const { id, cmd } = req.body;
@@ -98,7 +85,7 @@ export const handlers = [
     }
   ),
   rest.delete<DelACCReq, { apiKey: string }, DelACCRes | ErrRes>(
-    `${ReqURL().delAcc}:apiKey`,
+    `${ReqURL.delAccount}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
       const { id, name, password } = req.body;
