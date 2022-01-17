@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
-import { useRouter } from "next/router";
 import React from "react";
 import { object, string } from "yup";
+import { useAuth } from "../../hooks/useAuth";
 
 type SignInFormProps = {
   type: "Sign up" | "Log in";
@@ -13,7 +13,7 @@ type FormValues = {
 };
 
 const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
-  const router = useRouter();
+  const { logIn } = useAuth();
   const schema = object().shape({
     name: string()
       .min(3, "Please enter a name with 3 or more characters")
@@ -31,9 +31,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
           values,
           { setSubmitting }: FormikHelpers<FormValues>
         ) => {
-          console.log(`${type}: values:${values}`);
-          setSubmitting(false);
-          router.push("/dashboard");
+          logIn({ type, values, setSubmitting });
         }}
       >
         {({ isSubmitting }) => (
