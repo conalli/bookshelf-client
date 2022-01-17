@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Hydrate } from "react-query/hydration";
 import { ThemeProvider } from "next-themes";
 import { useState } from "react";
+import { AuthProvider } from "../src/hooks/useAuth";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   import("../src/mocks/setupMocks").then(({ setupMocks }) => {
@@ -15,14 +16,16 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-        </ThemeProvider>
-      </Hydrate>
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+          </ThemeProvider>
+        </Hydrate>
+      </QueryClientProvider>
+    </AuthProvider>
   );
 }
 
