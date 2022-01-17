@@ -5,7 +5,6 @@ import {
   DelACCRes,
   DelCMDReq,
   DelCMDRes,
-  LogInReq,
   LogInRes,
   AddCMDReq,
   AddCMDRes,
@@ -14,19 +13,38 @@ import {
 } from "../utils/APITypes";
 import { mockUsers } from "./mockUserData";
 import { ReqURL } from "../utils/APIEndpoints";
+import { AxiosResponse } from "axios";
+
+type header = {
+  "Content-Type": string;
+};
+type axiosReqBody = {
+  credentials: string;
+  body: string;
+  headers: header;
+};
 
 export const handlers = [
-  rest.post<LogInReq, PathParams, LogInRes | ErrRes>(
+  rest.post<axiosReqBody, PathParams, AxiosResponse<LogInRes> | ErrRes>(
     `${ReqURL.base}login`,
     (req, res, ctx) => {
-      const { name, password } = req.body;
+      const dataString = req.body.body;
+      console.log("data: ", dataString, "typeof: ", typeof dataString);
+      const data = JSON.parse(dataString);
       const found = mockUsers.find(
-        (user) => user.name === name && user.password === password
+        (user) => user.name === data.name && user.password === data.password
       );
+      console.log(found);
       if (found) {
         return res(
           ctx.status(200),
-          ctx.json({ id: found.id, apiKey: found.apiKey })
+          ctx.json({
+            data: { id: found.id, apiKey: found.apiKey },
+            status: 200,
+            statusText: "OK",
+            headers: {},
+            config: {},
+          })
         );
       }
       return res(ctx.status(400), ctx.json({ status: "error" }));
