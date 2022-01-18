@@ -59,12 +59,12 @@ export const AuthProvider = ({
           headers: { "Content-Type": "application/json" },
         });
         if (res.status === 200) {
-          const body = res;
+          const { id, apiKey } = res.data;
           setUser(() => ({
-            id: body.data.id,
+            id: id,
             name: values.name.trim(),
             password: values.password.trim(),
-            apiKey: body.data.apiKey,
+            apiKey: apiKey,
           }));
           setIsAuthLoading(false);
           router.push("/dashboard");
