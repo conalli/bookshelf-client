@@ -39,9 +39,9 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
         {({ isSubmitting }) => (
           <Form className="flex flex-col items-start">
             <label htmlFor="name">Name:</label>
-            <span className="text-orange-400 font-bold">
+            <p className="text-bk-orange font-bold">
               <ErrorMessage name="name" />
-            </span>
+            </p>
             <Field
               id="name"
               name="name"
@@ -50,9 +50,9 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
               disabled={isSubmitting || isAuthLoading}
             />
             <label htmlFor="password">Password:</label>
-            <span className="text-orange-400 font-bold">
+            <p className="text-bk-orange font-bold">
               <ErrorMessage name="password" />
-            </span>
+            </p>
             <Field
               id="password"
               name="password"
@@ -63,7 +63,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
             <button
               type="submit"
               disabled={isSubmitting || isAuthLoading}
-              className="bg-blue-300 px-3 py-1 rounded-sm"
+              className="bg-bk-blue px-3 py-1 rounded-sm text-gray-50"
             >
               {type}
             </button>
