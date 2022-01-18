@@ -6,7 +6,11 @@ import { ReqURL } from "../utils/APIEndpoints";
 export type CMDList = { [c: string]: string };
 
 const fetchCmds = (apiKey: string) => {
-  return axios.get(`${ReqURL.getCmds}${apiKey}`, {
+  return axios.get<
+    AxiosResponse<CMDList>,
+    AxiosResponse<CMDList>,
+    { withCredentials: boolean }
+  >(`${ReqURL.getCmds}${apiKey}`, {
     withCredentials: true,
   });
 };
@@ -16,14 +20,10 @@ export const useGetCmdData = (
   onSuccess: () => void,
   onError: () => void
 ) => {
-  return useQuery<AxiosResponse<CMDList>, Error>(
-    "user-cmds",
-    () => fetchCmds(apikey),
-    {
-      onSuccess,
-      onError,
-    }
-  );
+  return useQuery("user-cmds", () => fetchCmds(apikey), {
+    onSuccess,
+    onError,
+  });
 };
 
 type AddCmdData = {
