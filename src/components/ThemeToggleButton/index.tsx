@@ -14,7 +14,7 @@ const ThemeToggleButton = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="inline-flex items-center justify-center w-10 h-10 mr-2 transition duration-150 focus:shadow-outline"
+      className="inline-flex items-center justify-center w-10 h-10 transition duration-150 focus:shadow-outline"
       type="button"
       aria-pressed
     >
