@@ -6,30 +6,29 @@ import {
   DelCMDReq,
   DelCMDRes,
   LogInReq,
-  LogInRes,
   AddCMDReq,
   AddCMDRes,
   SignUpReq,
   SignUpRes,
+  LogInRes,
 } from "../utils/APITypes";
 import { mockUsers } from "./mockUserData";
 import { ReqURL } from "../utils/APIEndpoints";
-import { AxiosResponse } from "axios";
 
 export const handlers = [
-  rest.post<LogInReq, PathParams, AxiosResponse<LogInRes, LogInReq> | ErrRes>(
+  rest.post<LogInReq, PathParams, LogInRes | ErrRes>(
     `${ReqURL.base}login`,
     (req, res, ctx) => {
-      const data = req.body;
       const found = mockUsers.find(
-        (user) => user.name === data.name && user.password === data.password
+        (user) =>
+          user.name === req.body.name && user.password === req.body.password
       );
-      console.log(found);
       if (found) {
         return res(
           ctx.status(200),
           ctx.json({
-            data: { id: found.id, apiKey: found.apiKey },
+            id: found.id,
+            apiKey: found.apiKey,
             status: 200,
             statusText: "OK",
             headers: {},
@@ -40,7 +39,7 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  rest.post<SignUpReq, PathParams, AxiosResponse<SignUpRes> | ErrRes>(
+  rest.post<SignUpReq, PathParams, SignUpRes | ErrRes>(
     `${ReqURL.base}signup`,
     (req, res, ctx) => {
       const { name, password } = req.body;
@@ -51,7 +50,8 @@ export const handlers = [
         return res(
           ctx.status(200),
           ctx.json({
-            data: { id: "new_user_id", apiKey: "new_user_apiKey" },
+            id: "new_user_id",
+            apiKey: "new_user_apiKey",
             status: 200,
             statusText: "OK",
             headers: {},
@@ -70,7 +70,7 @@ export const handlers = [
     }
     return res(ctx.status(200), ctx.json(found.commands));
   }),
-  rest.put<AddCMDReq, { apiKey: string }, AxiosResponse<AddCMDRes> | ErrRes>(
+  rest.put<AddCMDReq, { apiKey: string }, AddCMDRes | ErrRes>(
     `${ReqURL.addCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
@@ -80,7 +80,7 @@ export const handlers = [
         return res(
           ctx.status(400),
           ctx.json({
-            data: { numUpdated: 0 },
+            numUpdated: 0,
             status: 400,
             statusText: "OK",
             headers: {},
@@ -92,7 +92,7 @@ export const handlers = [
       return res(
         ctx.status(200),
         ctx.json({
-          data: { numUpdated: 1 },
+          numUpdated: 1,
           status: 200,
           statusText: "OK",
           headers: {},
@@ -101,7 +101,7 @@ export const handlers = [
       );
     }
   ),
-  rest.put<DelCMDReq, { apiKey: string }, AxiosResponse<DelCMDRes>>(
+  rest.put<DelCMDReq, { apiKey: string }, DelCMDRes | ErrRes>(
     `${ReqURL.delCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
@@ -113,7 +113,7 @@ export const handlers = [
         return res(
           ctx.status(400),
           ctx.json({
-            data: { numUpdated: 0 },
+            numUpdated: 0,
             status: 400,
             statusText: "OK",
             headers: {},
@@ -125,7 +125,7 @@ export const handlers = [
       return res(
         ctx.status(200),
         ctx.json({
-          data: { numUpdated: 1 },
+          numUpdated: 1,
           status: 200,
           statusText: "OK",
           headers: {},
@@ -134,7 +134,7 @@ export const handlers = [
       );
     }
   ),
-  rest.delete<DelACCReq, { apiKey: string }, AxiosResponse<DelACCRes>>(
+  rest.delete<DelACCReq, { apiKey: string }, DelACCRes>(
     `${ReqURL.delAccount}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
@@ -147,7 +147,9 @@ export const handlers = [
         return res(
           ctx.status(400),
           ctx.json({
-            data: { name, numDeleted: 0, users: mockUsers },
+            name,
+            numDeleted: 0,
+            users: mockUsers,
             status: 400,
             statusText: "OK",
             headers: {},
@@ -165,7 +167,9 @@ export const handlers = [
       return res(
         ctx.status(200),
         ctx.json({
-          data: { name, numDeleted: 1, users: mockUsers },
+          name,
+          numDeleted: 1,
+          users: mockUsers,
           status: 200,
           statusText: "OK",
           headers: {},
