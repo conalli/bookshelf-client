@@ -1,7 +1,7 @@
+import { useTheme } from "next-themes";
 import React from "react";
 
 type BookshelfLogoProps = {
-  darkMode?: boolean;
   colors?: LogoColors;
 };
 
@@ -13,22 +13,24 @@ type LogoColors = {
   book3?: string;
 };
 
-const BookshelfLogo: React.FC<BookshelfLogoProps> = ({ darkMode, colors }) => {
-  const defaultColors: LogoColors = darkMode
-    ? {
-        text: "#fafafa",
-        shelf: "#d1d5db",
-        book1: "#F2994A",
-        book2: "#EB5757",
-        book3: "#63B3ED",
-      }
-    : {
-        text: "#525252",
-        shelf: "#171717",
-        book1: "#F2994A",
-        book2: "#EB5757",
-        book3: "#63B3ED",
-      };
+const BookshelfLogo: React.FC<BookshelfLogoProps> = ({ colors }) => {
+  const { theme } = useTheme();
+  const defaultColors: LogoColors =
+    theme === "dark"
+      ? {
+          text: "#fafafa",
+          shelf: "#d1d5db",
+          book1: "#F2994A",
+          book2: "#EB5757",
+          book3: "#63B3ED",
+        }
+      : {
+          text: "#525252",
+          shelf: "#171717",
+          book1: "#F2994A",
+          book2: "#EB5757",
+          book3: "#63B3ED",
+        };
 
   const logoColors = { ...defaultColors, ...colors };
   return (

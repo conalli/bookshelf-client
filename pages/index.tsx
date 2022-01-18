@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import BookshelfLogo from "../src/components/BookshelfLogo";
@@ -7,7 +6,6 @@ import ThemeToggleButton from "../src/components/ThemeToggleButton";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const { theme } = useTheme();
 
   const handleSignInNav = () => {
     router.push("/signin");
@@ -16,7 +14,7 @@ const Home: NextPage = () => {
   return (
     <div className="">
       <div id="home" className="h-screen w-sceen">
-        <BookshelfLogo darkMode={theme === "dark"} />
+        <BookshelfLogo />
         <header>
           <nav className="flex flex-row gap-2">
             <Link href="/learn">
