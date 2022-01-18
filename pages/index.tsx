@@ -4,20 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import BookshelfLogo from "../src/components/BookshelfLogo";
 import ThemeToggleButton from "../src/components/ThemeToggleButton";
-import {
-  useGetCmdData,
-  useAddCmdData,
-  useDelCmdData,
-} from "../src/hooks/useCmdData";
 
 const Home: NextPage = () => {
-  const { data } = useGetCmdData(
-    "ewrfgtyhn",
-    () => console.log("Success!"),
-    () => console.log("Error!")
-  );
-  const add = useAddCmdData();
-  const del = useDelCmdData();
   const router = useRouter();
   const { theme } = useTheme();
 
@@ -30,55 +18,16 @@ const Home: NextPage = () => {
       <div id="home" className="h-screen w-sceen">
         <BookshelfLogo darkMode={theme === "dark"} />
         <header>
-          <nav className="flex flex-row">
+          <nav className="flex flex-row gap-2">
             <Link href="/learn">
               <a className="py-2 px-4">Learn</a>
             </Link>
             <Link href="/dashboard">
               <a className=" py-2 px-4">Dashboard</a>
             </Link>
-            <div>
-              <ThemeToggleButton />
-            </div>
+            <ThemeToggleButton />
           </nav>
         </header>
-
-        <div className="bg-yellow-200">
-          <button
-            onClick={() =>
-              add.mutate({
-                apiKey: "ewrfgtyhn",
-                body: {
-                  id: "4",
-                  cmd: "ok",
-                  url: "ok.com",
-                },
-              })
-            }
-          >
-            Add
-          </button>
-          <button
-            onClick={() =>
-              del.mutate({
-                apiKey: "ewrfgtyhn",
-                body: {
-                  id: "4",
-                  cmd: "ok",
-                },
-              })
-            }
-          >
-            Del
-          </button>
-          {data &&
-            Object.keys(data.data).map((cmd) => (
-              <h5 key={cmd}>
-                {cmd}:{data.data[cmd]}
-              </h5>
-            ))}
-        </div>
-
         <main>
           <section>
             <h2>Store.</h2>
