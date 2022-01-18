@@ -16,7 +16,7 @@ const fetchCmds = (apiKey: string) => {
 };
 
 export const useGetCmdData = (
-  apikey: string,
+  apikey = "",
   onSuccess: () => void,
   onError: () => void
 ) => {
