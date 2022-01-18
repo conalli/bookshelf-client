@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import {
   createContext,
@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { ReqURL } from "../utils/APIEndpoints";
-import { LogInReq } from "../utils/APITypes";
+import { LogInReq, LogInRes } from "../utils/APITypes";
 
 type User = {
   id: string;
@@ -50,18 +50,21 @@ export const AuthProvider = ({
       const reqType = type === "Log in" ? "login" : "signup";
       setIsAuthLoading(true);
       try {
-        const res = await axios.post(`${ReqURL.base}${reqType}`, {
-          credentials: "include",
+        const res = await axios.post<
+          LogInRes,
+          AxiosResponse<LogInRes, LogInReq>,
+          LogInReq
+        >(`${ReqURL.base}${reqType}`, values, {
+          withCredentials: true,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
         });
         if (res.status === 200) {
-          const body = res.data.data;
+          const body = res;
           setUser(() => ({
-            id: body.id,
+            id: body.data.id,
             name: values.name.trim(),
             password: values.password.trim(),
-            apiKey: body.apiKey,
+            apiKey: body.data.apiKey,
           }));
           setIsAuthLoading(false);
           router.push("/dashboard");
