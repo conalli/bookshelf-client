@@ -6,6 +6,7 @@ import { Hydrate } from "react-query/hydration";
 import { ThemeProvider } from "next-themes";
 import { useState } from "react";
 import { AuthProvider } from "../src/hooks/useAuth";
+import RouteGuard from "../src/components/RouteGuard";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   import("../src/mocks/setupMocks").then(({ setupMocks }) => {
@@ -20,7 +21,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-            <Component {...pageProps} />
+            <RouteGuard>
+              <Component {...pageProps} />
+            </RouteGuard>
             <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
           </ThemeProvider>
         </Hydrate>
