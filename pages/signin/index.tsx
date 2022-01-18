@@ -14,7 +14,10 @@ const SignIn = () => {
       <SignInForm type={formType} />
       <p className="text-">
         {formType === "Log in" ? "Already" : "Don't"} have an account?{" "}
-        <button className="bg-red-400 px-1 rounded-sm" onClick={changeFormType}>
+        <button
+          className="bg-bk-red px-1 rounded-sm text-gray-50"
+          onClick={changeFormType}
+        >
           {altType}
         </button>
       </p>
