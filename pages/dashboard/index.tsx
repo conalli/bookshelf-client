@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import { useAuth } from "../../src/hooks/useAuth";
 import {
   useGetCmdData,
@@ -8,19 +7,16 @@ import {
 } from "../../src/hooks/useCmdData";
 
 const Dashboard: NextPage = () => {
-  const router = useRouter();
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const { data } = useGetCmdData(
-    user.apiKey,
+    user?.apiKey,
     () => console.log("Success!"),
     () => console.log("Error!")
   );
   const add = useAddCmdData();
   const del = useDelCmdData();
-  if (!user) {
-    router.push("/signin");
-    return null;
-  }
+
+  if (!user) return null;
   return (
     <>
       <h1>Dashboard</h1>
@@ -28,9 +24,9 @@ const Dashboard: NextPage = () => {
         <button
           onClick={() =>
             add.mutate({
-              apiKey: "ewrfgtyhn",
+              apiKey: user.apiKey,
               body: {
-                id: "4",
+                id: user.id,
                 cmd: "ok",
                 url: "ok.com",
               },
@@ -42,9 +38,9 @@ const Dashboard: NextPage = () => {
         <button
           onClick={() =>
             del.mutate({
-              apiKey: "ewrfgtyhn",
+              apiKey: user.apiKey,
               body: {
-                id: "4",
+                id: user.id,
                 cmd: "ok",
               },
             })
@@ -59,6 +55,7 @@ const Dashboard: NextPage = () => {
             </h5>
           ))}
       </div>
+      <button onClick={logOut}>Log out</button>
     </>
   );
 };
