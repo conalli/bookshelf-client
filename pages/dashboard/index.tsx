@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Nav from "../../src/components/Nav";
 import { useAuth } from "../../src/hooks/useAuth";
 import {
   useGetCmdData,
@@ -19,6 +20,7 @@ const Dashboard: NextPage = () => {
   if (!user) return null;
   return (
     <>
+      <Nav />
       <h1>Dashboard</h1>
       <div className="bg-yellow-200">
         <button
