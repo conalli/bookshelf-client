@@ -3,17 +3,19 @@ import React from "react";
 import { object, string } from "yup";
 import { useAuth } from "../../hooks/useAuth";
 
+export type SignInFormVariant = "Sign up" | "Log in";
+
 type SignInFormProps = {
-  type: "Sign up" | "Log in";
+  type: SignInFormVariant;
 };
 
-type FormValues = {
+type SignInFormValues = {
   name: string;
   password: string;
 };
 
 const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
-  const { logIn } = useAuth();
+  const { isAuthLoading, logIn } = useAuth();
   const schema = object().shape({
     name: string()
       .min(3, "Please enter a name with 3 or more characters")
@@ -29,32 +31,42 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
         initialValues={{ name: "", password: "" }}
         onSubmit={async (
           values,
-          { setSubmitting }: FormikHelpers<FormValues>
+          { setSubmitting }: FormikHelpers<SignInFormValues>
         ) => {
           logIn({ type, values, setSubmitting });
         }}
       >
         {({ isSubmitting }) => (
-          <Form>
+          <Form className="flex flex-col items-start">
             <label htmlFor="name">Name:</label>
+            <span className="text-orange-400 font-bold">
+              <ErrorMessage name="name" />
+            </span>
             <Field
               id="name"
               name="name"
               placeholder="name"
               type="text"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isAuthLoading}
             />
-            <ErrorMessage name="name" />
             <label htmlFor="password">Password:</label>
+            <span className="text-orange-400 font-bold">
+              <ErrorMessage name="password" />
+            </span>
             <Field
               id="password"
               name="password"
               placeholder="password"
               type="password"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isAuthLoading}
             />
-            <ErrorMessage name="password" />
-            <button type="submit">{type}</button>
+            <button
+              type="submit"
+              disabled={isSubmitting || isAuthLoading}
+              className="bg-blue-300 px-3 py-1 rounded-sm"
+            >
+              {type}
+            </button>
           </Form>
         )}
       </Formik>
