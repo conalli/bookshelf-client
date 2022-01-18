@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import BookshelfLogo from "../src/components/BookshelfLogo";
 import Nav from "../src/components/Nav";
 
 const Home: NextPage = () => {
@@ -13,7 +12,6 @@ const Home: NextPage = () => {
   return (
     <div className="">
       <div id="home" className="h-screen w-sceen">
-        <BookshelfLogo />
         <header>
           <Nav />
         </header>
