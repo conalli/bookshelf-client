@@ -5,6 +5,7 @@ import {
   DelACCRes,
   DelCMDReq,
   DelCMDRes,
+  LogInReq,
   LogInRes,
   AddCMDReq,
   AddCMDRes,
@@ -15,22 +16,11 @@ import { mockUsers } from "./mockUserData";
 import { ReqURL } from "../utils/APIEndpoints";
 import { AxiosResponse } from "axios";
 
-type header = {
-  "Content-Type": string;
-};
-type axiosReqBody = {
-  credentials: string;
-  body: string;
-  headers: header;
-};
-
 export const handlers = [
-  rest.post<axiosReqBody, PathParams, AxiosResponse<LogInRes> | ErrRes>(
+  rest.post<LogInReq, PathParams, AxiosResponse<LogInRes, LogInReq> | ErrRes>(
     `${ReqURL.base}login`,
     (req, res, ctx) => {
-      const dataString = req.body.body;
-      console.log("data: ", dataString, "typeof: ", typeof dataString);
-      const data = JSON.parse(dataString);
+      const data = req.body;
       const found = mockUsers.find(
         (user) => user.name === data.name && user.password === data.password
       );
@@ -50,7 +40,7 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  rest.post<SignUpReq, PathParams, SignUpRes | ErrRes>(
+  rest.post<SignUpReq, PathParams, AxiosResponse<SignUpRes> | ErrRes>(
     `${ReqURL.base}signup`,
     (req, res, ctx) => {
       const { name, password } = req.body;
@@ -60,7 +50,13 @@ export const handlers = [
       if (!found) {
         return res(
           ctx.status(200),
-          ctx.json({ id: "new_user_id", apiKey: "new_user_apiKey" })
+          ctx.json({
+            data: { id: "new_user_id", apiKey: "new_user_apiKey" },
+            status: 200,
+            statusText: "OK",
+            headers: {},
+            config: {},
+          })
         );
       }
       return res(ctx.status(400), ctx.json({ status: "error" }));
@@ -74,20 +70,38 @@ export const handlers = [
     }
     return res(ctx.status(200), ctx.json(found.commands));
   }),
-  rest.put<AddCMDReq, { apiKey: string }, AddCMDRes | ErrRes>(
+  rest.put<AddCMDReq, { apiKey: string }, AxiosResponse<AddCMDRes> | ErrRes>(
     `${ReqURL.addCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
       const { cmd, url } = req.body;
       const found = mockUsers.find((user) => user.apiKey === apiKey);
       if (!found) {
-        return res(ctx.status(400), ctx.json({ numUpdated: 0 }));
+        return res(
+          ctx.status(400),
+          ctx.json({
+            data: { numUpdated: 0 },
+            status: 400,
+            statusText: "OK",
+            headers: {},
+            config: {},
+          })
+        );
       }
       found.commands[cmd] = url;
-      return res(ctx.status(200), ctx.json({ numUpdated: 1 }));
+      return res(
+        ctx.status(200),
+        ctx.json({
+          data: { numUpdated: 1 },
+          status: 200,
+          statusText: "OK",
+          headers: {},
+          config: {},
+        })
+      );
     }
   ),
-  rest.put<DelCMDReq, { apiKey: string }, DelCMDRes | ErrRes>(
+  rest.put<DelCMDReq, { apiKey: string }, AxiosResponse<DelCMDRes>>(
     `${ReqURL.delCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
@@ -96,13 +110,31 @@ export const handlers = [
         (user) => user.apiKey === apiKey && user.id === id
       );
       if (!found) {
-        return res(ctx.status(400), ctx.json({ numUpdated: 0 }));
+        return res(
+          ctx.status(400),
+          ctx.json({
+            data: { numUpdated: 0 },
+            status: 400,
+            statusText: "OK",
+            headers: {},
+            config: {},
+          })
+        );
       }
       delete found.commands[cmd];
-      return res(ctx.status(200), ctx.json({ numUpdated: 1 }));
+      return res(
+        ctx.status(200),
+        ctx.json({
+          data: { numUpdated: 1 },
+          status: 200,
+          statusText: "OK",
+          headers: {},
+          config: {},
+        })
+      );
     }
   ),
-  rest.delete<DelACCReq, { apiKey: string }, DelACCRes | ErrRes>(
+  rest.delete<DelACCReq, { apiKey: string }, AxiosResponse<DelACCRes>>(
     `${ReqURL.delAccount}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
@@ -114,7 +146,13 @@ export const handlers = [
       if (!found) {
         return res(
           ctx.status(400),
-          ctx.json({ name, numDeleted: 0, users: mockUsers })
+          ctx.json({
+            data: { name, numDeleted: 0, users: mockUsers },
+            status: 400,
+            statusText: "OK",
+            headers: {},
+            config: {},
+          })
         );
       }
       mockUsers.filter(
@@ -126,7 +164,13 @@ export const handlers = [
       );
       return res(
         ctx.status(200),
-        ctx.json({ name, numDeleted: 1, users: mockUsers })
+        ctx.json({
+          data: { name, numDeleted: 1, users: mockUsers },
+          status: 200,
+          statusText: "OK",
+          headers: {},
+          config: {},
+        })
       );
     }
   ),
