@@ -1,8 +1,7 @@
 import { NextPage } from "next";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import BookshelfLogo from "../src/components/BookshelfLogo";
-import ThemeToggleButton from "../src/components/ThemeToggleButton";
+import Nav from "../src/components/Nav";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -16,15 +15,7 @@ const Home: NextPage = () => {
       <div id="home" className="h-screen w-sceen">
         <BookshelfLogo />
         <header>
-          <nav className="flex flex-row gap-2">
-            <Link href="/learn">
-              <a className="py-2 px-4">Learn</a>
-            </Link>
-            <Link href="/dashboard">
-              <a className=" py-2 px-4">Dashboard</a>
-            </Link>
-            <ThemeToggleButton />
-          </nav>
+          <Nav />
         </header>
         <main>
           <section>
