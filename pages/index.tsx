@@ -24,46 +24,50 @@ const Home: NextPage = () => {
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.2 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r to-bk-orange via-bk-red from-bk-red font-black lg:text-6xl xl:text-7xl rotate-180"
+                whileHover={{ scale: 1.1 }}
+                className="text-transparent bg-clip-text bg-gradient-to-r to-bk-orange via-bk-red from-bk-red font-black lg:text-6xl xl:text-7xl"
               >
                 Use.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.2 }}
-                className="text-bk-red font-black lg:text-6xl xl:text-7xl rotate-180"
+                whileHover={{ scale: 1.1 }}
+                className="text-bk-red font-black lg:text-6xl xl:text-7xl"
               >
                 Update.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.2 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r to-bk-red via-bk-blue from-bk-blue  font-black lg:text-6xl xl:text-7xl rotate-180 group"
+                whileHover={{ scale: 1.1 }}
+                className="text-transparent bg-clip-text bg-gradient-to-r to-bk-red via-bk-blue from-bk-blue  font-black lg:text-6xl xl:text-7xl group"
               >
                 Collaborate.
               </motion.h2>
               <motion.h3
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.2, rotate: 360 }}
-                className="text-bk-blue font-black lg:text-4xl xl:text-5xl rotate-180"
+                whileHover={{ scale: 1.1 }}
+                className="text-bk-blue font-black lg:text-4xl xl:text-5xl"
               >
                 (coming soon)
               </motion.h3>
             </div>
             <div className="col-start-3 col-span-2 row-start-5 flex justify-center items-center gap-20">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
                 className="bg-bk-blue dark:bg-bk-orange text-xl px-5 py-2 w-40 hover:opacity-90 rounded shadow-md"
                 onClick={handleSignInNav}
               >
                 Sign In
-              </button>
-              <button className="outline outline-bk-blue underline decoration-bk-blue decoration-2 text-xl px-5 py-2 w-40 hover:opacity-90 rounded shadow-md">
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="outline outline-bk-blue underline decoration-bk-blue decoration-2 text-xl px-5 py-2 w-40 hover:opacity-90 rounded shadow-md"
+              >
                 <a href="#learn">Learn more</a>
-              </button>
+              </motion.button>
             </div>
             <section className="col-start-2 col-span-4 row-start-6 flex justify-center items-center">
-              <p className="lg:text-xl">
+              <p className="underline decoration-bk-orange decoration-2 lg:text-xl">
                 Bookshelf helps you to manage and use your bookmarks more
                 efficiently than ever before.
               </p>
