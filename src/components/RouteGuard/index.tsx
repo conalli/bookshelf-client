@@ -19,10 +19,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
         (isAuthError && currentRoute === protectedPath)
       ) {
         setIsAuthenticated(false);
-        router.push({
-          pathname: "/signin",
-          query: { returnUrl: router.asPath },
-        });
+        router.push("/signin");
       } else {
         setIsAuthenticated(true);
       }
