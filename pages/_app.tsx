@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { useState } from "react";
 import { AuthProvider } from "../src/hooks/useAuth";
 import RouteGuard from "../src/components/RouteGuard";
+import Layout from "../src/components/Layout";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   import("../src/mocks/setupMocks").then(({ setupMocks }) => {
@@ -22,7 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Hydrate state={pageProps.dehydratedState}>
           <ThemeProvider attribute="class" enableSystem defaultTheme="system">
             <RouteGuard>
-              <Component {...pageProps} />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
             </RouteGuard>
             <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
           </ThemeProvider>
