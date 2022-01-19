@@ -1,13 +1,15 @@
-import { NextPage } from "next";
+import { ReactElement } from "react";
 import Nav from "../../src/components/Nav";
+import RouteGuard from "../../src/components/RouteGuard";
 import { useAuth } from "../../src/hooks/useAuth";
 import {
   useGetCmdData,
   useAddCmdData,
   useDelCmdData,
 } from "../../src/hooks/useCmdData";
+import { NextPageWithLayout } from "../_app";
 
-const Dashboard: NextPage = () => {
+const Dashboard: NextPageWithLayout = () => {
   const { user, logOut } = useAuth();
   const { data } = useGetCmdData(
     user?.apiKey,
@@ -60,6 +62,10 @@ const Dashboard: NextPage = () => {
       <button onClick={logOut}>Log out</button>
     </>
   );
+};
+
+Dashboard.getLayout = function getLayout(page: ReactElement) {
+  return <RouteGuard>{page}</RouteGuard>;
 };
 
 export default Dashboard;
