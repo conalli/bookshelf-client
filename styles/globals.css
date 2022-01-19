@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bk-rotate-text {
+  writing-mode: vertical-lr;
+  text-orientation: sideways;
+}
+
+html.light .bk-background {
+  background-image: radial-gradient(#21212110 20%, transparent 20%),
+    radial-gradient(#ffffff10 20%, transparent 20%);
+  background-position: 0 0, 5px 5px;
+  background-size: 10px 10px;
+}
+
+html.dark .bk-background {
+  background-image: radial-gradient(#212121 20%, transparent 20%),
+    radial-gradient(#dddddd01 20%, transparent 20%);
+  background-position: 0 0, 5px 5px;
+  background-size: 10px 10px;
+}
