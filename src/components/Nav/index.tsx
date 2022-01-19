@@ -11,7 +11,7 @@ const Nav = () => {
     <nav className="flex flex-row gap-2 justify-between py-2">
       <div className="flex items-center p-2 mx-4">
         <button onClick={navigateHome}>
-          <BookshelfLogo className="h-12 w-28" />
+          <BookshelfLogo className={{ main: "h-12 w-28" }} />
         </button>
       </div>
       <div className="flex flex-row gap-1 items-center mx-4 divide-x divide-bk-blue dark:bg-slate-800 rounded-sm">
