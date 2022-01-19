@@ -1,5 +1,5 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
-import Nav from "../../src/components/Nav";
 import SignInForm, { SignInFormVariant } from "../../src/components/SignInForm";
 
 const SignIn = () => {
@@ -9,19 +9,20 @@ const SignIn = () => {
   };
   const altType = formType === "Log in" ? "Sign up" : "Log in";
   return (
-    <>
-      <Nav />
+    <div className="flex flex-col justify-center items-center bg-white dark:bg-neutral-900">
+      <h1 className="text-6xl py-10">{formType}</h1>
       <SignInForm type={formType} />
-      <p className="text-">
+      <p className="text-xl py-10">
         {formType === "Log in" ? "Already" : "Don't"} have an account?{" "}
-        <button
-          className="bg-bk-red px-1 rounded-sm text-gray-50"
+        <motion.button
+          whileHover={{ scale: 1.1, x: 10 }}
+          className="underline decoration-bk-blue dark:decoration-bk-orange decoration-2 px-1 rounded-sm"
           onClick={changeFormType}
         >
           {altType}
-        </button>
+        </motion.button>
       </p>
-    </>
+    </div>
   );
 };
 
