@@ -8,15 +8,26 @@
 }
 
 html.light .bk-background {
+  animation: fadeIn 500ms ease-in;
   background-image: radial-gradient(#21212110 20%, transparent 20%),
-    radial-gradient(#ffffff10 20%, transparent 20%);
+    radial-gradient(#ffffff01 20%, transparent 20%);
   background-position: 0 0, 5px 5px;
   background-size: 10px 10px;
 }
 
 html.dark .bk-background {
-  background-image: radial-gradient(#212121 20%, transparent 20%),
+  animation: fadeIn 500ms;
+  background-image: radial-gradient(#21212180 20%, transparent 20%),
     radial-gradient(#dddddd01 20%, transparent 20%);
   background-position: 0 0, 5px 5px;
   background-size: 10px 10px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
