@@ -3,7 +3,18 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import React from "react";
 
-const ThemeToggleButton = () => {
+type ThemeToggleButtonProps = {
+  buttonClass: string;
+  iconClass: {
+    light: string;
+    dark: string;
+  };
+};
+
+const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
+  buttonClass,
+  iconClass,
+}) => {
   const { theme, setTheme } = useTheme();
   const toggleTheme = () => {
     if (theme === "light") {
@@ -16,14 +27,14 @@ const ThemeToggleButton = () => {
     <motion.button
       whileHover={{ scale: 1.1 }}
       onClick={toggleTheme}
-      className="inline-flex items-center justify-center w-10 h-10 focus:shadow-outline"
+      className={buttonClass}
       type="button"
       aria-pressed
     >
       {theme === "dark" ? (
-        <SunIcon className="p-2 text-orange-200 hover:text-orange-300 rounded-full" />
+        <SunIcon className={iconClass.dark} />
       ) : (
-        <MoonIcon className="p-2 text-gray-500 hover:text-gray-800 rounded-full" />
+        <MoonIcon className={iconClass.light} />
       )}
     </motion.button>
   );
