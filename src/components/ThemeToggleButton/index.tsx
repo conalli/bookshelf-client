@@ -19,9 +19,9 @@ const ThemeToggleButton = () => {
       aria-pressed
     >
       {theme === "dark" ? (
-        <SunIcon className="p-2 text-orange-200 hover:text-orange-300 hover:bg-gray-700 rounded-full transition duration-300" />
+        <SunIcon className="p-2 text-orange-200 hover:text-orange-300 rounded-full" />
       ) : (
-        <MoonIcon className="p-2 text-gray-500 hover:text-gray-50 hover:bg-gray-300 rounded-full transition duration-300" />
+        <MoonIcon className="p-2 text-gray-500 hover:text-gray-50 rounded-full" />
       )}
     </button>
   );
