@@ -23,7 +23,7 @@ class MyDocument extends Document {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;400;600;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Murecho:wght@100;400;600;900&family=Overpass:wght@100;400;600;900&display=swap"
             rel="stylesheet"
           />
         </Head>

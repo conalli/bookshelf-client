@@ -9,7 +9,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Overpass", ...fontFamily.sans],
+      sans: ["Overpass", "Murecho", ...fontFamily.sans],
     },
     extend: {
       colors: {
