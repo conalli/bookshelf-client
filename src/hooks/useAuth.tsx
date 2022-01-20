@@ -11,7 +11,7 @@ import {
 import { ReqURL } from "../utils/APIEndpoints";
 import { LogInReq, LogInRes } from "../utils/APITypes";
 
-type User = {
+export type User = {
   id: string;
   name: string;
   password: string;
@@ -24,10 +24,14 @@ type LogInData = {
   setSubmitting: (isSubmitting: boolean) => void;
 };
 
+// TODO: Refactor error types + messages
+type ErrorType = "Server" | "Sign up" | "Log in" | "Delete Account" | undefined;
+
 type AuthContextType = {
   user: User | null;
   isAuthLoading: boolean;
   isAuthError: boolean;
+  errorType: ErrorType;
   logIn: (data: LogInData) => Promise<void>;
   logOut: () => void;
   delAccount: () => Promise<void>;
@@ -44,6 +48,7 @@ export const AuthProvider = ({
   const [user, setUser] = useState<User | null>(null);
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
+  const [errorType, setErrorType] = useState<ErrorType>(undefined);
 
   const logIn = useCallback(
     async ({ type, values, setSubmitting }: LogInData): Promise<void> => {
@@ -70,11 +75,13 @@ export const AuthProvider = ({
           router.push("/dashboard");
         } else {
           setIsAuthError(true);
+          setErrorType(type);
           setIsAuthLoading(false);
         }
       } catch (error) {
         setSubmitting(false);
         setIsAuthError(true);
+        setErrorType("Server");
         setIsAuthLoading(false);
         console.error(error);
       }
@@ -101,10 +108,12 @@ export const AuthProvider = ({
         router.push("/");
       } else {
         setIsAuthError(true);
+        setErrorType("Delete Account");
         setIsAuthLoading(false);
       }
     } catch (error) {
       setIsAuthError(true);
+      setErrorType("Server");
       setIsAuthLoading(false);
       console.error(error);
     }
@@ -115,11 +124,12 @@ export const AuthProvider = ({
       user,
       isAuthLoading,
       isAuthError,
+      errorType,
       logIn,
       logOut,
       delAccount,
     }),
-    [user, isAuthLoading, isAuthError, logIn, logOut, delAccount]
+    [user, isAuthLoading, isAuthError, errorType, logIn, logOut, delAccount]
   );
   return (
     <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>
