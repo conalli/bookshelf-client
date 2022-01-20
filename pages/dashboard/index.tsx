@@ -1,62 +1,57 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
+import CommandTable from "../../src/components/CommandTable";
 import RouteGuard from "../../src/components/RouteGuard";
 import { useAuth } from "../../src/hooks/useAuth";
-import {
-  useGetCmdData,
-  useAddCmdData,
-  useDelCmdData,
-} from "../../src/hooks/useCmdData";
+import { useAddCmdData, useDelCmdData } from "../../src/hooks/useCmdData";
 import { NextPageWithLayout } from "../_app";
 
 const Dashboard: NextPageWithLayout = () => {
   const { user, logOut } = useAuth();
-  const { data } = useGetCmdData(
-    user?.apiKey,
-    () => console.log("Success!"),
-    () => console.log("Error!")
-  );
   const add = useAddCmdData();
   const del = useDelCmdData();
-
+  const [curr, setCurr] = useState(0);
   if (!user) return null;
+  const list = [
+    {
+      id: user.id,
+      cmd: "oa",
+      url: "ok.com",
+    },
+    {
+      id: user.id,
+      cmd: "ob",
+      url: "ok.com",
+    },
+    {
+      id: user.id,
+      cmd: "oc",
+      url: "ok.com",
+    },
+    {
+      id: user.id,
+      cmd: "od",
+      url: "ok.com",
+    },
+  ];
   return (
     <>
       <h1>Dashboard</h1>
-      <div className="bg-yellow-200">
+      <div className="">
         <button
-          onClick={() =>
+          onClick={() => {
+            console.log(list[curr]);
+            console.log(curr);
             add.mutate({
               apiKey: user.apiKey,
-              body: {
-                id: user.id,
-                cmd: "ok",
-                url: "ok.com",
-              },
-            })
-          }
+              body: list[curr],
+            });
+            setCurr(curr + 1);
+          }}
         >
           Add
         </button>
-        <button
-          onClick={() =>
-            del.mutate({
-              apiKey: user.apiKey,
-              body: {
-                id: user.id,
-                cmd: "ok",
-              },
-            })
-          }
-        >
-          Del
-        </button>
-        {data &&
-          Object.keys(data.data).map((cmd) => (
-            <h5 key={cmd} className="text-gray-900">
-              {cmd}:{data.data[cmd]}
-            </h5>
-          ))}
       </div>
+      <CommandTable del={del} user={user} />
       <button onClick={logOut}>Log out</button>
     </>
   );
