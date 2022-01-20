@@ -26,7 +26,7 @@ export const useGetCmdData = (
   });
 };
 
-type AddCmdData = {
+export type AddCmdData = {
   apiKey: string;
   body: AddCMDReq;
 };
@@ -47,7 +47,7 @@ export const useAddCmdData = () => {
   });
 };
 
-type DelCmdData = {
+export type DelCmdData = {
   apiKey: string;
   body: DelCMDReq;
 };
