@@ -40,9 +40,9 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form>
-            <div className="flex flex-col gap-2 py-2 text-xl">
-              <label htmlFor="name" className="pl-1">
+          <Form className="w-32 md:w-80">
+            <div className="py-2 text-md md:text-xl w-full">
+              <label htmlFor="name" className="pl-1 py-2">
                 Name:
               </label>
               <Field
@@ -55,12 +55,14 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
                 length={50}
                 className="appearance-none bg-gray-100  text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
               />
-              <p className="text-bk-blue dark:text-bk-orange font-semibold pl-1 text-md">
+              <p className="text-bk-blue dark:text-bk-orange font-semibold pl-1 py-2 text-xs md:text-md">
                 <ErrorMessage name="name" />
               </p>
             </div>
-            <div className="flex flex-col gap-2 py-2 text-xl">
-              <label htmlFor="password">Password:</label>
+            <div className="py-2 text-md md:text-xl">
+              <label htmlFor="password" className="py-2 pl-1">
+                Password:
+              </label>
               <Field
                 id="password"
                 name="password"
@@ -71,15 +73,15 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
                 length={50}
                 className="appearance-none bg-gray-100  text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
               />
-              <p className="text-bk-blue dark:text-bk-orange font-semibold pl-1 text-md">
+              <p className="text-bk-blue dark:text-bk-orange font-semibold pl-1 py-2 text-xs md:text-md">
                 <ErrorMessage name="password" />
               </p>
-              <div className="flex justify-center py-10">
+              <div className="flex justify-center py-2 md:py-10">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   type="submit"
                   disabled={isSubmitting || isAuthLoading}
-                  className="bg-bk-blue dark:bg-bk-orange text-xl px-5 py-2 w-40 hover:opacity-90 rounded shadow-md"
+                  className="bg-bk-blue dark:bg-bk-orange text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
                 >
                   {type}
                 </motion.button>
