@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import About from "../src/components/About";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -51,7 +52,7 @@ const Home: NextPage = () => {
                 (coming soon)
               </motion.h3>
             </div>
-            <div className="col-start-3 col-span-2 row-start-5 flex justify-center items-center gap-20">
+            <div className="col-start-2 col-span-4 row-start-5 place-self-center flex flex-1 justify-center items-center gap-20">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 className="bg-bk-blue dark:bg-bk-orange text-xl px-5 py-2 w-40 hover:opacity-90 rounded shadow-md"
@@ -66,43 +67,14 @@ const Home: NextPage = () => {
                 <a href="#learn">Learn more</a>
               </motion.button>
             </div>
-            <section className="col-start-2 col-span-4 row-start-6 flex justify-center items-center">
+            <section className="col-start-2 col-span-4 row-start-6 flex place-self-center">
               <p className="underline decoration-bk-orange decoration-2 lg:text-xl">
-                Bookshelf helps you to manage and use your bookmarks more
-                efficiently than ever before.
+                Manage and use your bookmarks more efficiently than ever before.
               </p>
             </section>
           </section>
         </main>
-        <article id="learn" className="w-screen">
-          <section>
-            <h2>About</h2>
-            <p>
-              Use Bookshelf to keep your bookmarks up to date and then use your
-              chosen commands to access them quickly in your browser of choice.
-            </p>
-          </section>
-          <section>
-            <h2>How?</h2>
-            <ul>
-              <li>Sign up to Bookshelf</li>
-              <li>Add bookmarks with your chosen commands to your account</li>
-              <li>
-                Configure your browser to use Bookshelf as a custom search
-                engine
-              </li>
-              <li>
-                Use the Bookshelf search engine to access your bookmark commands
-              </li>
-              <li>
-                You dont need to remember all your commands! Just type in your
-                command and if it doesn&apos;t exist, Bookshelf will default to
-                a Google search using your input.
-              </li>
-            </ul>
-          </section>
-          <a href="#home">Go to top</a>
-        </article>
+        <About />
       </div>
     </>
   );
