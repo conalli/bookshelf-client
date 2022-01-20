@@ -16,7 +16,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       const protectedPath = "/dashboard";
       if (
         (!user && !isAuthLoading && currentRoute === protectedPath) ||
-        (isAuthError && currentRoute === protectedPath)
+        (!user && isAuthError && currentRoute === protectedPath)
       ) {
         setIsAuthenticated(false);
         router.push("/signin");
