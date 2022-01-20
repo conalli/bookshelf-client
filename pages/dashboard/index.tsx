@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import Nav from "../../src/components/Nav";
 import RouteGuard from "../../src/components/RouteGuard";
 import { useAuth } from "../../src/hooks/useAuth";
 import {
@@ -22,7 +21,6 @@ const Dashboard: NextPageWithLayout = () => {
   if (!user) return null;
   return (
     <>
-      <Nav />
       <h1>Dashboard</h1>
       <div className="bg-yellow-200">
         <button
