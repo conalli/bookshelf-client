@@ -8,26 +8,21 @@
 }
 
 html.light .bk-background {
-  animation: fadeIn 500ms ease-in;
-  background-image: radial-gradient(#21212110 20%, transparent 20%),
-    radial-gradient(#ffffff01 20%, transparent 20%);
-  background-position: 0 0, 5px 5px;
-  background-size: 10px 10px;
+  background-color: #ffffff01;
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      #ffffff 4px
+    ),
+    repeating-linear-gradient(#c2c2c210, #c2c2c255);
 }
 
 html.dark .bk-background {
-  animation: fadeIn 500ms;
-  background-image: radial-gradient(#21212180 20%, transparent 20%),
-    radial-gradient(#dddddd01 20%, transparent 20%);
-  background-position: 0 0, 5px 5px;
-  background-size: 10px 10px;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  background-color: #21212180;
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      #dddddd05 4px
+    ),
+    repeating-linear-gradient(#c2c2c205, #c2c2c220);
 }
