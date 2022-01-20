@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 .bk-rotate-text {
   writing-mode: vertical-lr;
   text-orientation: sideways;
