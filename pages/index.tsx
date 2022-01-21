@@ -15,39 +15,39 @@ const Home: NextPage = () => {
       <div id="home" className="">
         <main className="h-4/5 min-w-sceen m-0">
           <section className="grid grid-cols-6 grid-rows-6">
-            <div className="col-start-3 col-span-2 row-start-2 row-span-3 bk-rotate-text justify-self-center align-self-center flex gap-5 flex-auto flex-col items-end ">
+            <div className="col-start-3 col-span-2 row-start-2 row-span-3 bk-rotate-text justify-self-center align-self-center flex gap-5 flex-auto flex-col items-end text-white">
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.2 }}
-                className="text-bk-orange font-black lg:text-6xl xl:text-7xl"
+                className="  bg-bk-orange  font-black lg:text-6xl xl:text-7xl rounded-sm"
               >
                 Store.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r to-bk-orange via-bk-red from-bk-red font-black lg:text-6xl xl:text-7xl"
+                className="bg-gradient-to-r to-bk-orange via-bk-red from-bk-red font-black lg:text-6xl xl:text-7xl rounded-sm"
               >
                 Use.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="text-bk-red font-black lg:text-6xl xl:text-7xl"
+                className="bg-bk-red font-black lg:text-6xl xl:text-7xl rounded-sm"
               >
                 Update.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r to-bk-red via-bk-blue from-bk-blue  font-black lg:text-6xl xl:text-7xl group"
+                className="bg-gradient-to-r to-bk-red via-bk-blue from-bk-blue  font-black lg:text-6xl xl:text-7xl rounded-sm group"
               >
                 Collaborate.
               </motion.h2>
               <motion.h3
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="text-bk-blue font-black lg:text-4xl xl:text-5xl"
+                className="bg-bk-blue font-black lg:text-3xl xl:text-4xl rounded-sm"
               >
                 (coming soon)
               </motion.h3>
