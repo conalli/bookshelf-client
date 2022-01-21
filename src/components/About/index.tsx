@@ -6,7 +6,7 @@ const About = () => {
   return (
     <article
       id="learn"
-      className="w-full my-10 lg:my-20 p-4 flex flex-col bg-white dark:bg-neutral-900 rounded-md shadow-md"
+      className="w-full my-10 lg:my-20 p-4 flex flex-col bg-white dark:bg-neutral-800 rounded-md shadow-md"
     >
       <section className="flex flex-col py-6">
         <h2 className="text-6xl font-bold py-4">About.</h2>
