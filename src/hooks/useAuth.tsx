@@ -91,7 +91,7 @@ export const AuthProvider = ({
 
   const logOut = useCallback((): void => {
     setUser(null);
-    router.push("/");
+    router.replace("/");
   }, [router]);
 
   const delAccount = useCallback(async (): Promise<void> => {
