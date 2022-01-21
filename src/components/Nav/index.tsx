@@ -18,7 +18,7 @@ const Nav = () => {
         <BookshelfLogo className={{ main: "h-6 w-14 lg:h-12 lg:w-28" }} />
       </motion.button>
 
-      <div className="flex flex-row gap-1 items-center lg:mx-4 divide-x divide-bk-blue dark:divide-bk-orange  bg-white dark:bg-neutral-900 shadow-lg rounded-r-md md:rounded-md">
+      <div className="flex flex-row gap-1 items-center lg:ml-4 divide-x divide-bk-blue dark:divide-bk-orange  bg-white dark:bg-neutral-900 shadow-lg rounded-r-md md:rounded-md">
         <Link href="/#about">
           <a className="text-xs md:text-sm p-1 md:p-2 md:px-4 md:ml-1 hover:text-bk-blue hover:dark:text-orange-300">
             About
