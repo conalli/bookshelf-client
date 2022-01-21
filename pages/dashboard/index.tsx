@@ -24,16 +24,27 @@ const Dashboard: NextPageWithLayout = () => {
   if (!user) return null;
   return (
     <>
-      <h1>Dashboard</h1>
-      <div className="">
-        <button
-          onClick={() => {
-            setModalType("add");
-            setModalOpen(true);
-          }}
-        >
-          Add
-        </button>
+      <div className="flex justify-between py-2 lg:py-6">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl">
+          {user.name}&apos;s Bookmarks:
+        </h1>
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              setModalType("add");
+              setModalOpen(true);
+            }}
+            className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
+          >
+            Add
+          </button>
+          <button
+            onClick={logOut}
+            className="text-white px-4 py-2 bg-neutral-600 dark:bg-bk-blue rounded"
+          >
+            Log out
+          </button>
+        </div>
       </div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
         {modalType === "add" ? (
@@ -53,7 +64,6 @@ const Dashboard: NextPageWithLayout = () => {
         setModalType={setModalType}
         setSelected={setSelectedCommand}
       />
-      <button onClick={logOut}>Log out</button>
     </>
   );
 };
