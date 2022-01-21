@@ -14,6 +14,19 @@ export type Command = {
   url: string;
 };
 
+export type UpdateCommandStatus = {
+  add: {
+    success: boolean;
+    loading: boolean;
+    error: boolean;
+  };
+  del: {
+    success: boolean;
+    loading: boolean;
+    error: boolean;
+  };
+};
+
 const Dashboard: NextPageWithLayout = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"add" | "del" | undefined>();
@@ -21,6 +34,19 @@ const Dashboard: NextPageWithLayout = () => {
   const { user, logOut } = useAuth();
   const add = useAddCmdData();
   const del = useDelCmdData();
+
+  const updateStatus: UpdateCommandStatus = {
+    add: {
+      success: add.isSuccess,
+      loading: add.isLoading,
+      error: add.isError,
+    },
+    del: {
+      success: del.isSuccess,
+      loading: del.isLoading,
+      error: del.isError,
+    },
+  };
 
   if (!user) return null;
   return (
@@ -74,7 +100,9 @@ const Dashboard: NextPageWithLayout = () => {
         user={user}
         openModal={setModalOpen}
         setModalType={setModalType}
+        selected={selectedCommand}
         setSelected={setSelectedCommand}
+        cmdStatus={updateStatus}
       />
     </>
   );
