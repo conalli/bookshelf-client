@@ -26,33 +26,33 @@ const CommandTable: React.FC<CommandTableProps> = ({
   const cmds = data?.data;
 
   return (
-    <table className="min-w-full bg-white dark:bg-neutral-800 rounded shadow">
-      <thead className="text-left text-white bg-bk-blue dark:bg-bk-orange rounded-top">
-        <tr className="rounded-t-md">
-          <th>Command</th>
-          <th>URL</th>
-          <th>Del</th>
+    <table className="w-full mt-6 lg:w-2/4 m-auto bg-white dark:bg-neutral-800 rounded shadow">
+      <thead className="text-left text-white bg-bk-blue dark:bg-bk-orange rounded-lg">
+        <tr className="rounded-md">
+          <th className="border-r-bk-blue p-2">Command</th>
+          <th className="border-r-bk-blue p-2">URL</th>
+          <th className="text-center p-2">Del</th>
         </tr>
       </thead>
-      <tbody className="divide-y divide-gray-200">
+      <tbody className="">
         {cmds &&
           Object.keys(cmds).map((key: string) => {
             return (
               <tr key={key}>
-                <td>{key}</td>
-                <td>
+                <td className="border-r-2 border-r-bk-blue p-2">{key}</td>
+                <td className="border-r-2 border-r-bk-blue p-2">
                   <a href={cmds[key]}>{cmds[key]}</a>
                 </td>
-                <td>
+                <td className="">
                   <button
                     onClick={() => {
                       setModalType("del");
                       setSelected({ cmd: key, url: cmds[key] });
                       openModal(true);
                     }}
-                    className="flex justify-center items-center"
+                    className="flex justify-center items-center w-full"
                   >
-                    <TrashIcon className="text-bk-red w-4 h-6 lg:w-6 lg:h-8" />
+                    <TrashIcon className="text-gray-400 w-4 h-6 lg:w-6 lg:h-8" />
                   </button>
                 </td>
               </tr>
