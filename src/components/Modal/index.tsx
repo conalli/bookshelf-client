@@ -15,6 +15,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={() => setIsOpen(false)}
+      shouldCloseOnOverlayClick={false}
       contentElement={() => (
         <motion.div className="bk-background flex flex-col h-screen w-screen items-center justify-center">
           <motion.div
