@@ -80,7 +80,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
                 url,
               },
             });
-            if (add.isSuccess) setIsOpen(false);
+            setIsOpen(false);
           }}
           className="bg-green-400 dark:bg-gray-100 dark:text-neutral-600 text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
         >

@@ -19,30 +19,42 @@ const DeleteCommandOverlay: React.FC<DeleteCommandOverlayProps> = ({
   selected,
   setIsOpen,
 }) => {
-  const deleteMessage = selected
-    ? `Are you sure you want to delete command: ${selected.cmd} - ${selected.url}?`
-    : "Error selecting command";
   return (
-    <div className="">
-      <h1>Delete Command: </h1>
-      <p>{deleteMessage}</p>
-      <button onClick={() => setIsOpen(false)}>Cancel</button>
+    <div className="flex flex-col p-3 lg:p-6">
+      <h1 className="text-3xl py-1 md:py-2 lg:py-3">Delete Command: </h1>
+      <p className="text-md md:text-xl py-1 md:py-2 lg:py-3">
+        Are you sure you want to delete command:
+      </p>
       {selected && (
-        <button
-          onClick={() => {
-            del.mutate({
-              apiKey: user.apiKey,
-              body: {
-                id: user.id,
-                cmd: selected?.cmd,
-              },
-            });
-            if (del.isSuccess) setIsOpen(false);
-          }}
-        >
-          Delete
-        </button>
+        <p className="text-md md:text-xl font-bold pb-5">
+          {selected.cmd} - {selected.url}
+        </p>
       )}
+      <div className="flex justify-between items-center w-full py-2 lg:py-4">
+        <button
+          onClick={() => setIsOpen(false)}
+          className="bg-bk-blue dark:bg-bk-orange text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
+        >
+          Cancel
+        </button>
+        {selected && (
+          <button
+            onClick={() => {
+              del.mutate({
+                apiKey: user.apiKey,
+                body: {
+                  id: user.id,
+                  cmd: selected?.cmd,
+                },
+              });
+              setIsOpen(false);
+            }}
+            className="bg-bk-red dark:gray-50 text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
+          >
+            Delete
+          </button>
+        )}
+      </div>
     </div>
   );
 };
