@@ -6,12 +6,14 @@ import { useGetCmdData } from "../../hooks/useCmdData";
 type CommandTableProps = {
   user: User | null;
   openModal: Dispatch<SetStateAction<boolean>>;
+  setModalType: Dispatch<SetStateAction<"add" | "del" | undefined>>;
   setSelected: Dispatch<SetStateAction<Command | null>>;
 };
 
 const CommandTable: React.FC<CommandTableProps> = ({
   user,
   openModal,
+  setModalType,
   setSelected,
 }) => {
   const { data } = useGetCmdData(
@@ -43,6 +45,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
                 <td>
                   <button
                     onClick={() => {
+                      setModalType("del");
                       setSelected({ cmd: key, url: cmds[key] });
                       openModal(true);
                     }}
