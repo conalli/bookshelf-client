@@ -1,16 +1,19 @@
-import { AxiosResponse } from "axios";
-import React from "react";
-import { UseMutationResult } from "react-query";
+import React, { Dispatch, SetStateAction } from "react";
+import { Command } from "../../../pages/dashboard";
 import { User } from "../../hooks/useAuth";
-import { DelCmdData, useGetCmdData } from "../../hooks/useCmdData";
+import { useGetCmdData } from "../../hooks/useCmdData";
 
 type CommandTableProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  del: UseMutationResult<AxiosResponse<any, any>, unknown, DelCmdData, unknown>;
   user: User | null;
+  openModal: Dispatch<SetStateAction<boolean>>;
+  setSelected: Dispatch<SetStateAction<Command | null>>;
 };
 
-const CommandTable: React.FC<CommandTableProps> = ({ del, user }) => {
+const CommandTable: React.FC<CommandTableProps> = ({
+  user,
+  openModal,
+  setSelected,
+}) => {
   const { data } = useGetCmdData(
     user?.apiKey,
     () => console.log("Success!"),
@@ -39,15 +42,10 @@ const CommandTable: React.FC<CommandTableProps> = ({ del, user }) => {
                 </td>
                 <td>
                   <button
-                    onClick={() =>
-                      del.mutate({
-                        apiKey: user.apiKey,
-                        body: {
-                          id: user.id,
-                          cmd: key,
-                        },
-                      })
-                    }
+                    onClick={() => {
+                      setSelected({ cmd: key, url: cmds[key] });
+                      openModal(true);
+                    }}
                     className="text-bk-red"
                   >
                     消す
