@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import LoadingPage from "../LoadingPage";
 
 type RouteGuardProps = {
   children: ReactNode;
@@ -38,6 +39,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     };
   }, [checkAuth, router.asPath, router.events]);
   if (!isAuthenticated) return null;
+  if (isAuthLoading) return <LoadingPage />;
   return isAuthenticated && <>{children}</>;
 };
 
