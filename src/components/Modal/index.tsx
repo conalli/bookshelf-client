@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
           <motion.div
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            className="bg-white dark:bg-neutral-900 mx-2 p-2 lg:mx-8 rounded shadow-md"
+            className="bg-white dark:bg-neutral-800 mx-2 p-2 lg:mx-8 rounded shadow-md"
           >
             {children}
           </motion.div>
