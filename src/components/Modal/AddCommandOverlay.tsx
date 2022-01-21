@@ -31,7 +31,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-3 lg:p-6">
       <h1 className="text-3xl">Add Command: </h1>
       <div className="py-2 lg:py-6 text-md md:text-xl">
         <div className="py-2">
@@ -40,7 +40,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
           </label>
           <input
             id="command"
-            className="appearance-none bg-gray-100  text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
+            className="appearance-none bg-gray-100 text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
             type="text"
             name="command"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -63,7 +63,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
           />
         </div>
       </div>
-      <div className="flex gap-2 w-full py-2 lg:py-6 ">
+      <div className="flex gap-2 w-full py-2 lg:py-4 ">
         <button
           onClick={() => setIsOpen(false)}
           className="bg-bk-blue dark:bg-bk-orange text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
@@ -82,7 +82,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
             });
             if (add.isSuccess) setIsOpen(false);
           }}
-          className="bg-green-400 text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
+          className="bg-green-400 dark:bg-gray-100 dark:text-neutral-600 text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
         >
           Add
         </button>
