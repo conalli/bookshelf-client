@@ -1,3 +1,4 @@
+import { TrashIcon } from "@heroicons/react/solid";
 import React, { Dispatch, SetStateAction } from "react";
 import { Command } from "../../../pages/dashboard";
 import { User } from "../../hooks/useAuth";
@@ -25,8 +26,8 @@ const CommandTable: React.FC<CommandTableProps> = ({
   const cmds = data?.data;
 
   return (
-    <table className="min-w-full bg-white dark:bg-neutral-900 rounded shadow">
-      <thead className="text-left divide-y divide-gray-200 bg-bk-blue bg-opacity-40">
+    <table className="min-w-full bg-white dark:bg-neutral-800 rounded shadow">
+      <thead className="text-left text-white bg-bk-blue dark:bg-bk-orange rounded-top">
         <tr className="rounded-t-md">
           <th>Command</th>
           <th>URL</th>
@@ -49,9 +50,9 @@ const CommandTable: React.FC<CommandTableProps> = ({
                       setSelected({ cmd: key, url: cmds[key] });
                       openModal(true);
                     }}
-                    className="text-bk-red"
+                    className="flex justify-center items-center"
                   >
-                    消す
+                    <TrashIcon className="text-bk-red w-4 h-6 lg:w-6 lg:h-8" />
                   </button>
                 </td>
               </tr>
