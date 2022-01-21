@@ -19,35 +19,35 @@ const Home: NextPage = () => {
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.2 }}
-                className="  bg-bk-orange  font-black lg:text-6xl xl:text-7xl rounded-sm"
+                className="  bg-bk-orange py-4 px-1 font-black lg:text-6xl xl:text-7xl rounded"
               >
                 Store.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="bg-gradient-to-r to-bk-orange via-bk-red from-bk-red font-black lg:text-6xl xl:text-7xl rounded-sm"
+                className="py-4 px-1 bg-gradient-to-r to-bk-orange via-bk-red from-bk-red font-black lg:text-6xl xl:text-7xl rounded"
               >
                 Use.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="bg-bk-red font-black lg:text-6xl xl:text-7xl rounded-sm"
+                className="py-4 px-1 bg-bk-red font-black lg:text-6xl xl:text-7xl rounded"
               >
                 Update.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="bg-gradient-to-r to-bk-red via-bk-blue from-bk-blue  font-black lg:text-6xl xl:text-7xl rounded-sm group"
+                className="py-4 px-1 bg-gradient-to-r to-bk-red via-bk-blue from-bk-blue  font-black lg:text-6xl xl:text-7xl rounded group"
               >
                 Collaborate.
               </motion.h2>
               <motion.h3
                 initial={{ rotate: 180 }}
                 whileHover={{ scale: 1.1 }}
-                className="bg-bk-blue font-black lg:text-3xl xl:text-4xl rounded-sm"
+                className="py-4 px-1 bg-bk-blue font-black lg:text-3xl xl:text-4xl rounded"
               >
                 (coming soon)
               </motion.h3>
