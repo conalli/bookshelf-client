@@ -46,10 +46,14 @@ const CommandTable: React.FC<CommandTableProps> = ({
     >
       <thead className="text-left text-white bg-bk-blue dark:bg-bk-orange rounded-lg">
         <tr>
-          <th className="text-xs md:text-smp-2">Command</th>
-          <th className="text-xs md:text-smp-2">URL</th>
-          <th className="text-xs md:text-smtext-center p-2">Status</th>
-          <th className="text-xs md:text-smtext-center p-2">Delete</th>
+          <th className="text-xs md:text-sm lg:text-base  p-2">Command</th>
+          <th className="text-xs md:text-sm lg:text-base  p-2">URL</th>
+          <th className="text-xs md:text-sm lg:text-base  text-center p-2">
+            Status
+          </th>
+          <th className="text-xs md:text-sm lg:text-base  text-center p-2">
+            Delete
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -57,22 +61,22 @@ const CommandTable: React.FC<CommandTableProps> = ({
           Object.keys(cmds).map((key: string) => {
             return (
               <tr key={key}>
-                <td className="text-xs md:text-smborder-r-2 border-r-bk-blue p-2">
+                <td className="text-xs md:text-sm lg:text-base border-r-2 border-r-bk-blue dark:border-r-bk-orange p-2">
                   {key}
                 </td>
-                <td className="text-xs md:text-smborder-r-2 border-r-bk-blue p-2">
+                <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange p-2">
                   <a href={cmds[key]}>{cmds[key]}</a>
                 </td>
-                <td className="text-xs md:text-smborder-r-2 border-r-bk-blue">
+                <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange">
                   <div className="flex justify-center items-center w-full h-full">
                     <StatusIcon
-                      key={key}
+                      cmd={key}
                       selected={selected}
                       cmdStatus={cmdStatus}
                     />
                   </div>
                 </td>
-                <td className="text-xs md:text-sm">
+                <td className="text-xs md:text-sm lg:text-base ">
                   <button
                     onClick={() => {
                       setModalType("del");
@@ -81,7 +85,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
                     }}
                     className="flex justify-center items-center w-full"
                   >
-                    <TrashIcon className="text-gray-400 w-4 h-6 lg:w-6 lg:h-8" />
+                    <TrashIcon className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-100 w-4 h-6 lg:w-6 lg:h-8" />
                   </button>
                 </td>
               </tr>

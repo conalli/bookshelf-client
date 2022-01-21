@@ -67,7 +67,7 @@ const Home: NextPage = () => {
             <div className="col-start-2 col-span-4 row-start-4 md:row-start-5 row-span-2 md:row-span-1 place-self-center flex flex-1 justify-center items-center gap-2 lg:gap-20">
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                className="outline outline-bk-blue bg-bk-blue dark:bg-bk-orange text-sm  lg:text-xl px-5 py-2 w-28 lg:w-40 hover:opacity-90 rounded shadow-md"
+                className="outline outline-bk-blue dark:outline-bk-orange bg-bk-blue dark:bg-bk-orange text-sm  lg:text-xl px-5 py-2 w-28 lg:w-40 hover:opacity-90 rounded shadow-md"
                 onClick={handleSignInNav}
               >
                 Sign In

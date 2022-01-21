@@ -36,7 +36,7 @@ const About = () => {
           </li>
           <li className="py-1 md:py-2">
             &rarr; &nbsp; Configure your browser to use Bookshelf as a custom
-            search engine. [Learn More]
+            search engine.
           </li>
           <li className="py-1 md:py-2">
             &rarr; &nbsp; Use the Bookshelf search engine to access your
@@ -47,7 +47,7 @@ const About = () => {
       <motion.a
         whileHover={{ scale: 1.1, x: 50 }}
         href="#top"
-        className="underline py-6 decoration-bk-blue decoration-2 text-xl"
+        className="underline py-6 decoration-bk-blue decoration-2 text-xl hover:text-bk-blue"
       >
         To top
       </motion.a>
