@@ -9,7 +9,18 @@ const SignIn = () => {
   };
   const altType = formType === "Log in" ? "Sign up" : "Log in";
   return (
-    <div className="flex justify-center items-center md:items-start py-4 md:py-10 h-4/5 md:h-full">
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{
+        opacity: 1,
+        x: 0,
+        transition: {
+          duration: 0.6,
+        },
+      }}
+      exit={{ opacity: 0, x: -20 }}
+      className="flex justify-center items-center md:items-start py-4 md:py-10 h-4/5 md:h-full"
+    >
       <div className="grid grid-cols-6 grid-rows-4 bg-white dark:bg-neutral-800 shadow-md w-4/5 md:w-3/4 xl:w-2/4 h-4/5 rounded-md">
         <h1 className="col-start-2 col-span-4 md:col-start-2 md:col-span-4 text-xl md:text-3xl lg:text-6xl py-2 lg:py-10 self-start md:self-center justify-self-center">
           {formType}
@@ -28,7 +39,7 @@ const SignIn = () => {
           </motion.button>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

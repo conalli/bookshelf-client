@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { ReactElement, useState } from "react";
 import CommandTable from "../../src/components/CommandTable";
 import Modal from "../../src/components/Modal";
@@ -24,7 +25,18 @@ const Dashboard: NextPageWithLayout = () => {
   if (!user) return null;
   return (
     <>
-      <div className="flex justify-between py-2 lg:py-6">
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.6,
+          },
+        }}
+        exit={{ opacity: 0, x: -20 }}
+        className="flex justify-between py-2 lg:py-6"
+      >
         <h1 className="text-2xl md:text-3xl lg:text-4xl">
           {user.name}&apos;s Bookmarks:
         </h1>
@@ -45,7 +57,7 @@ const Dashboard: NextPageWithLayout = () => {
             Log out
           </button>
         </div>
-      </div>
+      </motion.div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
         {modalType === "add" ? (
           <AddCommandOverlay user={user} add={add} setIsOpen={setModalOpen} />
