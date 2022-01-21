@@ -1,11 +1,20 @@
 import { ReactElement, useState } from "react";
 import CommandTable from "../../src/components/CommandTable";
+import Modal from "../../src/components/Modal";
+import DeleteCommandOverlay from "../../src/components/Modal/DeleteCommandOverlay";
 import RouteGuard from "../../src/components/RouteGuard";
 import { useAuth } from "../../src/hooks/useAuth";
 import { useAddCmdData, useDelCmdData } from "../../src/hooks/useCmdData";
 import { NextPageWithLayout } from "../_app";
 
+export type Command = {
+  cmd: string;
+  url: string;
+};
+
 const Dashboard: NextPageWithLayout = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
   const { user, logOut } = useAuth();
   const add = useAddCmdData();
   const del = useDelCmdData();
@@ -51,7 +60,18 @@ const Dashboard: NextPageWithLayout = () => {
           Add
         </button>
       </div>
-      <CommandTable del={del} user={user} />
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
+        <DeleteCommandOverlay
+          selected={selectedCommand || null}
+          user={user}
+          del={del}
+        />
+      </Modal>
+      <CommandTable
+        user={user}
+        openModal={setModalOpen}
+        setSelected={setSelectedCommand}
+      />
       <button onClick={logOut}>Log out</button>
     </>
   );
