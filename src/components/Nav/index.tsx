@@ -13,12 +13,12 @@ const Nav = () => {
       <motion.button
         whileHover={{ scale: 1.1 }}
         onClick={navigateHome}
-        className="flex items-center p-1 md:p-2 md:mr-4 bg-white dark:bg-neutral-900 rounded-l-md md:rounded-md shadow-lg"
+        className="flex items-center p-1 md:p-2 md:mr-4 bg-white dark:bg-neutral-800 rounded-l-md md:rounded-md shadow-lg"
       >
         <BookshelfLogo className={{ main: "h-6 w-14 lg:h-12 lg:w-28" }} />
       </motion.button>
 
-      <div className="flex flex-row gap-1 items-center lg:ml-4 divide-x divide-bk-blue dark:divide-bk-orange  bg-white dark:bg-neutral-900 shadow-lg rounded-r-md md:rounded-md">
+      <div className="flex flex-row gap-1 items-center lg:ml-4 divide-x divide-bk-blue dark:divide-bk-orange  bg-white dark:bg-neutral-800 shadow-lg rounded-r-md md:rounded-md">
         <Link href="/#about">
           <a className="text-xs md:text-sm p-1 md:p-2 md:px-4 md:ml-1 hover:text-bk-blue hover:dark:text-orange-300">
             About
