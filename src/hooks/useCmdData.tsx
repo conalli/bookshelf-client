@@ -1,16 +1,12 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { AddCMDReq, DelCMDReq } from "../utils/APITypes";
+import { AddCMDReq, AddCMDRes, DelCMDReq, DelCMDRes } from "../utils/APITypes";
 import { ReqURL } from "../utils/APIEndpoints";
 
 export type CMDList = { [c: string]: string };
 
 const fetchCmds = (apiKey: string) => {
-  return axios.get<
-    AxiosResponse<CMDList>,
-    AxiosResponse<CMDList>,
-    { withCredentials: boolean }
-  >(`${ReqURL.getCmds}${apiKey}`, {
+  return axios.get<CMDList>(`${ReqURL.getCmds}${apiKey}`, {
     withCredentials: true,
   });
 };
@@ -32,7 +28,7 @@ export type AddCmdData = {
 };
 
 const addCmd = (data: AddCmdData) => {
-  return axios.put(`${ReqURL.addCmd}${data.apiKey}`, data.body, {
+  return axios.put<AddCMDRes>(`${ReqURL.addCmd}${data.apiKey}`, data.body, {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });
@@ -53,7 +49,7 @@ export type DelCmdData = {
 };
 
 const delCmd = (data: DelCmdData) => {
-  return axios.put(`${ReqURL.delCmd}${data.apiKey}`, data.body, {
+  return axios.put<DelCMDRes>(`${ReqURL.delCmd}${data.apiKey}`, data.body, {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });
