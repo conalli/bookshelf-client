@@ -41,7 +41,7 @@ const defaultColors: LogoVariants = {
 };
 
 const BookshelfLogo: React.FC<BookshelfLogoProps> = ({ colors, className }) => {
-  const { theme } = useTheme();
+  const { resolvedTheme: theme } = useTheme();
   const [logoColors, setLogoColors] = useState<LogoElements>(
     defaultColors.light
   );

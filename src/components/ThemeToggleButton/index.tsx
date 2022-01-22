@@ -15,7 +15,7 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
   buttonClass,
   iconClass,
 }) => {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme: theme, setTheme } = useTheme();
   const [currentIcon, setCurrentIcon] = useState<"light" | "dark">("light");
   const toggleTheme = () => {
     if (theme === "light") {
