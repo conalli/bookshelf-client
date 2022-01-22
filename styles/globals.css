@@ -26,7 +26,7 @@ html.dark .bk-background {
   background-image: repeating-radial-gradient(
       circle at 0 0,
       transparent 0,
-      #dddddd05 4px
+      #dddddd10 4px
     ),
-    repeating-linear-gradient(#c2c2c203, #c2c2c220);
+    repeating-linear-gradient(#c2c2c210, #c2c2c215);
 }

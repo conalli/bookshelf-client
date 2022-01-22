@@ -45,7 +45,6 @@ const About = () => {
         </ul>
       </section>
       <motion.a
-        whileHover={{ scale: 1.1, x: 50 }}
         href="#top"
         className="underline py-6 decoration-bk-blue decoration-2 text-xl hover:text-bk-blue"
       >

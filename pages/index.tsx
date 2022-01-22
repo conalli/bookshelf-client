@@ -27,41 +27,41 @@ const Home: NextPage = () => {
       >
         <main className="h-4/5 min-w-sceen m-0">
           <section className="grid grid-cols-6 grid-rows-6 py-6 md:py-0">
-            <div className="col-start-3 col-span-2 row-start-1 md:row-start-2 row-span-3 bk-rotate-text justify-self-center align-self-center flex gap-2 md:gap-5 flex-auto flex-col items-end text-white">
+            <div className="col-start-3 col-span-2 row-start-1 md:row-start-2 row-span-3 bk-rotate-text justify-self-center align-self-center flex flex-auto flex-col items-end text-white">
               <motion.h2
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.2 }}
-                className="  bg-bk-orange py-4 px-1 font-black text-2xl md:text-4xl lg:text-6xl xl:text-7xl rounded"
+                whileHover={{ scaleY: 1.1 }}
+                className="  bg-bk-orange py-4 px-1 text-2xl md:text-4xl lg:text-6xl xl:text-7xl rounded"
               >
                 Store.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.1 }}
-                className="py-4 px-1 text-2xl md:text-4xl bg-gradient-to-r to-bk-orange via-bk-red from-bk-red font-black lg:text-6xl xl:text-7xl rounded"
+                whileHover={{ scaleY: 1.1 }}
+                className="py-4 px-1 text-2xl md:text-4xl bg-bk-red lg:text-6xl xl:text-7xl rounded"
               >
                 Use.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.1 }}
-                className="py-4 px-1 text-2xl md:text-4xl bg-bk-red font-black lg:text-6xl xl:text-7xl rounded"
+                whileHover={{ scaleY: 1.1 }}
+                className="py-4 px-1 text-2xl md:text-4xl bg-bk-blue lg:text-6xl xl:text-7xl rounded"
               >
                 Update.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.1 }}
-                className="py-4 px-1 text-2xl md:text-4xl bg-gradient-to-r to-bk-red via-bk-blue from-bk-blue  font-black lg:text-6xl xl:text-7xl rounded group"
+                whileHover={{ scaleY: 1.1 }}
+                className="py-4 px-1 text-2xl md:text-4xl bg-bk-orange lg:text-6xl xl:text-7xl rounded group"
               >
-                Collaborate.
+                Collaborate.&lowast;
               </motion.h2>
               <motion.h3
                 initial={{ rotate: 180 }}
-                whileHover={{ scale: 1.1 }}
-                className="py-4 px-1 text-sm bg-bk-blue font-black lg:text-3xl xl:text-4xl rounded"
+                whileHover={{ scaleY: 1.1 }}
+                className="py-4 px-1 text-sm bg-bk-red lg:text-3xl xl:text-4xl rounded"
               >
-                (coming soon)
+                (&lowast;coming soon)
               </motion.h3>
             </div>
             <div className="col-start-2 col-span-4 row-start-4 md:row-start-5 row-span-2 md:row-span-1 place-self-center flex flex-1 justify-center items-center gap-2 lg:gap-20">
