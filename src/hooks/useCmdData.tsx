@@ -37,8 +37,20 @@ const addCmd = (data: AddCmdData) => {
 export const useAddCmdData = () => {
   const queryClient = useQueryClient();
   return useMutation(addCmd, {
-    onSuccess: () => {
+    onMutate: async (addData) => {
+      await queryClient.cancelQueries("user-cmds");
+      const cmdList = queryClient.getQueryData<CMDList>("user-cmds");
+      queryClient.setQueryData<CMDList>("user-cmds", (prevData) => {
+        const { cmd, url } = addData.body;
+        return { ...prevData, [cmd]: url };
+      });
+      return cmdList || {};
+    },
+    onSettled: () => {
       queryClient.invalidateQueries("user-cmds");
+    },
+    onError: () => {
+      queryClient.setQueryData<CMDList>("user-cmds", (prev) => prev || {});
     },
   });
 };
@@ -58,9 +70,24 @@ const delCmd = (data: DelCmdData) => {
 export const useDelCmdData = () => {
   const queryClient = useQueryClient();
   return useMutation(delCmd, {
-    onSuccess: () => {
+    onMutate: async (delData) => {
+      await queryClient.cancelQueries("user-cmds");
+      const cmdList = queryClient.getQueryData<CMDList>("user-cmds");
+      queryClient.setQueryData<CMDList>("user-cmds", (prevData) => {
+        if (!prevData) return {};
+        const { cmd } = delData.body;
+        if (cmd in prevData) {
+          delete prevData.cmd;
+        }
+        return { ...prevData };
+      });
+      return cmdList || {};
+    },
+    onSettled: () => {
       queryClient.invalidateQueries("user-cmds");
     },
-    onError: (error) => console.error("error: ", error),
+    onError: () => {
+      queryClient.setQueryData<CMDList>("user-cmds", (prev) => prev || {});
+    },
   });
 };
