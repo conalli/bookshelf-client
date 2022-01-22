@@ -86,7 +86,12 @@ const Dashboard: NextPageWithLayout = () => {
       </motion.div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
         {modalType === "add" ? (
-          <AddCommandOverlay user={user} add={add} setIsOpen={setModalOpen} />
+          <AddCommandOverlay
+            user={user}
+            add={add}
+            setSelected={setSelectedCommand}
+            setIsOpen={setModalOpen}
+          />
         ) : (
           <DeleteCommandOverlay
             selected={selectedCommand || null}

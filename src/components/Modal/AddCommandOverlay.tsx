@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { UseMutationResult } from "react-query";
+import { Command } from "../../../pages/dashboard";
 import { User } from "../../hooks/useAuth";
 import { AddCmdData } from "../../hooks/useCmdData";
 
@@ -8,12 +9,14 @@ type AddCommandOverlayProps = {
   user: User;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   add: UseMutationResult<AxiosResponse<any, any>, unknown, AddCmdData, unknown>;
+  setSelected: Dispatch<SetStateAction<Command | null>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
   user,
   add,
+  setSelected,
   setIsOpen,
 }) => {
   const [cmd, setCmd] = useState<string>("");
@@ -80,6 +83,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
                 url,
               },
             });
+            setSelected({ cmd, url });
             setIsOpen(false);
           }}
           className="bg-green-400 dark:bg-gray-100 dark:text-neutral-600 text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
