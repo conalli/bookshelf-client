@@ -29,7 +29,7 @@ const SignIn = () => {
           <SignInForm type={formType} />
         </div>
         <p className="col-start-1 col-span-6 py-4 md:col-start-2 md:col-span-4 self-end md:self-center justify-self-center row-start-4 text-xs md:text-xl lg:py-10">
-          {formType === "Log in" ? "Already" : "Don't"} have an account?{" "}
+          {formType === "Sign up" ? "Already" : "Don't"} have an account?{" "}
           <motion.button
             whileHover={{ scale: 1.1, x: 10 }}
             className="underline decoration-bk-blue dark:decoration-bk-orange decoration-2 px-1 rounded-sm"
