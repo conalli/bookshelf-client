@@ -1,7 +1,7 @@
 import { SunIcon, MoonIcon } from "@heroicons/react/solid";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type ThemeToggleButtonProps = {
   buttonClass: string;
@@ -16,6 +16,7 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
   iconClass,
 }) => {
   const { theme, setTheme } = useTheme();
+  const [currentIcon, setCurrentIcon] = useState<"light" | "dark">("light");
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
@@ -23,6 +24,12 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
     }
     setTheme("light");
   };
+
+  useEffect(() => {
+    if (theme === "light") setCurrentIcon("light");
+    if (theme === "dark") setCurrentIcon("dark");
+  }, [theme]);
+
   return (
     <motion.button
       whileHover={{ scale: 1.1 }}
@@ -31,7 +38,7 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
       type="button"
       aria-pressed
     >
-      {theme === "dark" ? (
+      {currentIcon === "dark" ? (
         <SunIcon className={iconClass.dark} />
       ) : (
         <MoonIcon className={iconClass.light} />

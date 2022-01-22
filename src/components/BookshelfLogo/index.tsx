@@ -1,5 +1,5 @@
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type BookshelfLogoProps = {
   className?: SVGLogoElements;
@@ -10,6 +10,11 @@ type SVGLogoElements = LogoElements & {
   main?: string;
 };
 
+type LogoVariants = {
+  light: LogoElements;
+  dark: LogoElements;
+};
+
 type LogoElements = {
   text?: string;
   shelf?: string;
@@ -18,26 +23,34 @@ type LogoElements = {
   book3?: string;
 };
 
+const defaultColors: LogoVariants = {
+  dark: {
+    text: "#fafafa",
+    shelf: "#d1d5db",
+    book1: "#F2994A",
+    book2: "#EB5757",
+    book3: "#63B3ED",
+  },
+  light: {
+    text: "#525252",
+    shelf: "#171717",
+    book1: "#F2994A",
+    book2: "#EB5757",
+    book3: "#63B3ED",
+  },
+};
+
 const BookshelfLogo: React.FC<BookshelfLogoProps> = ({ colors, className }) => {
   const { theme } = useTheme();
-  const defaultColors: LogoElements =
-    theme === "dark"
-      ? {
-          text: "#fafafa",
-          shelf: "#d1d5db",
-          book1: "#F2994A",
-          book2: "#EB5757",
-          book3: "#63B3ED",
-        }
-      : {
-          text: "#525252",
-          shelf: "#171717",
-          book1: "#F2994A",
-          book2: "#EB5757",
-          book3: "#63B3ED",
-        };
+  const [logoColors, setLogoColors] = useState<LogoElements>(
+    defaultColors.light
+  );
 
-  const logoColors = { ...defaultColors, ...colors };
+  useEffect(() => {
+    if (theme === "light") setLogoColors({ ...defaultColors.light, ...colors });
+    if (theme === "dark") setLogoColors({ ...defaultColors.dark, ...colors });
+  }, [colors, theme]);
+
   return (
     <>
       <svg
