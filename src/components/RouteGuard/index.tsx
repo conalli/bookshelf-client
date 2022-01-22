@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ReactNode, useCallback, useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
 import { useAuth } from "../../hooks/useAuth";
 import LoadingPage from "../LoadingPage";
 
@@ -11,6 +12,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { user, isAuthLoading, isAuthError } = useAuth();
+  const queryClient = useQueryClient();
 
   const checkAuth = useCallback(
     (currentRoute: string) => {
@@ -29,6 +31,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   );
 
   useEffect(() => {
+    queryClient.removeQueries("user-cmds");
     checkAuth(router.asPath);
     const hideContent = () => setIsAuthenticated(false);
     router.events.on("routeChangeStart", hideContent);
@@ -37,9 +40,9 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", checkAuth);
     };
-  }, [checkAuth, router.asPath, router.events]);
-  if (!isAuthenticated) return null;
-  if (isAuthLoading && !isAuthenticated) return <LoadingPage />;
+  }, [checkAuth, queryClient, router.asPath, router.events]);
+
+  if (isAuthLoading || !isAuthenticated) return <LoadingPage />;
   return isAuthenticated && <>{children}</>;
 };
 
