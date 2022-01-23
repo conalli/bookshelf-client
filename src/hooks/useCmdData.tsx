@@ -32,6 +32,8 @@ export const useGetCmdData = (
     "user-cmds",
     () => fetchCmds(apikey),
     {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
       onSuccess,
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {
@@ -52,7 +54,7 @@ export type AddCmdData = {
 };
 
 const addCmd = (data: AddCmdData) => {
-  return axios.put<AddCMDRes, AddCMDRes>(
+  return axios.put<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
     `${ReqURL.addCmd}${data.apiKey}`,
     data.body,
     {
@@ -65,14 +67,24 @@ const addCmd = (data: AddCmdData) => {
 export const useAddCmdData = () => {
   const queryClient = useQueryClient();
   const { setErrorMessages } = useAuth();
-  return useMutation<AddCMDRes, AxiosError<ErrorRes>, AddCmdData>(addCmd, {
+  return useMutation<
+    AxiosResponse<AddCMDRes>,
+    AxiosError<ErrorRes>,
+    AddCmdData
+  >(addCmd, {
     onMutate: async (addData) => {
       await queryClient.cancelQueries("user-cmds");
-      const cmdList = queryClient.getQueryData<CMDList>("user-cmds");
-      queryClient.setQueryData<CMDList>("user-cmds", (prevData) => {
-        const { cmd, url } = addData.body;
-        return { ...prevData, [cmd]: url };
-      });
+      const cmdList =
+        queryClient.getQueryData<AxiosResponse<CMDList>>("user-cmds");
+      queryClient.setQueryData<AxiosResponse<CMDList>>(
+        "user-cmds",
+        (prevData) => {
+          const init = {} as AxiosResponse<CMDList>;
+          const { cmd, url } = addData.body;
+          if (!prevData) return { ...init, data: { cmd: url } };
+          return { ...prevData, data: { ...prevData.data, [cmd]: url } };
+        }
+      );
       return cmdList || {};
     },
     onSettled: () => {
@@ -96,7 +108,7 @@ export type DelCmdData = {
 };
 
 const delCmd = (data: DelCmdData) => {
-  return axios.put<DelCMDRes, DelCMDRes>(
+  return axios.put<DelCMDRes, AxiosResponse<DelCMDRes>, DelCMDReq>(
     `${ReqURL.delCmd}${data.apiKey}`,
     data.body,
     {
@@ -106,23 +118,15 @@ const delCmd = (data: DelCmdData) => {
   );
 };
 
+// Design choice -> Optimistic update on delete???
 export const useDelCmdData = () => {
   const queryClient = useQueryClient();
   const { setErrorMessages } = useAuth();
-  return useMutation<DelCMDRes, AxiosError<ErrorRes>, DelCmdData>(delCmd, {
-    onMutate: async (delData) => {
-      await queryClient.cancelQueries("user-cmds");
-      const cmdList = queryClient.getQueryData<CMDList>("user-cmds");
-      queryClient.setQueryData<CMDList>("user-cmds", (prevData) => {
-        if (!prevData) return {};
-        const { cmd } = delData.body;
-        if (cmd in prevData) {
-          delete prevData.cmd;
-        }
-        return { ...prevData };
-      });
-      return cmdList || {};
-    },
+  return useMutation<
+    AxiosResponse<DelCMDRes>,
+    AxiosError<ErrorRes>,
+    DelCmdData
+  >(delCmd, {
     onSettled: () => {
       queryClient.invalidateQueries("user-cmds");
     },
