@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   AddCMDReq,
@@ -14,9 +14,12 @@ import { createErrorMessage } from "../utils/errorMessages";
 export type CMDList = { [c: string]: string };
 
 const fetchCmds = (apiKey: string) => {
-  return axios.get<CMDList, CMDList>(`${ReqURL.getCmds}${apiKey}`, {
-    withCredentials: true,
-  });
+  return axios.get<AxiosResponse<CMDList>, AxiosResponse<CMDList>, CMDList>(
+    `${ReqURL.getCmds}${apiKey}`,
+    {
+      withCredentials: true,
+    }
+  );
 };
 
 export const useGetCmdData = (
@@ -25,7 +28,7 @@ export const useGetCmdData = (
   callOnError?: () => void
 ) => {
   const { setErrorMessages } = useAuth();
-  return useQuery<CMDList, AxiosError<ErrorRes>>(
+  return useQuery<AxiosResponse<CMDList>, AxiosError<ErrorRes>>(
     "user-cmds",
     () => fetchCmds(apikey),
     {
