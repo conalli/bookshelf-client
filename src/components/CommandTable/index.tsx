@@ -31,6 +31,13 @@ const CommandTable: React.FC<CommandTableProps> = ({
   if (!user) return null;
   const cmds = data?.data;
 
+  const formatLink = (link: string) => {
+    if (link.startsWith("http://") || link.startsWith("https://")) {
+      return link;
+    }
+    return `http://${link}`;
+  };
+
   return (
     <motion.table
       initial={{ opacity: 0, x: 20 }}
@@ -65,7 +72,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
                   {key}
                 </td>
                 <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange p-2">
-                  <a href={cmds[key]}>{cmds[key]}</a>
+                  <a href={formatLink(cmds[key])}>{cmds[key]}</a>
                 </td>
                 <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange">
                   <div className="flex justify-center items-center w-full h-full">
