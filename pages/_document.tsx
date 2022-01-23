@@ -16,6 +16,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta
+            name="description"
+            content="Create an account or log into Bookshelf. Add your bookmarks and then manage or access them anywhere."
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
