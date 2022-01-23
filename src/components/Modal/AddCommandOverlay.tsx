@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { motion } from "framer-motion";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { UseMutationResult } from "react-query";
 import { Command } from "../../../pages/dashboard";
@@ -57,7 +58,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
           </label>
           <input
             id="URL"
-            className="appearance-none bg-gray-100  text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
+            className="appearance-none bg-gray-100 text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
             type="text"
             name="URL"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -67,13 +68,15 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
         </div>
       </div>
       <div className="flex gap-2 w-full py-2 lg:py-4 ">
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
           onClick={() => setIsOpen(false)}
           className="bg-bk-blue dark:bg-bk-orange text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
         >
           Cancel
-        </button>
-        <button
+        </motion.button>
+        <motion.button
+          whileHover={cmd.length && url.length ? { scale: 1.05 } : { scale: 1 }}
           onClick={() => {
             add.mutate({
               apiKey: user.apiKey,
@@ -86,10 +89,11 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
             setSelected({ cmd, url });
             setIsOpen(false);
           }}
-          className="bg-green-400 dark:bg-gray-100 dark:text-neutral-600 text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
+          disabled={!cmd.length || !url.length}
+          className="bg-green-400 dark:bg-gray-100 dark:text-neutral-600 text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90  disabled:opacity-50 disabled:bg-gray-300 disabled:text-opacity-50 rounded shadow-md"
         >
           Add
-        </button>
+        </motion.button>
       </div>
     </div>
   );
