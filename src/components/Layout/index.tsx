@@ -2,6 +2,8 @@ import { AnimatePresence, motion, useAnimation, Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import React, { ReactNode, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { removeErrorMessage } from "../../utils/errorHelpers";
+import ErrorNotification from "../ErrorNotification";
 import LoadingPage from "../LoadingPage";
 import Nav from "../Nav";
 
@@ -9,7 +11,7 @@ type LayoutProps = {
   children: ReactNode;
 };
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { isAuthLoading } = useAuth();
+  const { isAuthLoading, errorMessages, setErrorMessages } = useAuth();
   const { theme } = useTheme();
   const controls = useAnimation();
 
@@ -24,6 +26,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     controls.start("themeTransition");
   }, [controls, theme]);
 
+  const closeErrorMessage = (id: string) => {
+    setErrorMessages(removeErrorMessage(errorMessages, id));
+  };
+
   if (isAuthLoading) return <LoadingPage />;
   return (
     <AnimatePresence>
@@ -37,6 +43,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Nav />
         </header>
         <div className="col-start-2 row-start-2">{children}</div>
+        <ul className="fixed bottom-0 right-0 top-0 flex flex-col justify-end">
+          <AnimatePresence initial={false}>
+            {errorMessages.map((err) => (
+              <ErrorNotification
+                key={err.id}
+                error={err}
+                closeErrorMessage={closeErrorMessage}
+              />
+            ))}
+          </AnimatePresence>
+        </ul>
       </motion.div>
     </AnimatePresence>
   );
