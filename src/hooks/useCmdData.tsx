@@ -1,25 +1,46 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { AddCMDReq, AddCMDRes, DelCMDReq, DelCMDRes } from "../utils/APITypes";
+import {
+  AddCMDReq,
+  AddCMDRes,
+  DelCMDReq,
+  DelCMDRes,
+  ErrorRes,
+} from "../utils/APITypes";
 import { ReqURL } from "../utils/APIEndpoints";
+import { useAuth } from "./useAuth";
+import { createErrorMessage } from "../utils/errorMessages";
 
 export type CMDList = { [c: string]: string };
 
 const fetchCmds = (apiKey: string) => {
-  return axios.get<CMDList>(`${ReqURL.getCmds}${apiKey}`, {
+  return axios.get<CMDList, CMDList>(`${ReqURL.getCmds}${apiKey}`, {
     withCredentials: true,
   });
 };
 
 export const useGetCmdData = (
   apikey = "",
-  onSuccess: () => void,
-  onError: () => void
+  onSuccess?: () => void,
+  callOnError?: () => void
 ) => {
-  return useQuery("user-cmds", () => fetchCmds(apikey), {
-    onSuccess,
-    onError,
-  });
+  const { setErrorMessages } = useAuth();
+  return useQuery<CMDList, AxiosError<ErrorRes>>(
+    "user-cmds",
+    () => fetchCmds(apikey),
+    {
+      onSuccess,
+      onError: (err) => {
+        if (axios.isAxiosError(err) && err.response) {
+          const errRes = err.response.data as ErrorRes;
+          setErrorMessages((prev) => {
+            return [...prev, createErrorMessage(errRes.error)];
+          });
+        }
+        if (callOnError) callOnError();
+      },
+    }
+  );
 };
 
 export type AddCmdData = {
@@ -28,15 +49,20 @@ export type AddCmdData = {
 };
 
 const addCmd = (data: AddCmdData) => {
-  return axios.put<AddCMDRes>(`${ReqURL.addCmd}${data.apiKey}`, data.body, {
-    withCredentials: true,
-    headers: { "Content-Type": "application/json" },
-  });
+  return axios.put<AddCMDRes, AddCMDRes>(
+    `${ReqURL.addCmd}${data.apiKey}`,
+    data.body,
+    {
+      withCredentials: true,
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 };
 
 export const useAddCmdData = () => {
   const queryClient = useQueryClient();
-  return useMutation(addCmd, {
+  const { setErrorMessages } = useAuth();
+  return useMutation<AddCMDRes, AxiosError<ErrorRes>, AddCmdData>(addCmd, {
     onMutate: async (addData) => {
       await queryClient.cancelQueries("user-cmds");
       const cmdList = queryClient.getQueryData<CMDList>("user-cmds");
@@ -49,7 +75,13 @@ export const useAddCmdData = () => {
     onSettled: () => {
       queryClient.invalidateQueries("user-cmds");
     },
-    onError: () => {
+    onError: (err) => {
+      if (axios.isAxiosError(err) && err.response) {
+        const errRes = err.response.data as ErrorRes;
+        setErrorMessages((prev) => {
+          return [...prev, createErrorMessage(errRes.error)];
+        });
+      }
       queryClient.setQueryData<CMDList>("user-cmds", (prev) => prev || {});
     },
   });
@@ -61,15 +93,20 @@ export type DelCmdData = {
 };
 
 const delCmd = (data: DelCmdData) => {
-  return axios.put<DelCMDRes>(`${ReqURL.delCmd}${data.apiKey}`, data.body, {
-    withCredentials: true,
-    headers: { "Content-Type": "application/json" },
-  });
+  return axios.put<DelCMDRes, DelCMDRes>(
+    `${ReqURL.delCmd}${data.apiKey}`,
+    data.body,
+    {
+      withCredentials: true,
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 };
 
 export const useDelCmdData = () => {
   const queryClient = useQueryClient();
-  return useMutation(delCmd, {
+  const { setErrorMessages } = useAuth();
+  return useMutation<DelCMDRes, AxiosError<ErrorRes>, DelCmdData>(delCmd, {
     onMutate: async (delData) => {
       await queryClient.cancelQueries("user-cmds");
       const cmdList = queryClient.getQueryData<CMDList>("user-cmds");
@@ -86,7 +123,13 @@ export const useDelCmdData = () => {
     onSettled: () => {
       queryClient.invalidateQueries("user-cmds");
     },
-    onError: () => {
+    onError: (err) => {
+      if (axios.isAxiosError(err) && err.response) {
+        const errRes = err.response.data as ErrorRes;
+        setErrorMessages((prev) => {
+          return [...prev, createErrorMessage(errRes.error)];
+        });
+      }
       queryClient.setQueryData<CMDList>("user-cmds", (prev) => prev || {});
     },
   });
