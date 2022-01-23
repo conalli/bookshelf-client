@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bookshelf - Frontend 🔖
 
-## Getting Started
+![bookshelf-logo-github](https://user-images.githubusercontent.com/76471929/145391946-8870d37b-fab8-4fd4-8a68-000d33d02d15.png)
 
-First, run the development server:
+ ## About Bookshelf 📚
+ 
+ Bookshelf is a smart-booking application for efficiently saving and using bookmarks while working in the browser. To get started head on over to $$$ and Sign up for an account.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## How to add a custom search engine 📑
+This example uses Google Chrome, however setup is similar across most browsers.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. First, find the settings page.
+2. Next, locate the Search engine tab on the left hand side.
+3. Click Manage search engines.
+4. In the Other search engines section, click Add.
+ - Undersearch engine, choose a name; e.g. Bookshelf.
+ - Under Keyword, choose a keyword to invoke Bookshelf; e.g. bk, shelf, etc.
+ - Under URL, copy and paste your unique URL.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Get started developing 🖥️
+This is the repository for the frontend web client. If you would like to work on the backend, check out the [backend repository](https://github.com/conalli/bookshelf-backend) 📓.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The web client is written in TypeScript, using React, Chakra-UI and Formik. 
+To get started
+ - Clone this repository.
+ - To build the project and run the dev server, in the terminal run:
+ ``` 
+ yarn dev
+ ```
