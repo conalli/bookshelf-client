@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { Dispatch, SetStateAction } from "react";
 import { UseMutationResult } from "react-query";
 import { Command } from "../../../pages/dashboard";
@@ -9,7 +9,8 @@ import { DelCMDRes, ErrorRes } from "../../utils/APITypes";
 type DeleteCommandOverlayProps = {
   user: User;
   del: UseMutationResult<
-    DelCMDRes,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    AxiosResponse<DelCMDRes, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     AxiosError<ErrorRes, any>,
     DelCmdData,

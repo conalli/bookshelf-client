@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { motion } from "framer-motion";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { UseMutationResult } from "react-query";
@@ -10,7 +10,8 @@ import { AddCMDRes, ErrorRes } from "../../utils/APITypes";
 type AddCommandOverlayProps = {
   user: User;
   add: UseMutationResult<
-    AddCMDRes,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    AxiosResponse<AddCMDRes, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     AxiosError<ErrorRes, any>,
     AddCmdData,
