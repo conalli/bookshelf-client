@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import About from "../src/components/About";
 
@@ -12,6 +13,9 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Bookshelf</title>
+      </Head>
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{

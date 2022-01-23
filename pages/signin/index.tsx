@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Head from "next/head";
 import React, { useState } from "react";
 import SignInForm, { SignInFormVariant } from "../../src/components/SignInForm";
 
@@ -21,6 +22,9 @@ const SignIn = () => {
       exit={{ opacity: 0, x: -20 }}
       className="flex justify-center items-center md:items-start py-4 md:py-10 h-4/5 md:h-full"
     >
+      <Head>
+        <title>Sign in</title>
+      </Head>
       <div className="grid grid-cols-6 grid-rows-4 bg-white dark:bg-neutral-800 shadow-md w-4/5 md:w-3/4 xl:w-2/4 h-4/5 rounded-md">
         <h1 className="col-start-2 col-span-4 md:col-start-2 md:col-span-4 text-xl md:text-3xl lg:text-6xl py-2 lg:py-10 self-start md:self-center justify-self-center">
           {formType}
