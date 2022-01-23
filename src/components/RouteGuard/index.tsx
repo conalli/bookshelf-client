@@ -17,14 +17,15 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const checkAuth = useCallback(
     (currentRoute: string) => {
       const protectedPath = "/dashboard";
+      if (user) {
+        setIsAuthenticated(true);
+      }
       if (
         (!user && !isAuthLoading && currentRoute === protectedPath) ||
         (!user && isAuthError && currentRoute === protectedPath)
       ) {
         setIsAuthenticated(false);
         router.push("/signin");
-      } else {
-        setIsAuthenticated(true);
       }
     },
     [isAuthError, isAuthLoading, router, user]
