@@ -97,7 +97,6 @@ export const AuthProvider = ({
         setSubmitting(false);
         setIsAuthError(true);
         setIsAuthLoading(false);
-        console.error(error);
       }
     },
     [router]
@@ -137,7 +136,6 @@ export const AuthProvider = ({
       }
       setIsAuthError(true);
       setIsAuthLoading(false);
-      console.error(error);
     }
   }, [router, user]);
 
