@@ -42,8 +42,8 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       router.events.off("routeChangeComplete", checkAuth);
     };
   }, [checkAuth, queryClient, router.asPath, router.events]);
-
-  if (isAuthLoading || !isAuthenticated) return <LoadingPage />;
+  if (!isAuthenticated) return null;
+  if (isAuthLoading) return <LoadingPage />;
   return isAuthenticated && <>{children}</>;
 };
 
