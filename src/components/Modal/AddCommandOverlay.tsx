@@ -1,15 +1,21 @@
-import { AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import { motion } from "framer-motion";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { UseMutationResult } from "react-query";
 import { Command } from "../../../pages/dashboard";
 import { User } from "../../hooks/useAuth";
 import { AddCmdData } from "../../hooks/useCmdData";
+import { AddCMDRes, ErrorRes } from "../../utils/APITypes";
 
 type AddCommandOverlayProps = {
   user: User;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  add: UseMutationResult<AxiosResponse<any, any>, unknown, AddCmdData, unknown>;
+  add: UseMutationResult<
+    AddCMDRes,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    AxiosError<ErrorRes, any>,
+    AddCmdData,
+    unknown
+  >;
   setSelected: Dispatch<SetStateAction<Command | null>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
