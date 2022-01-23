@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useAnimation, Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import React, { ReactNode, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { removeErrorMessage } from "../../utils/errorHelpers";
+import { removeErrorMessage } from "../../utils/errorMessages";
 import ErrorNotification from "../ErrorNotification";
 import LoadingPage from "../LoadingPage";
 import Nav from "../Nav";

@@ -50,3 +50,8 @@ export type DelACCRes = {
   numDeleted: number;
   users: MockUser[];
 };
+
+export type ErrorRes = {
+  status: number;
+  error: string;
+};

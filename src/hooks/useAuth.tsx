@@ -2,14 +2,17 @@ import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useCallback,
   useContext,
   useMemo,
   useState,
 } from "react";
 import { ReqURL } from "../utils/APIEndpoints";
-import { LogInReq, LogInRes } from "../utils/APITypes";
+import { ErrorRes, LogInReq, LogInRes } from "../utils/APITypes";
+import { createErrorMessage } from "../utils/errorMessages";
 
 export type User = {
   id: string;
@@ -24,14 +27,17 @@ type LogInData = {
   setSubmitting: (isSubmitting: boolean) => void;
 };
 
-// TODO: Refactor error types + messages
-type ErrorType = "Server" | "Sign up" | "Log in" | "Delete Account" | undefined;
+export type ErrorMessage = {
+  id: string;
+  error: string;
+};
 
 type AuthContextType = {
   user: User | null;
   isAuthLoading: boolean;
   isAuthError: boolean;
-  errorType: ErrorType;
+  errorMessages: ErrorMessage[];
+  setErrorMessages: Dispatch<SetStateAction<ErrorMessage[]>>;
   logIn: (data: LogInData) => Promise<void>;
   logOut: () => void;
   delAccount: () => Promise<void>;
@@ -48,7 +54,7 @@ export const AuthProvider = ({
   const [user, setUser] = useState<User | null>(null);
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
-  const [errorType, setErrorType] = useState<ErrorType>(undefined);
+  const [errorMessages, setErrorMessages] = useState<ErrorMessage[]>([]);
 
   const logIn = useCallback(
     async ({ type, values, setSubmitting }: LogInData): Promise<void> => {
@@ -75,13 +81,21 @@ export const AuthProvider = ({
           router.push("/dashboard");
         } else {
           setIsAuthError(true);
-          setErrorType(type);
+          setErrorMessages((prev) => {
+            const msg = `Unexpected ${type} Error: Please check credentials before trying again.`;
+            return [...prev, createErrorMessage(msg)];
+          });
           setIsAuthLoading(false);
         }
       } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          const errRes = error.response.data as ErrorRes;
+          setErrorMessages((prev) => {
+            return [...prev, createErrorMessage(errRes.error)];
+          });
+        }
         setSubmitting(false);
         setIsAuthError(true);
-        setErrorType("Server");
         setIsAuthLoading(false);
         console.error(error);
       }
@@ -108,12 +122,20 @@ export const AuthProvider = ({
         router.push("/");
       } else {
         setIsAuthError(true);
-        setErrorType("Delete Account");
+        setErrorMessages((prev) => {
+          const msg = `Unexpected Error While trying to Delete ${user.name}'s Account: Please check credentials before trying again.`;
+          return [...prev, createErrorMessage(msg)];
+        });
         setIsAuthLoading(false);
       }
     } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const errRes = error.response.data as ErrorRes;
+        setErrorMessages((prev) => {
+          return [...prev, createErrorMessage(errRes.error)];
+        });
+      }
       setIsAuthError(true);
-      setErrorType("Server");
       setIsAuthLoading(false);
       console.error(error);
     }
@@ -124,12 +146,13 @@ export const AuthProvider = ({
       user,
       isAuthLoading,
       isAuthError,
-      errorType,
+      errorMessages,
+      setErrorMessages,
       logIn,
       logOut,
       delAccount,
     }),
-    [user, isAuthLoading, isAuthError, errorType, logIn, logOut, delAccount]
+    [user, isAuthLoading, isAuthError, errorMessages, logIn, logOut, delAccount]
   );
   return (
     <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>
