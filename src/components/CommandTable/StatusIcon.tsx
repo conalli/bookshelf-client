@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
 import { Command, UpdateCommandStatus } from "../../../pages/dashboard";
-import Spinner from "../../Spinner";
+import Spinner from "../Spinner";
 
 type StatusIconProps = {
   cmd: string;
