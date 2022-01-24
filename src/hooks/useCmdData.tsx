@@ -54,7 +54,7 @@ export type AddCmdData = {
 };
 
 const addCmd = (data: AddCmdData) => {
-  return axios.put<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
+  return axios.patch<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
     `${ReqURL.addCmd}${data.apiKey}`,
     data.body,
     {
@@ -108,7 +108,7 @@ export type DelCmdData = {
 };
 
 const delCmd = (data: DelCmdData) => {
-  return axios.put<DelCMDRes, AxiosResponse<DelCMDRes>, DelCMDReq>(
+  return axios.patch<DelCMDRes, AxiosResponse<DelCMDRes>, DelCMDReq>(
     `${ReqURL.delCmd}${data.apiKey}`,
     data.body,
     {
@@ -118,7 +118,6 @@ const delCmd = (data: DelCmdData) => {
   );
 };
 
-// Design choice -> Optimistic update on delete???
 export const useDelCmdData = () => {
   const queryClient = useQueryClient();
   const { setErrorMessages } = useAuth();
