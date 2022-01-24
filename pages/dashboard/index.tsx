@@ -3,6 +3,7 @@ import { ReactElement, useState } from "react";
 import CommandTable from "../../src/components/CommandTable";
 import Modal from "../../src/components/Modal";
 import AddCommandOverlay from "../../src/components/Modal/AddCommandOverlay";
+import BrowserSetupOverlay from "../../src/components/Modal/BrowserSetupOverlay";
 import DeleteCommandOverlay from "../../src/components/Modal/DeleteCommandOverlay";
 import RouteGuard from "../../src/components/RouteGuard";
 import { useAuth } from "../../src/hooks/useAuth";
@@ -29,7 +30,9 @@ export type UpdateCommandStatus = {
 
 const Dashboard: NextPageWithLayout = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [modalType, setModalType] = useState<"add" | "del" | undefined>();
+  const [modalType, setModalType] = useState<
+    "add" | "del" | "setup" | undefined
+  >();
   const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
   const { user, logOut } = useAuth();
   const add = useAddCmdData();
@@ -66,7 +69,16 @@ const Dashboard: NextPageWithLayout = () => {
         <h1 className="text-2xl md:text-3xl lg:text-4xl">
           {user.name}&apos;s Bookmarks:
         </h1>
-        <div className="flex gap-2">
+        <div className="flex gap-0.5 md:gap-2">
+          <button
+            onClick={() => {
+              setModalType("setup");
+              setModalOpen(true);
+            }}
+            className="text-white px-4 py-2 bg-bk-orange rounded"
+          >
+            Setup Guide
+          </button>
           <button
             onClick={() => {
               setModalType("add");
@@ -92,13 +104,15 @@ const Dashboard: NextPageWithLayout = () => {
             setSelected={setSelectedCommand}
             setIsOpen={setModalOpen}
           />
-        ) : (
+        ) : modalType === "del" ? (
           <DeleteCommandOverlay
             selected={selectedCommand || null}
             user={user}
             del={del}
             setIsOpen={setModalOpen}
           />
+        ) : (
+          <BrowserSetupOverlay setIsOpen={setModalOpen} />
         )}
       </Modal>
       <CommandTable

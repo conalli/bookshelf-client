@@ -10,7 +10,7 @@ import StatusIcon from "./StatusIcon";
 type CommandTableProps = {
   user: User | null;
   openModal: Dispatch<SetStateAction<boolean>>;
-  setModalType: Dispatch<SetStateAction<"add" | "del" | undefined>>;
+  setModalType: Dispatch<SetStateAction<"add" | "del" | "setup" | undefined>>;
   selected: Command | null;
   setSelected: Dispatch<SetStateAction<Command | null>>;
   cmdStatus: UpdateCommandStatus;
