@@ -13,7 +13,7 @@ describe("signin", () => {
     // Should render input elements.
     cy.findByRole("textbox");
     cy.findByPlaceholderText(/password/i);
-    // Should render login button.
+    // Should render sign up button.
     cy.findByRole("button", { name: /sign up/i });
     // Should render subtitle with button to change to login form.
     cy.findByText(/already have an account\?/i);
@@ -54,14 +54,35 @@ describe("signin", () => {
       cy.location().should((loc) => expect(loc.pathname).to.eq("/signin"));
       cy.findByText(/Password cannot be longer than 20 characters/i);
     });
+  });
+  describe("Sign up/ Log in", () => {
+    it("Should allow users with unique credentials to sign up", () => {
+      cy.location().should((loc) => expect(loc.pathname).to.eq("/signin"));
+      cy.findByRole("textbox").type("newuser");
+      cy.findByPlaceholderText(/password/i).type("12345");
+      cy.findByRole("button", { name: /sign up/i }).click();
+      cy.location().should((loc) => expect(loc.pathname).to.eq("/dashboard"));
+    });
     it("Should log user in with correct information", () => {
-      const user = { name: "tom", password: "password" };
       cy.location().should((loc) => expect(loc.pathname).to.eq("/signin"));
       cy.findByRole("button", { name: /log in/i }).click();
-      cy.findByRole("textbox").type(user.name);
-      cy.findByPlaceholderText(/password/i).type(user.password);
+      cy.findByRole("textbox").type("tom");
+      cy.findByPlaceholderText(/password/i).type("password");
       cy.findByRole("button", { name: /log in/i }).click();
       cy.location().should((loc) => expect(loc.pathname).to.eq("/dashboard"));
+    });
+    it("Should not allow user to login with incorrect credentials", () => {
+      cy.findByRole("button", { name: /log in/i }).click();
+      cy.findByRole("textbox").type("tom");
+      cy.findByPlaceholderText(/password/i).type("password1");
+      cy.findByRole("button", { name: /log in/i }).click();
+      cy.location().should((loc) => expect(loc.pathname).to.eq("/signin"));
+    });
+    it("Should not allow user to signup with non-unique used name", () => {
+      cy.findByRole("textbox").type("tom");
+      cy.findByPlaceholderText(/password/i).type("12345");
+      cy.findByRole("button", { name: /sign up/i }).click();
+      cy.location().should((loc) => expect(loc.pathname).to.eq("/signin"));
     });
   });
 });
