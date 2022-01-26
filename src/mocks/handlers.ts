@@ -1,5 +1,5 @@
 import { PathParams, rest } from "msw";
-import { ErrRes } from "./mockTypes";
+import { ErrRes, MockUser } from "./mockTypes";
 import {
   DelACCReq,
   DelACCRes,
@@ -46,12 +46,20 @@ export const handlers = [
       const found = mockUsers.find(
         (user) => user.name === name && user.password === password
       );
+      const newUser: MockUser = {
+        id: "new_user_id",
+        apiKey: "new_user_apiKey",
+        name,
+        password,
+        commands: {},
+      };
+      mockUsers.push(newUser);
       if (!found) {
         return res(
           ctx.status(200),
           ctx.json({
-            id: "new_user_id",
-            apiKey: "new_user_apiKey",
+            id: newUser.id,
+            apiKey: newUser.apiKey,
             status: 200,
             statusText: "OK",
             headers: {},
@@ -70,7 +78,7 @@ export const handlers = [
     }
     return res(ctx.status(200), ctx.json(found.commands));
   }),
-  rest.put<AddCMDReq, { apiKey: string }, AddCMDRes | ErrRes>(
+  rest.patch<AddCMDReq, { apiKey: string }, AddCMDRes | ErrRes>(
     `${ReqURL.addCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
@@ -101,7 +109,7 @@ export const handlers = [
       );
     }
   ),
-  rest.put<DelCMDReq, { apiKey: string }, DelCMDRes | ErrRes>(
+  rest.patch<DelCMDReq, { apiKey: string }, DelCMDRes | ErrRes>(
     `${ReqURL.delCmd}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
