@@ -1,4 +1,6 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { copyToClipboard } from "../../utils/copyToClipboard";
 
 type BrowserSetupOverlayProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -7,6 +9,15 @@ type BrowserSetupOverlayProps = {
 const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
   setIsOpen,
 }) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const { user } = useAuth();
+  const handleCopyURL = () => {
+    copyToClipboard(
+      `https://book-shelf-server.herokuapp.com/search/${user?.apiKey}/%s`
+    );
+    setIsCopied(true);
+  };
+
   return (
     <div className="flex flex-col p-3 lg:p-6">
       <h1 className="text-3xl py-1 md:py-2 lg:py-3">Browser Setup: </h1>
@@ -64,6 +75,14 @@ const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
                   Under <span className="text-bk-red">URL </span>, copy and
                   paste your unique URL.
                 </p>
+                <button
+                  className={`${
+                    isCopied ? "bg-green-400 " : "bg-bk-orange "
+                  } dark:bg-bk-blue p-2 hover:opacity-90 rounded shadow-md`}
+                  onClick={handleCopyURL}
+                >
+                  {isCopied ? "copied" : "copy"}
+                </button>
               </li>
             </ul>
           </li>
