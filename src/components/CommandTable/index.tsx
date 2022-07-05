@@ -24,7 +24,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
   setSelected,
   cmdStatus,
 }) => {
-  const { data, isLoading } = useGetCmdData(user?.apiKey);
+  const { data, isLoading } = useGetCmdData(user?.APIKey);
   if (!user) return null;
 
   const cmds = data?.data;

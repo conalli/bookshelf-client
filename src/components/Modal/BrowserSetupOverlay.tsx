@@ -13,7 +13,7 @@ const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
   const { user } = useAuth();
   const handleCopyURL = () => {
     copyToClipboard(
-      `https://book-shelf-server.herokuapp.com/search/${user?.apiKey}/%s`
+      `https://book-shelf-server.herokuapp.com/search/${user?.APIKey}/%s`
     );
     setIsCopied(true);
   };
