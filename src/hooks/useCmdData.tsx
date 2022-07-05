@@ -14,7 +14,6 @@ import { createErrorMessage } from "../utils/errorMessages";
 export type CMDList = { [c: string]: string };
 
 const fetchCmds = (APIKey: string) => {
-  console.error("APIKey", APIKey);
   return axios.get<AxiosResponse<CMDList>, AxiosResponse<CMDList>, CMDList>(
     `${ReqURL.getCmds}${APIKey}`,
     {
