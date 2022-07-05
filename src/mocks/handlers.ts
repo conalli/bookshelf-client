@@ -143,7 +143,7 @@ export const handlers = [
     }
   ),
   rest.delete<DelACCReq, { apiKey: string }, DelACCRes>(
-    `${ReqURL.delAccount}:apiKey`,
+    `${ReqURL.base}:apiKey`,
     (req, res, ctx) => {
       const { apiKey } = req.params;
       const { id, name, password } = req.body;

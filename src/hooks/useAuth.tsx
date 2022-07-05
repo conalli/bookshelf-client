@@ -111,7 +111,7 @@ export const AuthProvider = ({
     if (!user) return;
     setIsAuthLoading(true);
     try {
-      const res = await axios.delete(`${ReqURL.delAccount}${user.apiKey}`, {
+      const res = await axios.delete(`${ReqURL.base}${user.apiKey}`, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
