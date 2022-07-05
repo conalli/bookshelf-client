@@ -48,7 +48,7 @@ const DeleteCommandOverlay: React.FC<DeleteCommandOverlayProps> = ({
           <button
             onClick={() => {
               del.mutate({
-                apiKey: user.apiKey,
+                APIKey: user.APIKey,
                 body: {
                   id: user.id,
                   cmd: selected?.cmd,

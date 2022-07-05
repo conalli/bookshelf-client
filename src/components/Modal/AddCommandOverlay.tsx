@@ -86,7 +86,7 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
           whileHover={cmd.length && url.length ? { scale: 1.05 } : { scale: 1 }}
           onClick={() => {
             add.mutate({
-              apiKey: user.apiKey,
+              APIKey: user.APIKey,
               body: {
                 id: user.id,
                 cmd,

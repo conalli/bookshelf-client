@@ -13,9 +13,9 @@ import { createErrorMessage } from "../utils/errorMessages";
 
 export type CMDList = { [c: string]: string };
 
-const fetchCmds = (apiKey: string) => {
+const fetchCmds = (APIKey: string) => {
   return axios.get<AxiosResponse<CMDList>, AxiosResponse<CMDList>, CMDList>(
-    `${ReqURL.getCmds}${apiKey}`,
+    `${ReqURL.getCmds}${APIKey}`,
     {
       withCredentials: true,
     }
@@ -49,13 +49,13 @@ export const useGetCmdData = (
 };
 
 export type AddCmdData = {
-  apiKey: string;
+  APIKey: string;
   body: AddCMDReq;
 };
 
 const addCmd = (data: AddCmdData) => {
   return axios.patch<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
-    `${ReqURL.addCmd}${data.apiKey}`,
+    `${ReqURL.addCmd}${data.APIKey}`,
     data.body,
     {
       withCredentials: true,
@@ -103,13 +103,13 @@ export const useAddCmdData = () => {
 };
 
 export type DelCmdData = {
-  apiKey: string;
+  APIKey: string;
   body: DelCMDReq;
 };
 
 const delCmd = (data: DelCmdData) => {
   return axios.patch<DelCMDRes, AxiosResponse<DelCMDRes>, DelCMDReq>(
-    `${ReqURL.delCmd}${data.apiKey}`,
+    `${ReqURL.delCmd}${data.APIKey}`,
     data.body,
     {
       withCredentials: true,

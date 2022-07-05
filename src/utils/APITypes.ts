@@ -7,7 +7,7 @@ export type SignUpReq = {
 
 export type SignUpRes = {
   id: string;
-  apiKey: string;
+  APIKey: string;
 };
 
 export type LogInReq = {
@@ -17,7 +17,7 @@ export type LogInReq = {
 
 export type LogInRes = {
   id: string;
-  apiKey: string;
+  APIKey: string;
 };
 
 export type AddCMDReq = {

@@ -2,7 +2,7 @@ export type MockUser = {
   id: string;
   name: string;
   password: string;
-  apiKey: string;
+  APIKey: string;
   commands: { [c: string]: string };
 };
 

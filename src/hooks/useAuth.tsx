@@ -18,7 +18,7 @@ export type User = {
   id: string;
   name: string;
   password: string;
-  apiKey: string;
+  APIKey: string;
 };
 
 type LogInData = {
@@ -70,12 +70,12 @@ export const AuthProvider = ({
           headers: { "Content-Type": "application/json" },
         });
         if (res.status === 200) {
-          const { id, apiKey } = res.data;
+          const { id, APIKey } = res.data;
           setUser(() => ({
             id: id,
             name: values.name.trim(),
             password: values.password.trim(),
-            apiKey: apiKey,
+            APIKey: APIKey,
           }));
           setIsAuthLoading(false);
           router.push("/dashboard");
@@ -111,7 +111,7 @@ export const AuthProvider = ({
     if (!user) return;
     setIsAuthLoading(true);
     try {
-      const res = await axios.delete(`${ReqURL.base}${user.apiKey}`, {
+      const res = await axios.delete(`${ReqURL.base}${user.APIKey}`, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });

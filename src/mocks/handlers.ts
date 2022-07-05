@@ -28,7 +28,7 @@ export const handlers = [
           ctx.status(200),
           ctx.json({
             id: found.id,
-            apiKey: found.apiKey,
+            APIKey: found.APIKey,
             status: 200,
             statusText: "OK",
             headers: {},
@@ -48,7 +48,7 @@ export const handlers = [
       );
       const newUser: MockUser = {
         id: "new_user_id",
-        apiKey: "new_user_apiKey",
+        APIKey: "new_user_apiKey",
         name,
         password,
         commands: {},
@@ -59,7 +59,7 @@ export const handlers = [
           ctx.status(200),
           ctx.json({
             id: newUser.id,
-            apiKey: newUser.apiKey,
+            APIKey: newUser.APIKey,
             status: 200,
             statusText: "OK",
             headers: {},
@@ -70,20 +70,20 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  rest.get(`${ReqURL.getCmds}:apiKey`, (req, res, ctx) => {
-    const { apiKey } = req.params;
-    const found = mockUsers.find((user) => user.apiKey === apiKey);
+  rest.get(`${ReqURL.getCmds}:APIKey`, (req, res, ctx) => {
+    const { APIKey } = req.params;
+    const found = mockUsers.find((user) => user.APIKey === APIKey);
     if (!found) {
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
     return res(ctx.status(200), ctx.json(found.commands));
   }),
-  rest.patch<AddCMDReq, { apiKey: string }, AddCMDRes | ErrRes>(
-    `${ReqURL.addCmd}:apiKey`,
+  rest.patch<AddCMDReq, { APIKey: string }, AddCMDRes | ErrRes>(
+    `${ReqURL.addCmd}:APIKey`,
     (req, res, ctx) => {
-      const { apiKey } = req.params;
+      const { APIKey } = req.params;
       const { cmd, url } = req.body;
-      const found = mockUsers.find((user) => user.apiKey === apiKey);
+      const found = mockUsers.find((user) => user.APIKey === APIKey);
       if (!found) {
         return res(
           ctx.status(400),
@@ -109,13 +109,13 @@ export const handlers = [
       );
     }
   ),
-  rest.patch<DelCMDReq, { apiKey: string }, DelCMDRes | ErrRes>(
-    `${ReqURL.delCmd}:apiKey`,
+  rest.patch<DelCMDReq, { APIKey: string }, DelCMDRes | ErrRes>(
+    `${ReqURL.delCmd}:APIKey`,
     (req, res, ctx) => {
-      const { apiKey } = req.params;
+      const { APIKey } = req.params;
       const { id, cmd } = req.body;
       const found = mockUsers.find(
-        (user) => user.apiKey === apiKey && user.id === id
+        (user) => user.APIKey === APIKey && user.id === id
       );
       if (!found) {
         return res(
@@ -142,14 +142,14 @@ export const handlers = [
       );
     }
   ),
-  rest.delete<DelACCReq, { apiKey: string }, DelACCRes>(
-    `${ReqURL.base}:apiKey`,
+  rest.delete<DelACCReq, { APIKey: string }, DelACCRes>(
+    `${ReqURL.base}:APIKey`,
     (req, res, ctx) => {
-      const { apiKey } = req.params;
+      const { APIKey } = req.params;
       const { id, name, password } = req.body;
       const found = mockUsers.find(
         (user) =>
-          user.apiKey === apiKey && user.id === id && user.password === password
+          user.APIKey === APIKey && user.id === id && user.password === password
       );
       if (!found) {
         return res(
@@ -168,7 +168,7 @@ export const handlers = [
       mockUsers.filter(
         (user) =>
           user.id !== id &&
-          user.apiKey !== apiKey &&
+          user.APIKey !== APIKey &&
           user.name !== name &&
           user.password !== password
       );
