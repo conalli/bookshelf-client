@@ -54,7 +54,7 @@ export type AddCmdData = {
 };
 
 const addCmd = (data: AddCmdData) => {
-  return axios.patch<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
+  return axios.post<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
     `${ReqURL.addCmd}${data.APIKey}`,
     data.body,
     {
