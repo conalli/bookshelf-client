@@ -45,7 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="col-start-2 row-start-2">{children}</div>
         <ul className="fixed bottom-0 right-0 top-0 flex flex-col justify-end">
           <AnimatePresence initial={false}>
-            {errorMessages.map((err) => (
+            {errorMessages?.map((err) => (
               <ErrorNotification
                 key={err.id}
                 error={err}
