@@ -20,6 +20,10 @@ export type LogInRes = {
   APIKey: string;
 };
 
+export type CMD = { [cmd: string]: string };
+
+export type GetCMDRes = CMD | ErrorRes;
+
 export type AddCMDReq = {
   id: string;
   cmd: string;
@@ -38,6 +42,14 @@ export type DelCMDReq = {
 export type DelCMDRes = {
   numUpdated: number;
 };
+
+export type Bookmark = {
+  path: string;
+  url: string;
+  name: string;
+};
+
+export type GetBookmarkRes = [Bookmark] | ErrorRes;
 
 export type DelACCReq = {
   id: string;
