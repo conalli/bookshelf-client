@@ -14,7 +14,7 @@ export default Bookmark;
 export async function getServerSideProps(context: NextPageContext) {
   try {
     const res = (await axios.get(
-      ReqURL.base + "bookmark/" + context.query.APIKey,
+      ReqURL.base + "/bookmark/" + context.query.APIKey,
       {
         withCredentials: true,
       }

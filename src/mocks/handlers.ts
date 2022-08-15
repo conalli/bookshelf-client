@@ -17,7 +17,7 @@ import { ReqURL } from "../utils/APIEndpoints";
 
 export const handlers = [
   rest.post<LogInReq, PathParams, LogInRes | ErrRes>(
-    `${ReqURL.base}login`,
+    `${ReqURL.base}/login`,
     (req, res, ctx) => {
       const found = mockUsers.find(
         (user) =>
@@ -40,7 +40,7 @@ export const handlers = [
     }
   ),
   rest.post<SignUpReq, PathParams, SignUpRes | ErrRes>(
-    `${ReqURL.base}signup`,
+    `${ReqURL.base}`,
     (req, res, ctx) => {
       const { name, password } = req.body;
       const found = mockUsers.find(
@@ -143,7 +143,7 @@ export const handlers = [
     }
   ),
   rest.delete<DelACCReq, { APIKey: string }, DelACCRes>(
-    `${ReqURL.base}:APIKey`,
+    `${ReqURL.base}/:APIKey`,
     (req, res, ctx) => {
       const { APIKey } = req.params;
       const { id, name, password } = req.body;
