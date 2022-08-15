@@ -88,7 +88,7 @@ export const AuthProvider = ({
           setIsAuthLoading(false);
         }
       } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
+        if (axios.isAxiosError(error) && error.response?.data) {
           const errRes = error.response.data as ErrorRes;
           setErrorMessages((prev) => {
             return [...prev, createErrorMessage(errRes.error)];
