@@ -65,7 +65,7 @@ export const AuthProvider = ({
           LogInRes,
           AxiosResponse<LogInRes, LogInReq>,
           LogInReq
-        >(`http://localhost:8080/api/user${reqType}`, values, {
+        >(`${ReqURL.base}${reqType}`, values, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
