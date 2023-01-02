@@ -23,10 +23,11 @@ const About = () => {
         <ul className="pt-4 text-xl">
           <li className="py-1 md:py-2">
             &rarr; &nbsp;
-            <Link href="/signin" passHref>
-              <a className="underline decoration-bk-blue dark:decoration-bk-orange decoration-2 hover:text-bk-blue dark:hover:text-bk-orange">
-                Sign up
-              </a>
+            <Link
+              className="underline decoration-bk-blue dark:decoration-bk-orange decoration-2 hover:text-bk-blue dark:hover:text-bk-orange"
+              href="/signin"
+            >
+              Sign up
             </Link>{" "}
             for a Bookshelf account.
           </li>

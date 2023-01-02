@@ -11,17 +11,17 @@ type SignInFormProps = {
 };
 
 type SignInFormValues = {
-  name: string;
+  email: string;
   password: string;
 };
 
 const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
   const { isAuthLoading, logIn } = useAuth();
   const schema = object().shape({
-    name: string()
-      .min(3, "Name: minimum 3 characters")
-      .max(12, "Name cannot be longer than 12 characters")
-      .required("Please enter your username"),
+    email: string()
+      .min(3, "Email: minimum 3 characters")
+      .max(50, "Email cannot be longer than 50 characters")
+      .required("Please enter your email"),
     password: string()
       .min(5, "Password: min 5 characters")
       .max(20, "Password cannot be longer than 20 characters")
@@ -31,7 +31,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
     <>
       <Formik
         validationSchema={schema}
-        initialValues={{ name: "", password: "" }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={async (
           values,
           { setSubmitting }: FormikHelpers<SignInFormValues>
@@ -42,21 +42,21 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
         {({ isSubmitting }) => (
           <Form className="w-32 md:w-80">
             <div className="py-2 text-md md:text-xl w-full">
-              <label htmlFor="name" className="pl-1 py-2">
-                Name:
+              <label htmlFor="email" className="pl-1 py-2">
+                Email:
               </label>
               <Field
-                id="name"
-                name="name"
-                placeholder="name"
-                type="text"
+                id="email"
+                name="email"
+                placeholder="email"
+                type="email"
                 disabled={isSubmitting || isAuthLoading}
                 autoCorrect="off"
                 length={50}
                 className="appearance-none bg-gray-100  text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
               />
               <p className="text-bk-blue dark:text-bk-orange font-semibold pl-1 py-2 text-xs md:text-md">
-                <ErrorMessage name="name" />
+                <ErrorMessage name="email" />
               </p>
             </div>
             <div className="py-2 text-md md:text-xl">

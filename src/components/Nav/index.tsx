@@ -19,15 +19,17 @@ const Nav = () => {
       </motion.button>
 
       <div className="flex flex-row gap-1 items-center lg:ml-4 divide-x divide-bk-blue dark:divide-bk-orange  bg-white dark:bg-neutral-800 shadow-lg rounded-r-md md:rounded-md">
-        <Link href="/#learn">
-          <a className="text-xs md:text-sm p-1 md:p-2 md:px-4 md:ml-1 hover:text-bk-blue hover:dark:text-orange-300">
-            About
-          </a>
+        <Link
+          className="text-xs md:text-sm p-1 md:p-2 md:px-4 md:ml-1 hover:text-bk-blue hover:dark:text-orange-300"
+          href="/#learn"
+        >
+          About
         </Link>
-        <Link href="/dashboard">
-          <a className="text-xs md:text-sm p-1 md:p-2 md:px-4 hover:text-bk-blue hover:dark:text-orange-300">
-            Dashboard
-          </a>
+        <Link
+          className="text-xs md:text-sm p-1 md:p-2 md:px-4 hover:text-bk-blue hover:dark:text-orange-300"
+          href="/dashboard"
+        >
+          Dashboard
         </Link>
         <div className="flex place-content-center px-2 md:px-4 md:mr-2">
           <ThemeToggleButton

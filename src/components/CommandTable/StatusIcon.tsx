@@ -2,7 +2,7 @@ import {
   CheckIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { Command, UpdateCommandStatus } from "../../../pages/dashboard";
 import Spinner from "../Spinner";

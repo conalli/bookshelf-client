@@ -58,14 +58,14 @@ export const AuthProvider = ({
 
   const logIn = useCallback(
     async ({ type, values, setSubmitting }: LogInData): Promise<void> => {
-      const reqType = type === "Log in" ? "/login" : "";
+      const reqType = type === "Log in" ? "login" : "signup";
       setIsAuthLoading(true);
       try {
         const res = await axios.post<
           LogInRes,
           AxiosResponse<LogInRes, LogInReq>,
           LogInReq
-        >(`${ReqURL.base}${reqType}`, values, {
+        >(`${ReqURL.base}/auth/${reqType}`, values, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
@@ -73,7 +73,7 @@ export const AuthProvider = ({
           const { id, APIKey } = res.data;
           setUser(() => ({
             id: id,
-            name: values.name.trim(),
+            name: values.email.trim(),
             password: values.password.trim(),
             APIKey: APIKey,
           }));

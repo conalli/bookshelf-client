@@ -1,5 +1,5 @@
 import React from "react";
-import { XIcon } from "@heroicons/react/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ErrorMessage } from "../../hooks/useAuth";
 import { motion } from "framer-motion";
 
@@ -25,7 +25,7 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({
         <div className="flex justify-between items-start">
           <h3 className="text-bk-red text-lg font-semibold">Error:</h3>
           <button onClick={() => closeErrorMessage(id)}>
-            <XIcon className="h-5 w-5" />
+            <XMarkIcon className="h-5 w-5" />
           </button>
         </div>
         <p>{message}</p>

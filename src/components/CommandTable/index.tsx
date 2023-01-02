@@ -1,4 +1,4 @@
-import { TrashIcon } from "@heroicons/react/solid";
+import { TrashIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import React, { Dispatch, SetStateAction } from "react";
 import { Command, UpdateCommandStatus } from "../../../pages/dashboard";

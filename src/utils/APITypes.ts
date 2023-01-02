@@ -1,7 +1,7 @@
 import { MockUser } from "../mocks/mockTypes";
 
 export type SignUpReq = {
-  name: string;
+  email: string;
   password: string;
 };
 
@@ -11,7 +11,7 @@ export type SignUpRes = {
 };
 
 export type LogInReq = {
-  name: string;
+  email: string;
   password: string;
 };
 
