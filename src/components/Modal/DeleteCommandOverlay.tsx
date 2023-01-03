@@ -2,9 +2,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { Dispatch, SetStateAction } from "react";
 import { UseMutationResult } from "react-query";
 import { Command } from "../../../pages/dashboard";
-import { User } from "../../hooks/useAuth";
-import { DelCmdData } from "../../hooks/useCmdData";
-import { DelCMDRes, ErrorRes } from "../../utils/APITypes";
+import { DelCMDReq, DelCMDRes, ErrorRes, User } from "../../utils/APITypes";
 
 type DeleteCommandOverlayProps = {
   user: User;
@@ -13,7 +11,7 @@ type DeleteCommandOverlayProps = {
     AxiosResponse<DelCMDRes, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     AxiosError<ErrorRes, any>,
-    DelCmdData,
+    DelCMDReq,
     unknown
   >;
   selected: Command | null;
@@ -48,11 +46,8 @@ const DeleteCommandOverlay: React.FC<DeleteCommandOverlayProps> = ({
           <button
             onClick={() => {
               del.mutate({
-                APIKey: user.APIKey,
-                body: {
-                  id: user.id,
-                  cmd: selected?.cmd,
-                },
+                id: user.id,
+                cmd: selected?.cmd,
               });
               setIsOpen(false);
             }}

@@ -3,9 +3,7 @@ import { motion } from "framer-motion";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { UseMutationResult } from "react-query";
 import { Command } from "../../../pages/dashboard";
-import { User } from "../../hooks/useAuth";
-import { AddCmdData } from "../../hooks/useCmdData";
-import { AddCMDRes, ErrorRes } from "../../utils/APITypes";
+import { AddCMDReq, AddCMDRes, ErrorRes, User } from "../../utils/APITypes";
 
 type AddCommandOverlayProps = {
   user: User;
@@ -14,7 +12,7 @@ type AddCommandOverlayProps = {
     AxiosResponse<AddCMDRes, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     AxiosError<ErrorRes, any>,
-    AddCmdData,
+    AddCMDReq,
     unknown
   >;
   setSelected: Dispatch<SetStateAction<Command | null>>;
@@ -29,7 +27,6 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
 }) => {
   const [cmd, setCmd] = useState<string>("");
   const [url, setUrl] = useState<string>("");
-
   const updateData = (
     type: "cmd" | "url",
     e: ChangeEvent<HTMLInputElement>
@@ -86,12 +83,9 @@ const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
           whileHover={cmd.length && url.length ? { scale: 1.05 } : { scale: 1 }}
           onClick={() => {
             add.mutate({
-              APIKey: user.APIKey,
-              body: {
-                id: user.id,
-                cmd,
-                url,
-              },
+              id: user.id,
+              cmd,
+              url,
             });
             setSelected({ cmd, url });
             setIsOpen(false);
