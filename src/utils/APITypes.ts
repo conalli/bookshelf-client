@@ -1,4 +1,15 @@
-import { MockUser } from "../mocks/mockTypes";
+export type User = {
+  id: string;
+  api_key: string;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  email: string;
+  email_verified: boolean;
+  locale: string;
+  cmds: CMD;
+};
 
 export type SignUpReq = {
   email: string;
@@ -60,7 +71,7 @@ export type DelACCReq = {
 export type DelACCRes = {
   name: string;
   numDeleted: number;
-  users: MockUser[];
+  users: User[];
 };
 
 export type ErrorRes = {

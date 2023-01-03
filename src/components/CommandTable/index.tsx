@@ -2,7 +2,7 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import React, { Dispatch, SetStateAction } from "react";
 import { Command, UpdateCommandStatus } from "../../../pages/dashboard";
-import { User } from "../../hooks/useAuth";
+import { User } from "../../utils/APITypes";
 import { useGetCmdData } from "../../hooks/useCmdData";
 import CommandPlaceholder from "./CommandPlaceholder";
 import StatusIcon from "./StatusIcon";
@@ -24,7 +24,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
   setSelected,
   cmdStatus,
 }) => {
-  const { data, isLoading } = useGetCmdData(user?.APIKey);
+  const { data, isLoading } = useGetCmdData();
   if (!user) return null;
 
   const cmds = data?.data;

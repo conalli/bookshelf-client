@@ -11,18 +11,11 @@ import {
   useState,
 } from "react";
 import { ReqURL } from "../utils/APIEndpoints";
-import { ErrorRes, LogInReq, LogInRes } from "../utils/APITypes";
+import { ErrorRes, LogInReq, User } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
 
-export type User = {
-  id: string;
-  name: string;
-  password: string;
-  APIKey: string;
-};
-
 type LogInData = {
-  type: "Sign up" | "Log in";
+  type: "Sign up" | "Sign in";
   values: LogInReq;
   setSubmitting: (isSubmitting: boolean) => void;
 };
@@ -34,6 +27,7 @@ export type ErrorMessage = {
 
 type AuthContextType = {
   user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
   isAuthLoading: boolean;
   isAuthError: boolean;
   errorMessages: ErrorMessage[];
@@ -58,25 +52,20 @@ export const AuthProvider = ({
 
   const logIn = useCallback(
     async ({ type, values, setSubmitting }: LogInData): Promise<void> => {
-      const reqType = type === "Log in" ? "login" : "signup";
+      const reqType = type === "Sign in" ? "login" : "signup";
       setIsAuthLoading(true);
       try {
         const res = await axios.post<
-          LogInRes,
-          AxiosResponse<LogInRes, LogInReq>,
+          User,
+          AxiosResponse<User, LogInReq>,
           LogInReq
         >(`${ReqURL.base}/auth/${reqType}`, values, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
         if (res.status === 200) {
-          const { id, APIKey } = res.data;
-          setUser(() => ({
-            id: id,
-            name: values.email.trim(),
-            password: values.password.trim(),
-            APIKey: APIKey,
-          }));
+          const user = res.data as User;
+          setUser(() => user);
           setIsAuthLoading(false);
           router.push("/dashboard");
         } else {
@@ -111,7 +100,7 @@ export const AuthProvider = ({
     if (!user) return;
     setIsAuthLoading(true);
     try {
-      const res = await axios.delete(`${ReqURL.base}/${user.APIKey}`, {
+      const res = await axios.delete(`${ReqURL.base}`, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
@@ -142,6 +131,7 @@ export const AuthProvider = ({
   const memoedValue = useMemo(
     () => ({
       user,
+      setUser,
       isAuthLoading,
       isAuthError,
       errorMessages,
@@ -150,7 +140,16 @@ export const AuthProvider = ({
       logOut,
       delAccount,
     }),
-    [user, isAuthLoading, isAuthError, errorMessages, logIn, logOut, delAccount]
+    [
+      user,
+      setUser,
+      isAuthLoading,
+      isAuthError,
+      errorMessages,
+      logIn,
+      logOut,
+      delAccount,
+    ]
   );
   return (
     <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>
