@@ -1,14 +1,18 @@
+import axios, { AxiosResponse } from "axios";
 import { motion } from "framer-motion";
+import { NextPageContext } from "next";
 import { ReactElement, useState } from "react";
 import CommandTable from "../../src/components/CommandTable";
 import Modal from "../../src/components/Modal";
 import AddCommandOverlay from "../../src/components/Modal/AddCommandOverlay";
 import BrowserSetupOverlay from "../../src/components/Modal/BrowserSetupOverlay";
 import DeleteCommandOverlay from "../../src/components/Modal/DeleteCommandOverlay";
-import RouteGuard from "../../src/components/RouteGuard";
+// import RouteGuard from "../../src/components/RouteGuard";
 import { useAuth } from "../../src/hooks/useAuth";
 import { useAddCmdData, useDelCmdData } from "../../src/hooks/useCmdData";
-import { NextPageWithLayout } from "../_app";
+import { ReqURL } from "../../src/utils/APIEndpoints";
+import { User } from "../../src/utils/APITypes";
+import { NextPageWithLayoutAndProps } from "../_app";
 
 export type Command = {
   cmd: string;
@@ -28,13 +32,35 @@ export type UpdateCommandStatus = {
   };
 };
 
-const Dashboard: NextPageWithLayout = () => {
+export async function getServerSideProps(context: NextPageContext) {
+  try {
+    const res = (await axios.get(`${ReqURL.base}/user`, {
+      withCredentials: true,
+      headers: {
+        Cookie: context.req?.headers.cookie,
+      },
+    })) as AxiosResponse<User>;
+    return {
+      props: { userData: res.data },
+    };
+  } catch (error) {
+    console.error(error);
+    context.res?.writeHead(303, "See Other", { Location: "/signin" });
+  }
+}
+
+const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
+  userData,
+}) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<
     "add" | "del" | "setup" | undefined
   >();
   const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
-  const { user, logOut } = useAuth();
+  const { user, setUser, logOut } = useAuth();
+  if (!user) {
+    setUser(userData);
+  }
   const add = useAddCmdData();
   const del = useDelCmdData();
 
@@ -128,7 +154,8 @@ const Dashboard: NextPageWithLayout = () => {
 };
 
 Dashboard.getLayout = function getLayout(page: ReactElement) {
-  return <RouteGuard>{page}</RouteGuard>;
+  // return <RouteGuard>{page}</RouteGuard>;
+  return page;
 };
 
 export default Dashboard;
