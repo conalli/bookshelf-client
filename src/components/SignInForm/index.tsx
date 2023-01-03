@@ -4,7 +4,7 @@ import React from "react";
 import { object, string } from "yup";
 import { useAuth } from "../../hooks/useAuth";
 
-export type SignInFormVariant = "Sign up" | "Log in";
+export type SignInFormVariant = "Sign up" | "Sign in";
 
 type SignInFormProps = {
   type: SignInFormVariant;

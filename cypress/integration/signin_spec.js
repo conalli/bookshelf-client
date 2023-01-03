@@ -55,7 +55,7 @@ describe("signin", () => {
       cy.findByText(/Password cannot be longer than 20 characters/i);
     });
   });
-  describe("Sign up/ Log in", () => {
+  describe("Sign up/ Sign in", () => {
     it("Should allow users with unique credentials to sign up", () => {
       cy.location().should((loc) => expect(loc.pathname).to.eq("/signin"));
       cy.findByRole("textbox").type("newuser");

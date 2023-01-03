@@ -3,7 +3,7 @@ import SignInForm from ".";
 
 describe("Bookshelf Logo", () => {
   beforeEach(() => {
-    render(<SignInForm type="Log in" />);
+    render(<SignInForm type="Sign in" />);
   });
   describe("Should render form elements", () => {
     test("name label", () => {

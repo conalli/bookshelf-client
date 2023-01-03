@@ -6,8 +6,8 @@ import GoogleSignInButton from "../../src/components/GoogleSignIn";
 import SignInForm, { SignInFormVariant } from "../../src/components/SignInForm";
 
 const SignIn = () => {
-  const formType: SignInFormVariant = "Sign in";
-  const altType: SignInFormVariant = "Sign up";
+  const formType: SignInFormVariant = "Sign up";
+  const altType: SignInFormVariant = "Sign in";
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
@@ -35,10 +35,10 @@ const SignIn = () => {
           </div>
         </div>
         <p className="col-start-1 col-span-6 py-4 md:col-start-2 md:col-span-4 self-end md:self-center justify-self-center row-start-4 text-xs md:text-xl lg:py-10">
-          {"Don't have an account? "}
+          {"Already have an account? "}
           <Link
             className="underline decoration-bk-blue dark:decoration-bk-orange decoration-2 px-1 rounded-sm"
-            href="/signup"
+            href="/signin"
           >
             {altType}
           </Link>
