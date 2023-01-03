@@ -3,6 +3,7 @@ import axios from "axios";
 import { NextPageContext } from "next";
 import { GetCMDRes } from "../../../src/utils/APITypes";
 
+// TODO: FIX THIS
 const Command = ({ data }: { data: GetCMDRes }) => {
   return <div>{JSON.stringify(data)}</div>;
 };

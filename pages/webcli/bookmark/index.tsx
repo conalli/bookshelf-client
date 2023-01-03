@@ -11,6 +11,7 @@ const Bookmark = ({ data }: { data: GetBookmarkRes }) => {
 
 export default Bookmark;
 
+// TODO: FIX THIS
 export async function getServerSideProps(context: NextPageContext) {
   try {
     const res = (await axios.get(

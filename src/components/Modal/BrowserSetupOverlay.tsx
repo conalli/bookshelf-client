@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
 import { copyToClipboard } from "../../utils/copyToClipboard";
 
 type BrowserSetupOverlayProps = {
@@ -10,11 +9,8 @@ const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
   setIsOpen,
 }) => {
   const [isCopied, setIsCopied] = useState(false);
-  const { user } = useAuth();
   const handleCopyURL = () => {
-    copyToClipboard(
-      `https://book-shelf-server.herokuapp.com/search/${user?.APIKey}/%s`
-    );
+    copyToClipboard(`https://book-shelf-server.herokuapp.com/search/%s`);
     setIsCopied(true);
   };
 
