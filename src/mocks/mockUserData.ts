@@ -16,6 +16,7 @@ export const mockUsers: MockUser[] = [
     picture: "",
     password: "password",
     api_key: "qwertyuiop",
+    provider: "bookshelftest",
     cmds: {
       g: "www.google.com",
       fb: "www.facebook.com",
@@ -33,6 +34,7 @@ export const mockUsers: MockUser[] = [
     picture: "",
     password: "12345",
     api_key: "asdfghj",
+    provider: "bookshelftest",
     cmds: {
       g: "www.google.com",
       tw: "www.twitter.com",
@@ -49,6 +51,7 @@ export const mockUsers: MockUser[] = [
     picture: "",
     password: "qwerty",
     api_key: "zxerfgthy,",
+    provider: "bookshelftest",
     cmds: {
       fb: "www.facebook.com",
       g: "www.google.com",
@@ -66,6 +69,7 @@ export const mockUsers: MockUser[] = [
     picture: "",
     password: "abcdefg",
     api_key: "ewrfgtyhn",
+    provider: "bookshelftest",
     cmds: {
       bbc: "www.bbc.co.uk",
       sport: "www.bbc.co.uk/sports",
@@ -84,6 +88,7 @@ export const mockUsers: MockUser[] = [
     picture: "",
     password: "password",
     api_key: "zxcvbn",
+    provider: "bookshelftest",
     cmds: {
       search: "www.google.com",
     },

@@ -8,6 +8,7 @@ export type User = {
   email: string;
   email_verified: boolean;
   locale: string;
+  provider: string;
   cmds: CMD;
 };
 

@@ -56,6 +56,7 @@ export const handlers = [
         family_name: "",
         locale: "",
         picture: "",
+        provider: "bookshelftest",
         password,
         cmds: {},
       };
