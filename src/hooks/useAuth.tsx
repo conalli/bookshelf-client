@@ -10,12 +10,13 @@ import {
   useMemo,
   useState,
 } from "react";
+import { SignInFormVariant } from "../components/SignInForm";
 import { ReqURL } from "../utils/APIEndpoints";
 import { ErrorRes, LogInReq, User } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
 
 type LogInData = {
-  type: "Sign up" | "Sign in";
+  type: SignInFormVariant;
   values: LogInReq;
   setSubmitting: (isSubmitting: boolean) => void;
 };
@@ -26,8 +27,8 @@ export type ErrorMessage = {
 };
 
 type AuthContextType = {
-  user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
+  user: User;
+  setUser: Dispatch<SetStateAction<User>>;
   isAuthLoading: boolean;
   isAuthError: boolean;
   errorMessages: ErrorMessage[];
@@ -45,7 +46,7 @@ export const AuthProvider = ({
   children: ReactNode;
 }): JSX.Element => {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>({} as User);
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
   const [errorMessages, setErrorMessages] = useState<ErrorMessage[]>([]);
@@ -91,9 +92,28 @@ export const AuthProvider = ({
     [router]
   );
 
-  const logOut = useCallback((): void => {
-    setUser(null);
-    router.replace("/");
+  const logOut = useCallback(async (): Promise<void> => {
+    setIsAuthLoading(true);
+    try {
+      const res = await axios.post(`${ReqURL.base}/auth/logout`, null, {
+        withCredentials: true,
+      });
+      if (res.status === 200) {
+        setUser({} as User);
+        setIsAuthLoading(false);
+        router.replace("/");
+      } else {
+        setIsAuthLoading(false);
+        setIsAuthError(true);
+        console.error("error: ", res);
+        router.replace("/404");
+      }
+    } catch (error) {
+      setIsAuthLoading(false);
+      setIsAuthError(true);
+      console.error(error);
+      router.replace("/404");
+    }
   }, [router]);
 
   const delAccount = useCallback(async (): Promise<void> => {
@@ -106,7 +126,7 @@ export const AuthProvider = ({
       });
       if (res.status === 200) {
         setIsAuthLoading(false);
-        setUser(null);
+        setUser({} as User);
         router.push("/");
       } else {
         setIsAuthError(true);

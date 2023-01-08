@@ -12,7 +12,7 @@ import { ReqURL } from "../utils/APIEndpoints";
 import { useAuth } from "./useAuth";
 import { createErrorMessage } from "../utils/errorMessages";
 
-const COMMAND_KEY = "cmds";
+export const COMMAND_KEY = "cmds";
 
 const fetchCmds = async () => {
   const res = await axios.get<CMD, AxiosResponse<CMD, null>, null>(
