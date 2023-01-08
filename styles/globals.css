@@ -13,20 +13,8 @@ html {
 
 html.light .bk-background {
   background-color: #ffffff01;
-  background-image: repeating-radial-gradient(
-      circle at 0 0,
-      transparent 0,
-      #ffffff 4px
-    ),
-    repeating-linear-gradient(#c2c2c210, #c2c2c255);
 }
 
 html.dark .bk-background {
   background-color: #21212180;
-  background-image: repeating-radial-gradient(
-      circle at 0 0,
-      transparent 0,
-      #dddddd10 4px
-    ),
-    repeating-linear-gradient(#c2c2c210, #c2c2c215);
 }
