@@ -1,8 +1,11 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { Hydrate } from "react-query/hydration";
+import {
+  QueryClientProvider,
+  QueryClient,
+  Hydrate,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "next-themes";
 import { ReactElement, ReactNode, useState } from "react";
 import { AuthProvider } from "../src/hooks/useAuth";
