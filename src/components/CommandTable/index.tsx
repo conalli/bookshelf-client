@@ -2,13 +2,14 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import React, { Dispatch, SetStateAction } from "react";
 import { Command, UpdateCommandStatus } from "../../../pages/dashboard";
-import { User } from "../../utils/APITypes";
-import { useGetCmdData } from "../../hooks/useCmdData";
+import { CMD, User } from "../../utils/APITypes";
 import CommandPlaceholder from "./CommandPlaceholder";
 import StatusIcon from "./StatusIcon";
 
 type CommandTableProps = {
-  user: User | null;
+  commands: CMD | undefined;
+  isLoadingCommands: boolean;
+  user: User;
   openModal: Dispatch<SetStateAction<boolean>>;
   setModalType: Dispatch<SetStateAction<"add" | "del" | "setup" | undefined>>;
   selected: Command | null;
@@ -17,6 +18,8 @@ type CommandTableProps = {
 };
 
 const CommandTable: React.FC<CommandTableProps> = ({
+  commands,
+  isLoadingCommands,
   user,
   openModal,
   setModalType,
@@ -24,10 +27,8 @@ const CommandTable: React.FC<CommandTableProps> = ({
   setSelected,
   cmdStatus,
 }) => {
-  const { data, isLoading } = useGetCmdData();
   if (!user) return null;
 
-  const cmds = data?.data;
   const formatLink = (link: string) => {
     if (link.startsWith("http://") || link.startsWith("https://")) {
       return link;
@@ -35,13 +36,13 @@ const CommandTable: React.FC<CommandTableProps> = ({
     return `http://${link}`;
   };
   // Refactor logic?
-  if (cmds && Object.keys(cmds).length === 0) {
+  if (commands && Object.keys(commands).length === 0) {
     return (
       <div className="w-full mt-6 lg:w-2/4 m-auto text-3xl text-center pt-10">
         Add your commands here.
       </div>
     );
-  } else if (isLoading || !cmds) {
+  } else if (isLoadingCommands || !commands) {
     return (
       <div className="w-full lg:w-2/4 m-auto text-3xl text-center pt-10">
         <CommandPlaceholder />
@@ -59,7 +60,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
           },
         }}
         exit={{ opacity: 0, x: -20 }}
-        className="w-full mt-6 lg:w-2/4 m-auto bg-white dark:bg-neutral-800 rounded shadow"
+        className="h-full w-full mt-1 md:mt-1.5 lg:w-2/4 mx-auto bg-white dark:bg-neutral-800 rounded shadow"
       >
         <thead className="text-left text-white bg-bk-blue dark:bg-bk-orange rounded-lg">
           <tr>
@@ -74,15 +75,15 @@ const CommandTable: React.FC<CommandTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {cmds &&
-            Object.keys(cmds).map((key: string) => {
+          {commands &&
+            Object.keys(commands).map((key: string) => {
               return (
                 <tr key={key}>
                   <td className="text-xs md:text-sm lg:text-base border-r-2 border-r-bk-blue dark:border-r-bk-orange p-2">
                     {key}
                   </td>
                   <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange p-2">
-                    <a href={formatLink(cmds[key])}>{cmds[key]}</a>
+                    <a href={formatLink(commands[key])}>{commands[key]}</a>
                   </td>
                   <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange">
                     <div className="flex justify-center items-center w-full h-full">
@@ -97,7 +98,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
                     <button
                       onClick={() => {
                         setModalType("del");
-                        setSelected({ cmd: key, url: cmds[key] });
+                        setSelected({ cmd: key, url: commands[key] });
                         openModal(true);
                       }}
                       className="flex justify-center items-center w-full"

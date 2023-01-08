@@ -12,6 +12,25 @@ export type User = {
   cmds: CMD;
 };
 
+export type CMD = { [cmd: string]: string };
+
+export type Bookmark = {
+  id: string;
+  api_key: string;
+  path: string;
+  url: string;
+  name: string;
+  is_folder: boolean;
+};
+
+export type Folder = {
+  id: string;
+  name: string;
+  path: string;
+  bookmarks: Bookmark[] | null;
+  folders: Folder[] | null;
+};
+
 export type SignUpReq = {
   email: string;
   password: string;
@@ -31,8 +50,6 @@ export type LogInRes = {
   id: string;
   APIKey: string;
 };
-
-export type CMD = { [cmd: string]: string };
 
 export type GetCMDRes = CMD | ErrorRes;
 
@@ -55,13 +72,11 @@ export type DelCMDRes = {
   numUpdated: number;
 };
 
-export type Bookmark = {
-  path: string;
-  url: string;
-  name: string;
+export type AddBookmarkFileRes = {
+  num_added: number;
 };
 
-export type GetBookmarkRes = [Bookmark] | ErrorRes;
+export type GetBookmarkRes = Bookmark[] | ErrorRes;
 
 export type DelACCReq = {
   id: string;

@@ -1,19 +1,12 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import { Dispatch, SetStateAction } from "react";
-import { UseMutationResult } from "react-query";
+import { UseMutationResult } from "@tanstack/react-query";
 import { Command } from "../../../pages/dashboard";
 import { DelCMDReq, DelCMDRes, ErrorRes, User } from "../../utils/APITypes";
 
 type DeleteCommandOverlayProps = {
   user: User;
-  del: UseMutationResult<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    AxiosResponse<DelCMDRes, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    AxiosError<ErrorRes, any>,
-    DelCMDReq,
-    unknown
-  >;
+  del: UseMutationResult<DelCMDRes, AxiosError<ErrorRes, DelCMDReq>, DelCMDReq>;
   selected: Command | null;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };

@@ -1,13 +1,7 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { copyToClipboard } from "../../utils/copyToClipboard";
 
-type BrowserSetupOverlayProps = {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
-
-const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
-  setIsOpen,
-}) => {
+const BrowserSetup = () => {
   const [isCopied, setIsCopied] = useState(false);
   const handleCopyURL = () => {
     copyToClipboard(`https://bookshelf-6ii7.onrender.com/api/search/%s`);
@@ -16,7 +10,7 @@ const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
 
   return (
     <div className="flex flex-col p-3 lg:p-6">
-      <h1 className="text-3xl py-1 md:py-2 lg:py-3">Browser Setup: </h1>
+      <h1 className="text-3xl py-1 md:py-2">Browser Setup: </h1>
       <div>
         <p>
           Current examples use Google Chrome, however setup is similar across
@@ -83,18 +77,9 @@ const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
             </ul>
           </li>
         </ol>
-
-        <div className="flex justify-between items-center w-full py-2 lg:py-4">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="bg-bk-blue dark:bg-bk-orange text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
-          >
-            back
-          </button>
-        </div>
       </div>
     </div>
   );
 };
 
-export default BrowserSetupOverlay;
+export default BrowserSetup;
