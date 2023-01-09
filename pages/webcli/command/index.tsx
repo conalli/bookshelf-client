@@ -1,28 +1,81 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import axios, { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
-import { GetCMDRes } from "../../../src/utils/APITypes";
+import { User } from "../../../src/utils/APITypes";
+import { ReqURL } from "../../../src/utils/APIEndpoints";
+import { Command, UpdateCommandStatus } from "../../dashboard";
+import CommandTable from "../../../src/components/CommandTable";
+import { useDelCmdData } from "../../../src/hooks/useCommands";
+import Modal from "../../../src/components/Modal";
+import DeleteCommandOverlay from "../../../src/components/Modal/DeleteCommandOverlay";
 
-// TODO: FIX THIS
-const Command = ({ data }: { data: GetCMDRes }) => {
-  return <div>{JSON.stringify(data)}</div>;
+const Command = ({ user }: { user: User }) => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalType, setModalType] = useState<
+    "add" | "del" | "setup" | undefined
+  >();
+  const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
+  const del = useDelCmdData(user.id);
+  const updateStatus: UpdateCommandStatus = {
+    add: {
+      success: false,
+      loading: false,
+      error: false,
+    },
+    del: {
+      success: del.isSuccess,
+      loading: del.isLoading,
+      error: del.isError,
+    },
+  };
+  return (
+    <div>
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
+        {modalType === "del" && (
+          <DeleteCommandOverlay
+            user={user}
+            del={del}
+            selected={selectedCommand}
+            setIsOpen={setModalOpen}
+          />
+        )}
+      </Modal>
+      <CommandTable
+        cmdStatus={updateStatus}
+        user={user}
+        commands={user.cmds}
+        isLoadingCommands={false}
+        openModal={setModalOpen}
+        setModalType={setModalType}
+        selected={selectedCommand}
+        setSelected={setSelectedCommand}
+      />
+    </div>
+  );
 };
 
 export async function getServerSideProps(context: NextPageContext) {
   try {
-    const data = (await axios.get(
-      "http://localhost:8080/api/user/command/" + context.query.APIKey,
+    const user = await axios.get<User, AxiosResponse<User, null>, null>(
+      ReqURL.base + "/user",
       {
         withCredentials: true,
+        headers: {
+          Cookie: context.req?.headers.cookie,
+        },
       }
-    )) as GetCMDRes;
-    console.log("DATA: ", data);
+    );
     return {
-      props: { data },
+      props: { user: user.data },
     };
   } catch (error) {
     console.log(error);
-    return { props: { data: "none" } };
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: false,
+      },
+    };
   }
 }
 

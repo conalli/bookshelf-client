@@ -1,32 +1,43 @@
 import React from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
-import { GetBookmarkRes } from "../../../src/utils/APITypes";
 import { ReqURL } from "../../../src/utils/APIEndpoints";
+import { Folder } from "../../../src/utils/APITypes";
+import BookmarkTable from "../../../src/components/BookmarkTable";
 
-const Bookmark = ({ data }: { data: GetBookmarkRes }) => {
-  console.log(data);
-  return <div>{JSON.stringify(data)}</div>;
+const Bookmark = ({ data }: { data: Folder }) => {
+  return (
+    <div>
+      <BookmarkTable folder={data} />
+    </div>
+  );
 };
 
 export default Bookmark;
 
-// TODO: FIX THIS
 export async function getServerSideProps(context: NextPageContext) {
+  const folder = context.query.folder ? `/${context.query.folder}` : "";
+  const url = ReqURL.base + "/bookmark" + folder;
   try {
-    const res = (await axios.get(
-      ReqURL.base + "/bookmark/" + context.query.APIKey,
+    const res = await axios.get<Folder, AxiosResponse<Folder, null>, null>(
+      url,
       {
         withCredentials: true,
+        headers: {
+          Cookie: context.req?.headers.cookie,
+        },
       }
-    )) as GetBookmarkRes;
+    );
     return {
-      props: { data: res },
+      props: { data: res.data },
     };
   } catch (error) {
     console.error(error);
     return {
-      props: { data: "there was an error" },
+      redirect: {
+        destination: "/signin",
+        permanent: false,
+      },
     };
   }
 }
