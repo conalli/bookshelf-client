@@ -19,7 +19,10 @@ import { ReqURL } from "../../src/utils/APIEndpoints";
 import { User } from "../../src/utils/APITypes";
 import { NextPageWithLayoutAndProps } from "../_app";
 import BookmarkTable from "../../src/components/BookmarkTable";
-import { useAddBookmarkFromFile } from "../../src/hooks/useBookmarks";
+import {
+  useAddBookmarkFromFile,
+  useGetBookmarks,
+} from "../../src/hooks/useBookmarks";
 import RouteGuard from "../../src/components/RouteGuard";
 import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
@@ -93,8 +96,9 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
 
   const add = useAddCmdData(userID);
   const del = useDelCmdData(userID);
-  const addBookmarkFile = useAddBookmarkFromFile(userID);
   const { data, isLoading } = useGetCommands(userID);
+  const { data: folder } = useGetBookmarks(userID);
+  const addBookmarkFile = useAddBookmarkFromFile(userID);
   const refreshTokenErrors = useRefreshTokens();
   if (refreshTokenErrors.length) {
     console.error(refreshTokenErrors);
@@ -213,7 +217,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
         )}
         {menuOption === "Bookmarks" && (
           <OpenFolderProvider>
-            <BookmarkTable />
+            <BookmarkTable folder={folder} />
           </OpenFolderProvider>
         )}
         {menuOption === "Setup guide" && (

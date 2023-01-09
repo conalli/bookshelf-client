@@ -36,19 +36,9 @@ export type SignUpReq = {
   password: string;
 };
 
-export type SignUpRes = {
-  id: string;
-  APIKey: string;
-};
-
 export type LogInReq = {
   email: string;
   password: string;
-};
-
-export type LogInRes = {
-  id: string;
-  APIKey: string;
 };
 
 export type GetCMDRes = CMD | ErrorRes;
@@ -60,7 +50,7 @@ export type AddCMDReq = {
 };
 
 export type AddCMDRes = {
-  numUpdated: number;
+  num_updated: number;
 };
 
 export type DelCMDReq = {
@@ -69,14 +59,12 @@ export type DelCMDReq = {
 };
 
 export type DelCMDRes = {
-  numUpdated: number;
+  num_updated: number;
 };
 
 export type AddBookmarkFileRes = {
   num_added: number;
 };
-
-export type GetBookmarkRes = Bookmark[] | ErrorRes;
 
 export type DelACCReq = {
   id: string;
@@ -86,7 +74,7 @@ export type DelACCReq = {
 
 export type DelACCRes = {
   name: string;
-  numDeleted: number;
+  num_deleted: number;
   users: User[];
 };
 
