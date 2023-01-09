@@ -9,14 +9,13 @@ import {
   // AddCMDReq,
   // AddCMDRes,
   SignUpReq,
-  SignUpRes,
-  LogInRes,
+  User,
 } from "../utils/APITypes";
 import { mockUsers, MockUser } from "./mockUserData";
 import { ReqURL } from "../utils/APIEndpoints";
 
 export const handlers = [
-  rest.post<LogInReq, PathParams, LogInRes | ErrRes>(
+  rest.post<LogInReq, PathParams, User | ErrRes>(
     `${ReqURL.base}/login`,
     (req, res, ctx) => {
       const found = mockUsers.find(
@@ -24,11 +23,13 @@ export const handlers = [
           user.email === req.body.email && user.password === req.body.password
       );
       if (found) {
+        const data = {} as User;
         return res(
           ctx.status(200),
           ctx.json({
+            ...data,
             id: found.id,
-            APIKey: found.api_key,
+            api_key: found.api_key,
             status: 200,
             statusText: "OK",
             headers: {},
@@ -39,7 +40,7 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  rest.post<SignUpReq, PathParams, SignUpRes | ErrRes>(
+  rest.post<SignUpReq, PathParams, User | ErrRes>(
     `${ReqURL.base}`,
     (req, res, ctx) => {
       const { email, password } = req.body;
@@ -62,9 +63,11 @@ export const handlers = [
       };
       mockUsers.push(newUser);
       if (!found) {
+        const data = {} as User;
         return res(
           ctx.status(200),
           ctx.json({
+            ...data,
             id: newUser.id,
             APIKey: newUser.api_key,
             status: 200,

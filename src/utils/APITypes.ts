@@ -41,8 +41,6 @@ export type LogInReq = {
   password: string;
 };
 
-export type GetCMDRes = CMD | ErrorRes;
-
 export type AddCMDReq = {
   id: string;
   cmd: string;

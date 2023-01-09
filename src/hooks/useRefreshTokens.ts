@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ReqURL } from "../utils/APIEndpoints";
+import { ErrorRes } from "../utils/APITypes";
 
 const refreshTokens = () => {
   axios.post<null, AxiosResponse<null, null>, null>(
@@ -17,19 +18,21 @@ export const useRefreshTokens = () => {
   const [refreshErrors, setRefreshErrors] = useState<string[]>([]);
   const router = useRouter();
   useEffect(() => {
-    const interval = setInterval(() => {
-      try {
-        refreshTokens();
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          const err = error as AxiosError<null, null>;
-          if (err.name !== undefined) {
-            setRefreshErrors((prev) => [...prev, err.name]);
-          }
+    let interval: NodeJS.Timer;
+    try {
+      interval = setInterval(refreshTokens, 1000 * 60 * 7);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const err = error as AxiosError<ErrorRes, null>;
+        if (err.response !== undefined) {
+          setRefreshErrors((prev) => [
+            ...prev,
+            err.response?.data.error as string,
+          ]);
         }
-        router.push("/signin");
       }
-    }, 1000 * 60 * 7);
+      router.push("/signin");
+    }
     return () => {
       clearInterval(interval);
     };
