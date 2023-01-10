@@ -8,6 +8,7 @@ import CommandTable from "../../../src/components/CommandTable";
 import { useDelCmdData } from "../../../src/hooks/useCommands";
 import Modal from "../../../src/components/Modal";
 import DeleteCommandOverlay from "../../../src/components/Modal/DeleteCommandOverlay";
+import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 
 const Command = ({ user }: { user: User }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -28,6 +29,10 @@ const Command = ({ user }: { user: User }) => {
       error: del.isError,
     },
   };
+  const refreshErrors = useRefreshTokens();
+  if (refreshErrors.length) {
+    console.error(...refreshErrors);
+  }
   return (
     <div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>

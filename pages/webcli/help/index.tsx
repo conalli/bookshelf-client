@@ -1,4 +1,10 @@
+import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
+
 const Help = () => {
+  const refreshErrors = useRefreshTokens();
+  if (refreshErrors.length) {
+    console.error(...refreshErrors);
+  }
   return (
     <div>
       <h1>Help</h1>

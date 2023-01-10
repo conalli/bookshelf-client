@@ -4,8 +4,13 @@ import { NextPageContext } from "next";
 import { ReqURL } from "../../../src/utils/APIEndpoints";
 import { Folder } from "../../../src/utils/APITypes";
 import BookmarkTable from "../../../src/components/BookmarkTable";
+import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 
 const Bookmark = ({ data }: { data: Folder }) => {
+  const refreshErrors = useRefreshTokens();
+  if (refreshErrors.length) {
+    console.error(...refreshErrors);
+  }
   return (
     <div>
       <BookmarkTable folder={data} />
