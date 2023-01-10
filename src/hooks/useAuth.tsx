@@ -81,7 +81,10 @@ export const AuthProvider = ({
         if (axios.isAxiosError(error) && error.response?.data) {
           const errRes = error.response.data as ErrorRes;
           setErrorMessages((prev) => {
-            return [...prev, createErrorMessage(errRes.error)];
+            return [
+              ...prev,
+              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
+            ];
           });
         }
         setSubmitting(false);
@@ -140,7 +143,10 @@ export const AuthProvider = ({
       if (axios.isAxiosError(error) && error.response) {
         const errRes = error.response.data as ErrorRes;
         setErrorMessages((prev) => {
-          return [...prev, createErrorMessage(errRes.error)];
+          return [
+            ...prev,
+            createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
+          ];
         });
       }
       setIsAuthError(true);

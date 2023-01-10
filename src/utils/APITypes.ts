@@ -78,5 +78,6 @@ export type DelACCRes = {
 
 export type ErrorRes = {
   status: number;
-  error: string;
+  title: string;
+  detail: string;
 };

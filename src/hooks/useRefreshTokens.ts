@@ -27,7 +27,7 @@ export const useRefreshTokens = () => {
         if (err.response !== undefined) {
           setRefreshErrors((prev) => [
             ...prev,
-            err.response?.data.error as string,
+            `${err.response?.data.title} -- ${err.response?.data.detail}`,
           ]);
         }
       }

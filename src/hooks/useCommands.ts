@@ -41,7 +41,10 @@ export const useGetCommands = (
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
           setErrorMessages((prev) => {
-            return [...prev, createErrorMessage(errRes.error)];
+            return [
+              ...prev,
+              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
+            ];
           });
         }
         if (callOnError) callOnError();
@@ -84,7 +87,10 @@ export const useAddCmdData = (userID: string) => {
       if (axios.isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorRes;
         setErrorMessages((prev) => {
-          return [...prev, createErrorMessage(errRes.error)];
+          return [
+            ...prev,
+            createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
+          ];
         });
       }
       queryClient.setQueryData<CMD>(
@@ -120,7 +126,10 @@ export const useDelCmdData = (userID: string) => {
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
           setErrorMessages((prev) => {
-            return [...prev, createErrorMessage(errRes.error)];
+            return [
+              ...prev,
+              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
+            ];
           });
         }
         queryClient.setQueryData<CMD>(

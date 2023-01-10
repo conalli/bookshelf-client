@@ -37,7 +37,10 @@ export const useAddBookmarkFromFile = (userID: string | undefined) => {
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
           setErrorMessages((prev) => {
-            return [...prev, createErrorMessage(errRes.error)];
+            return [
+              ...prev,
+              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
+            ];
           });
         }
       },
@@ -70,7 +73,10 @@ export const useGetBookmarks = (
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
           setErrorMessages((prev) => {
-            return [...prev, createErrorMessage(errRes.error)];
+            return [
+              ...prev,
+              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
+            ];
           });
         }
         if (callOnError) callOnError();
