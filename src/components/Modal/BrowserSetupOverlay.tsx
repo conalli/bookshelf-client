@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
+import { SearchURL } from "../../utils/APIEndpoints";
 import { copyToClipboard } from "../../utils/copyToClipboard";
 
 type BrowserSetupOverlayProps = {
@@ -10,7 +11,7 @@ const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
 }) => {
   const [isCopied, setIsCopied] = useState(false);
   const handleCopyURL = () => {
-    copyToClipboard(`https://bookshelf-6ii7.onrender.com/api/search/%s`);
+    copyToClipboard(`${SearchURL}/%s`);
     setIsCopied(true);
   };
 

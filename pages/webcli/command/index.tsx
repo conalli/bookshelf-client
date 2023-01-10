@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
 import { User } from "../../../src/utils/APITypes";
-import { ReqURL } from "../../../src/utils/APIEndpoints";
+import { APIURL } from "../../../src/utils/APIEndpoints";
 import { Command, UpdateCommandStatus } from "../../dashboard";
 import CommandTable from "../../../src/components/CommandTable";
 import { useDelCmdData } from "../../../src/hooks/useCommands";
@@ -62,7 +62,7 @@ const Command = ({ user }: { user: User }) => {
 export async function getServerSideProps(context: NextPageContext) {
   try {
     const user = await axios.get<User, AxiosResponse<User, null>, null>(
-      ReqURL.base + "/user",
+      APIURL.base + "/user",
       {
         withCredentials: true,
         headers: {

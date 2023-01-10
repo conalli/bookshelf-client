@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { ReqURL } from "../utils/APIEndpoints";
+import { APIURL } from "../utils/APIEndpoints";
 import { ErrorRes, User } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
 import { useAuth } from "./useAuth";
@@ -9,7 +9,7 @@ export const USER_KEY = "user";
 
 const getUser = async () => {
   const res = await axios.get<User, AxiosResponse<User, null>, null>(
-    `${ReqURL.base}/user`,
+    `${APIURL.base}/user`,
     {
       withCredentials: true,
     }

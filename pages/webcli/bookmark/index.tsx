@@ -1,7 +1,7 @@
 import React from "react";
 import axios, { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
-import { ReqURL } from "../../../src/utils/APIEndpoints";
+import { APIURL } from "../../../src/utils/APIEndpoints";
 import { Folder } from "../../../src/utils/APITypes";
 import BookmarkTable from "../../../src/components/BookmarkTable";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
@@ -22,7 +22,7 @@ export default Bookmark;
 
 export async function getServerSideProps(context: NextPageContext) {
   const folder = context.query.folder ? `/${context.query.folder}` : "";
-  const url = ReqURL.base + "/bookmark" + folder;
+  const url = APIURL.base + "/bookmark" + folder;
   try {
     const res = await axios.get<Folder, AxiosResponse<Folder, null>, null>(
       url,

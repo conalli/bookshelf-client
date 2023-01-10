@@ -12,11 +12,11 @@ import {
   User,
 } from "../utils/APITypes";
 import { mockUsers, MockUser } from "./mockUserData";
-import { ReqURL } from "../utils/APIEndpoints";
+import { APIURL } from "../utils/APIEndpoints";
 
 export const handlers = [
   rest.post<LogInReq, PathParams, User | ErrRes>(
-    `${ReqURL.base}/login`,
+    `${APIURL.base}/login`,
     (req, res, ctx) => {
       const found = mockUsers.find(
         (user) =>
@@ -41,7 +41,7 @@ export const handlers = [
     }
   ),
   rest.post<SignUpReq, PathParams, User | ErrRes>(
-    `${ReqURL.base}`,
+    `${APIURL.base}`,
     (req, res, ctx) => {
       const { email, password } = req.body;
       const found = mockUsers.find(
@@ -80,7 +80,7 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  //   rest.get(`${ReqURL.getCmds}`, (req, res, ctx) => {
+  //   rest.get(`${APIURL.getCmds}`, (req, res, ctx) => {
   //     const found = mockUsers.find((user) => user.api_key === APIKey);
   //     if (!found) {
   //       return res(ctx.status(400), ctx.json({ status: "error" }));
@@ -88,7 +88,7 @@ export const handlers = [
   //     return res(ctx.status(200), ctx.json(found.cmds));
   //   }),
   //   rest.patch<AddCMDReq, { APIKey: string }, AddCMDRes | ErrRes>(
-  //     `${ReqURL.addCmd}:APIKey`,
+  //     `${APIURL.addCmd}:APIKey`,
   //     (req, res, ctx) => {
   //       const { APIKey } = req.params;
   //       const { cmd, url } = req.body;
@@ -119,7 +119,7 @@ export const handlers = [
   //     }
   //   ),
   //   rest.patch<DelCMDReq, { APIKey: string }, DelCMDRes | ErrRes>(
-  //     `${ReqURL.delCmd}:APIKey`,
+  //     `${APIURL.delCmd}:APIKey`,
   //     (req, res, ctx) => {
   //       const { APIKey } = req.params;
   //       const { id, cmd } = req.body;
@@ -152,7 +152,7 @@ export const handlers = [
   //     }
   //   ),
   //   rest.delete<DelACCReq, { APIKey: string }, DelACCRes>(
-  //     `${ReqURL.base}/:APIKey`,
+  //     `${APIURL.base}/:APIKey`,
   //     (req, res, ctx) => {
   //       const { APIKey } = req.params;
   //       const { id, name, password } = req.body;

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { SignInFormVariant } from "../SignInForm";
-import { ReqURL } from "../../utils/APIEndpoints";
+import { APIURL } from "../../utils/APIEndpoints";
 
 const GoogleIcon = () => {
   return (
@@ -35,7 +35,7 @@ const GoogleIcon = () => {
 const GoogleSignInButton: React.FC<{ authType: SignInFormVariant }> = ({
   authType,
 }) => {
-  const href = `${ReqURL.base}/auth/oauth?provider=google&type=${
+  const href = `${APIURL.base}/auth/oauth?provider=google&type=${
     authType === "Sign up" ? "signup" : "login"
   }`;
   return (

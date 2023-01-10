@@ -1,12 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { ReqURL } from "../utils/APIEndpoints";
+import { APIURL } from "../utils/APIEndpoints";
 import { ErrorRes } from "../utils/APITypes";
 
 const refreshTokens = () => {
   axios.post<null, AxiosResponse<null, null>, null>(
-    `${ReqURL.base}/auth/refresh`,
+    `${APIURL.base}/auth/refresh`,
     null,
     {
       withCredentials: true,

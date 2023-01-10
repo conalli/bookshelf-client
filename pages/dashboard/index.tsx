@@ -15,7 +15,7 @@ import {
   useDelCmdData,
   useGetCommands,
 } from "../../src/hooks/useCommands";
-import { ReqURL } from "../../src/utils/APIEndpoints";
+import { APIURL } from "../../src/utils/APIEndpoints";
 import { User } from "../../src/utils/APITypes";
 import { NextPageWithLayoutAndProps } from "../_app";
 import BookmarkTable from "../../src/components/BookmarkTable";
@@ -49,7 +49,7 @@ export type UpdateCommandStatus = {
 export const getServerSideProps = async (context: NextPageContext) => {
   try {
     const prefetchUser = async () => {
-      const res = await axios.get<User>(`${ReqURL.base}/user`, {
+      const res = await axios.get<User>(`${APIURL.base}/user`, {
         withCredentials: true,
         headers: {
           Cookie: context.req?.headers.cookie,

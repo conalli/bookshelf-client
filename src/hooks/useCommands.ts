@@ -8,7 +8,7 @@ import {
   DelCMDRes,
   ErrorRes,
 } from "../utils/APITypes";
-import { ReqURL } from "../utils/APIEndpoints";
+import { APIURL } from "../utils/APIEndpoints";
 import { useAuth } from "./useAuth";
 import { createErrorMessage } from "../utils/errorMessages";
 
@@ -16,7 +16,7 @@ export const COMMAND_KEY = "cmds";
 
 const fetchCmds = async () => {
   const res = await axios.get<CMD, AxiosResponse<CMD, null>, null>(
-    `${ReqURL.getCmds}`,
+    `${APIURL.cmd}`,
     {
       withCredentials: true,
     }
@@ -55,7 +55,7 @@ export const useGetCommands = (
 
 const addCmd = async (data: AddCMDReq) => {
   const res = await axios.post<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
-    `${ReqURL.addCmd}`,
+    `${APIURL.cmd}`,
     data,
     {
       withCredentials: true,
@@ -106,7 +106,7 @@ const delCmd = async (data: DelCMDReq) => {
     DelCMDRes,
     AxiosResponse<DelCMDRes, DelCMDReq>,
     DelCMDReq
-  >(`${ReqURL.delCmd}`, data, {
+  >(`${APIURL.cmd}`, data, {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });

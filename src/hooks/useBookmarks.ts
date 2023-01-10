@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ReqURL } from "../utils/APIEndpoints";
+import { APIURL } from "../utils/APIEndpoints";
 import { AddBookmarkFileRes, ErrorRes, Folder } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
 import { useAuth } from "./useAuth";
@@ -12,7 +12,7 @@ const addBookmarksFromFile = async (data: FormData) => {
     AddBookmarkFileRes,
     AxiosResponse<AddBookmarkFileRes, FormData>,
     FormData
-  >(`${ReqURL.base}/bookmark/file`, data, {
+  >(`${APIURL.base}/bookmark/file`, data, {
     withCredentials: true,
     headers: {
       "Content-Type": "multipart/form-data",
@@ -50,7 +50,7 @@ export const useAddBookmarkFromFile = (userID: string | undefined) => {
 
 const getAllBookmarks = async () => {
   const res = await axios.get<Folder, AxiosResponse<Folder, null>, null>(
-    `${ReqURL.base}/bookmark`,
+    `${APIURL.base}/bookmark`,
     { withCredentials: true }
   );
   return res.data;

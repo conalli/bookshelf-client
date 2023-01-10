@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { SearchURL } from "../../utils/APIEndpoints";
 import { copyToClipboard } from "../../utils/copyToClipboard";
 
 const BrowserSetup = () => {
   const [isCopied, setIsCopied] = useState(false);
   const handleCopyURL = () => {
-    copyToClipboard(`https://bookshelf-6ii7.onrender.com/api/search/%s`);
+    copyToClipboard(`${SearchURL}/%s`);
     setIsCopied(true);
   };
 

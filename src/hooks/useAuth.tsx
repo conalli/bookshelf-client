@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 import { SignInFormVariant } from "../components/SignInForm";
-import { ReqURL } from "../utils/APIEndpoints";
+import { APIURL } from "../utils/APIEndpoints";
 import { ErrorRes, LogInReq, User } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
 
@@ -60,7 +60,7 @@ export const AuthProvider = ({
           User,
           AxiosResponse<User, LogInReq>,
           LogInReq
-        >(`${ReqURL.base}/auth/${reqType}`, values, {
+        >(`${APIURL.base}/auth/${reqType}`, values, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
@@ -98,7 +98,7 @@ export const AuthProvider = ({
   const logOut = useCallback(async (): Promise<void> => {
     setIsAuthLoading(true);
     try {
-      const res = await axios.post(`${ReqURL.base}/auth/logout`, null, {
+      const res = await axios.post(`${APIURL.base}/auth/logout`, null, {
         withCredentials: true,
       });
       if (res.status === 200) {
@@ -123,7 +123,7 @@ export const AuthProvider = ({
     if (!user) return;
     setIsAuthLoading(true);
     try {
-      const res = await axios.delete(`${ReqURL.base}`, {
+      const res = await axios.delete(`${APIURL.base}`, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
