@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { APIURL } from "../utils/APIEndpoints";
-import { AddBookmarkFileRes, ErrorRes, Folder } from "../utils/APITypes";
-import { createErrorMessage } from "../utils/errorMessages";
+import { APIURL } from "../utils/api/endpoints";
+import { AddBookmarkFileRes, ErrorRes, Folder } from "../utils/api/types";
+import { createErrorMessage } from "../utils/errors";
 import { useAuth } from "./useAuth";
 
 export const BOOKMARKS_FILE_FORM_KEY = "bookmarks_file";

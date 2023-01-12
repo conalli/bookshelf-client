@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { SearchURL } from "../../utils/APIEndpoints";
+import { SearchURL } from "../../utils/api/endpoints";
 import { copyToClipboard } from "../../utils/copyToClipboard";
 
 type BrowserSetupOverlayProps = {

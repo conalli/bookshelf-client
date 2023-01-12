@@ -2,9 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { SignInFormVariant } from "../components/SignInForm";
-import { APIURL } from "../utils/APIEndpoints";
-import { ErrorRes, User } from "../utils/APITypes";
-import { createErrorMessage } from "../utils/errorMessages";
+import { APIURL } from "../utils/api/endpoints";
+import { ErrorRes, User } from "../utils/api/types";
+import { createErrorMessage } from "../utils/errors";
 import { useAuth } from "./useAuth";
 
 export const USER_KEY = "user";

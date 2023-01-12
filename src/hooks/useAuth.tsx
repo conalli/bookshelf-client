@@ -10,9 +10,9 @@ import {
   useMemo,
   useState,
 } from "react";
-import { APIURL } from "../utils/APIEndpoints";
-import { ErrorRes, User } from "../utils/APITypes";
-import { createErrorMessage } from "../utils/errorMessages";
+import { APIURL } from "../utils/api/endpoints";
+import { ErrorRes, User } from "../utils/api/types";
+import { createErrorMessage } from "../utils/errors";
 import { AuthRequest, AuthRequestData } from "./useUser";
 
 export type ErrorMessage = {

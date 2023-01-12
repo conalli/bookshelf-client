@@ -7,10 +7,10 @@ import {
   DelCMDReq,
   DelCMDRes,
   ErrorRes,
-} from "../utils/APITypes";
-import { APIURL } from "../utils/APIEndpoints";
+} from "../utils/api/types";
+import { APIURL } from "../utils/api/endpoints";
 import { useAuth } from "./useAuth";
-import { createErrorMessage } from "../utils/errorMessages";
+import { createErrorMessage } from "../utils/errors";
 
 export const COMMAND_KEY = "cmds";
 

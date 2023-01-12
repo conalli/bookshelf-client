@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
-import { User } from "../../../src/utils/APITypes";
-import { APIURL } from "../../../src/utils/APIEndpoints";
+import { User } from "../../../src/utils/api/types";
+import { APIURL } from "../../../src/utils/api/endpoints";
 import { Command, UpdateCommandStatus } from "../../dashboard";
 import CommandTable from "../../../src/components/CommandTable";
 import { useDelCmdData } from "../../../src/hooks/useCommands";

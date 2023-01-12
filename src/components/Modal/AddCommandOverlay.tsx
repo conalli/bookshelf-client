@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Command } from "../../../pages/dashboard";
-import { AddCMDReq, AddCMDRes, ErrorRes, User } from "../../utils/APITypes";
+import { AddCMDReq, AddCMDRes, ErrorRes, User } from "../../utils/api/types";
 
 type AddCommandOverlayProps = {
   user: User;

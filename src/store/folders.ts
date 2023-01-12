@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { Folder } from "../utils/APITypes";
+import { Folder } from "../utils/api/types";
 
 export type FolderOpenState = { [name: string]: boolean };
 

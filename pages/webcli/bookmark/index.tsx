@@ -1,8 +1,8 @@
 import React from "react";
 import axios, { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
-import { APIURL } from "../../../src/utils/APIEndpoints";
-import { Folder } from "../../../src/utils/APITypes";
+import { APIURL } from "../../../src/utils/api/endpoints";
+import { Folder } from "../../../src/utils/api/types";
 import BookmarkTable from "../../../src/components/BookmarkTable";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 

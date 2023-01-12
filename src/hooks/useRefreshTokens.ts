@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { APIURL } from "../utils/APIEndpoints";
-import { ErrorRes } from "../utils/APITypes";
+import { APIURL } from "../utils/api/endpoints";
+import { ErrorRes } from "../utils/api/types";
 
 const refreshTokens = () => {
   axios.post<null, AxiosResponse<null, null>, null>(

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { SignInFormVariant } from "../SignInForm";
-import { APIURL } from "../../utils/APIEndpoints";
+import { APIURL } from "../../utils/api/endpoints";
 
 const GoogleIcon = () => {
   return (

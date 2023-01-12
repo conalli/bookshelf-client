@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { Dispatch, SetStateAction } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Command } from "../../../pages/dashboard";
-import { DelCMDReq, DelCMDRes, ErrorRes, User } from "../../utils/APITypes";
+import { DelCMDReq, DelCMDRes, ErrorRes, User } from "../../utils/api/types";
 
 type DeleteCommandOverlayProps = {
   user: User;

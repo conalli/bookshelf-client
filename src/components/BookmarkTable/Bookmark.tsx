@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
-import { Bookmark as APIBookmark } from "../../utils/APITypes";
+import { Bookmark as APIBookmark } from "../../utils/api/types";
 
 type BookmarkProps = {
   bookmark: APIBookmark;

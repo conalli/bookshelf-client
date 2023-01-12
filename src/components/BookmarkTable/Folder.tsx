@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { openFoldersAtom, updateOpenFoldersAtom } from "../../store/folders";
 import { motion } from "framer-motion";
-import { Folder as APIFolder } from "../../utils/APITypes";
+import { Folder as APIFolder } from "../../utils/api/types";
 import Bookmark from "./Bookmark";
 import BookmarksFolderIcon from "./BookmarksFolderIcon";
 

@@ -3,8 +3,8 @@ import { useSetAtom } from "jotai";
 import React, { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { addOpenFoldersAtom, foldersAtom } from "../../store/folders";
-import { Folder as APIFolder } from "../../utils/APITypes";
-import { createErrorMessage } from "../../utils/errorMessages";
+import { Folder as APIFolder } from "../../utils/api/types";
+import { createErrorMessage } from "../../utils/errors";
 import Spinner from "../Spinner";
 import Folder from "./Folder";
 

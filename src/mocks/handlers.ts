@@ -10,9 +10,9 @@ import {
   // AddCMDRes,
   SignUpReq,
   User,
-} from "../utils/APITypes";
+} from "../utils/api/types";
 import { mockUsers, MockUser } from "./mockUserData";
-import { APIURL } from "../utils/APIEndpoints";
+import { APIURL } from "../utils/api/endpoints";
 
 export const handlers = [
   rest.post<LogInReq, PathParams, User | ErrRes>(
