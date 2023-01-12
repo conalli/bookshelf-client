@@ -5,6 +5,7 @@ import { AddBookmarkFileRes, ErrorRes, Folder } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
 import { useAuth } from "./useAuth";
 
+export const BOOKMARKS_FILE_FORM_KEY = "bookmarks_file";
 const BOOKMARKS_KEY = "bookmarks";
 
 const addBookmarksFromFile = async (data: FormData) => {

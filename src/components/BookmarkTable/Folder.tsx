@@ -1,10 +1,10 @@
 import { MouseEvent } from "react";
-import { FolderPlusIcon, FolderMinusIcon } from "@heroicons/react/24/solid";
 import { useAtomValue, useSetAtom } from "jotai";
 import { openFoldersAtom, updateOpenFoldersAtom } from "../../store/folders";
+import { motion } from "framer-motion";
 import { Folder as APIFolder } from "../../utils/APITypes";
 import Bookmark from "./Bookmark";
-import { motion } from "framer-motion";
+import BookmarksFolderIcon from "./BookmarksFolderIcon";
 
 const FOLDER_BASE_PATH = "";
 
@@ -25,28 +25,16 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
     e.stopPropagation();
     setIsFolderOpen(name);
   };
-  //   const folderVariant: Variants = {
-  //     hidden: { opacity: 0 },
-  //     show: {
-  //       opacity: 1,
-  //       transition: {
-  //         type: "tween",
-  //         duration: 0.1,
-  //         staggerChildren: 0.2,
-  //       },
-  //     },
-  //     out: { opacity: 0 },
-  //   };
+
+  const hasContents =
+    (folder.bookmarks && folder.bookmarks.length > 0) ||
+    (folder.folders !== null && folder.folders.length > 0);
 
   return (
     <div className="pt-1.5 pb-0.5">
       {folder.name !== FOLDER_BASE_PATH && (
-        <div className="flex gap-2 hover:cursor-pointer">
-          {isOpen ? (
-            <FolderMinusIcon className=" w-2 h-2 md:w-3 md:h-3 lg:w-5 lg:h-5" />
-          ) : (
-            <FolderPlusIcon className="w-2 h-2 md:w-3 md:h-3 lg:w-5 lg:h-5" />
-          )}
+        <div className="flex gap-2 truncate hover:cursor-pointer">
+          <BookmarksFolderIcon hasContents={hasContents} isOpen={isOpen} />
           <h3 className="text-bk-blue dark:text-bk-orange">{folder.name}</h3>
         </div>
       )}
@@ -56,7 +44,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
           layout
           variants={{
             open: {
-              clipPath: "inset(0% 0% 0% 0% round 10px)",
               transition: {
                 type: "spring",
                 bounce: 0,
@@ -66,7 +53,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
               },
             },
             closed: {
-              clipPath: "inset(10% 50% 90% 50% round 10px)",
               transition: {
                 type: "spring",
                 bounce: 0,
@@ -83,7 +69,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                 key={b.id}
                 variants={{
                   open: {
-                    clipPath: "inset(0% 0% 0% 0% round 10px)",
                     transition: {
                       type: "spring",
                       bounce: 0,
@@ -93,7 +78,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                     },
                   },
                   closed: {
-                    clipPath: "inset(10% 50% 90% 50% round 10px)",
                     transition: {
                       type: "spring",
                       bounce: 0,
@@ -117,7 +101,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                   key={f.id}
                   variants={{
                     open: {
-                      clipPath: "inset(0% 0% 0% 0% round 10px)",
                       transition: {
                         type: "spring",
                         bounce: 0,
@@ -127,7 +110,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                       },
                     },
                     closed: {
-                      clipPath: "inset(10% 50% 90% 50% round 10px)",
                       transition: {
                         type: "spring",
                         bounce: 0,

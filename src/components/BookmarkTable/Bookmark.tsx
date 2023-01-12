@@ -9,8 +9,8 @@ type BookmarkProps = {
 
 const Bookmark: React.FC<BookmarkProps> = ({ bookmark }) => {
   return (
-    <motion.div>
-      <Link className="mx-2" href={bookmark.url}>
+    <motion.div className="truncate">
+      <Link className="ml-2" href={bookmark.url}>
         {bookmark.name}
       </Link>
     </motion.div>

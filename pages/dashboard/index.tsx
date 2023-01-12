@@ -20,12 +20,13 @@ import { User } from "../../src/utils/APITypes";
 import { NextPageWithLayoutAndProps } from "../_app";
 import BookmarkTable from "../../src/components/BookmarkTable";
 import {
+  BOOKMARKS_FILE_FORM_KEY,
   useAddBookmarkFromFile,
   useGetBookmarks,
 } from "../../src/hooks/useBookmarks";
 import RouteGuard from "../../src/components/RouteGuard";
 import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { dehydrate, QueryClient, useQueryClient } from "@tanstack/react-query";
 import { USER_KEY, useUser } from "../../src/hooks/useUser";
 
 export type Command = {
@@ -88,6 +89,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     setUser,
     logOut,
   } = useAuth();
+
   useEffect(() => {
     if (!user) {
       setUser(userData);
@@ -97,13 +99,22 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   const add = useAddCmdData(userID);
   const del = useDelCmdData(userID);
   const { data, isLoading } = useGetCommands(userID);
-  const { data: folder } = useGetBookmarks(userID);
+  const {
+    data: folder,
+    isLoading: isFolderLoading,
+    isError: isFolderError,
+  } = useGetBookmarks(userID);
   const addBookmarkFile = useAddBookmarkFromFile(userID);
   const refreshTokenErrors = useRefreshTokens();
   if (refreshTokenErrors.length) {
     console.error(refreshTokenErrors);
   }
-
+  const queryClient = useQueryClient();
+  const handleLogout = () => {
+    setUser({} as User);
+    queryClient.clear();
+    logOut();
+  };
   const updateStatus: UpdateCommandStatus = {
     add: {
       success: add.isSuccess,
@@ -131,8 +142,9 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     const file = files.item(0);
     if (!file) return;
     const formData = new FormData();
-    formData.append("bookmarks_file", file, file.name);
+    formData.append(BOOKMARKS_FILE_FORM_KEY, file, file.name);
     addBookmarkFile.mutate(formData);
+    e.target.files = null;
   };
 
   return (
@@ -153,15 +165,6 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
           {generateDisplayName(user)}&apos;s Bookshelf:
         </h1>
         <div className="flex gap-0.5 md:gap-2">
-          {/* <button
-            onClick={() => {
-              setModalType("setup");
-              setModalOpen(true);
-            }}
-            className="text-white px-4 py-2 bg-bk-orange rounded"
-          >
-            Setup Guide
-          </button> */}
           {menuOption === "Commands" && (
             <button
               onClick={() => {
@@ -174,11 +177,20 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
             </button>
           )}
           {menuOption === "Bookmarks" && (
-            <input accept=".html" onChange={handleSelectFile} type="file" />
+            <div className="flex flex-col">
+              <input
+                id="file-input"
+                accept=".html"
+                className=" block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding text-bk-blue border border-solid border-gray-300 rounded transition ease-in-out m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                onChange={handleSelectFile}
+                type="file"
+              />
+            </div>
           )}
           <button
-            onClick={logOut}
-            className="text-white px-4 py-2 bg-neutral-600 dark:bg-bk-blue rounded"
+            onClick={handleLogout}
+            className="h-max text-white px-4 py-2 bg-neutral-600 dark:bg-bk-blue rounded"
           >
             Log out
           </button>
@@ -217,7 +229,11 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
         )}
         {menuOption === "Bookmarks" && (
           <OpenFolderProvider>
-            <BookmarkTable folder={folder} />
+            <BookmarkTable
+              folder={folder}
+              isLoading={isFolderLoading || addBookmarkFile.isLoading}
+              isError={isFolderError}
+            />
           </OpenFolderProvider>
         )}
         {menuOption === "Setup guide" && (

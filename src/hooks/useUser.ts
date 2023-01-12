@@ -1,5 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { useRouter } from "next/router";
+import { SignInFormVariant } from "../components/SignInForm";
 import { APIURL } from "../utils/APIEndpoints";
 import { ErrorRes, User } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
@@ -34,6 +36,58 @@ export const useUser = (onSuccess?: () => void, callOnError?: () => void) => {
         });
       }
       if (callOnError) callOnError();
+    },
+  });
+};
+
+export type AuthRequest = {
+  type: SignInFormVariant;
+  data: AuthRequestData;
+  setSubmitting: (isSubmitting: boolean) => void;
+};
+
+export type AuthRequestData = {
+  email: string;
+  password: string;
+};
+
+const auth = async ({ type, data }: AuthRequest): Promise<User> => {
+  const reqType = type === "Sign in" ? "login" : "signup";
+  const res = await axios.post<
+    User,
+    AxiosResponse<User, AuthRequestData>,
+    AuthRequestData
+  >(`${APIURL.base}/auth/${reqType}`, data, {
+    withCredentials: true,
+    headers: { "Content-Type": "application/json" },
+  });
+
+  return res.data;
+};
+
+export const useUserAuth = () => {
+  const { setErrorMessages } = useAuth();
+  const queryClient = useQueryClient();
+  const router = useRouter();
+  return useMutation([USER_KEY], auth, {
+    onSuccess: (): void => {
+      router.push("/");
+    },
+    onMutate: async ({ setSubmitting }): Promise<void> => {
+      setSubmitting(true);
+      await queryClient.cancelQueries([USER_KEY]);
+    },
+    onSettled: (_data, _err, { setSubmitting }): void => {
+      setSubmitting(false);
+      queryClient.invalidateQueries([USER_KEY]);
+    },
+    onError: (error): void => {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const errRes = error.response.data as ErrorRes;
+        setErrorMessages((prev) => {
+          return [...prev, createErrorMessage(`${errRes.title}`)];
+        });
+      }
     },
   });
 };

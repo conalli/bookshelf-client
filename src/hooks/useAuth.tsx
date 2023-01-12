@@ -10,16 +10,10 @@ import {
   useMemo,
   useState,
 } from "react";
-import { SignInFormVariant } from "../components/SignInForm";
 import { APIURL } from "../utils/APIEndpoints";
-import { ErrorRes, LogInReq, User } from "../utils/APITypes";
+import { ErrorRes, User } from "../utils/APITypes";
 import { createErrorMessage } from "../utils/errorMessages";
-
-type LogInData = {
-  type: SignInFormVariant;
-  values: LogInReq;
-  setSubmitting: (isSubmitting: boolean) => void;
-};
+import { AuthRequest, AuthRequestData } from "./useUser";
 
 export type ErrorMessage = {
   id: string;
@@ -33,7 +27,7 @@ type AuthContextType = {
   isAuthError: boolean;
   errorMessages: ErrorMessage[];
   setErrorMessages: Dispatch<SetStateAction<ErrorMessage[]>>;
-  logIn: (data: LogInData) => Promise<void>;
+  logIn: (data: AuthRequest) => Promise<void>;
   logOut: () => void;
   delAccount: () => Promise<void>;
 };
@@ -52,15 +46,15 @@ export const AuthProvider = ({
   const [errorMessages, setErrorMessages] = useState<ErrorMessage[]>([]);
 
   const logIn = useCallback(
-    async ({ type, values, setSubmitting }: LogInData): Promise<void> => {
+    async ({ type, data, setSubmitting }: AuthRequest): Promise<void> => {
       const reqType = type === "Sign in" ? "login" : "signup";
       setIsAuthLoading(true);
       try {
         const res = await axios.post<
           User,
-          AxiosResponse<User, LogInReq>,
-          LogInReq
-        >(`${APIURL.base}/auth/${reqType}`, values, {
+          AxiosResponse<User, AuthRequestData>,
+          AuthRequestData
+        >(`${APIURL.base}/auth/${reqType}`, data, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
@@ -81,10 +75,7 @@ export const AuthProvider = ({
         if (axios.isAxiosError(error) && error.response?.data) {
           const errRes = error.response.data as ErrorRes;
           setErrorMessages((prev) => {
-            return [
-              ...prev,
-              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-            ];
+            return [...prev, createErrorMessage(`${errRes.title}`)];
           });
         }
         setSubmitting(false);
@@ -112,6 +103,7 @@ export const AuthProvider = ({
         router.replace("/404");
       }
     } catch (error) {
+      setUser({} as User);
       setIsAuthLoading(false);
       setIsAuthError(true);
       console.error(error);

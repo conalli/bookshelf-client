@@ -31,16 +31,6 @@ export type Folder = {
   folders: Folder[] | null;
 };
 
-export type SignUpReq = {
-  email: string;
-  password: string;
-};
-
-export type LogInReq = {
-  email: string;
-  password: string;
-};
-
 export type AddCMDReq = {
   id: string;
   cmd: string;

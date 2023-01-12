@@ -3,16 +3,12 @@ import { motion } from "framer-motion";
 import React from "react";
 import { object, string } from "yup";
 import { useAuth } from "../../hooks/useAuth";
+import { AuthRequestData } from "../../hooks/useUser";
 
 export type SignInFormVariant = "Sign up" | "Sign in";
 
 type SignInFormProps = {
   type: SignInFormVariant;
-};
-
-type SignInFormValues = {
-  email: string;
-  password: string;
 };
 
 const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
@@ -34,9 +30,9 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
         initialValues={{ email: "", password: "" }}
         onSubmit={async (
           values,
-          { setSubmitting }: FormikHelpers<SignInFormValues>
+          { setSubmitting }: FormikHelpers<AuthRequestData>
         ) => {
-          logIn({ type, values, setSubmitting });
+          logIn({ type, data: values, setSubmitting });
         }}
       >
         {({ isSubmitting }) => (

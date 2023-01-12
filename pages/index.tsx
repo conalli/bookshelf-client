@@ -1,16 +1,10 @@
 import { motion } from "framer-motion";
 import { NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import About from "../src/components/About";
 
 const Home: NextPage = () => {
-  const router = useRouter();
-
-  const handleSignInNav = () => {
-    router.push("/signin");
-  };
-
   return (
     <>
       <Head>
@@ -72,9 +66,8 @@ const Home: NextPage = () => {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 className="outline outline-bk-blue dark:outline-bk-orange bg-bk-blue dark:bg-bk-orange text-sm  lg:text-xl px-5 py-2 w-28 lg:w-40 hover:opacity-90 rounded shadow-md"
-                onClick={handleSignInNav}
               >
-                Sign In
+                <Link href="/signup">Sign up</Link>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.1 }}

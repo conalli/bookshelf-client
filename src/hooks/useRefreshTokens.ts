@@ -14,13 +14,15 @@ const refreshTokens = () => {
   );
 };
 
+const REFRESH_INTERVAL = 1000 * 60 * 9;
+
 export const useRefreshTokens = () => {
   const [refreshErrors, setRefreshErrors] = useState<string[]>([]);
   const router = useRouter();
   useEffect(() => {
     let interval: NodeJS.Timer;
     try {
-      interval = setInterval(refreshTokens, 1000 * 60 * 7);
+      interval = setInterval(refreshTokens, REFRESH_INTERVAL);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const err = error as AxiosError<ErrorRes, null>;
