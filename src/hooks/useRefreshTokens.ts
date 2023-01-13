@@ -7,7 +7,7 @@ import { createErrorMessage } from "../utils/errors";
 import { useAuth } from "./useAuth";
 
 const REFRESH_KEY = "refresh";
-const REFRESH_INTERVAL = 1000 * 60 * 19;
+const REFRESH_INTERVAL = 1000 * 60 * 9;
 
 const refreshTokens = async () => {
   const res = await axios.post<null, AxiosResponse<null, null>, null>(

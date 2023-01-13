@@ -55,7 +55,23 @@ export type DelCMDRes = {
   num_updated: number;
 };
 
-export type AddBookmarkFileRes = {
+export type AddBookmarkRequest = {
+  name: string;
+  path: string;
+  url: string;
+  is_folder: boolean;
+};
+
+export type AddBookmarkResponse = {
+  id: string;
+  num_added: number;
+  name: string;
+  path: string;
+  url: string;
+  is_folder: boolean;
+};
+
+export type AddBookmarkFileResponse = {
   num_added: number;
 };
 
