@@ -1,7 +1,11 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import React, { Dispatch, SetStateAction } from "react";
-import { Command, UpdateCommandStatus } from "../../../pages/dashboard";
+import {
+  Command,
+  ModalType,
+  UpdateCommandStatus,
+} from "../../../pages/dashboard";
 import { CMD, User } from "../../utils/api/types";
 import CommandPlaceholder from "./CommandPlaceholder";
 import StatusIcon from "./StatusIcon";
@@ -11,7 +15,7 @@ type CommandTableProps = {
   isLoadingCommands: boolean;
   user: User;
   openModal: Dispatch<SetStateAction<boolean>>;
-  setModalType: Dispatch<SetStateAction<"add" | "del" | "setup" | undefined>>;
+  setModalType: Dispatch<SetStateAction<ModalType>>;
   selected: Command | null;
   setSelected: Dispatch<SetStateAction<Command | null>>;
   cmdStatus: UpdateCommandStatus;
@@ -97,7 +101,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
                   <td className="text-xs md:text-sm lg:text-base ">
                     <button
                       onClick={() => {
-                        setModalType("del");
+                        setModalType("delcmd");
                         setSelected({ cmd: key, url: commands[key] });
                         openModal(true);
                       }}

@@ -6,9 +6,7 @@ import { Provider as OpenFolderProvider } from "jotai";
 import CommandTable from "../../src/components/CommandTable";
 import MenuBar, { MenuOption } from "../../src/components/MenuBar";
 import Modal from "../../src/components/Modal";
-import AddCommandOverlay from "../../src/components/Modal/AddCommandOverlay";
 import BrowserSetup from "../../src/components/BrowserSetup";
-import DeleteCommandOverlay from "../../src/components/Modal/DeleteCommandOverlay";
 import { useAuth } from "../../src/hooks/useAuth";
 import {
   useAddCmdData,
@@ -21,6 +19,7 @@ import { NextPageWithLayoutAndProps } from "../_app";
 import BookmarkTable from "../../src/components/BookmarkTable";
 import {
   BOOKMARKS_FILE_FORM_KEY,
+  useAddBookmark,
   useAddBookmarkFromFile,
   useGetBookmarks,
 } from "../../src/hooks/useBookmarks";
@@ -28,6 +27,15 @@ import RouteGuard from "../../src/components/RouteGuard";
 import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
 import { dehydrate, QueryClient, useQueryClient } from "@tanstack/react-query";
 import { USER_KEY, useUser } from "../../src/hooks/useUser";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import ModalOverlay from "../../src/components/Modal/ModalOverlay";
+
+export type ModalType =
+  | "addcmd"
+  | "addbookmark"
+  | "delcmd"
+  | "setup"
+  | undefined;
 
 export type Command = {
   cmd: string;
@@ -78,17 +86,11 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   userData,
 }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [modalType, setModalType] = useState<
-    "add" | "del" | "setup" | undefined
-  >();
+  const [modalType, setModalType] = useState<ModalType>();
   const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
   const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
   const { data: user } = useUser();
-  const {
-    user: { id: userID },
-    setUser,
-    logOut,
-  } = useAuth();
+  const { setUser, logOut } = useAuth();
 
   useEffect(() => {
     if (!user) {
@@ -96,15 +98,16 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     }
   }, [setUser, user, userData]);
 
-  const add = useAddCmdData(userID);
-  const del = useDelCmdData(userID);
-  const { data, isLoading } = useGetCommands(userID);
+  const addCommand = useAddCmdData();
+  const deleteCommand = useDelCmdData();
+  const { data, isLoading } = useGetCommands();
   const {
     data: folder,
     isLoading: isFolderLoading,
     isError: isFolderError,
-  } = useGetBookmarks(userID);
-  const addBookmarkFile = useAddBookmarkFromFile(userID);
+  } = useGetBookmarks();
+  const addBookmarkFile = useAddBookmarkFromFile();
+  const addBookmark = useAddBookmark();
   const { data: refreshedToken } = useRefreshTokens();
   if (refreshedToken) {
     console.log("tokens refreshed");
@@ -117,14 +120,14 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   };
   const updateStatus: UpdateCommandStatus = {
     add: {
-      success: add.isSuccess,
-      loading: add.isLoading,
-      error: add.isError,
+      success: addCommand.isSuccess,
+      loading: addCommand.isLoading,
+      error: addCommand.isError,
     },
     del: {
-      success: del.isSuccess,
-      loading: del.isLoading,
-      error: del.isError,
+      success: deleteCommand.isSuccess,
+      loading: deleteCommand.isLoading,
+      error: deleteCommand.isError,
     },
   };
 
@@ -168,16 +171,31 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
           {menuOption === "Commands" && (
             <button
               onClick={() => {
-                setModalType("add");
+                setModalType("addcmd");
                 setModalOpen(true);
               }}
               className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
             >
-              Add
+              <div className="flex gap-1 justify-center items-center">
+                <p className="mt-0.5">Add</p>
+                <PlusIcon className="w-5 h-5" />
+              </div>
             </button>
           )}
           {menuOption === "Bookmarks" && (
-            <div className="flex flex-col">
+            <div className="flex gap-0.5 md:gap-2">
+              <button
+                onClick={() => {
+                  setModalType("addbookmark");
+                  setModalOpen(true);
+                }}
+                className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
+              >
+                <div className="flex gap-1 justify-center items-center">
+                  <p className="mt-0.5">Add</p>
+                  <PlusIcon className="w-5 h-5" />
+                </div>
+              </button>
               <input
                 id="file-input"
                 accept=".html"
@@ -190,28 +208,24 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
           )}
           <button
             onClick={handleLogout}
-            className="h-max text-white px-4 py-2 bg-neutral-600 dark:bg-bk-blue rounded"
+            className="h-max text-white px-4 py-2.5 bg-neutral-600 dark:bg-bk-blue rounded"
           >
             Log out
           </button>
         </div>
       </motion.div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
-        {modalType === "add" ? (
-          <AddCommandOverlay
-            user={user}
-            add={add}
-            setSelected={setSelectedCommand}
-            setIsOpen={setModalOpen}
-          />
-        ) : (
-          <DeleteCommandOverlay
-            selected={selectedCommand || null}
-            user={user}
-            del={del}
-            setIsOpen={setModalOpen}
-          />
-        )}
+        <ModalOverlay
+          user={user}
+          folder={folder}
+          addCommand={addCommand}
+          deleteCommand={deleteCommand}
+          addBookmark={addBookmark}
+          selectedCommand={selectedCommand}
+          setSelectedCommand={setSelectedCommand}
+          modalType={modalType}
+          setModalOpen={setModalOpen}
+        />
       </Modal>
       <div className="flex justify-start items-start">
         <MenuBar selected={menuOption} setSelected={setMenuOption} />

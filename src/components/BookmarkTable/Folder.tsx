@@ -31,7 +31,7 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
     (folder.folders !== null && folder.folders.length > 0);
 
   return (
-    <div className="pt-1.5 pb-0.5">
+    <div className="pt-1 pb-0.5">
       {folder.name !== FOLDER_BASE_PATH && (
         <div className="flex gap-2 truncate hover:cursor-pointer">
           <BookmarksFolderIcon hasContents={hasContents} isOpen={isOpen} />

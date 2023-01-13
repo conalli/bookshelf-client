@@ -11,7 +11,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ bookmark }) => {
   return (
     <motion.div className="truncate">
       <Link className="ml-2" href={bookmark.url}>
-        {bookmark.name}
+        {bookmark.name !== "" ? bookmark.name : bookmark.url}
       </Link>
     </motion.div>
   );

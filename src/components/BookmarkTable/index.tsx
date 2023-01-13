@@ -38,7 +38,7 @@ const BookmarkTable: React.FC<BookmarkTableProps> = ({
   }
   return (
     <AnimatePresence mode="sync">
-      <motion.div className="flex flex-col w-full pt-1 pb-2 md:py-1.5 md:pb-3 lg:pb-6 lg:w-2/4 m-auto bg-white dark:bg-neutral-800 rounded shadow">
+      <motion.div className="flex flex-col w-full pt-4 pb-2 md:py-1.5 md:pb-3 lg:pb-6 lg:w-2/4 m-auto bg-white dark:bg-neutral-800 rounded shadow">
         {(isLoading || isError) && <Spinner />}
         {folder && <Folder folder={folder} isOpen={true} />}
       </motion.div>
