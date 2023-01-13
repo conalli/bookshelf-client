@@ -7,13 +7,13 @@ import BookmarkTable from "../../../src/components/BookmarkTable";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 
 const Bookmark = ({ data }: { data: Folder }) => {
-  const refreshErrors = useRefreshTokens();
-  if (refreshErrors.length) {
-    console.error(...refreshErrors);
+  const { data: refreshedToken } = useRefreshTokens();
+  if (refreshedToken) {
+    console.log("tokens refreshed");
   }
   return (
     <div>
-      <BookmarkTable folder={data} />
+      <BookmarkTable folder={data} isLoading={false} isError={false} />
     </div>
   );
 };

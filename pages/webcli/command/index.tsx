@@ -29,9 +29,9 @@ const Command = ({ user }: { user: User }) => {
       error: del.isError,
     },
   };
-  const refreshErrors = useRefreshTokens();
-  if (refreshErrors.length) {
-    console.error(...refreshErrors);
+  const { data: refreshedToken } = useRefreshTokens();
+  if (refreshedToken) {
+    console.log("tokens refreshed");
   }
   return (
     <div>

@@ -105,9 +105,9 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     isError: isFolderError,
   } = useGetBookmarks(userID);
   const addBookmarkFile = useAddBookmarkFromFile(userID);
-  const refreshTokenErrors = useRefreshTokens();
-  if (refreshTokenErrors.length) {
-    console.error(refreshTokenErrors);
+  const { data: refreshedToken } = useRefreshTokens();
+  if (refreshedToken) {
+    console.log("tokens refreshed");
   }
   const queryClient = useQueryClient();
   const handleLogout = () => {

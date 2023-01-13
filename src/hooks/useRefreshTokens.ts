@@ -1,43 +1,45 @@
+import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { APIURL } from "../utils/api/endpoints";
 import { ErrorRes } from "../utils/api/types";
+import { createErrorMessage } from "../utils/errors";
+import { useAuth } from "./useAuth";
 
-const refreshTokens = () => {
-  axios.post<null, AxiosResponse<null, null>, null>(
-    `${APIURL.base}/auth/refresh`,
+const REFRESH_KEY = "refresh";
+const REFRESH_INTERVAL = 1000 * 60 * 19;
+
+const refreshTokens = async () => {
+  const res = await axios.post<null, AxiosResponse<null, null>, null>(
+    APIURL.refresh,
     null,
     {
       withCredentials: true,
     }
   );
+  return res.status === 200;
 };
 
-const REFRESH_INTERVAL = 1000 * 60 * 9;
-
 export const useRefreshTokens = () => {
-  const [refreshErrors, setRefreshErrors] = useState<string[]>([]);
   const router = useRouter();
-  useEffect(() => {
-    let interval: NodeJS.Timer;
-    try {
-      interval = setInterval(refreshTokens, REFRESH_INTERVAL);
-    } catch (error) {
+  const { setErrorMessages } = useAuth();
+  return useQuery([REFRESH_KEY], refreshTokens, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    refetchInterval: REFRESH_INTERVAL,
+    refetchIntervalInBackground: true,
+    onError: (error) => {
       if (axios.isAxiosError(error)) {
         const err = error as AxiosError<ErrorRes, null>;
         if (err.response !== undefined) {
-          setRefreshErrors((prev) => [
+          setErrorMessages((prev) => [
             ...prev,
-            `${err.response?.data.title} -- ${err.response?.data.detail}`,
+            createErrorMessage(`${err.response?.data.title}`),
           ]);
         }
       }
       router.push("/signin");
-    }
-    return () => {
-      clearInterval(interval);
-    };
-  }, [router]);
-  return refreshErrors;
+    },
+  });
 };
