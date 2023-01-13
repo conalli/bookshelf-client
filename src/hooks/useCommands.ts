@@ -57,7 +57,7 @@ const addCmd = async (data: AddCMDReq) => {
   return res.data;
 };
 
-export const useAddCmdData = () => {
+export const useAddCommand = () => {
   const queryClient = useQueryClient();
   const { setErrorMessages } = useAuth();
   return useMutation<AddCMDRes, AxiosError<ErrorRes, AddCMDReq>, AddCMDReq>(
@@ -105,7 +105,7 @@ const delCmd = async (data: DelCMDReq) => {
   return res.data;
 };
 
-export const useDelCmdData = () => {
+export const useDeleteCommand = () => {
   const queryClient = useQueryClient();
   const { setErrorMessages } = useAuth();
   return useMutation<DelCMDRes, AxiosError<ErrorRes, DelCMDReq>, DelCMDReq>(

@@ -3,20 +3,18 @@ import axios, { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
 import { User } from "../../../src/utils/api/types";
 import { APIURL } from "../../../src/utils/api/endpoints";
-import { Command, UpdateCommandStatus } from "../../dashboard";
+import { Command, ModalType, UpdateCommandStatus } from "../../dashboard";
 import CommandTable from "../../../src/components/CommandTable";
-import { useDelCmdData } from "../../../src/hooks/useCommands";
+import { useDeleteCommand } from "../../../src/hooks/useCommands";
 import Modal from "../../../src/components/Modal";
 import DeleteCommandOverlay from "../../../src/components/Modal/DeleteCommandOverlay";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 
 const Command = ({ user }: { user: User }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [modalType, setModalType] = useState<
-    "add" | "del" | "setup" | undefined
-  >();
+  const [modalType, setModalType] = useState<ModalType>();
   const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
-  const del = useDelCmdData(user.id);
+  const del = useDeleteCommand();
   const updateStatus: UpdateCommandStatus = {
     add: {
       success: false,
@@ -36,7 +34,7 @@ const Command = ({ user }: { user: User }) => {
   return (
     <div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
-        {modalType === "del" && (
+        {modalType === "delcmd" && (
           <DeleteCommandOverlay
             user={user}
             del={del}

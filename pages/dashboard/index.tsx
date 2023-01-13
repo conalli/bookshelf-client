@@ -9,8 +9,8 @@ import Modal from "../../src/components/Modal";
 import BrowserSetup from "../../src/components/BrowserSetup";
 import { useAuth } from "../../src/hooks/useAuth";
 import {
-  useAddCmdData,
-  useDelCmdData,
+  useAddCommand,
+  useDeleteCommand,
   useGetCommands,
 } from "../../src/hooks/useCommands";
 import { APIURL } from "../../src/utils/api/endpoints";
@@ -98,8 +98,8 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     }
   }, [setUser, user, userData]);
 
-  const addCommand = useAddCmdData();
-  const deleteCommand = useDelCmdData();
+  const addCommand = useAddCommand();
+  const deleteCommand = useDeleteCommand();
   const { data, isLoading } = useGetCommands();
   const {
     data: folder,
