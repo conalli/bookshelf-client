@@ -3,7 +3,7 @@ import { ReactNode, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../../hooks/useAuth";
 import LoadingPage from "../LoadingPage";
-import { useUser } from "../../hooks/useUser";
+import { useUser, useUserErrorHandler } from "../../hooks/useUser";
 
 type RouteGuardProps = {
   children: ReactNode;
@@ -13,7 +13,10 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { user, setUser, isAuthLoading, isAuthError } = useAuth();
-  const { data, isLoading, isError } = useUser();
+  const errorHandler = useUserErrorHandler(router, 2);
+  const { data, isLoading, isError } = useUser({
+    callOnError: errorHandler,
+  });
   const queryClient = useQueryClient();
 
   const checkAuth = useCallback(

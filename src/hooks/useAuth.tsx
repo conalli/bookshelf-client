@@ -99,14 +99,12 @@ export const AuthProvider = ({
       } else {
         setIsAuthLoading(false);
         setIsAuthError(true);
-        console.error("error: ", res);
         router.replace("/404");
       }
     } catch (error) {
       setUser({} as User);
       setIsAuthLoading(false);
       setIsAuthError(true);
-      console.error(error);
       router.replace("/404");
     }
   }, [router]);

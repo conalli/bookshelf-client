@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { SignInFormVariant } from "../components/SignInForm";
 import { APIURL } from "../utils/api/endpoints";
 import { ErrorRes, User } from "../utils/api/types";
@@ -19,7 +19,20 @@ const getUser = async () => {
   return res.data;
 };
 
-export const useUser = (onSuccess?: () => void, callOnError?: () => void) => {
+export const useUserErrorHandler = (router: NextRouter, retries = 3) => {
+  let errCount = 0;
+  return () => {
+    errCount++;
+    if (errCount >= retries) {
+      router.push("/signin");
+    }
+  };
+};
+
+export const useUser = ({
+  onSuccess,
+  callOnError,
+}: { onSuccess?: () => void; callOnError?: () => void } = {}) => {
   const { setErrorMessages } = useAuth();
   return useQuery<User, AxiosError<ErrorRes, null>>([USER_KEY], getUser, {
     refetchOnMount: true,
