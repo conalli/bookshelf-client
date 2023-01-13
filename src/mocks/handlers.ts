@@ -5,18 +5,17 @@ import {
   // DelACCRes,
   // DelCMDReq,
   // DelCMDRes,
-  LogInReq,
   // AddCMDReq,
   // AddCMDRes,
-  SignUpReq,
   User,
+  AuthRequestData,
 } from "../utils/api/types";
 import { mockUsers, MockUser } from "./mockUserData";
 import { APIURL } from "../utils/api/endpoints";
 
 export const handlers = [
-  rest.post<LogInReq, PathParams, User | ErrRes>(
-    `${APIURL.base}/login`,
+  rest.post<AuthRequestData, PathParams, User | ErrRes>(
+    `${APIURL.AUTH}/login`,
     (req, res, ctx) => {
       const found = mockUsers.find(
         (user) =>
@@ -40,8 +39,8 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  rest.post<SignUpReq, PathParams, User | ErrRes>(
-    `${APIURL.base}`,
+  rest.post<AuthRequestData, PathParams, User | ErrRes>(
+    `${APIURL.AUTH}/signup`,
     (req, res, ctx) => {
       const { email, password } = req.body;
       const found = mockUsers.find(
@@ -152,7 +151,7 @@ export const handlers = [
   //     }
   //   ),
   //   rest.delete<DelACCReq, { APIKey: string }, DelACCRes>(
-  //     `${APIURL.base}/:APIKey`,
+  //     `${APIURL.BASE}/:APIKey`,
   //     (req, res, ctx) => {
   //       const { APIKey } = req.params;
   //       const { id, name, password } = req.body;

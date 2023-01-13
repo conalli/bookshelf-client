@@ -11,9 +11,9 @@ import {
   useState,
 } from "react";
 import { APIURL } from "../utils/api/endpoints";
-import { ErrorRes, User } from "../utils/api/types";
+import { ErrorRes, User, AuthRequestData } from "../utils/api/types";
 import { createErrorMessage } from "../utils/errors";
-import { AuthRequest, AuthRequestData } from "./useUser";
+import { AuthRequest } from "./useUser";
 
 export type ErrorMessage = {
   id: string;
@@ -54,7 +54,7 @@ export const AuthProvider = ({
           User,
           AxiosResponse<User, AuthRequestData>,
           AuthRequestData
-        >(`${APIURL.base}/auth/${reqType}`, data, {
+        >(`${APIURL.BASE}/auth/${reqType}`, data, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
@@ -89,7 +89,7 @@ export const AuthProvider = ({
   const logOut = useCallback(async (): Promise<void> => {
     setIsAuthLoading(true);
     try {
-      const res = await axios.post(`${APIURL.base}/auth/logout`, null, {
+      const res = await axios.post(`${APIURL.BASE}/auth/logout`, null, {
         withCredentials: true,
       });
       if (res.status === 200) {
@@ -113,7 +113,7 @@ export const AuthProvider = ({
     if (!user) return;
     setIsAuthLoading(true);
     try {
-      const res = await axios.delete(`${APIURL.base}`, {
+      const res = await axios.delete(`${APIURL.BASE}`, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });

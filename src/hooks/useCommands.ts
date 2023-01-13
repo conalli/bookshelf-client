@@ -15,12 +15,9 @@ import { createErrorMessage } from "../utils/errors";
 export const COMMAND_KEY = "cmds";
 
 const fetchCmds = async () => {
-  const res = await axios.get<CMD, AxiosResponse<CMD, null>, null>(
-    `${APIURL.cmd}`,
-    {
-      withCredentials: true,
-    }
-  );
+  const res = await axios.get<CMD, AxiosResponse<CMD, null>, null>(APIURL.CMD, {
+    withCredentials: true,
+  });
   return res.data;
 };
 
@@ -55,7 +52,7 @@ export const useGetCommands = (
 
 const addCmd = async (data: AddCMDReq) => {
   const res = await axios.post<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
-    `${APIURL.cmd}`,
+    APIURL.CMD,
     data,
     {
       withCredentials: true,
@@ -106,7 +103,7 @@ const delCmd = async (data: DelCMDReq) => {
     DelCMDRes,
     AxiosResponse<DelCMDRes, DelCMDReq>,
     DelCMDReq
-  >(`${APIURL.cmd}`, data, {
+  >(APIURL.CMD, data, {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });

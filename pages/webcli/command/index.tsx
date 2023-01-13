@@ -62,7 +62,7 @@ const Command = ({ user }: { user: User }) => {
 export async function getServerSideProps(context: NextPageContext) {
   try {
     const user = await axios.get<User, AxiosResponse<User, null>, null>(
-      APIURL.base + "/user",
+      APIURL.USER,
       {
         withCredentials: true,
         headers: {

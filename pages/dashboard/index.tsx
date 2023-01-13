@@ -50,7 +50,7 @@ export type UpdateCommandStatus = {
 export const getServerSideProps = async (context: NextPageContext) => {
   try {
     const prefetchUser = async () => {
-      const res = await axios.get<User>(`${APIURL.base}/user`, {
+      const res = await axios.get<User>(APIURL.USER, {
         withCredentials: true,
         headers: {
           Cookie: context.req?.headers.cookie,

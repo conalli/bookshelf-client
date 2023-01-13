@@ -35,7 +35,7 @@ const GoogleIcon = () => {
 const GoogleSignInButton: React.FC<{ authType: SignInFormVariant }> = ({
   authType,
 }) => {
-  const href = `${APIURL.base}/auth/oauth?provider=google&type=${
+  const href = `${APIURL.AUTH}/oauth?provider=google&type=${
     authType === "Sign up" ? "signup" : "login"
   }`;
   return (

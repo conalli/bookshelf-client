@@ -22,7 +22,7 @@ export default Bookmark;
 
 export async function getServerSideProps(context: NextPageContext) {
   const folder = context.query.folder ? `/${context.query.folder}` : "";
-  const url = APIURL.base + "/bookmark" + folder;
+  const url = APIURL.BOOKMARKS + folder;
   try {
     const res = await axios.get<Folder, AxiosResponse<Folder, null>, null>(
       url,

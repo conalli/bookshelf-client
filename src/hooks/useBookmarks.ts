@@ -13,7 +13,7 @@ const addBookmarksFromFile = async (data: FormData) => {
     AddBookmarkFileRes,
     AxiosResponse<AddBookmarkFileRes, FormData>,
     FormData
-  >(`${APIURL.base}/bookmark/file`, data, {
+  >(APIURL.BOOKMARKSFILE, data, {
     withCredentials: true,
     headers: {
       "Content-Type": "multipart/form-data",
@@ -51,7 +51,7 @@ export const useAddBookmarkFromFile = (userID: string | undefined) => {
 
 const getAllBookmarks = async () => {
   const res = await axios.get<Folder, AxiosResponse<Folder, null>, null>(
-    `${APIURL.base}/bookmark`,
+    APIURL.BOOKMARKS,
     { withCredentials: true }
   );
   return res.data;

@@ -31,6 +31,11 @@ export type Folder = {
   folders: Folder[] | null;
 };
 
+export type AuthRequestData = {
+  email: string;
+  password: string;
+};
+
 export type AddCMDReq = {
   id: string;
   cmd: string;

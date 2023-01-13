@@ -11,7 +11,7 @@ const REFRESH_INTERVAL = 1000 * 60 * 19;
 
 const refreshTokens = async () => {
   const res = await axios.post<null, AxiosResponse<null, null>, null>(
-    APIURL.refresh,
+    APIURL.REFRESH,
     null,
     {
       withCredentials: true,

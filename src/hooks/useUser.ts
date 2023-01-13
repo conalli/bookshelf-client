@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { NextRouter, useRouter } from "next/router";
 import { SignInFormVariant } from "../components/SignInForm";
 import { APIURL } from "../utils/api/endpoints";
-import { ErrorRes, User } from "../utils/api/types";
+import { ErrorRes, User, AuthRequestData } from "../utils/api/types";
 import { createErrorMessage } from "../utils/errors";
 import { useAuth } from "./useAuth";
 
@@ -11,7 +11,7 @@ export const USER_KEY = "user";
 
 const getUser = async () => {
   const res = await axios.get<User, AxiosResponse<User, null>, null>(
-    `${APIURL.base}/user`,
+    APIURL.USER,
     {
       withCredentials: true,
     }
@@ -59,18 +59,13 @@ export type AuthRequest = {
   setSubmitting: (isSubmitting: boolean) => void;
 };
 
-export type AuthRequestData = {
-  email: string;
-  password: string;
-};
-
 const auth = async ({ type, data }: AuthRequest): Promise<User> => {
   const reqType = type === "Sign in" ? "login" : "signup";
   const res = await axios.post<
     User,
     AxiosResponse<User, AuthRequestData>,
     AuthRequestData
-  >(`${APIURL.base}/auth/${reqType}`, data, {
+  >(`${APIURL.AUTH}/${reqType}`, data, {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });
