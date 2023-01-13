@@ -11,22 +11,15 @@ import {
   useState,
 } from "react";
 import { APIURL } from "../utils/api/endpoints";
-import { ErrorRes, User, AuthRequestData } from "../utils/api/types";
-import { createErrorMessage } from "../utils/errors";
+import { AuthRequestData, ErrorRes, User } from "../utils/api/types";
+import { useMessages } from "./useMessages";
 import { AuthRequest } from "./useUser";
-
-export type ErrorMessage = {
-  id: string;
-  error: string;
-};
 
 type AuthContextType = {
   user: User;
   setUser: Dispatch<SetStateAction<User>>;
   isAuthLoading: boolean;
   isAuthError: boolean;
-  errorMessages: ErrorMessage[];
-  setErrorMessages: Dispatch<SetStateAction<ErrorMessage[]>>;
   logIn: (data: AuthRequest) => Promise<void>;
   logOut: () => void;
   delAccount: () => Promise<void>;
@@ -43,8 +36,7 @@ export const AuthProvider = ({
   const [user, setUser] = useState<User>({} as User);
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
-  const [errorMessages, setErrorMessages] = useState<ErrorMessage[]>([]);
-
+  const { addMessage } = useMessages();
   const logIn = useCallback(
     async ({ type, data, setSubmitting }: AuthRequest): Promise<void> => {
       const reqType = type === "Sign in" ? "login" : "signup";
@@ -65,25 +57,24 @@ export const AuthProvider = ({
           router.push("/dashboard");
         } else {
           setIsAuthError(true);
-          setErrorMessages((prev) => {
-            const msg = `Unexpected ${type} Error: Please check credentials before trying again.`;
-            return [...prev, createErrorMessage(msg)];
-          });
+          const msg = `Unexpected ${type} Error: Please check credentials before trying again.`;
+          addMessage(msg, true);
           setIsAuthLoading(false);
         }
       } catch (error) {
         if (axios.isAxiosError(error) && error.response?.data) {
           const errRes = error.response.data as ErrorRes;
-          setErrorMessages((prev) => {
-            return [...prev, createErrorMessage(`${errRes.title}`)];
-          });
+          addMessage(`${errRes.title}`, true);
+        } else {
+          const msg = `Unexpected ${type} Error: Please check credentials before trying again.`;
+          addMessage(msg, true);
         }
         setSubmitting(false);
         setIsAuthError(true);
         setIsAuthLoading(false);
       }
     },
-    [router]
+    [addMessage, router]
   );
 
   const logOut = useCallback(async (): Promise<void> => {
@@ -123,26 +114,19 @@ export const AuthProvider = ({
         router.push("/");
       } else {
         setIsAuthError(true);
-        setErrorMessages((prev) => {
-          const msg = `Unexpected Error While trying to Delete ${user.name}'s Account: Please check credentials before trying again.`;
-          return [...prev, createErrorMessage(msg)];
-        });
+        const msg = `Unexpected Error While trying to Delete ${user.name}'s Account: Please check credentials before trying again.`;
+        addMessage(msg, true);
         setIsAuthLoading(false);
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errRes = error.response.data as ErrorRes;
-        setErrorMessages((prev) => {
-          return [
-            ...prev,
-            createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-          ];
-        });
+        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
       setIsAuthError(true);
       setIsAuthLoading(false);
     }
-  }, [router, user]);
+  }, [addMessage, router, user]);
 
   const memoedValue = useMemo(
     () => ({
@@ -150,22 +134,11 @@ export const AuthProvider = ({
       setUser,
       isAuthLoading,
       isAuthError,
-      errorMessages,
-      setErrorMessages,
       logIn,
       logOut,
       delAccount,
     }),
-    [
-      user,
-      setUser,
-      isAuthLoading,
-      isAuthError,
-      errorMessages,
-      logIn,
-      logOut,
-      delAccount,
-    ]
+    [user, setUser, isAuthLoading, isAuthError, logIn, logOut, delAccount]
   );
   return (
     <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>

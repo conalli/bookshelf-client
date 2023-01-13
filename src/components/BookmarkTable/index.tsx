@@ -1,10 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useSetAtom } from "jotai";
 import React, { useEffect } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import { useMessages } from "../../hooks/useMessages";
 import { addOpenFoldersAtom, foldersAtom } from "../../store/folders";
 import { Folder as APIFolder } from "../../utils/api/types";
-import { createErrorMessage } from "../../utils/errors";
 import Spinner from "../Spinner";
 import Folder from "./Folder";
 
@@ -19,9 +18,9 @@ const BookmarkTable: React.FC<BookmarkTableProps> = ({
   isLoading,
   isError,
 }) => {
+  const { addMessage } = useMessages();
   const setFolders = useSetAtom(foldersAtom);
   const setOpenFolders = useSetAtom(addOpenFoldersAtom);
-  const { setErrorMessages } = useAuth();
 
   useEffect(() => {
     setFolders(() => {
@@ -31,10 +30,7 @@ const BookmarkTable: React.FC<BookmarkTableProps> = ({
     setOpenFolders();
   }, [setOpenFolders, folder, setFolders]);
   if (isError) {
-    setErrorMessages((prev) => [
-      ...prev,
-      createErrorMessage("error getting bookmarks"),
-    ]);
+    addMessage("error getting bookmarks", true);
   }
   return (
     <AnimatePresence mode="sync">

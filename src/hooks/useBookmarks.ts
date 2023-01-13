@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { APIURL } from "../utils/api/endpoints";
 import {
   AddBookmarkFileResponse,
@@ -8,8 +8,7 @@ import {
   ErrorRes,
   Folder,
 } from "../utils/api/types";
-import { createErrorMessage } from "../utils/errors";
-import { useAuth } from "./useAuth";
+import { useMessages } from "./useMessages";
 
 export const BOOKMARKS_FILE_FORM_KEY = "bookmarks_file";
 const BOOKMARKS_KEY = "bookmarks";
@@ -24,7 +23,7 @@ const addBookmark = async (data: AddBookmarkRequest) => {
 };
 
 export const useAddBookmark = () => {
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   const queryClient = useQueryClient();
   return useMutation<
     AddBookmarkResponse,
@@ -40,12 +39,7 @@ export const useAddBookmark = () => {
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorRes;
-        setErrorMessages((prev) => {
-          return [
-            ...prev,
-            createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-          ];
-        });
+        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
     },
   });
@@ -67,7 +61,7 @@ const addBookmarksFromFile = async (data: FormData) => {
 
 export const useAddBookmarkFromFile = () => {
   const queryClient = useQueryClient();
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   return useMutation<
     AddBookmarkFileResponse,
     AxiosError<ErrorRes, FormData>,
@@ -82,12 +76,7 @@ export const useAddBookmarkFromFile = () => {
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorRes;
-        setErrorMessages((prev) => {
-          return [
-            ...prev,
-            createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-          ];
-        });
+        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
     },
   });
@@ -105,7 +94,7 @@ export const useGetBookmarks = (
   onSuccess?: () => void,
   callOnError?: () => void
 ) => {
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   return useQuery<Folder, AxiosError<ErrorRes>>(
     [BOOKMARKS_KEY],
     getAllBookmarks,
@@ -116,12 +105,7 @@ export const useGetBookmarks = (
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
-          setErrorMessages((prev) => {
-            return [
-              ...prev,
-              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-            ];
-          });
+          addMessage(`${errRes.title} -- ${errRes.detail}`, true);
         }
         if (callOnError) callOnError();
       },

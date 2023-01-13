@@ -3,9 +3,8 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { NextRouter, useRouter } from "next/router";
 import { SignInFormVariant } from "../components/SignInForm";
 import { APIURL } from "../utils/api/endpoints";
-import { ErrorRes, User, AuthRequestData } from "../utils/api/types";
-import { createErrorMessage } from "../utils/errors";
-import { useAuth } from "./useAuth";
+import { AuthRequestData, ErrorRes, User } from "../utils/api/types";
+import { useMessages } from "./useMessages";
 
 export const USER_KEY = "user";
 
@@ -33,7 +32,7 @@ export const useUser = ({
   onSuccess,
   callOnError,
 }: { onSuccess?: () => void; callOnError?: () => void } = {}) => {
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   return useQuery<User, AxiosError<ErrorRes, null>>([USER_KEY], getUser, {
     refetchOnMount: true,
     refetchOnWindowFocus: false,
@@ -41,12 +40,7 @@ export const useUser = ({
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorRes;
-        setErrorMessages((prev) => {
-          return [
-            ...prev,
-            createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-          ];
-        });
+        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
       if (callOnError) callOnError();
     },
@@ -74,7 +68,7 @@ const auth = async ({ type, data }: AuthRequest): Promise<User> => {
 };
 
 export const useUserAuth = () => {
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   const queryClient = useQueryClient();
   const router = useRouter();
   return useMutation([USER_KEY], auth, {
@@ -92,9 +86,7 @@ export const useUserAuth = () => {
     onError: (error): void => {
       if (axios.isAxiosError(error) && error.response?.data) {
         const errRes = error.response.data as ErrorRes;
-        setErrorMessages((prev) => {
-          return [...prev, createErrorMessage(`${errRes.title}`)];
-        });
+        addMessage(`${errRes.title}`, true);
       }
     },
   });

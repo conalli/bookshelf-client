@@ -1,34 +1,34 @@
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { dehydrate, QueryClient, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { Provider as OpenFolderProvider } from "jotai";
 import { NextPageContext } from "next";
 import { ChangeEvent, ReactElement, useEffect, useState } from "react";
-import { Provider as OpenFolderProvider } from "jotai";
+import BookmarkTable from "../../src/components/BookmarkTable";
+import BrowserSetup from "../../src/components/BrowserSetup";
 import CommandTable from "../../src/components/CommandTable";
 import MenuBar, { MenuOption } from "../../src/components/MenuBar";
 import Modal from "../../src/components/Modal";
-import BrowserSetup from "../../src/components/BrowserSetup";
+import ModalOverlay from "../../src/components/Modal/ModalOverlay";
+import RouteGuard from "../../src/components/RouteGuard";
 import { useAuth } from "../../src/hooks/useAuth";
-import {
-  useAddCommand,
-  useDeleteCommand,
-  useGetCommands,
-} from "../../src/hooks/useCommands";
-import { APIURL } from "../../src/utils/api/endpoints";
-import { User } from "../../src/utils/api/types";
-import { NextPageWithLayoutAndProps } from "../_app";
-import BookmarkTable from "../../src/components/BookmarkTable";
 import {
   BOOKMARKS_FILE_FORM_KEY,
   useAddBookmark,
   useAddBookmarkFromFile,
   useGetBookmarks,
 } from "../../src/hooks/useBookmarks";
-import RouteGuard from "../../src/components/RouteGuard";
+import {
+  useAddCommand,
+  useDeleteCommand,
+  useGetCommands,
+} from "../../src/hooks/useCommands";
 import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
-import { dehydrate, QueryClient, useQueryClient } from "@tanstack/react-query";
 import { USER_KEY, useUser } from "../../src/hooks/useUser";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import ModalOverlay from "../../src/components/Modal/ModalOverlay";
+import { APIURL } from "../../src/utils/api/endpoints";
+import { User } from "../../src/utils/api/types";
+import { NextPageWithLayoutAndProps } from "../_app";
 
 export type ModalType =
   | "addcmd"

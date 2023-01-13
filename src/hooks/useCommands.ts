@@ -1,5 +1,6 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { APIURL } from "../utils/api/endpoints";
 import {
   AddCMDReq,
   AddCMDRes,
@@ -8,9 +9,7 @@ import {
   DelCMDRes,
   ErrorRes,
 } from "../utils/api/types";
-import { APIURL } from "../utils/api/endpoints";
-import { useAuth } from "./useAuth";
-import { createErrorMessage } from "../utils/errors";
+import { useMessages } from "./useMessages";
 
 export const COMMAND_KEY = "cmds";
 
@@ -25,7 +24,7 @@ export const useGetCommands = (
   onSuccess?: () => void,
   callOnError?: () => void
 ) => {
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   return useQuery<CMD, AxiosError<ErrorRes, null>>([COMMAND_KEY], fetchCmds, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -33,12 +32,7 @@ export const useGetCommands = (
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorRes;
-        setErrorMessages((prev) => {
-          return [
-            ...prev,
-            createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-          ];
-        });
+        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
       if (callOnError) callOnError();
     },
@@ -59,7 +53,7 @@ const addCmd = async (data: AddCMDReq) => {
 
 export const useAddCommand = () => {
   const queryClient = useQueryClient();
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   return useMutation<AddCMDRes, AxiosError<ErrorRes, AddCMDReq>, AddCMDReq>(
     addCmd,
     {
@@ -80,12 +74,7 @@ export const useAddCommand = () => {
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
-          setErrorMessages((prev) => {
-            return [
-              ...prev,
-              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-            ];
-          });
+          addMessage(`${errRes.title} -- ${errRes.detail}`, true);
         }
         queryClient.setQueryData<CMD>([COMMAND_KEY], (prev) => prev || {});
       },
@@ -107,7 +96,7 @@ const delCmd = async (data: DelCMDReq) => {
 
 export const useDeleteCommand = () => {
   const queryClient = useQueryClient();
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   return useMutation<DelCMDRes, AxiosError<ErrorRes, DelCMDReq>, DelCMDReq>(
     delCmd,
     {
@@ -117,12 +106,7 @@ export const useDeleteCommand = () => {
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
-          setErrorMessages((prev) => {
-            return [
-              ...prev,
-              createErrorMessage(`${errRes.title} -- ${errRes.detail}`),
-            ];
-          });
+          addMessage(`${errRes.title} -- ${errRes.detail}`, true);
         }
         queryClient.setQueryData<CMD>([COMMAND_KEY], (prev) => prev || {});
       },

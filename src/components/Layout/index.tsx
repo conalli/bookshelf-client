@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useAnimation, Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import React, { ReactNode, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { removeErrorMessage } from "../../utils/errors";
+import { useMessages } from "../../hooks/useMessages";
 import ErrorNotification from "../ErrorNotification";
 import LoadingPage from "../LoadingPage";
 import Nav from "../Nav";
@@ -11,7 +11,8 @@ type LayoutProps = {
   children: ReactNode;
 };
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { isAuthLoading, errorMessages, setErrorMessages } = useAuth();
+  const { isAuthLoading } = useAuth();
+  const { messages, removeMessage, removeMessageFIFO } = useMessages();
   const { theme } = useTheme();
   const controls = useAnimation();
 
@@ -26,9 +27,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     controls.start("themeTransition");
   }, [controls, theme]);
 
-  const closeErrorMessage = (id: string) => {
-    setErrorMessages(removeErrorMessage(errorMessages, id));
-  };
+  useEffect(() => {
+    let time: NodeJS.Timer;
+    if (messages.length) {
+      time = setInterval(removeMessageFIFO, 5000);
+    }
+    return () => clearInterval(time);
+  }, [messages, removeMessageFIFO]);
 
   if (isAuthLoading) return <LoadingPage />;
   return (
@@ -45,13 +50,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="col-start-2 row-start-2">{children}</div>
         <ul className="fixed bottom-0 right-0 top-0 flex flex-col justify-end">
           <AnimatePresence initial={false}>
-            {errorMessages?.map((err) => (
-              <ErrorNotification
-                key={err.id}
-                error={err}
-                closeErrorMessage={closeErrorMessage}
-              />
-            ))}
+            {messages
+              .filter((err) => err.isError)
+              .map((err) => (
+                <ErrorNotification
+                  key={err.id}
+                  errorMessage={err}
+                  closeErrorMessage={removeMessage}
+                />
+              ))}
           </AnimatePresence>
         </ul>
       </motion.div>

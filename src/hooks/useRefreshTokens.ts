@@ -3,8 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { APIURL } from "../utils/api/endpoints";
 import { ErrorRes } from "../utils/api/types";
-import { createErrorMessage } from "../utils/errors";
-import { useAuth } from "./useAuth";
+import { useMessages } from "./useMessages";
 
 const REFRESH_KEY = "refresh";
 const REFRESH_INTERVAL = 1000 * 60 * 9;
@@ -22,7 +21,7 @@ const refreshTokens = async () => {
 
 export const useRefreshTokens = () => {
   const router = useRouter();
-  const { setErrorMessages } = useAuth();
+  const { addMessage } = useMessages();
   return useQuery([REFRESH_KEY], refreshTokens, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -33,10 +32,7 @@ export const useRefreshTokens = () => {
       if (axios.isAxiosError(error)) {
         const err = error as AxiosError<ErrorRes, null>;
         if (err.response !== undefined) {
-          setErrorMessages((prev) => [
-            ...prev,
-            createErrorMessage(`${err.response?.data.title}`),
-          ]);
+          addMessage(`${err.response?.data.title}`, true);
         }
       }
       router.push("/signin");
