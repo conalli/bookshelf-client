@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { object, string } from "yup";
 import { useAuth } from "../../hooks/useAuth";
-import { AuthRequestData } from "../../hooks/useUser";
+import { AuthRequestData } from "../../utils/api/types";
 
 export type SignInFormVariant = "Sign up" | "Sign in";
 
