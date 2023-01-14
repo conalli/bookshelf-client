@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 
-const LoadingPage = () => {
+const Loading = ({ isPage = false }: { isPage?: boolean }) => {
   return (
     <AnimatePresence>
       <motion.div
@@ -13,7 +13,9 @@ const LoadingPage = () => {
           },
         }}
         exit={{ opacity: 0 }}
-        className="h-screen w-screen flex items-center justify-center"
+        className={`${
+          isPage ? "h-screen w-screen" : "h-full w-full"
+        } flex items-center justify-center`}
       >
         <motion.svg
           width="192"
@@ -84,4 +86,4 @@ const LoadingPage = () => {
   );
 };
 
-export default LoadingPage;
+export default Loading;
