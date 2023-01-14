@@ -11,7 +11,6 @@ const SignIn = () => {
   const status = useAuthStatus();
   const formType: SignInFormVariant = "Sign in";
   const altType: SignInFormVariant = "Sign up";
-  console.log("signin", status);
   if (status && (status.loading || status.success)) return <LoadingPage />;
   return (
     <motion.div

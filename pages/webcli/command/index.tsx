@@ -70,7 +70,7 @@ export async function getServerSideProps(context: NextPageContext) {
       props: { user: user.data },
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       redirect: {
         destination: "/signin",

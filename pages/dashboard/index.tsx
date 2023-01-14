@@ -79,7 +79,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
 const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   userData,
 }) => {
-  console.log("userDATA", userData);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<ModalType>();
   const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
