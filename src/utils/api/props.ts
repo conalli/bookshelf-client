@@ -3,6 +3,15 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { APIURL } from "./endpoints";
 import { Folder, User } from "./types";
 
+const ACCESS_TOKEN = "bookshelf_access_token";
+const CODE_TOKEN = "bookshelf_token_code";
+
+const getCookiesFromContext = (context: GetServerSidePropsContext) => {
+  const access = context.req.cookies[ACCESS_TOKEN];
+  const code = context.req.cookies[CODE_TOKEN];
+  return `${ACCESS_TOKEN}=${access}; ${CODE_TOKEN}=${code};`;
+};
+
 export const getUserOrRedirect: GetServerSideProps<{ userData: User }> = async (
   context: GetServerSidePropsContext
 ) => {
@@ -10,7 +19,7 @@ export const getUserOrRedirect: GetServerSideProps<{ userData: User }> = async (
     const { data } = await axios.get<User>(APIURL.USER, {
       withCredentials: true,
       headers: {
-        Cookie: context.req?.headers.cookie,
+        Cookie: getCookiesFromContext(context),
       },
     });
     return {
@@ -37,13 +46,13 @@ export const getUserAndBookmarksOrRedirect: GetServerSideProps<{
     const u = axios.get<User, AxiosResponse<User, null>, null>(APIURL.USER, {
       withCredentials: true,
       headers: {
-        Cookie: context.req?.headers.cookie,
+        Cookie: getCookiesFromContext(context),
       },
     });
     const f = axios.get<Folder, AxiosResponse<Folder, null>, null>(url, {
       withCredentials: true,
       headers: {
-        Cookie: context.req?.headers.cookie,
+        Cookie: getCookiesFromContext(context),
       },
     });
     const [{ data: userData }, { data: folderData }] = await Promise.all([
@@ -71,7 +80,7 @@ export const getUserIfPossible: GetServerSideProps<{
     const { data } = await axios.get<User>(APIURL.USER, {
       withCredentials: true,
       headers: {
-        Cookie: context.req?.headers.cookie,
+        Cookie: getCookiesFromContext(context),
       },
     });
     return {
