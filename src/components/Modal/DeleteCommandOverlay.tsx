@@ -1,6 +1,6 @@
-import { AxiosError } from "axios";
-import { Dispatch, SetStateAction } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { SetStateAction } from "jotai";
 import { Command } from "../../../pages/dashboard";
 import { DelCMDReq, DelCMDRes, ErrorRes, User } from "../../utils/api/types";
 
@@ -8,7 +8,7 @@ type DeleteCommandOverlayProps = {
   user: User;
   del: UseMutationResult<DelCMDRes, AxiosError<ErrorRes, DelCMDReq>, DelCMDReq>;
   selected: Command | null;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: (update: SetStateAction<boolean>) => void;
 };
 
 const DeleteCommandOverlay: React.FC<DeleteCommandOverlayProps> = ({

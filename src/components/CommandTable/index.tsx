@@ -1,11 +1,9 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import React, { Dispatch, SetStateAction } from "react";
-import {
-  Command,
-  ModalType,
-  UpdateCommandStatus,
-} from "../../../pages/dashboard";
+import { ModalType, UpdateCommandStatus } from "../../../pages/dashboard";
+import { useSelectCommand } from "../../hooks/useCommands";
+import { useOpenModal } from "../../hooks/useOpenModal";
 import { CMD, User } from "../../utils/api/types";
 import CommandPlaceholder from "./CommandPlaceholder";
 import StatusIcon from "./StatusIcon";
@@ -14,10 +12,7 @@ type CommandTableProps = {
   commands: CMD | undefined;
   isLoadingCommands: boolean;
   user: User;
-  openModal: Dispatch<SetStateAction<boolean>>;
   setModalType: Dispatch<SetStateAction<ModalType>>;
-  selected: Command | null;
-  setSelected: Dispatch<SetStateAction<Command | null>>;
   cmdStatus: UpdateCommandStatus;
 };
 
@@ -25,12 +20,11 @@ const CommandTable: React.FC<CommandTableProps> = ({
   commands,
   isLoadingCommands,
   user,
-  openModal,
   setModalType,
-  selected,
-  setSelected,
   cmdStatus,
 }) => {
+  const { setIsOpen } = useOpenModal();
+  const { selectedCommand, setSelectedCommand } = useSelectCommand();
   if (!user) return null;
 
   const formatLink = (link: string) => {
@@ -93,7 +87,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
                     <div className="flex justify-center items-center w-full h-full">
                       <StatusIcon
                         cmd={key}
-                        selected={selected}
+                        selected={selectedCommand}
                         cmdStatus={cmdStatus}
                       />
                     </div>
@@ -102,8 +96,8 @@ const CommandTable: React.FC<CommandTableProps> = ({
                     <button
                       onClick={() => {
                         setModalType("delcmd");
-                        setSelected({ cmd: key, url: commands[key] });
-                        openModal(true);
+                        setSelectedCommand({ cmd: key, url: commands[key] });
+                        setIsOpen(true);
                       }}
                       className="flex justify-center items-center w-full"
                     >

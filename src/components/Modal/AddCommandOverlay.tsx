@@ -1,15 +1,16 @@
+import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { motion } from "framer-motion";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { UseMutationResult } from "@tanstack/react-query";
+import { SetStateAction } from "jotai";
+import { ChangeEvent, useState } from "react";
 import { Command } from "../../../pages/dashboard";
 import { AddCMDReq, AddCMDRes, ErrorRes, User } from "../../utils/api/types";
 
 type AddCommandOverlayProps = {
   user: User;
   add: UseMutationResult<AddCMDRes, AxiosError<ErrorRes, AddCMDReq>, AddCMDReq>;
-  setSelected: Dispatch<SetStateAction<Command | null>>;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setSelected: (update: SetStateAction<Command | null>) => void;
+  setIsOpen: (update: SetStateAction<boolean>) => void;
 };
 
 const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({

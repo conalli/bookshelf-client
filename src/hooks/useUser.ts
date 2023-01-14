@@ -35,6 +35,7 @@ export const useGetUser = (
     User,
     QueryKey
   > = {},
+  quiet = false,
   callOnError?: () => void
 ) => {
   const setUser = useSetAtom(userAtom);
@@ -48,7 +49,7 @@ export const useGetUser = (
       setUser(data);
     },
     onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
+      if (axios.isAxiosError(err) && err.response && !quiet) {
         const errRes = err.response.data as ErrorRes;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }

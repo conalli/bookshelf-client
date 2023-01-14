@@ -1,14 +1,14 @@
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { motion } from "framer-motion";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { UseMutationResult } from "@tanstack/react-query";
+import { ChangeEvent, SetStateAction, useState } from "react";
 import {
   AddBookmarkRequest,
   AddBookmarkResponse,
   ErrorRes,
   Folder,
 } from "../../utils/api/types";
-import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 type AddBookmarkOverlayProps = {
   folder: Folder | undefined;
@@ -18,7 +18,7 @@ type AddBookmarkOverlayProps = {
     AddBookmarkRequest,
     unknown
   >;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: (update: SetStateAction<boolean>) => void;
 };
 
 const generatePathOptions = (folder: Folder): string[] => {

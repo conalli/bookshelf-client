@@ -1,7 +1,8 @@
 import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import React, { Dispatch, SetStateAction } from "react";
-import { Command, ModalType } from "../../../pages/dashboard";
+import { ModalType } from "../../../pages/dashboard";
+import { useSelectCommand } from "../../hooks/useCommands";
+import { useOpenModal } from "../../hooks/useOpenModal";
 import {
   AddBookmarkRequest,
   AddBookmarkResponse,
@@ -39,9 +40,6 @@ type ModalOverlayProps = {
     AddBookmarkRequest,
     unknown
   >;
-  selectedCommand: Command | null;
-  setSelectedCommand: Dispatch<SetStateAction<Command | null>>;
-  setModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const ModalOverlay: React.FC<ModalOverlayProps> = ({
@@ -51,10 +49,9 @@ const ModalOverlay: React.FC<ModalOverlayProps> = ({
   addCommand,
   deleteCommand,
   addBookmark,
-  setModalOpen,
-  selectedCommand,
-  setSelectedCommand,
 }) => {
+  const { setIsOpen } = useOpenModal();
+  const { selectedCommand, setSelectedCommand } = useSelectCommand();
   switch (modalType) {
     case "addcmd":
       return (
@@ -62,7 +59,7 @@ const ModalOverlay: React.FC<ModalOverlayProps> = ({
           user={user}
           add={addCommand}
           setSelected={setSelectedCommand}
-          setIsOpen={setModalOpen}
+          setIsOpen={setIsOpen}
         />
       );
     case "delcmd":
@@ -71,7 +68,7 @@ const ModalOverlay: React.FC<ModalOverlayProps> = ({
           selected={selectedCommand || null}
           user={user}
           del={deleteCommand}
-          setIsOpen={setModalOpen}
+          setIsOpen={setIsOpen}
         />
       );
     case "addbookmark":
@@ -79,7 +76,7 @@ const ModalOverlay: React.FC<ModalOverlayProps> = ({
         <AddBookmarkOverlay
           folder={folder}
           add={addBookmark}
-          setIsOpen={setModalOpen}
+          setIsOpen={setIsOpen}
         />
       );
     default:

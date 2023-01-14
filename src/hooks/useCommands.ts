@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { useAtomValue, useSetAtom } from "jotai";
+import { selectedCommandAtom } from "../store/command";
 import { APIURL } from "../utils/api/endpoints";
 import {
   AddCMDReq,
@@ -129,4 +131,10 @@ export const useDeleteCommand = (userKey?: string) => {
       },
     }
   );
+};
+
+export const useSelectCommand = () => {
+  const selectedCommand = useAtomValue(selectedCommandAtom);
+  const setSelectedCommand = useSetAtom(selectedCommandAtom);
+  return { selectedCommand, setSelectedCommand };
 };

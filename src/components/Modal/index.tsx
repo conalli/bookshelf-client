@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { ReactNode } from "react";
 import ReactModal from "react-modal";
+import { useOpenModal } from "../../hooks/useOpenModal";
 
 ReactModal.setAppElement("#__next");
 
 type ModalProps = {
   children: ReactNode;
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Modal: React.FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
+const Modal: React.FC<ModalProps> = ({ children }) => {
+  const { isOpen, setIsOpen } = useOpenModal();
   return (
     <ReactModal
       isOpen={isOpen}
