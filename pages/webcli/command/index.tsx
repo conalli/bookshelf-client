@@ -1,20 +1,34 @@
-import React, { useState } from "react";
-import axios, { AxiosResponse } from "axios";
-import { NextPageContext } from "next";
-import { User } from "../../../src/utils/api/types";
-import { APIURL } from "../../../src/utils/api/endpoints";
-import { Command, ModalType, UpdateCommandStatus } from "../../dashboard";
+import { useState } from "react";
 import CommandTable from "../../../src/components/CommandTable";
-import { useDeleteCommand } from "../../../src/hooks/useCommands";
 import Modal from "../../../src/components/Modal";
 import DeleteCommandOverlay from "../../../src/components/Modal/DeleteCommandOverlay";
+import {
+  useDeleteCommand,
+  useGetCommands,
+  useSelectCommand,
+} from "../../../src/hooks/useCommands";
+import { useOpenModal } from "../../../src/hooks/useOpenModal";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
+import { useGetUser } from "../../../src/hooks/useUser";
+import { getUserOrRedirect } from "../../../src/utils/api/props";
+import { User } from "../../../src/utils/api/types";
+import { ModalType, UpdateCommandStatus } from "../../dashboard";
 
-const Command = ({ user }: { user: User }) => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+export const getServerSideProps = getUserOrRedirect;
+
+const Command = ({ userData }: { userData: User }) => {
   const [modalType, setModalType] = useState<ModalType>();
-  const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
+  const { data: user } = useGetUser(
+    userData.api_key,
+    {
+      initialData: userData,
+    },
+    true
+  );
+  const { data: commands } = useGetCommands(userData.api_key);
   const del = useDeleteCommand();
+  const { setIsOpen } = useOpenModal();
+  const { selectedCommand } = useSelectCommand();
   const updateStatus: UpdateCommandStatus = {
     add: {
       success: false,
@@ -27,57 +41,30 @@ const Command = ({ user }: { user: User }) => {
       error: del.isError,
     },
   };
-  useRefreshTokens();
+  useRefreshTokens(userData.api_key);
 
   return (
     <div>
-      <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
+      <h1 className="text-4xl py-3">WebCLI Commands:</h1>
+      <Modal>
         {modalType === "delcmd" && (
           <DeleteCommandOverlay
-            user={user}
+            user={user ? user : userData}
             del={del}
             selected={selectedCommand}
-            setIsOpen={setModalOpen}
+            setIsOpen={setIsOpen}
           />
         )}
       </Modal>
       <CommandTable
         cmdStatus={updateStatus}
-        user={user}
-        commands={user.cmds}
+        user={user ? user : userData}
+        commands={commands}
         isLoadingCommands={false}
-        openModal={setModalOpen}
         setModalType={setModalType}
-        selected={selectedCommand}
-        setSelected={setSelectedCommand}
       />
     </div>
   );
 };
-
-export async function getServerSideProps(context: NextPageContext) {
-  try {
-    const user = await axios.get<User, AxiosResponse<User, null>, null>(
-      APIURL.USER,
-      {
-        withCredentials: true,
-        headers: {
-          Cookie: context.req?.headers.cookie,
-        },
-      }
-    );
-    return {
-      props: { user: user.data },
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    };
-  }
-}
 
 export default Command;

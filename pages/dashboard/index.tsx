@@ -1,8 +1,6 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
 import { motion } from "framer-motion";
 import { Provider as OpenFolderProvider } from "jotai";
-import { NextPageContext } from "next";
 import { ChangeEvent, useState } from "react";
 import BookmarkTable from "../../src/components/BookmarkTable";
 import BrowserSetup from "../../src/components/BrowserSetup";
@@ -23,9 +21,10 @@ import {
   useDeleteCommand,
   useGetCommands,
 } from "../../src/hooks/useCommands";
+import { useOpenModal } from "../../src/hooks/useOpenModal";
 import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
 import { useGetUser } from "../../src/hooks/useUser";
-import { APIURL } from "../../src/utils/api/endpoints";
+import { getUserOrRedirect } from "../../src/utils/api/props";
 import { User } from "../../src/utils/api/types";
 import { NextPageWithLayoutAndProps } from "../_app";
 
@@ -54,57 +53,34 @@ export type UpdateCommandStatus = {
   };
 };
 
-export const getServerSideProps = async (context: NextPageContext) => {
-  try {
-    const { data } = await axios.get<User>(APIURL.USER, {
-      withCredentials: true,
-      headers: {
-        Cookie: context.req?.headers.cookie,
-      },
-    });
-    return {
-      props: { userData: data },
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    };
-  }
-};
+export const getServerSideProps = getUserOrRedirect;
 
 const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   userData,
 }) => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<ModalType>();
   const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
-  const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
+  const { setIsOpen } = useOpenModal();
+  const userKey = userData.api_key;
   const {
     signOut: { mutate: signOut },
   } = useAuth();
   const status = useAuthStatus();
-  const { data: user } = useGetUser(userData.api_key, {
+  const { data: user } = useGetUser(userKey, {
     initialData: userData,
   });
-  const addCommand = useAddCommand(userData.api_key);
-  const deleteCommand = useDeleteCommand(userData.api_key);
-  const { data, isLoading } = useGetCommands(userData.api_key);
+  const addCommand = useAddCommand(userKey);
+  const deleteCommand = useDeleteCommand(userKey);
+  const { data, isLoading } = useGetCommands(userKey);
   const {
     data: folder,
     isLoading: isFolderLoading,
     isError: isFolderError,
-  } = useGetBookmarks(userData.api_key);
-  const addBookmarkFile = useAddBookmarkFromFile(userData.api_key);
-  const addBookmark = useAddBookmark(userData.api_key);
-  useRefreshTokens(userData.api_key);
+  } = useGetBookmarks(userKey);
+  const addBookmarkFile = useAddBookmarkFromFile(userKey);
+  const addBookmark = useAddBookmark(userKey);
+  useRefreshTokens(userKey);
 
-  const handleLogout = () => {
-    signOut();
-  };
   const updateStatus: UpdateCommandStatus = {
     add: {
       success: addCommand.isSuccess,
@@ -159,7 +135,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
             <button
               onClick={() => {
                 setModalType("addcmd");
-                setModalOpen(true);
+                setIsOpen(true);
               }}
               className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
             >
@@ -174,7 +150,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
               <button
                 onClick={() => {
                   setModalType("addbookmark");
-                  setModalOpen(true);
+                  setIsOpen(true);
                 }}
                 className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
               >
@@ -194,24 +170,21 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
             </div>
           )}
           <button
-            onClick={handleLogout}
+            onClick={() => signOut()}
             className="h-max text-white px-4 py-2.5 bg-neutral-600 dark:bg-bk-blue rounded"
           >
             Log out
           </button>
         </div>
       </motion.div>
-      <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
+      <Modal>
         <ModalOverlay
           user={user}
           folder={folder}
           addCommand={addCommand}
           deleteCommand={deleteCommand}
           addBookmark={addBookmark}
-          selectedCommand={selectedCommand}
-          setSelectedCommand={setSelectedCommand}
           modalType={modalType}
-          setModalOpen={setModalOpen}
         />
       </Modal>
       <div className="flex justify-start items-start">
@@ -221,10 +194,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
             commands={data}
             isLoadingCommands={isLoading}
             user={user}
-            openModal={setModalOpen}
             setModalType={setModalType}
-            selected={selectedCommand}
-            setSelected={setSelectedCommand}
             cmdStatus={updateStatus}
           />
         )}

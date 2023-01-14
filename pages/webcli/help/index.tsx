@@ -1,11 +1,18 @@
-import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
+import { useGetUser } from "../../../src/hooks/useUser";
+import { getUserIfPossible } from "../../../src/utils/api/props";
+import { User } from "../../../src/utils/api/types";
 
-const Help = () => {
-  useRefreshTokens();
+export const getServerSideProps = getUserIfPossible;
 
+const Help = ({ userData }: { userData: User | null }) => {
+  useGetUser(
+    userData?.api_key,
+    userData ? { initialData: userData } : undefined,
+    true
+  );
   return (
     <div>
-      <h1>Help</h1>
+      <h1 className="text-4xl py-3">WebCLI Help:</h1>
       <table>
         <thead>
           <tr>
@@ -77,6 +84,16 @@ const Help = () => {
             <td></td>
             <td className="text-bk-blue dark:text-bk-orange py-1">-c</td>
             <td>List commands.</td>
+          </tr>
+          <tr>
+            <td className="border-b-2 py-1"></td>
+            <td className="border-b-2"></td>
+            <td className="border-b-2"></td>
+          </tr>
+          <tr>
+            <td className="py-2">help</td>
+            <td> </td>
+            <td>View this help page.</td>
           </tr>
         </tbody>
       </table>
