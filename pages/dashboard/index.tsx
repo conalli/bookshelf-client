@@ -1,18 +1,17 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { dehydrate, QueryClient, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Provider as OpenFolderProvider } from "jotai";
 import { NextPageContext } from "next";
-import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import BookmarkTable from "../../src/components/BookmarkTable";
 import BrowserSetup from "../../src/components/BrowserSetup";
 import CommandTable from "../../src/components/CommandTable";
+import Loading from "../../src/components/Loading";
 import MenuBar, { MenuOption } from "../../src/components/MenuBar";
 import Modal from "../../src/components/Modal";
 import ModalOverlay from "../../src/components/Modal/ModalOverlay";
-import RouteGuard from "../../src/components/RouteGuard";
-import { useAuth } from "../../src/hooks/useAuth";
+import { useAuth, useAuthStatus } from "../../src/hooks/useAuth";
 import {
   BOOKMARKS_FILE_FORM_KEY,
   useAddBookmark,
@@ -25,7 +24,7 @@ import {
   useGetCommands,
 } from "../../src/hooks/useCommands";
 import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
-import { USER_KEY, useUser } from "../../src/hooks/useUser";
+import { useGetUser } from "../../src/hooks/useUser";
 import { APIURL } from "../../src/utils/api/endpoints";
 import { User } from "../../src/utils/api/types";
 import { NextPageWithLayoutAndProps } from "../_app";
@@ -57,19 +56,14 @@ export type UpdateCommandStatus = {
 
 export const getServerSideProps = async (context: NextPageContext) => {
   try {
-    const prefetchUser = async () => {
-      const res = await axios.get<User>(APIURL.USER, {
-        withCredentials: true,
-        headers: {
-          Cookie: context.req?.headers.cookie,
-        },
-      });
-      return res.data;
-    };
-    const queryClient = new QueryClient();
-    await queryClient.prefetchQuery([USER_KEY], prefetchUser);
+    const { data } = await axios.get<User>(APIURL.USER, {
+      withCredentials: true,
+      headers: {
+        Cookie: context.req?.headers.cookie,
+      },
+    });
     return {
-      props: { dehydratedState: dehydrate(queryClient) },
+      props: { userData: data },
     };
   } catch (error) {
     console.error(error);
@@ -85,38 +79,32 @@ export const getServerSideProps = async (context: NextPageContext) => {
 const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   userData,
 }) => {
+  console.log("userDATA", userData);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<ModalType>();
   const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
   const [selectedCommand, setSelectedCommand] = useState<Command | null>(null);
-  const { data: user } = useUser();
-  const { setUser, logOut } = useAuth();
-
-  useEffect(() => {
-    if (!user) {
-      setUser(userData);
-    }
-  }, [setUser, user, userData]);
-
-  const addCommand = useAddCommand();
-  const deleteCommand = useDeleteCommand();
-  const { data, isLoading } = useGetCommands();
+  const {
+    signOut: { mutate: signOut },
+  } = useAuth();
+  const status = useAuthStatus();
+  const { data: user } = useGetUser(userData.api_key, {
+    initialData: userData,
+  });
+  const addCommand = useAddCommand(userData.api_key);
+  const deleteCommand = useDeleteCommand(userData.api_key);
+  const { data, isLoading } = useGetCommands(userData.api_key);
   const {
     data: folder,
     isLoading: isFolderLoading,
     isError: isFolderError,
-  } = useGetBookmarks();
-  const addBookmarkFile = useAddBookmarkFromFile();
-  const addBookmark = useAddBookmark();
-  const { data: refreshedToken } = useRefreshTokens();
-  if (refreshedToken) {
-    console.log("tokens refreshed");
-  }
-  const queryClient = useQueryClient();
+  } = useGetBookmarks(userData.api_key);
+  const addBookmarkFile = useAddBookmarkFromFile(userData.api_key);
+  const addBookmark = useAddBookmark(userData.api_key);
+  useRefreshTokens(userData.api_key);
+
   const handleLogout = () => {
-    setUser({} as User);
-    queryClient.clear();
-    logOut();
+    signOut();
   };
   const updateStatus: UpdateCommandStatus = {
     add: {
@@ -149,7 +137,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     addBookmarkFile.mutate(formData);
     e.target.files = null;
   };
-
+  if (!status) return <Loading />;
   return (
     <>
       <motion.div
@@ -269,10 +257,6 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
       </div>
     </>
   );
-};
-
-Dashboard.getLayout = function getLayout(page: ReactElement) {
-  return <RouteGuard>{page}</RouteGuard>;
 };
 
 export default Dashboard;

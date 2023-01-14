@@ -1,11 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { APIURL } from "../utils/api/endpoints";
 import { ErrorRes } from "../utils/api/types";
+import { createQueryKey } from "../utils/query/cache";
 import { useMessages } from "./useMessages";
 
-const REFRESH_KEY = "refresh";
+export const REFRESH_KEY = "refresh";
 const REFRESH_INTERVAL = 1000 * 60 * 9;
 
 const refreshTokens = async () => {
@@ -19,15 +20,19 @@ const refreshTokens = async () => {
   return res.status === 200;
 };
 
-export const useRefreshTokens = () => {
+export const useRefreshTokens = (userKey?: string) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { addMessage } = useMessages();
-  return useQuery([REFRESH_KEY], refreshTokens, {
+  return useQuery({
+    queryKey: [createQueryKey(REFRESH_KEY, userKey)],
+    queryFn: refreshTokens,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
     refetchInterval: REFRESH_INTERVAL,
     refetchIntervalInBackground: true,
+    staleTime: REFRESH_INTERVAL,
     onError: (error) => {
       if (axios.isAxiosError(error)) {
         const err = error as AxiosError<ErrorRes, null>;
@@ -35,6 +40,7 @@ export const useRefreshTokens = () => {
           addMessage(`${err.response?.data.title}`, true);
         }
       }
+      queryClient.clear();
       router.push("/signin");
     },
   });

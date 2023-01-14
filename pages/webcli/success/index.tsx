@@ -2,10 +2,8 @@ import React from "react";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 
 const Success = () => {
-  const { data: refreshedToken } = useRefreshTokens();
-  if (refreshedToken) {
-    console.log("tokens refreshed");
-  }
+  useRefreshTokens();
+
   return <div>Success</div>;
 };
 

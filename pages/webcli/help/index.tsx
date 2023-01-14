@@ -1,10 +1,8 @@
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 
 const Help = () => {
-  const { data: refreshedToken } = useRefreshTokens();
-  if (refreshedToken) {
-    console.log("tokens refreshed");
-  }
+  useRefreshTokens();
+
   return (
     <div>
       <h1>Help</h1>

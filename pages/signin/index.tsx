@@ -3,11 +3,16 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import GoogleSignInButton from "../../src/components/GoogleSignIn";
+import LoadingPage from "../../src/components/Loading";
 import SignInForm, { SignInFormVariant } from "../../src/components/SignInForm";
+import { useAuthStatus } from "../../src/hooks/useAuth";
 
 const SignIn = () => {
+  const status = useAuthStatus();
   const formType: SignInFormVariant = "Sign in";
   const altType: SignInFormVariant = "Sign up";
+  console.log("signin", status);
+  if (status && (status.loading || status.success)) return <LoadingPage />;
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}

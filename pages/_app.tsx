@@ -8,7 +8,6 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "next-themes";
 import { ReactElement, ReactNode, useState } from "react";
-import { AuthProvider } from "../src/hooks/useAuth";
 import Layout from "../src/components/Layout";
 import { NextPage } from "next";
 
@@ -34,16 +33,14 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(() => new QueryClient());
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-            <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
-            <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-          </ThemeProvider>
-        </Hydrate>
-      </QueryClientProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+          <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </ThemeProvider>
+      </Hydrate>
+    </QueryClientProvider>
   );
 }
 

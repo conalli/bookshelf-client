@@ -27,10 +27,8 @@ const Command = ({ user }: { user: User }) => {
       error: del.isError,
     },
   };
-  const { data: refreshedToken } = useRefreshTokens();
-  if (refreshedToken) {
-    console.log("tokens refreshed");
-  }
+  useRefreshTokens();
+
   return (
     <div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>

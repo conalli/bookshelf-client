@@ -9,6 +9,7 @@ import {
   DelCMDRes,
   ErrorRes,
 } from "../utils/api/types";
+import { createQueryKey } from "../utils/query/cache";
 import { useMessages } from "./useMessages";
 
 export const COMMAND_KEY = "cmds";
@@ -21,22 +22,27 @@ const fetchCmds = async () => {
 };
 
 export const useGetCommands = (
+  userKey?: string,
   onSuccess?: () => void,
   callOnError?: () => void
 ) => {
   const { addMessage } = useMessages();
-  return useQuery<CMD, AxiosError<ErrorRes, null>>([COMMAND_KEY], fetchCmds, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    onSuccess,
-    onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
-        const errRes = err.response.data as ErrorRes;
-        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
-      }
-      if (callOnError) callOnError();
-    },
-  });
+  return useQuery<CMD, AxiosError<ErrorRes, null>>(
+    [createQueryKey(COMMAND_KEY, userKey)],
+    fetchCmds,
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      onSuccess,
+      onError: (err) => {
+        if (axios.isAxiosError(err) && err.response) {
+          const errRes = err.response.data as ErrorRes;
+          addMessage(`${errRes.title} -- ${errRes.detail}`, true);
+        }
+        if (callOnError) callOnError();
+      },
+    }
+  );
 };
 
 const addCmd = async (data: AddCMDReq) => {
@@ -51,32 +57,40 @@ const addCmd = async (data: AddCMDReq) => {
   return res.data;
 };
 
-export const useAddCommand = () => {
+export const useAddCommand = (userKey?: string) => {
   const queryClient = useQueryClient();
   const { addMessage } = useMessages();
   return useMutation<AddCMDRes, AxiosError<ErrorRes, AddCMDReq>, AddCMDReq>(
     addCmd,
     {
       onMutate: async (addData) => {
-        await queryClient.cancelQueries([COMMAND_KEY]);
-        const cmdList = queryClient.getQueryData<CMD>([COMMAND_KEY]);
-        queryClient.setQueryData<CMD>([COMMAND_KEY], (prevData) => {
-          const init = {} as CMD;
-          const { cmd, url } = addData;
-          if (!prevData) return { ...init, [cmd]: url };
-          return { ...prevData, [cmd]: url };
-        });
+        await queryClient.cancelQueries([createQueryKey(COMMAND_KEY, userKey)]);
+        const cmdList = queryClient.getQueryData<CMD>([
+          createQueryKey(COMMAND_KEY, userKey),
+        ]);
+        queryClient.setQueryData<CMD>(
+          [createQueryKey(COMMAND_KEY, userKey)],
+          (prevData) => {
+            const init = {} as CMD;
+            const { cmd, url } = addData;
+            if (!prevData) return { ...init, [cmd]: url };
+            return { ...prevData, [cmd]: url };
+          }
+        );
         return cmdList || {};
       },
       onSettled: () => {
-        queryClient.invalidateQueries([COMMAND_KEY]);
+        queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
       },
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
           addMessage(`${errRes.title} -- ${errRes.detail}`, true);
         }
-        queryClient.setQueryData<CMD>([COMMAND_KEY], (prev) => prev || {});
+        queryClient.setQueryData<CMD>(
+          [createQueryKey(COMMAND_KEY, userKey)],
+          (prev) => prev || {}
+        );
       },
     }
   );
@@ -94,21 +108,24 @@ const delCmd = async (data: DelCMDReq) => {
   return res.data;
 };
 
-export const useDeleteCommand = () => {
+export const useDeleteCommand = (userKey?: string) => {
   const queryClient = useQueryClient();
   const { addMessage } = useMessages();
   return useMutation<DelCMDRes, AxiosError<ErrorRes, DelCMDReq>, DelCMDReq>(
     delCmd,
     {
       onSettled: () => {
-        queryClient.invalidateQueries([COMMAND_KEY]);
+        queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
       },
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorRes;
           addMessage(`${errRes.title} -- ${errRes.detail}`, true);
         }
-        queryClient.setQueryData<CMD>([COMMAND_KEY], (prev) => prev || {});
+        queryClient.setQueryData<CMD>(
+          [createQueryKey(COMMAND_KEY, userKey)],
+          (prev) => prev || {}
+        );
       },
     }
   );

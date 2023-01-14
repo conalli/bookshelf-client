@@ -1,17 +1,17 @@
 import { AnimatePresence, motion, useAnimation, Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import React, { ReactNode, useEffect } from "react";
-import { useAuth } from "../../hooks/useAuth";
 import { useMessages } from "../../hooks/useMessages";
+import { useAuthStatus } from "../../hooks/useAuth";
 import ErrorNotification from "../ErrorNotification";
-import LoadingPage from "../LoadingPage";
+import Loading from "../Loading";
 import Nav from "../Nav";
 
 type LayoutProps = {
   children: ReactNode;
 };
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { isAuthLoading } = useAuth();
+  const status = useAuthStatus();
   const { messages, removeMessage, removeMessageFIFO } = useMessages();
   const { theme } = useTheme();
   const controls = useAnimation();
@@ -35,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => clearInterval(time);
   }, [messages, removeMessageFIFO]);
 
-  if (isAuthLoading) return <LoadingPage />;
+  if (status && status.loading) return <Loading isPage />;
   return (
     <AnimatePresence>
       <motion.div

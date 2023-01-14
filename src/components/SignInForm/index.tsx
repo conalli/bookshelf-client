@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import { motion } from "framer-motion";
 import React from "react";
 import { object, string } from "yup";
-import { useAuth } from "../../hooks/useAuth";
+import { AuthRequest, useAuth } from "../../hooks/useAuth";
 import { AuthRequestData } from "../../utils/api/types";
 
 export type SignInFormVariant = "Sign up" | "Sign in";
@@ -12,7 +12,10 @@ type SignInFormProps = {
 };
 
 const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
-  const { isAuthLoading, logIn } = useAuth();
+  const {
+    signIn: { isLoading: isSignInLoading, mutate: signin },
+    signUp: { isLoading: isSignUpLoading, mutate: signup },
+  } = useAuth();
   const schema = object().shape({
     email: string()
       .min(3, "Email: minimum 3 characters")
@@ -32,7 +35,8 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
           values,
           { setSubmitting }: FormikHelpers<AuthRequestData>
         ) => {
-          logIn({ type, data: values, setSubmitting });
+          const authData: AuthRequest = { data: values, setSubmitting };
+          type === "Sign in" ? signin(authData) : signup(authData);
         }}
       >
         {({ isSubmitting }) => (
@@ -46,7 +50,10 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
                 name="email"
                 placeholder="email"
                 type="email"
-                disabled={isSubmitting || isAuthLoading}
+                disabled={
+                  isSubmitting ||
+                  (type === "Sign in" ? isSignInLoading : isSignUpLoading)
+                }
                 autoCorrect="off"
                 length={50}
                 className="appearance-none bg-gray-100  text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
@@ -64,7 +71,10 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
                 name="password"
                 placeholder="password"
                 type="password"
-                disabled={isSubmitting || isAuthLoading}
+                disabled={
+                  isSubmitting ||
+                  (type === "Sign in" ? isSignInLoading : isSignUpLoading)
+                }
                 autoCorrect="off"
                 length={50}
                 className="appearance-none bg-gray-100  text-gray-900 text-sm rounded-lg focus:ring-bk-blue focus:border-bk-blue block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bk-orange dark:focus:border-bk-orange shadow-md"
@@ -76,7 +86,10 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   type="submit"
-                  disabled={isSubmitting || isAuthLoading}
+                  disabled={
+                    isSubmitting ||
+                    (type === "Sign in" ? isSignInLoading : isSignUpLoading)
+                  }
                   className="bg-bk-blue dark:bg-bk-orange text-sm md:text-xl px-5 py-2 w-24 md:w-40 hover:opacity-90 rounded shadow-md"
                 >
                   {type}

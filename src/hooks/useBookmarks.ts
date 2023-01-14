@@ -8,10 +8,11 @@ import {
   ErrorRes,
   Folder,
 } from "../utils/api/types";
+import { createQueryKey } from "../utils/query/cache";
 import { useMessages } from "./useMessages";
 
 export const BOOKMARKS_FILE_FORM_KEY = "bookmarks_file";
-const BOOKMARKS_KEY = "bookmarks";
+export const BOOKMARKS_KEY = "bookmarks";
 
 const addBookmark = async (data: AddBookmarkRequest) => {
   const res = await axios.post<
@@ -22,14 +23,14 @@ const addBookmark = async (data: AddBookmarkRequest) => {
   return res.data;
 };
 
-export const useAddBookmark = () => {
+export const useAddBookmark = (userKey?: string) => {
   const { addMessage } = useMessages();
   const queryClient = useQueryClient();
   return useMutation<
     AddBookmarkResponse,
     AxiosError<ErrorRes, AddBookmarkRequest>,
     AddBookmarkRequest
-  >([BOOKMARKS_KEY], addBookmark, {
+  >([createQueryKey(BOOKMARKS_KEY, userKey)], addBookmark, {
     onMutate: async (): Promise<void> => {
       await queryClient.cancelQueries([BOOKMARKS_KEY]);
     },
@@ -59,7 +60,7 @@ const addBookmarksFromFile = async (data: FormData) => {
   return res.data;
 };
 
-export const useAddBookmarkFromFile = () => {
+export const useAddBookmarkFromFile = (userKey?: string) => {
   const queryClient = useQueryClient();
   const { addMessage } = useMessages();
   return useMutation<
@@ -68,10 +69,10 @@ export const useAddBookmarkFromFile = () => {
     FormData
   >(addBookmarksFromFile, {
     onMutate: async (): Promise<void> => {
-      await queryClient.cancelQueries([BOOKMARKS_KEY]);
+      await queryClient.cancelQueries([createQueryKey(BOOKMARKS_KEY, userKey)]);
     },
     onSettled: () => {
-      queryClient.invalidateQueries([BOOKMARKS_KEY]);
+      queryClient.invalidateQueries([createQueryKey(BOOKMARKS_KEY, userKey)]);
     },
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
@@ -91,12 +92,13 @@ const getAllBookmarks = async () => {
 };
 
 export const useGetBookmarks = (
+  userKey?: string,
   onSuccess?: () => void,
   callOnError?: () => void
 ) => {
   const { addMessage } = useMessages();
   return useQuery<Folder, AxiosError<ErrorRes>>(
-    [BOOKMARKS_KEY],
+    [createQueryKey(BOOKMARKS_KEY, userKey)],
     getAllBookmarks,
     {
       refetchOnMount: false,

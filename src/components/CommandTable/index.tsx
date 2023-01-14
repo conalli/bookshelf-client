@@ -66,14 +66,14 @@ const CommandTable: React.FC<CommandTableProps> = ({
         exit={{ opacity: 0, x: -20 }}
         className="h-full w-full mt-1 md:mt-1.5 lg:w-2/4 mx-auto bg-white dark:bg-neutral-800 rounded shadow"
       >
-        <thead className="text-left text-white bg-bk-blue dark:bg-bk-orange rounded-lg">
+        <thead className="text-left text-bk-blue dark:text-bk-orange bg-white dark:bg-neutral-800 rounded-lg border-b-2 border-b-bk-blue dark:border-b-bk-orange">
           <tr>
-            <th className="text-xs md:text-sm lg:text-base  p-2">Command</th>
-            <th className="text-xs md:text-sm lg:text-base  p-2">URL</th>
-            <th className="text-xs md:text-sm lg:text-base  text-center p-2">
+            <th className="text-xs md:text-sm lg:text-base p-2">Command</th>
+            <th className="text-xs md:text-sm lg:text-base p-2 ">URL</th>
+            <th className="text-xs md:text-sm lg:text-base text-center p-2">
               Status
             </th>
-            <th className="text-xs md:text-sm lg:text-base  text-center p-2">
+            <th className="text-xs md:text-sm lg:text-base text-center p-2">
               Delete
             </th>
           </tr>
@@ -83,13 +83,13 @@ const CommandTable: React.FC<CommandTableProps> = ({
             Object.keys(commands).map((key: string) => {
               return (
                 <tr key={key}>
-                  <td className="text-xs md:text-sm lg:text-base border-r-2 border-r-bk-blue dark:border-r-bk-orange p-2">
+                  <td className="text-xs md:text-sm lg:text-base  p-2">
                     {key}
                   </td>
-                  <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange p-2">
+                  <td className="text-xs md:text-sm lg:text-base   p-2">
                     <a href={formatLink(commands[key])}>{commands[key]}</a>
                   </td>
-                  <td className="text-xs md:text-sm lg:text-base  border-r-2 border-r-bk-blue dark:border-r-bk-orange">
+                  <td className="text-xs md:text-sm lg:text-base ">
                     <div className="flex justify-center items-center w-full h-full">
                       <StatusIcon
                         cmd={key}

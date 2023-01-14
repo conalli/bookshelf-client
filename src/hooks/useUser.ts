@@ -1,12 +1,17 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryKey, useQuery, UseQueryOptions } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { NextRouter, useRouter } from "next/router";
-import { SignInFormVariant } from "../components/SignInForm";
+import { useAtomValue, useSetAtom } from "jotai";
+import { userAtom } from "../store/user";
 import { APIURL } from "../utils/api/endpoints";
-import { AuthRequestData, ErrorRes, User } from "../utils/api/types";
+import { ErrorRes, User } from "../utils/api/types";
+import { createQueryKey } from "../utils/query/cache";
 import { useMessages } from "./useMessages";
 
 export const USER_KEY = "user";
+
+export const useUser = () => {
+  return useAtomValue(userAtom);
+};
 
 const getUser = async () => {
   const res = await axios.get<User, AxiosResponse<User, null>, null>(
@@ -18,25 +23,26 @@ const getUser = async () => {
   return res.data;
 };
 
-export const useUserErrorHandler = (router: NextRouter, retries = 3) => {
-  let errCount = 0;
-  return () => {
-    errCount++;
-    if (errCount >= retries) {
-      router.push("/signin");
-    }
-  };
-};
-
-export const useUser = ({
-  onSuccess,
-  callOnError,
-}: { onSuccess?: () => void; callOnError?: () => void } = {}) => {
+export const useGetUser = (
+  userKey?: string,
+  options: UseQueryOptions<
+    User,
+    AxiosError<ErrorRes, null>,
+    User,
+    QueryKey
+  > = {},
+  callOnError?: () => void
+) => {
+  const setUser = useSetAtom(userAtom);
   const { addMessage } = useMessages();
-  return useQuery<User, AxiosError<ErrorRes, null>>([USER_KEY], getUser, {
+  return useQuery<User, AxiosError<ErrorRes, null>>({
+    queryKey: [createQueryKey(USER_KEY, userKey)],
+    queryFn: getUser,
     refetchOnMount: true,
     refetchOnWindowFocus: false,
-    onSuccess,
+    onSuccess: (data) => {
+      setUser(data);
+    },
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorRes;
@@ -44,50 +50,6 @@ export const useUser = ({
       }
       if (callOnError) callOnError();
     },
-  });
-};
-
-export type AuthRequest = {
-  type: SignInFormVariant;
-  data: AuthRequestData;
-  setSubmitting: (isSubmitting: boolean) => void;
-};
-
-const auth = async ({ type, data }: AuthRequest): Promise<User> => {
-  const reqType = type === "Sign in" ? "login" : "signup";
-  const res = await axios.post<
-    User,
-    AxiosResponse<User, AuthRequestData>,
-    AuthRequestData
-  >(`${APIURL.AUTH}/${reqType}`, data, {
-    withCredentials: true,
-    headers: { "Content-Type": "application/json" },
-  });
-
-  return res.data;
-};
-
-export const useUserAuth = () => {
-  const { addMessage } = useMessages();
-  const queryClient = useQueryClient();
-  const router = useRouter();
-  return useMutation([USER_KEY], auth, {
-    onSuccess: (): void => {
-      router.push("/");
-    },
-    onMutate: async ({ setSubmitting }): Promise<void> => {
-      setSubmitting(true);
-      await queryClient.cancelQueries([USER_KEY]);
-    },
-    onSettled: (_data, _err, { setSubmitting }): void => {
-      setSubmitting(false);
-      queryClient.invalidateQueries([USER_KEY]);
-    },
-    onError: (error): void => {
-      if (axios.isAxiosError(error) && error.response?.data) {
-        const errRes = error.response.data as ErrorRes;
-        addMessage(`${errRes.title}`, true);
-      }
-    },
+    ...options,
   });
 };

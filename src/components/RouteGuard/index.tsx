@@ -1,9 +1,6 @@
 import { useRouter } from "next/router";
-import { ReactNode, useCallback, useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { useAuth } from "../../hooks/useAuth";
-import LoadingPage from "../LoadingPage";
-import { useUser, useUserErrorHandler } from "../../hooks/useUser";
+import { ReactNode } from "react";
+import { useAuthStatus } from "../../hooks/useAuth";
 
 type RouteGuardProps = {
   children: ReactNode;
@@ -11,59 +8,13 @@ type RouteGuardProps = {
 
 const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { user, setUser, isAuthLoading, isAuthError } = useAuth();
-  const errorHandler = useUserErrorHandler(router, 2);
-  const { data, isLoading, isError } = useUser({
-    callOnError: errorHandler,
-  });
-  const queryClient = useQueryClient();
+  const status = useAuthStatus();
 
-  const checkAuth = useCallback(
-    (currentRoute: string) => {
-      const protectedPath = "/dashboard";
-      if (user) {
-        setIsAuthenticated(true);
-      }
-      if (data) {
-        setUser(data);
-        setIsAuthenticated(true);
-      }
-      if (
-        (!user && !isAuthLoading && currentRoute === protectedPath) ||
-        (!user && isAuthError && currentRoute === protectedPath) ||
-        (!data && !isLoading && currentRoute === protectedPath) ||
-        (!data && isError && currentRoute === protectedPath)
-      ) {
-        setIsAuthenticated(false);
-        router.push("/signin");
-      }
-    },
-    [
-      data,
-      isAuthError,
-      isAuthLoading,
-      isError,
-      isLoading,
-      router,
-      setUser,
-      user,
-    ]
-  );
+  if (status && !status.success) {
+    router.push("/signin");
+  }
 
-  useEffect(() => {
-    checkAuth(router.asPath);
-    const hideContent = () => setIsAuthenticated(false);
-    router.events.on("routeChangeStart", hideContent);
-    router.events.on("routeChangeComplete", checkAuth);
-    return () => {
-      router.events.off("routeChangeStart", hideContent);
-      router.events.off("routeChangeComplete", checkAuth);
-    };
-  }, [checkAuth, queryClient, router.asPath, router.events]);
-  if (!isAuthenticated) return null;
-  if (isAuthLoading || isLoading) return <LoadingPage />;
-  return isAuthenticated && <>{children}</>;
+  return <>{children}</>;
 };
 
 export default RouteGuard;
