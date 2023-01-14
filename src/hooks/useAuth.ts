@@ -14,7 +14,7 @@ import { AuthStatus, statusAtom } from "../store/auth";
 import { APIURL } from "../utils/api/endpoints";
 import { AuthRequestData, ErrorRes, User } from "../utils/api/types";
 import { useMessages } from "./useMessages";
-import { USER_KEY } from "./useUser";
+import { useRemoveUser, USER_KEY } from "./useUser";
 
 export type AuthRequest = {
   data: AuthRequestData;
@@ -100,6 +100,7 @@ export const useAuth = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const setAuthStatus = useSetAtom(statusAtom);
+  const removeUser = useRemoveUser();
   const { addMessage } = useMessages();
 
   const signUpOptions = useCallback(
@@ -114,6 +115,7 @@ export const useAuth = () => {
   const signOut = useMutation([USER_KEY], logout, {
     onSuccess: () => {
       setAuthStatus(null);
+      removeUser();
       router.replace("/");
     },
     onMutate: async () => {

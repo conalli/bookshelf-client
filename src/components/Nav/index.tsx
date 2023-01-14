@@ -2,11 +2,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { useUser } from "../../hooks/useUser";
 import BookshelfLogo from "../BookshelfLogo";
 import ThemeToggleButton from "../ThemeToggleButton";
 
 const Nav = () => {
   const router = useRouter();
+  const user = useUser();
   const navigateHome = () => router.push("/");
   return (
     <nav className="flex flex-row md:gap-2 justify-between py-2">
@@ -25,12 +27,21 @@ const Nav = () => {
         >
           About
         </Link>
-        <Link
-          className="text-xs md:text-sm p-1 md:p-2 md:px-4 hover:text-bk-blue hover:dark:text-orange-300"
-          href="/dashboard"
-        >
-          Dashboard
-        </Link>
+        {user ? (
+          <Link
+            className="text-xs md:text-sm p-1 md:p-2 md:px-4 hover:text-bk-blue hover:dark:text-orange-300"
+            href="/dashboard"
+          >
+            Dashboard
+          </Link>
+        ) : (
+          <Link
+            className="text-xs md:text-sm p-1 md:p-2 md:px-4 hover:text-bk-blue hover:dark:text-orange-300"
+            href="/signin"
+          >
+            Sign In
+          </Link>
+        )}
         <div className="flex place-content-center px-2 md:px-4 md:mr-2">
           <ThemeToggleButton
             buttonClass="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 focus:shadow-outline"
