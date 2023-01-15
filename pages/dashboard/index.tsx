@@ -1,6 +1,5 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import { Provider as OpenFolderProvider } from "jotai";
 import { ChangeEvent, useState } from "react";
 import BookmarkTable from "../../src/components/BookmarkTable";
 import BrowserSetup from "../../src/components/BrowserSetup";
@@ -9,7 +8,7 @@ import Loading from "../../src/components/Loading";
 import MenuBar, { MenuOption } from "../../src/components/MenuBar";
 import Modal from "../../src/components/Modal";
 import ModalOverlay from "../../src/components/Modal/ModalOverlay";
-import { useAuth, useAuthStatus } from "../../src/hooks/useAuth";
+import { useAuth } from "../../src/hooks/useAuth";
 import {
   BOOKMARKS_FILE_FORM_KEY,
   useAddBookmark,
@@ -21,19 +20,13 @@ import {
   useDeleteCommand,
   useGetCommands,
 } from "../../src/hooks/useCommands";
-import { useOpenModal } from "../../src/hooks/useOpenModal";
+import { useModal } from "../../src/hooks/useModal";
 import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
 import { useGetUser } from "../../src/hooks/useUser";
+import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "../../src/store/modal";
 import { getUserOrRedirect } from "../../src/utils/api/props";
 import { User } from "../../src/utils/api/types";
 import { NextPageWithLayoutAndProps } from "../_app";
-
-export type ModalType =
-  | "addcmd"
-  | "addbookmark"
-  | "delcmd"
-  | "setup"
-  | undefined;
 
 export type Command = {
   cmd: string;
@@ -55,17 +48,34 @@ export type UpdateCommandStatus = {
 
 export const getServerSideProps = getUserOrRedirect;
 
+const generateDisplayName = (user: User): string => {
+  if (user.given_name) return user.given_name;
+  if (user.name) return user.name;
+  if (user.family_name) return user.family_name;
+  return user.email.split("@")[0];
+};
+
+const createBookmarksFileFormData = (e: ChangeEvent<HTMLInputElement>) => {
+  const files = e.target.files;
+  if (!files) return null;
+  const file = files.item(0);
+  if (!file) return null;
+  const formData = new FormData();
+  formData.append(BOOKMARKS_FILE_FORM_KEY, file, file.name);
+  return formData;
+};
+
 const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   userData,
 }) => {
-  const [modalType, setModalType] = useState<ModalType>();
   const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
-  const { setIsOpen } = useOpenModal();
+  const { setIsOpen, setModalType } = useModal();
   const userKey = userData.api_key;
   const {
+    status,
+    setStatus,
     signOut: { mutate: signOut },
   } = useAuth();
-  const status = useAuthStatus();
   const { data: user } = useGetUser(userKey, {
     initialData: userData,
   });
@@ -93,26 +103,16 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
       error: deleteCommand.isError,
     },
   };
-
   if (!user) return null;
-  const generateDisplayName = (user: User): string => {
-    if (user.given_name) return user.given_name;
-    if (user.name) return user.name;
-    if (user.family_name) return user.family_name;
-    return user.email.split("@")[0];
-  };
 
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
-    const file = files.item(0);
-    if (!file) return;
-    const formData = new FormData();
-    formData.append(BOOKMARKS_FILE_FORM_KEY, file, file.name);
+    const formData = createBookmarksFileFormData(e);
+    if (!formData) return;
     addBookmarkFile.mutate(formData);
     e.target.files = null;
   };
-  if (!status) return <Loading />;
+  if (status && status.loading) return <Loading />;
+  else setStatus(null);
   return (
     <>
       <motion.div
@@ -134,7 +134,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
           {menuOption === "Commands" && (
             <button
               onClick={() => {
-                setModalType("addcmd");
+                setModalType(ADD_COMMAND_MODAL);
                 setIsOpen(true);
               }}
               className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
@@ -149,7 +149,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
             <div className="flex gap-0.5 md:gap-2">
               <button
                 onClick={() => {
-                  setModalType("addbookmark");
+                  setModalType(ADD_BOOKMARK_MODAL);
                   setIsOpen(true);
                 }}
                 className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
@@ -184,7 +184,6 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
           addCommand={addCommand}
           deleteCommand={deleteCommand}
           addBookmark={addBookmark}
-          modalType={modalType}
         />
       </Modal>
       <div className="flex justify-start items-start">
@@ -194,18 +193,15 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
             commands={data}
             isLoadingCommands={isLoading}
             user={user}
-            setModalType={setModalType}
             cmdStatus={updateStatus}
           />
         )}
         {menuOption === "Bookmarks" && (
-          <OpenFolderProvider>
-            <BookmarkTable
-              folder={folder}
-              isLoading={isFolderLoading || addBookmarkFile.isLoading}
-              isError={isFolderError}
-            />
-          </OpenFolderProvider>
+          <BookmarkTable
+            folder={folder}
+            isLoading={isFolderLoading || addBookmarkFile.isLoading}
+            isError={isFolderError}
+          />
         )}
         {menuOption === "Setup guide" && (
           <motion.div

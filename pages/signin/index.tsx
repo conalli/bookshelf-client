@@ -5,10 +5,10 @@ import React from "react";
 import GoogleSignInButton from "../../src/components/GoogleSignIn";
 import LoadingPage from "../../src/components/Loading";
 import SignInForm, { SignInFormVariant } from "../../src/components/SignInForm";
-import { useAuthStatus } from "../../src/hooks/useAuth";
+import { useAuth } from "../../src/hooks/useAuth";
 
 const SignIn = () => {
-  const status = useAuthStatus();
+  const { status } = useAuth();
   const formType: SignInFormVariant = "Sign in";
   const altType: SignInFormVariant = "Sign up";
   if (status && (status.loading || status.success)) return <LoadingPage />;

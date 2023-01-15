@@ -1,4 +1,3 @@
-import { useState } from "react";
 import CommandTable from "../../../src/components/CommandTable";
 import Modal from "../../../src/components/Modal";
 import DeleteCommandOverlay from "../../../src/components/Modal/DeleteCommandOverlay";
@@ -7,17 +6,17 @@ import {
   useGetCommands,
   useSelectCommand,
 } from "../../../src/hooks/useCommands";
-import { useOpenModal } from "../../../src/hooks/useOpenModal";
+import { useModal } from "../../../src/hooks/useModal";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 import { useGetUser } from "../../../src/hooks/useUser";
+import { DELETE_COMMAND_MODAL } from "../../../src/store/modal";
 import { getUserOrRedirect } from "../../../src/utils/api/props";
 import { User } from "../../../src/utils/api/types";
-import { ModalType, UpdateCommandStatus } from "../../dashboard";
+import { UpdateCommandStatus } from "../../dashboard";
 
 export const getServerSideProps = getUserOrRedirect;
 
 const Command = ({ userData }: { userData: User }) => {
-  const [modalType, setModalType] = useState<ModalType>();
   const { data: user } = useGetUser(
     userData.api_key,
     {
@@ -27,7 +26,7 @@ const Command = ({ userData }: { userData: User }) => {
   );
   const { data: commands } = useGetCommands(userData.api_key);
   const del = useDeleteCommand();
-  const { setIsOpen } = useOpenModal();
+  const { setIsOpen, modalType } = useModal();
   const { selectedCommand } = useSelectCommand();
   const updateStatus: UpdateCommandStatus = {
     add: {
@@ -47,7 +46,7 @@ const Command = ({ userData }: { userData: User }) => {
     <div>
       <h1 className="text-4xl py-3">WebCLI Commands:</h1>
       <Modal>
-        {modalType === "delcmd" && (
+        {modalType === DELETE_COMMAND_MODAL && (
           <DeleteCommandOverlay
             user={user ? user : userData}
             del={del}
@@ -61,7 +60,6 @@ const Command = ({ userData }: { userData: User }) => {
         user={user ? user : userData}
         commands={commands}
         isLoadingCommands={false}
-        setModalType={setModalType}
       />
     </div>
   );

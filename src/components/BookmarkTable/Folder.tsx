@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { openFoldersAtom, updateOpenFoldersAtom } from "../../store/folders";
 import { motion } from "framer-motion";
@@ -15,10 +15,11 @@ type FolderProps = {
 
 const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
   const { bookmarks, folders } = folder;
+  const [showDelete, setShowDelete] = useState<string | null>(folder.id);
   const isFolderOpen = useAtomValue(openFoldersAtom);
   const setIsFolderOpen = useSetAtom(updateOpenFoldersAtom);
   const handleToggleFolder = (
-    e: MouseEvent<HTMLLIElement>,
+    e: MouseEvent<HTMLDivElement>,
     name: string | number
   ) => {
     e.preventDefault();
@@ -33,7 +34,10 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
   return (
     <div className="pt-1 pb-0.5">
       {folder.name !== FOLDER_BASE_PATH && (
-        <div className="flex gap-2 truncate hover:cursor-pointer">
+        <div
+          className="flex gap-2 truncate hover:cursor-pointer"
+          onClick={(e) => handleToggleFolder(e, folder.name)}
+        >
           <BookmarksFolderIcon hasContents={hasContents} isOpen={isOpen} />
           <h3 className="text-bk-blue dark:text-bk-orange">{folder.name}</h3>
         </div>
@@ -67,6 +71,11 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
             bookmarks.map((b) => (
               <motion.li
                 key={b.id}
+                onHoverStart={() => {
+                  setShowDelete(b.id);
+                }}
+                onHoverEnd={() => setShowDelete(null)}
+                whileHover={{ scale: 1.1, x: 25, transition: { delay: 0.05 } }}
                 variants={{
                   open: {
                     transition: {
@@ -86,7 +95,7 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                   },
                 }}
               >
-                <Bookmark bookmark={b} />
+                <Bookmark bookmark={b} showDelete={showDelete} />
               </motion.li>
             ))}
           {folders &&
@@ -117,7 +126,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                       },
                     },
                   }}
-                  onClick={(e) => handleToggleFolder(e, f.name)}
                 >
                   <Folder folder={f} isOpen={isOpen} />
                 </motion.li>

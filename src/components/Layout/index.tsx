@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useAnimation, Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import React, { ReactNode, useEffect } from "react";
 import { useMessages } from "../../hooks/useMessages";
-import { useAuthStatus } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import ErrorNotification from "../ErrorNotification";
 import Loading from "../Loading";
 import Nav from "../Nav";
@@ -11,7 +11,7 @@ type LayoutProps = {
   children: ReactNode;
 };
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const status = useAuthStatus();
+  const { status } = useAuth();
   const { messages, removeMessage, removeMessageFIFO } = useMessages();
   const { theme } = useTheme();
   const controls = useAnimation();
@@ -30,7 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     let time: NodeJS.Timer;
     if (messages.length) {
-      time = setInterval(removeMessageFIFO, 5000);
+      time = setInterval(removeMessageFIFO, 3000);
     }
     return () => clearInterval(time);
   }, [messages, removeMessageFIFO]);

@@ -21,7 +21,7 @@ const StatusIcon: React.FC<StatusIconProps> = ({
   const { add, del } = cmdStatus;
   const [iconType, setIconType] = useState<
     "success" | "loading" | "error" | "default"
-  >("loading");
+  >("default");
   useEffect(() => {
     if (selected && selected.cmd === cmd) {
       if (add.success || del.success) setIconType("success");

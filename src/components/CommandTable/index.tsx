@@ -1,9 +1,10 @@
-import { TrashIcon } from "@heroicons/react/24/solid";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import React, { Dispatch, SetStateAction } from "react";
-import { ModalType, UpdateCommandStatus } from "../../../pages/dashboard";
+import React from "react";
+import { UpdateCommandStatus } from "../../../pages/dashboard";
 import { useSelectCommand } from "../../hooks/useCommands";
-import { useOpenModal } from "../../hooks/useOpenModal";
+import { useModal } from "../../hooks/useModal";
+import { DELETE_COMMAND_MODAL } from "../../store/modal";
 import { CMD, User } from "../../utils/api/types";
 import CommandPlaceholder from "./CommandPlaceholder";
 import StatusIcon from "./StatusIcon";
@@ -12,7 +13,6 @@ type CommandTableProps = {
   commands: CMD | undefined;
   isLoadingCommands: boolean;
   user: User;
-  setModalType: Dispatch<SetStateAction<ModalType>>;
   cmdStatus: UpdateCommandStatus;
 };
 
@@ -20,10 +20,9 @@ const CommandTable: React.FC<CommandTableProps> = ({
   commands,
   isLoadingCommands,
   user,
-  setModalType,
   cmdStatus,
 }) => {
-  const { setIsOpen } = useOpenModal();
+  const { setIsOpen, setModalType } = useModal();
   const { selectedCommand, setSelectedCommand } = useSelectCommand();
   if (!user) return null;
 
@@ -95,7 +94,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
                   <td className="text-xs md:text-sm lg:text-base ">
                     <button
                       onClick={() => {
-                        setModalType("delcmd");
+                        setModalType(DELETE_COMMAND_MODAL);
                         setSelectedCommand({ cmd: key, url: commands[key] });
                         setIsOpen(true);
                       }}

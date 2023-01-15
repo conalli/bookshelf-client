@@ -1,8 +1,14 @@
 import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { ModalType } from "../../../pages/dashboard";
+import { useSelectBookmark } from "../../hooks/useBookmarks";
 import { useSelectCommand } from "../../hooks/useCommands";
-import { useOpenModal } from "../../hooks/useOpenModal";
+import { useModal } from "../../hooks/useModal";
+import {
+  ADD_BOOKMARK_MODAL,
+  ADD_COMMAND_MODAL,
+  DELETE_BOOKMARK_MODAL,
+  DELETE_COMMAND_MODAL,
+} from "../../store/modal";
 import {
   AddBookmarkRequest,
   AddBookmarkResponse,
@@ -16,10 +22,10 @@ import {
 } from "../../utils/api/types";
 import AddBookmarkOverlay from "./AddBookmarkOverlay";
 import AddCommandOverlay from "./AddCommandOverlay";
+import DeleteBookmarkOverlay from "./DeleteBookmarkOverlay";
 import DeleteCommandOverlay from "./DeleteCommandOverlay";
 
 type ModalOverlayProps = {
-  modalType: ModalType;
   user: User;
   folder: Folder | undefined;
   addCommand: UseMutationResult<
@@ -43,17 +49,17 @@ type ModalOverlayProps = {
 };
 
 const ModalOverlay: React.FC<ModalOverlayProps> = ({
-  modalType,
   user,
   folder,
   addCommand,
   deleteCommand,
   addBookmark,
 }) => {
-  const { setIsOpen } = useOpenModal();
+  const { setIsOpen, modalType } = useModal();
   const { selectedCommand, setSelectedCommand } = useSelectCommand();
+  const { selectedBookmark } = useSelectBookmark();
   switch (modalType) {
-    case "addcmd":
+    case ADD_COMMAND_MODAL:
       return (
         <AddCommandOverlay
           user={user}
@@ -62,7 +68,7 @@ const ModalOverlay: React.FC<ModalOverlayProps> = ({
           setIsOpen={setIsOpen}
         />
       );
-    case "delcmd":
+    case DELETE_COMMAND_MODAL:
       return (
         <DeleteCommandOverlay
           selected={selectedCommand || null}
@@ -71,11 +77,19 @@ const ModalOverlay: React.FC<ModalOverlayProps> = ({
           setIsOpen={setIsOpen}
         />
       );
-    case "addbookmark":
+    case ADD_BOOKMARK_MODAL:
       return (
         <AddBookmarkOverlay
           folder={folder}
           add={addBookmark}
+          setIsOpen={setIsOpen}
+        />
+      );
+    case DELETE_BOOKMARK_MODAL:
+      return (
+        <DeleteBookmarkOverlay
+          apiKey={user.api_key}
+          selected={selectedBookmark}
           setIsOpen={setIsOpen}
         />
       );
