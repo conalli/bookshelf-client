@@ -11,7 +11,7 @@ import {
   DelCMDRes,
   ErrorRes,
 } from "../utils/api/types";
-import { createQueryKey } from "../utils/query/cache";
+import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const COMMAND_KEY = "cmds";
@@ -35,6 +35,7 @@ export const useGetCommands = (
     {
       refetchOnMount: false,
       refetchOnWindowFocus: false,
+      retryDelay: exponentialBackoff,
       onSuccess,
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {

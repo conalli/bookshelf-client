@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { APIURL } from "../utils/api/endpoints";
 import { ErrorRes } from "../utils/api/types";
-import { createQueryKey } from "../utils/query/cache";
+import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const REFRESH_KEY = "refresh";
@@ -32,6 +32,7 @@ export const useRefreshTokens = (userKey?: string) => {
     refetchOnReconnect: false,
     refetchInterval: REFRESH_INTERVAL,
     refetchIntervalInBackground: true,
+    retryDelay: exponentialBackoff,
     staleTime: REFRESH_INTERVAL,
     onError: (error) => {
       if (axios.isAxiosError(error)) {

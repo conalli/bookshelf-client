@@ -4,7 +4,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { removeUserAtom, userAtom } from "../store/user";
 import { APIURL } from "../utils/api/endpoints";
 import { ErrorRes, User } from "../utils/api/types";
-import { createQueryKey } from "../utils/query/cache";
+import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const USER_KEY = "user";
@@ -45,6 +45,7 @@ export const useGetUser = (
     queryFn: getUser,
     refetchOnMount: true,
     refetchOnWindowFocus: false,
+    retryDelay: exponentialBackoff,
     onSuccess: (data) => {
       setUser(data);
     },

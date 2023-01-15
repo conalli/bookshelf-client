@@ -56,8 +56,6 @@ const logout = async () => {
   return res.data;
 };
 
-export const useAuthStatus = () => useAtomValue(statusAtom);
-
 const authRequest = (
   mutationFn: MutationFunction<User, AuthRequest>,
   queryClient: QueryClient,
@@ -102,6 +100,8 @@ export const useAuth = () => {
   const setAuthStatus = useSetAtom(statusAtom);
   const removeUser = useRemoveUser();
   const { addMessage } = useMessages();
+  const status = useAtomValue(statusAtom);
+  const setStatus = useSetAtom(statusAtom);
 
   const signUpOptions = useCallback(
     () => authRequest(signUp, queryClient, router, setAuthStatus, addMessage),
@@ -132,6 +132,8 @@ export const useAuth = () => {
     },
   });
   return {
+    status,
+    setStatus,
     signUp: useMutation(signUpOptions()),
     signIn: useMutation(signInOptions()),
     signOut,
