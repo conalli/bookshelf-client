@@ -75,6 +75,11 @@ export type AddBookmarkFileResponse = {
   num_added: number;
 };
 
+export type DeleteBookmarkResponse = {
+  id: string;
+  num_deleted: number;
+};
+
 export type DelACCReq = {
   id: string;
   name: string;
