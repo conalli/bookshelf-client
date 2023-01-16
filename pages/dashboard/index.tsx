@@ -28,11 +28,6 @@ import { getUserOrRedirect } from "../../src/utils/api/props";
 import { User } from "../../src/utils/api/types";
 import { NextPageWithLayoutAndProps } from "../_app";
 
-export type Command = {
-  cmd: string;
-  url: string;
-};
-
 export type UpdateCommandStatus = {
   add: {
     success: boolean;

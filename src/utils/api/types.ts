@@ -9,10 +9,10 @@ export type User = {
   email_verified: boolean;
   locale: string;
   provider: string;
-  cmds: CMD;
+  cmds: CommandList;
 };
 
-export type CMD = { [cmd: string]: string };
+export type CommandList = { [cmd: string]: string };
 
 export type Bookmark = {
   id: string;
@@ -29,71 +29,4 @@ export type Folder = {
   path: string;
   bookmarks: Bookmark[] | null;
   folders: Folder[] | null;
-};
-
-export type AuthRequestData = {
-  email: string;
-  password: string;
-};
-
-export type AddCMDReq = {
-  id: string;
-  cmd: string;
-  url: string;
-};
-
-export type AddCMDRes = {
-  num_updated: number;
-};
-
-export type DelCMDReq = {
-  id: string;
-  cmd: string;
-};
-
-export type DelCMDRes = {
-  num_updated: number;
-};
-
-export type AddBookmarkRequest = {
-  name: string;
-  path: string;
-  url: string;
-  is_folder: boolean;
-};
-
-export type AddBookmarkResponse = {
-  id: string;
-  num_added: number;
-  name: string;
-  path: string;
-  url: string;
-  is_folder: boolean;
-};
-
-export type AddBookmarkFileResponse = {
-  num_added: number;
-};
-
-export type DeleteBookmarkResponse = {
-  id: string;
-  num_deleted: number;
-};
-
-export type DelACCReq = {
-  id: string;
-  name: string;
-  password: string;
-};
-
-export type DelACCRes = {
-  name: string;
-  num_deleted: number;
-  users: User[];
-};
-
-export type ErrorRes = {
-  status: number;
-  title: string;
-  detail: string;
 };

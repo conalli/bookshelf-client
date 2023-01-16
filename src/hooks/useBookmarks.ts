@@ -3,14 +3,14 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
 import { selectedBookmarkAtom } from "../store/bookmark";
 import { APIURL } from "../utils/api/endpoints";
+import { AddBookmarkRequest } from "../utils/api/request";
 import {
-  AddBookmarkFileResponse,
-  AddBookmarkRequest,
   AddBookmarkResponse,
+  ErrorResponse,
+  AddBookmarkFileResponse,
   DeleteBookmarkResponse,
-  ErrorRes,
-  Folder,
-} from "../utils/api/types";
+} from "../utils/api/response";
+import { Folder } from "../utils/api/types";
 import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
@@ -37,7 +37,7 @@ export const useAddBookmark = (userKey?: string) => {
   const queryClient = useQueryClient();
   return useMutation<
     AddBookmarkResponse,
-    AxiosError<ErrorRes, AddBookmarkRequest>,
+    AxiosError<ErrorResponse, AddBookmarkRequest>,
     AddBookmarkRequest
   >({
     mutationFn: addBookmark,
@@ -49,7 +49,7 @@ export const useAddBookmark = (userKey?: string) => {
     },
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
-        const errRes = err.response.data as ErrorRes;
+        const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
     },
@@ -75,7 +75,7 @@ export const useAddBookmarkFromFile = (userKey?: string) => {
   const { addMessage } = useMessages();
   return useMutation<
     AddBookmarkFileResponse,
-    AxiosError<ErrorRes, FormData>,
+    AxiosError<ErrorResponse, FormData>,
     FormData
   >({
     mutationFn: addBookmarksFromFile,
@@ -87,7 +87,7 @@ export const useAddBookmarkFromFile = (userKey?: string) => {
     },
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
-        const errRes = err.response.data as ErrorRes;
+        const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
     },
@@ -128,7 +128,7 @@ export const useDeleteBookmark = (userKey?: string) => {
   const { addMessage } = useMessages();
   return useMutation<
     DeleteBookmarkResponse,
-    AxiosError<ErrorRes, null>,
+    AxiosError<ErrorResponse, null>,
     string
   >({
     mutationFn: deleteBookmark,
@@ -147,7 +147,7 @@ export const useDeleteBookmark = (userKey?: string) => {
     },
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
-        const errRes = err.response.data as ErrorRes;
+        const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
     },
@@ -168,7 +168,7 @@ export const useGetBookmarks = (
   callOnError?: () => void
 ) => {
   const { addMessage } = useMessages();
-  return useQuery<Folder, AxiosError<ErrorRes>>({
+  return useQuery<Folder, AxiosError<ErrorResponse>>({
     queryKey: [createQueryKey(BOOKMARKS_KEY, userKey)],
     queryFn: getAllBookmarks,
     refetchOnMount: false,
@@ -177,7 +177,7 @@ export const useGetBookmarks = (
     onSuccess,
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response) {
-        const errRes = err.response.data as ErrorRes;
+        const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
       if (callOnError) callOnError();

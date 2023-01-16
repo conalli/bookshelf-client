@@ -3,12 +3,18 @@ import { AxiosError } from "axios";
 import { motion } from "framer-motion";
 import { SetStateAction } from "jotai";
 import { ChangeEvent, useState } from "react";
-import { Command } from "../../../pages/dashboard";
-import { AddCMDReq, AddCMDRes, ErrorRes, User } from "../../utils/api/types";
+import { Command } from "../../store/command";
+import { AddCommandRequest } from "../../utils/api/request";
+import { AddCommandResponse, ErrorResponse } from "../../utils/api/response";
+import { User } from "../../utils/api/types";
 
 type AddCommandOverlayProps = {
   user: User;
-  add: UseMutationResult<AddCMDRes, AxiosError<ErrorRes, AddCMDReq>, AddCMDReq>;
+  add: UseMutationResult<
+    AddCommandResponse,
+    AxiosError<ErrorResponse, AddCommandRequest>,
+    AddCommandRequest
+  >;
   setSelected: (update: SetStateAction<Command | null>) => void;
   setIsOpen: (update: SetStateAction<boolean>) => void;
 };

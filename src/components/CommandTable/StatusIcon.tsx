@@ -4,7 +4,8 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
-import { Command, UpdateCommandStatus } from "../../../pages/dashboard";
+import { UpdateCommandStatus } from "../../../pages/dashboard";
+import { Command } from "../../store/command";
 import Spinner from "../Spinner";
 
 type StatusIconProps = {

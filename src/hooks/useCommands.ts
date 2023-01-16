@@ -3,21 +3,24 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
 import { selectedCommandAtom } from "../store/command";
 import { APIURL } from "../utils/api/endpoints";
+import { AddCommandRequest, DeleteCommandRequest } from "../utils/api/request";
 import {
-  AddCMDReq,
-  AddCMDRes,
-  CMD,
-  DelCMDReq,
-  DelCMDRes,
-  ErrorRes,
-} from "../utils/api/types";
+  AddCommandResponse,
+  DeleteCommandResponse,
+  ErrorResponse,
+} from "../utils/api/response";
+import { CommandList } from "../utils/api/types";
 import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const COMMAND_KEY = "cmds";
 
 const fetchCmds = async () => {
-  const res = await axios.get<CMD, AxiosResponse<CMD, null>, null>(APIURL.CMD, {
+  const res = await axios.get<
+    CommandList,
+    AxiosResponse<CommandList, null>,
+    null
+  >(APIURL.CommandList, {
     withCredentials: true,
   });
   return res.data;
@@ -29,7 +32,7 @@ export const useGetCommands = (
   callOnError?: () => void
 ) => {
   const { addMessage } = useMessages();
-  return useQuery<CMD, AxiosError<ErrorRes, null>>(
+  return useQuery<CommandList, AxiosError<ErrorResponse, null>>(
     [createQueryKey(COMMAND_KEY, userKey)],
     fetchCmds,
     {
@@ -39,7 +42,7 @@ export const useGetCommands = (
       onSuccess,
       onError: (err) => {
         if (axios.isAxiosError(err) && err.response) {
-          const errRes = err.response.data as ErrorRes;
+          const errRes = err.response.data as ErrorResponse;
           addMessage(`${errRes.title} -- ${errRes.detail}`, true);
         }
         if (callOnError) callOnError();
@@ -48,63 +51,64 @@ export const useGetCommands = (
   );
 };
 
-const addCmd = async (data: AddCMDReq) => {
-  const res = await axios.post<AddCMDRes, AxiosResponse<AddCMDRes>, AddCMDReq>(
-    APIURL.CMD,
-    data,
-    {
-      withCredentials: true,
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+const addCmd = async (data: AddCommandRequest) => {
+  const res = await axios.post<
+    AddCommandResponse,
+    AxiosResponse<AddCommandResponse>,
+    AddCommandRequest
+  >(APIURL.CommandList, data, {
+    withCredentials: true,
+    headers: { "Content-Type": "application/json" },
+  });
   return res.data;
 };
 
 export const useAddCommand = (userKey?: string) => {
   const queryClient = useQueryClient();
   const { addMessage } = useMessages();
-  return useMutation<AddCMDRes, AxiosError<ErrorRes, AddCMDReq>, AddCMDReq>(
-    addCmd,
-    {
-      onMutate: async (addData) => {
-        await queryClient.cancelQueries([createQueryKey(COMMAND_KEY, userKey)]);
-        const cmdList = queryClient.getQueryData<CMD>([
-          createQueryKey(COMMAND_KEY, userKey),
-        ]);
-        queryClient.setQueryData<CMD>(
-          [createQueryKey(COMMAND_KEY, userKey)],
-          (prevData) => {
-            const init = {} as CMD;
-            const { cmd, url } = addData;
-            if (!prevData) return { ...init, [cmd]: url };
-            return { ...prevData, [cmd]: url };
-          }
-        );
-        return cmdList || {};
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
-      },
-      onError: (err) => {
-        if (axios.isAxiosError(err) && err.response) {
-          const errRes = err.response.data as ErrorRes;
-          addMessage(`${errRes.title} -- ${errRes.detail}`, true);
+  return useMutation<
+    AddCommandResponse,
+    AxiosError<ErrorResponse, AddCommandRequest>,
+    AddCommandRequest
+  >(addCmd, {
+    onMutate: async (addData) => {
+      await queryClient.cancelQueries([createQueryKey(COMMAND_KEY, userKey)]);
+      const cmdList = queryClient.getQueryData<CommandList>([
+        createQueryKey(COMMAND_KEY, userKey),
+      ]);
+      queryClient.setQueryData<CommandList>(
+        [createQueryKey(COMMAND_KEY, userKey)],
+        (prevData) => {
+          const init = {} as CommandList;
+          const { cmd, url } = addData;
+          if (!prevData) return { ...init, [cmd]: url };
+          return { ...prevData, [cmd]: url };
         }
-        queryClient.setQueryData<CMD>(
-          [createQueryKey(COMMAND_KEY, userKey)],
-          (prev) => prev || {}
-        );
-      },
-    }
-  );
+      );
+      return cmdList || {};
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
+    },
+    onError: (err) => {
+      if (axios.isAxiosError(err) && err.response) {
+        const errRes = err.response.data as ErrorResponse;
+        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
+      }
+      queryClient.setQueryData<CommandList>(
+        [createQueryKey(COMMAND_KEY, userKey)],
+        (prev) => prev || {}
+      );
+    },
+  });
 };
 
-const delCmd = async (data: DelCMDReq) => {
+const delCmd = async (data: DeleteCommandRequest) => {
   const res = await axios.patch<
-    DelCMDRes,
-    AxiosResponse<DelCMDRes, DelCMDReq>,
-    DelCMDReq
-  >(APIURL.CMD, data, {
+    DeleteCommandResponse,
+    AxiosResponse<DeleteCommandResponse, DeleteCommandRequest>,
+    DeleteCommandRequest
+  >(APIURL.CommandList, data, {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });
@@ -114,24 +118,25 @@ const delCmd = async (data: DelCMDReq) => {
 export const useDeleteCommand = (userKey?: string) => {
   const queryClient = useQueryClient();
   const { addMessage } = useMessages();
-  return useMutation<DelCMDRes, AxiosError<ErrorRes, DelCMDReq>, DelCMDReq>(
-    delCmd,
-    {
-      onSettled: () => {
-        queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
-      },
-      onError: (err) => {
-        if (axios.isAxiosError(err) && err.response) {
-          const errRes = err.response.data as ErrorRes;
-          addMessage(`${errRes.title} -- ${errRes.detail}`, true);
-        }
-        queryClient.setQueryData<CMD>(
-          [createQueryKey(COMMAND_KEY, userKey)],
-          (prev) => prev || {}
-        );
-      },
-    }
-  );
+  return useMutation<
+    DeleteCommandResponse,
+    AxiosError<ErrorResponse, DeleteCommandRequest>,
+    DeleteCommandRequest
+  >(delCmd, {
+    onSettled: () => {
+      queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
+    },
+    onError: (err) => {
+      if (axios.isAxiosError(err) && err.response) {
+        const errRes = err.response.data as ErrorResponse;
+        addMessage(`${errRes.title} -- ${errRes.detail}`, true);
+      }
+      queryClient.setQueryData<CommandList>(
+        [createQueryKey(COMMAND_KEY, userKey)],
+        (prev) => prev || {}
+      );
+    },
+  });
 };
 
 export const useSelectCommand = () => {

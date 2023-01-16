@@ -3,18 +3,18 @@ import { ErrRes } from "./mockTypes";
 import {
   // DelACCReq,
   // DelACCRes,
-  // DelCMDReq,
-  // DelCMDRes,
-  // AddCMDReq,
-  // AddCMDRes,
-  User,
-  AuthRequestData,
-} from "../utils/api/types";
+  // DeleteCommandRequest,
+  // DeleteCommandResponse,
+  // AddCommandRequest,
+  // AddCommandResponse,
+  AuthRequest,
+} from "../utils/api/request";
 import { mockUsers, MockUser } from "./mockUserData";
 import { APIURL } from "../utils/api/endpoints";
+import { User } from "../utils/api/types";
 
 export const handlers = [
-  rest.post<AuthRequestData, PathParams, User | ErrRes>(
+  rest.post<AuthRequest, PathParams, User | ErrRes>(
     `${APIURL.AUTH}/login`,
     (req, res, ctx) => {
       const found = mockUsers.find(
@@ -39,7 +39,7 @@ export const handlers = [
       return res(ctx.status(400), ctx.json({ status: "error" }));
     }
   ),
-  rest.post<AuthRequestData, PathParams, User | ErrRes>(
+  rest.post<AuthRequest, PathParams, User | ErrRes>(
     `${APIURL.AUTH}/signup`,
     (req, res, ctx) => {
       const { email, password } = req.body;
@@ -86,7 +86,7 @@ export const handlers = [
   //     }
   //     return res(ctx.status(200), ctx.json(found.cmds));
   //   }),
-  //   rest.patch<AddCMDReq, { APIKey: string }, AddCMDRes | ErrRes>(
+  //   rest.patch<AddCommandRequest, { APIKey: string }, AddCommandResponse | ErrRes>(
   //     `${APIURL.addCmd}:APIKey`,
   //     (req, res, ctx) => {
   //       const { APIKey } = req.params;
@@ -117,7 +117,7 @@ export const handlers = [
   //       );
   //     }
   //   ),
-  //   rest.patch<DelCMDReq, { APIKey: string }, DelCMDRes | ErrRes>(
+  //   rest.patch<DeleteCommandRequest, { APIKey: string }, DeleteCommandResponse | ErrRes>(
   //     `${APIURL.delCmd}:APIKey`,
   //     (req, res, ctx) => {
   //       const { APIKey } = req.params;

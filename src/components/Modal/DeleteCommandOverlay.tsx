@@ -1,12 +1,18 @@
 import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { SetStateAction } from "jotai";
-import { Command } from "../../../pages/dashboard";
-import { DelCMDReq, DelCMDRes, ErrorRes, User } from "../../utils/api/types";
+import { Command } from "../../store/command";
+import { DeleteCommandRequest } from "../../utils/api/request";
+import { DeleteCommandResponse, ErrorResponse } from "../../utils/api/response";
+import { User } from "../../utils/api/types";
 
 type DeleteCommandOverlayProps = {
   user: User;
-  del: UseMutationResult<DelCMDRes, AxiosError<ErrorRes, DelCMDReq>, DelCMDReq>;
+  del: UseMutationResult<
+    DeleteCommandResponse,
+    AxiosError<ErrorResponse, DeleteCommandRequest>,
+    DeleteCommandRequest
+  >;
   selected: Command | null;
   setIsOpen: (update: SetStateAction<boolean>) => void;
 };

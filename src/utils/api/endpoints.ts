@@ -5,7 +5,7 @@ export const APIURL = {
   AUTH: base + "/auth",
   REFRESH: base + "/auth/refresh",
   USER: base + "/user",
-  CMD: base + "/user/cmd",
+  CommandList: base + "/user/cmd",
   BOOKMARKS: base + "/bookmark",
   BOOKMARKSFILE: base + "/bookmark/file",
 };

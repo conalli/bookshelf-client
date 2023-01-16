@@ -5,12 +5,12 @@ import { UpdateCommandStatus } from "../../../pages/dashboard";
 import { useSelectCommand } from "../../hooks/useCommands";
 import { useModal } from "../../hooks/useModal";
 import { DELETE_COMMAND_MODAL } from "../../store/modal";
-import { CMD, User } from "../../utils/api/types";
+import { CommandList, User } from "../../utils/api/types";
 import CommandPlaceholder from "./CommandPlaceholder";
 import StatusIcon from "./StatusIcon";
 
 type CommandTableProps = {
-  commands: CMD | undefined;
+  commands: CommandList | undefined;
   isLoadingCommands: boolean;
   user: User;
   cmdStatus: UpdateCommandStatus;

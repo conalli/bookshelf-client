@@ -3,7 +3,8 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
 import { removeUserAtom, userAtom } from "../store/user";
 import { APIURL } from "../utils/api/endpoints";
-import { ErrorRes, User } from "../utils/api/types";
+import { ErrorResponse } from "../utils/api/response";
+import { User } from "../utils/api/types";
 import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
@@ -31,7 +32,7 @@ export const useGetUser = (
   userKey?: string,
   options: UseQueryOptions<
     User,
-    AxiosError<ErrorRes, null>,
+    AxiosError<ErrorResponse, null>,
     User,
     QueryKey
   > = {},
@@ -40,7 +41,7 @@ export const useGetUser = (
 ) => {
   const setUser = useSetAtom(userAtom);
   const { addMessage } = useMessages();
-  return useQuery<User, AxiosError<ErrorRes, null>>({
+  return useQuery<User, AxiosError<ErrorResponse, null>>({
     queryKey: [createQueryKey(USER_KEY, userKey)],
     queryFn: getUser,
     refetchOnMount: true,
@@ -51,7 +52,7 @@ export const useGetUser = (
     },
     onError: (err) => {
       if (axios.isAxiosError(err) && err.response && !quiet) {
-        const errRes = err.response.data as ErrorRes;
+        const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
       if (callOnError) callOnError();

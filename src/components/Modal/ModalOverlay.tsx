@@ -11,15 +11,16 @@ import {
 } from "../../store/modal";
 import {
   AddBookmarkRequest,
+  AddCommandRequest,
+  DeleteCommandRequest,
+} from "../../utils/api/request";
+import {
+  AddCommandResponse,
+  ErrorResponse,
+  DeleteCommandResponse,
   AddBookmarkResponse,
-  AddCMDReq,
-  AddCMDRes,
-  DelCMDReq,
-  DelCMDRes,
-  ErrorRes,
-  Folder,
-  User,
-} from "../../utils/api/types";
+} from "../../utils/api/response";
+import { Folder, User } from "../../utils/api/types";
 import AddBookmarkOverlay from "./AddBookmarkOverlay";
 import AddCommandOverlay from "./AddCommandOverlay";
 import DeleteBookmarkOverlay from "./DeleteBookmarkOverlay";
@@ -29,20 +30,20 @@ type ModalOverlayProps = {
   user: User;
   folder: Folder | undefined;
   addCommand: UseMutationResult<
-    AddCMDRes,
-    AxiosError<ErrorRes, AddCMDReq>,
-    AddCMDReq,
+    AddCommandResponse,
+    AxiosError<ErrorResponse, AddCommandRequest>,
+    AddCommandRequest,
     unknown
   >;
   deleteCommand: UseMutationResult<
-    DelCMDRes,
-    AxiosError<ErrorRes, DelCMDReq>,
-    DelCMDReq,
+    DeleteCommandResponse,
+    AxiosError<ErrorResponse, DeleteCommandRequest>,
+    DeleteCommandRequest,
     unknown
   >;
   addBookmark: UseMutationResult<
     AddBookmarkResponse,
-    AxiosError<ErrorRes, AddBookmarkRequest>,
+    AxiosError<ErrorResponse, AddBookmarkRequest>,
     AddBookmarkRequest,
     unknown
   >;

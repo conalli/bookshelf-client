@@ -3,18 +3,15 @@ import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { motion } from "framer-motion";
 import { ChangeEvent, SetStateAction, useState } from "react";
-import {
-  AddBookmarkRequest,
-  AddBookmarkResponse,
-  ErrorRes,
-  Folder,
-} from "../../utils/api/types";
+import { AddBookmarkRequest } from "../../utils/api/request";
+import { AddBookmarkResponse, ErrorResponse } from "../../utils/api/response";
+import { Folder } from "../../utils/api/types";
 
 type AddBookmarkOverlayProps = {
   folder: Folder | undefined;
   add: UseMutationResult<
     AddBookmarkResponse,
-    AxiosError<ErrorRes, AddBookmarkRequest>,
+    AxiosError<ErrorResponse, AddBookmarkRequest>,
     AddBookmarkRequest,
     unknown
   >;

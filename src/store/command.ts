@@ -1,4 +1,8 @@
 import { atom } from "jotai";
-import { Command } from "../../pages/dashboard";
+
+export type Command = {
+  cmd: string;
+  url: string;
+};
 
 export const selectedCommandAtom = atom<Command | null>(null);

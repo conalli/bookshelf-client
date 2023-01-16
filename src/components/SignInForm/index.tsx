@@ -2,8 +2,8 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import { motion } from "framer-motion";
 import React from "react";
 import { object, string } from "yup";
-import { AuthRequest, useAuth } from "../../hooks/useAuth";
-import { AuthRequestData } from "../../utils/api/types";
+import { AuthRequestData, useAuth } from "../../hooks/useAuth";
+import { AuthRequest } from "../../utils/api/request";
 
 export type SignInFormVariant = "Sign up" | "Sign in";
 
@@ -33,9 +33,9 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
         initialValues={{ email: "", password: "" }}
         onSubmit={async (
           values,
-          { setSubmitting }: FormikHelpers<AuthRequestData>
+          { setSubmitting }: FormikHelpers<AuthRequest>
         ) => {
-          const authData: AuthRequest = { data: values, setSubmitting };
+          const authData: AuthRequestData = { data: values, setSubmitting };
           type === "Sign in" ? signin(authData) : signup(authData);
         }}
       >

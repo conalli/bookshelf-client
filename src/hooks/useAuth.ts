@@ -12,16 +12,18 @@ import { useCallback } from "react";
 import { SignInFormVariant } from "../components/SignInForm";
 import { AuthStatus, statusAtom } from "../store/auth";
 import { APIURL } from "../utils/api/endpoints";
-import { AuthRequestData, ErrorRes, User } from "../utils/api/types";
+import { AuthRequest } from "../utils/api/request";
+import { ErrorResponse } from "../utils/api/response";
+import { User } from "../utils/api/types";
 import { useMessages } from "./useMessages";
 import { useRemoveUser, USER_KEY } from "./useUser";
 
-export type AuthRequest = {
-  data: AuthRequestData;
+export type AuthRequestData = {
+  data: AuthRequest;
   setSubmitting: (isSubmitting: boolean) => void;
 };
 
-type AuthRequestWithType = AuthRequest & {
+type AuthRequestWithType = AuthRequestData & {
   type: SignInFormVariant;
 };
 
@@ -29,8 +31,8 @@ const auth = async ({ type, data }: AuthRequestWithType): Promise<User> => {
   const reqType = type === "Sign in" ? "login" : "signup";
   const res = await axios.post<
     User,
-    AxiosResponse<User, AuthRequestData>,
-    AuthRequestData
+    AxiosResponse<User, AuthRequest>,
+    AuthRequest
   >(`${APIURL.AUTH}/${reqType}`, data, {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
@@ -39,10 +41,10 @@ const auth = async ({ type, data }: AuthRequestWithType): Promise<User> => {
   return res.data;
 };
 
-const signUp = ({ data, setSubmitting }: AuthRequest) =>
+const signUp = ({ data, setSubmitting }: AuthRequestData) =>
   auth({ type: "Sign up", data, setSubmitting });
 
-const logIn = ({ data, setSubmitting }: AuthRequest) =>
+const logIn = ({ data, setSubmitting }: AuthRequestData) =>
   auth({ type: "Sign in", data, setSubmitting });
 
 const logout = async () => {
@@ -57,16 +59,16 @@ const logout = async () => {
 };
 
 const authRequest = (
-  mutationFn: MutationFunction<User, AuthRequest>,
+  mutationFn: MutationFunction<User, AuthRequestData>,
   queryClient: QueryClient,
   router: NextRouter,
   setAuthStatus: (update: SetStateAction<AuthStatus | null>) => void,
   addMessage: (message: string, isError?: boolean) => void
 ): UseMutationOptions<
   User,
-  AxiosError<ErrorRes, AuthRequestData>,
-  AuthRequest,
-  unknown
+  AxiosError<ErrorResponse, AuthRequest>,
+  AuthRequestData,
+  void
 > => ({
   mutationKey: [USER_KEY],
   mutationFn,
@@ -86,7 +88,7 @@ const authRequest = (
   onError: (error): void => {
     setAuthStatus({ success: false, loading: false, error: true });
     if (axios.isAxiosError(error) && error.response?.data) {
-      const errRes = error.response.data as ErrorRes;
+      const errRes = error.response.data as ErrorResponse;
       addMessage(`${errRes.title}`, true);
     } else {
       addMessage("Unknown auth error, check credentials and try again", true);
@@ -123,7 +125,7 @@ export const useAuth = () => {
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response?.data) {
-        const errRes = error.response.data as ErrorRes;
+        const errRes = error.response.data as ErrorResponse;
         addMessage(`${errRes.title}`, true);
       } else {
         addMessage("Unknown error while attempting to logout", true);

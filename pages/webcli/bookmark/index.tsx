@@ -1,9 +1,8 @@
-import React from "react";
-import { Folder, User } from "../../../src/utils/api/types";
 import BookmarkTable from "../../../src/components/BookmarkTable";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 import { useGetUser } from "../../../src/hooks/useUser";
 import { getUserAndBookmarksOrRedirect } from "../../../src/utils/api/props";
+import { Folder, User } from "../../../src/utils/api/types";
 
 export const getServerSideProps = getUserAndBookmarksOrRedirect;
 
