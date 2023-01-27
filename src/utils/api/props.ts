@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { APIURL } from "./endpoints";
-import { Folder, User } from "./request";
+import { Folder, User } from "./types";
 
 const ACCESS_TOKEN = "bookshelf_access_token";
 const CODE_TOKEN = "bookshelf_token_code";
