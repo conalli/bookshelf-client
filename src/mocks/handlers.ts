@@ -1,20 +1,12 @@
 import { PathParams, rest } from "msw";
-import { ErrRes } from "./mockTypes";
-import {
-  // DelACCReq,
-  // DelACCRes,
-  // DeleteCommandRequest,
-  // DeleteCommandResponse,
-  // AddCommandRequest,
-  // AddCommandResponse,
-  AuthRequest,
-} from "../utils/api/request";
+import { AuthRequest } from "../utils/api/request";
 import { mockUsers, MockUser } from "./mockUserData";
 import { APIURL } from "../utils/api/endpoints";
 import { User } from "../utils/api/types";
+import { ErrorResponse } from "../utils/api/response";
 
 export const handlers = [
-  rest.post<AuthRequest, PathParams, User | ErrRes>(
+  rest.post<AuthRequest, PathParams, User | ErrorResponse>(
     `${APIURL.AUTH}/login`,
     (req, res, ctx) => {
       const found = mockUsers.find(
@@ -36,10 +28,13 @@ export const handlers = [
           })
         );
       }
-      return res(ctx.status(400), ctx.json({ status: "error" }));
+      return res(
+        ctx.status(400),
+        ctx.json({ status: 400, title: "bad request", detail: "not found" })
+      );
     }
   ),
-  rest.post<AuthRequest, PathParams, User | ErrRes>(
+  rest.post<AuthRequest, PathParams, User | ErrorResponse>(
     `${APIURL.AUTH}/signup`,
     (req, res, ctx) => {
       const { email, password } = req.body;
@@ -76,7 +71,10 @@ export const handlers = [
           })
         );
       }
-      return res(ctx.status(400), ctx.json({ status: "error" }));
+      return res(
+        ctx.status(400),
+        ctx.json({ status: 400, title: "bad request", detail: "not found" })
+      );
     }
   ),
   //   rest.get(`${APIURL.getCmds}`, (req, res, ctx) => {
