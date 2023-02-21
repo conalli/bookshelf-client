@@ -1,3 +1,4 @@
+export {};
 describe("dashboard", () => {
   describe("New user", () => {
     beforeEach(() => {

@@ -1,3 +1,4 @@
+export {};
 describe("home", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -12,7 +13,7 @@ describe("home", () => {
     cy.findByRole("heading", { name: /collaborate\.∗/i });
     cy.findByRole("heading", { name: /\(∗coming soon\)/i });
     // Should show Sign in button.
-    cy.findByRole("button", { name: /sign in/i });
+    cy.findByRole("button", { name: /sign up/i });
     // Should show Learn more button.
     cy.findByRole("button", { name: /learn more/i });
     // Should show subtitle.
@@ -24,17 +25,13 @@ describe("home", () => {
     // Should be able to click learn more.
     cy.findByRole("button", { name: /learn more/i }).click();
     // Should be able to see about heading.
-    cy.findByRole("heading", { name: /about\./i });
+    cy.findByRole("heading", { name: /about bookshelf\./i });
   });
   it("Should render all elements of the about section", () => {
     // Should be able to click learn more.
     cy.findByRole("button", { name: /learn more/i }).click();
-    // Should be able to see about heading.
-    cy.findByRole("heading", { name: /about\./i });
-    // Should be able to read about Bookshelf.
-    cy.findByText(
-      /use bookshelf to keep your bookmarks up to date and then use the commands that you assigned to them to quickly access them in your browser of choice\./i
-    );
+    // Should be able to see about/how headings.
+    cy.findByRole("heading", { name: /about bookshelf\./i });
     cy.findByRole("heading", { name: /how\?/i });
     // TODO: Add name to list. ***
     cy.findByRole("article").within(() => cy.findByRole("list"));
@@ -43,12 +40,12 @@ describe("home", () => {
   });
   it("Should be able to go back to the top of the page", () => {
     cy.findByRole("button", { name: /learn more/i }).click();
-    cy.findByRole("heading", { name: /about\./i });
+    cy.findByRole("heading", { name: /about bookshelf\./i });
     // Should move back to top on click.
     cy.findByRole("link", { name: /to top/i }).click();
     // Should be able to see main screen.
     cy.findByRole("navigation");
-    cy.findByRole("button", { name: /sign in/i });
+    cy.findByRole("button", { name: /sign up/i });
     cy.findByText(
       /manage and use your bookmarks more efficiently than ever before\./i
     );

@@ -1,3 +1,4 @@
+export {};
 describe("signin", () => {
   beforeEach(() => {
     cy.visit("/signin");
