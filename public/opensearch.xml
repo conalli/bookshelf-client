@@ -1,0 +1,9 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>Bookshelf</ShortName>
+    <Description>Bookshelf - Smart Bookmarking and Commands</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Image width="16" height="16" type="image/x-icon">https://bookshelf.conalli.info/favicon/favicon.ico</Image>
+    <Url type="text/html" template="https://bookshelfsearch.conalli.info/api/search/{searchTerms}"/>
+    <Url type="application/opensearchdescription+xml" rel="self" template="https://bookshelf.conalli.info/opensearch.xml"/>
+    <moz:SearchForm>https://bookshelf.conalli.info</moz:SearchForm>
+</OpenSearchDescription>
