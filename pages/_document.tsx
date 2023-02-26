@@ -56,6 +56,12 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Murecho:wght@100;400;600;900&family=Overpass:wght@100;400;600;900&display=swap"
             rel="stylesheet"
           />
+          <link
+            rel="search"
+            type="application/opensearchdescription+xml"
+            href="/opensearch.xml"
+            title="bookshelf"
+          />
         </Head>
         <body>
           <Main />
