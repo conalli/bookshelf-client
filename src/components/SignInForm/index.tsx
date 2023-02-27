@@ -84,6 +84,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
               </p>
               <div className="flex justify-center py-2 md:py-10">
                 <motion.button
+                  data-cy={type}
                   whileHover={{ scale: 1.1 }}
                   type="submit"
                   disabled={
