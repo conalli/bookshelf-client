@@ -1,4 +1,3 @@
-export {};
 describe("signin", () => {
   beforeEach(() => {
     cy.visit("/signup");
@@ -31,9 +30,9 @@ describe("signin", () => {
     cy.findByText(/already have an account\?/i).within(() =>
       cy.findByRole("link", { name: /sign in/i }).click()
     );
-
     // Should have changed to the sign in form.
     cy.findByRole("heading", { name: /sign in/i });
     cy.findByText(/don't have an account\?/i);
   });
 });
+export {};

@@ -1,4 +1,3 @@
-export {};
 describe("home", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -51,3 +50,4 @@ describe("home", () => {
     );
   });
 });
+export {};

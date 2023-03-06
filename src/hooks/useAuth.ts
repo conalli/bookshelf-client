@@ -49,7 +49,7 @@ const logIn = ({ data, setSubmitting }: AuthRequestData) =>
 
 const logout = async () => {
   const res = await axios.post<null, AxiosResponse<null, null>, null>(
-    `${APIURL.BASE}/auth/logout`,
+    `${APIURL.AUTH}/logout`,
     null,
     {
       withCredentials: true,
