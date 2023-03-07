@@ -38,7 +38,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.13.0",
-    "@types/react": "^18.0.26",
+    "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
     "@types/react-modal": "^3.13.1",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
@@ -62,6 +62,6 @@
     "workerDirectory": "public"
   },
   "resolutions": {
-    "@types/react": "18.0.26"
+    "@types/react": "18.0.28"
   }
 }
