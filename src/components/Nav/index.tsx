@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
 import { useUser } from "../../hooks/useUser";
 import BookshelfLogo from "../BookshelfLogo";
 import ThemeToggleButton from "../ThemeToggleButton";
