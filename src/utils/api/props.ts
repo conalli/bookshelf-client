@@ -40,7 +40,10 @@ export const getUserAndBookmarksOrRedirect: GetServerSideProps<{
   userData: User;
   folderData: Folder;
 }> = async (context: GetServerSidePropsContext) => {
-  const folder = context.query.folder ? `/${context.query.folder}` : "";
+  const folder = context.query.folder
+    ? `/folder?name=${context.query.folder}`
+    : "";
+  console.log("CTX", context.query.folder);
   const url = APIURL.BOOKMARKS + folder;
   try {
     const u = axios.get<User, AxiosResponse<User, null>, null>(APIURL.USER, {
