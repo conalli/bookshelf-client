@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import About from "../src/components/About";
+import About from "../src/components/home/About";
 
 const Home: NextPage = () => {
   return (
@@ -23,60 +23,60 @@ const Home: NextPage = () => {
         id="home"
         className=""
       >
-        <main className="h-4/5 min-w-sceen m-0">
+        <main className="min-w-sceen m-0 h-4/5">
           <section className="grid grid-cols-6 grid-rows-6 py-6 md:py-0">
-            <div className="col-start-3 col-span-2 row-start-1 md:row-start-2 row-span-3 bk-rotate-text justify-self-center align-self-center flex flex-auto flex-col items-end text-white">
+            <div className="bk-rotate-text align-self-center col-span-2 col-start-3 row-span-3 row-start-1 flex flex-auto flex-col items-end justify-self-center text-white md:row-start-2">
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="  bg-bk-orange py-4 px-1 text-2xl md:text-4xl lg:text-6xl xl:text-7xl rounded"
+                className="  rounded bg-bk-orange px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Store.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="py-4 px-1 text-2xl md:text-4xl bg-bk-red lg:text-6xl xl:text-7xl rounded"
+                className="rounded bg-bk-red px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Use.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="py-4 px-1 text-2xl md:text-4xl bg-bk-blue lg:text-6xl xl:text-7xl rounded"
+                className="rounded bg-bk-blue px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Update.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="py-4 px-1 text-2xl md:text-4xl bg-bk-orange lg:text-6xl xl:text-7xl rounded group"
+                className="group rounded bg-bk-orange px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Collaborate.&lowast;
               </motion.h2>
               <motion.h3
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="py-4 px-1 text-sm bg-bk-red lg:text-3xl xl:text-4xl rounded"
+                className="rounded bg-bk-red px-1 py-4 text-sm lg:text-3xl xl:text-4xl"
               >
                 (&lowast;coming soon)
               </motion.h3>
             </div>
-            <div className="col-start-2 col-span-4 row-start-4 md:row-start-5 row-span-2 md:row-span-1 place-self-center flex flex-1 justify-center items-center gap-2 lg:gap-20">
+            <div className="col-span-4 col-start-2 row-span-2 row-start-4 flex flex-1 items-center justify-center gap-2 place-self-center md:row-span-1 md:row-start-5 lg:gap-20">
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                className="outline outline-bk-blue dark:outline-bk-orange bg-bk-blue dark:bg-bk-orange text-sm  lg:text-xl px-5 py-2 w-28 lg:w-40 hover:opacity-90 rounded shadow-md"
+                className="w-28 rounded bg-bk-blue px-5 py-2 text-sm  shadow-md outline outline-bk-blue hover:opacity-90 dark:bg-bk-orange dark:outline-bk-orange lg:w-40 lg:text-xl"
               >
                 <Link href="/signup">Sign up</Link>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                className="outline outline-bk-blue underline decoration-bk-blue decoration-2 text-sm lg:text-xl px-5 py-2 w-28 lg:w-40 hover:opacity-90 rounded shadow-md"
+                className="w-28 rounded px-5 py-2 text-sm underline decoration-bk-blue decoration-2 shadow-md outline outline-bk-blue hover:opacity-90 lg:w-40 lg:text-xl"
               >
                 <a href="#learn">Learn more</a>
               </motion.button>
             </div>
-            <section className="col-start-1 md:col-start-2 col-span-6 md:col-span-4 row-start-6 flex place-self-center text-center sm:text-left">
+            <section className="col-span-6 col-start-1 row-start-6 flex place-self-center text-center sm:text-left md:col-span-4 md:col-start-2">
               <p className="underline decoration-bk-orange decoration-2 lg:text-xl">
                 Manage and use your bookmarks more efficiently than ever before.
               </p>

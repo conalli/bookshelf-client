@@ -9,14 +9,14 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { SetStateAction, useAtomValue, useSetAtom } from "jotai";
 import { NextRouter, useRouter } from "next/router";
 import { useCallback } from "react";
-import { SignInFormVariant } from "../components/SignInForm";
+import { SignInFormVariant } from "../components/auth/SignInForm";
 import { AuthStatus, statusAtom } from "../store/auth";
 import { APIURL } from "../utils/api/endpoints";
 import { AuthRequest } from "../utils/api/request";
 import { ErrorResponse } from "../utils/api/response";
 import { User } from "../utils/api/types";
 import { useMessages } from "./useMessages";
-import { useRemoveUser, USER_KEY } from "./useUser";
+import { USER_KEY, useRemoveUser } from "./useUser";
 
 export type AuthRequestData = {
   data: AuthRequest;

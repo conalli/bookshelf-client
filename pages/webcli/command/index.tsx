@@ -1,6 +1,6 @@
-import CommandTable from "../../../src/components/CommandTable";
-import Modal from "../../../src/components/Modal";
-import DeleteCommandOverlay from "../../../src/components/Modal/DeleteCommandOverlay";
+import CommandTable from "../../../src/components/dashboard/CommandTable";
+import Modal from "../../../src/components/dashboard/Modal";
+import DeleteCommandOverlay from "../../../src/components/dashboard/Modal/DeleteCommandOverlay";
 import {
   useDeleteCommand,
   useGetCommands,
@@ -44,7 +44,7 @@ const Command = ({ userData }: { userData: User }) => {
 
   return (
     <div>
-      <h1 className="text-4xl py-3">WebCLI Commands:</h1>
+      <h1 className="py-3 text-4xl">WebCLI Commands:</h1>
       <Modal>
         {modalType === DELETE_COMMAND_MODAL && (
           <DeleteCommandOverlay

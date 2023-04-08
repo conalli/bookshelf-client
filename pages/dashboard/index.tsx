@@ -1,13 +1,13 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { ChangeEvent, useState } from "react";
-import BookmarkTable from "../../src/components/BookmarkTable";
-import BrowserSetup from "../../src/components/BrowserSetup";
-import CommandTable from "../../src/components/CommandTable";
 import Loading from "../../src/components/Loading";
-import MenuBar, { MenuOption } from "../../src/components/MenuBar";
-import Modal from "../../src/components/Modal";
-import ModalOverlay from "../../src/components/Modal/ModalOverlay";
+import BookmarkTable from "../../src/components/dashboard/BookmarkTable";
+import BrowserSetup from "../../src/components/dashboard/BrowserSetup";
+import CommandTable from "../../src/components/dashboard/CommandTable";
+import MenuBar, { MenuOption } from "../../src/components/dashboard/MenuBar";
+import Modal from "../../src/components/dashboard/Modal";
+import ModalOverlay from "../../src/components/dashboard/Modal/ModalOverlay";
 import { useAuth } from "../../src/hooks/useAuth";
 import {
   BOOKMARKS_FILE_FORM_KEY,
@@ -132,11 +132,11 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
                 setModalType(ADD_COMMAND_MODAL);
                 setIsOpen(true);
               }}
-              className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
+              className="rounded bg-green-500 px-4 py-2 text-white dark:bg-gray-100 dark:text-neutral-600"
             >
-              <div className="flex gap-1 justify-center items-center">
+              <div className="flex items-center justify-center gap-1">
                 <p className="mt-0.5">Add</p>
-                <PlusIcon className="w-5 h-5" />
+                <PlusIcon className="h-5 w-5" />
               </div>
             </button>
           )}
@@ -147,18 +147,18 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
                   setModalType(ADD_BOOKMARK_MODAL);
                   setIsOpen(true);
                 }}
-                className="text-white px-4 py-2 bg-green-500 dark:bg-gray-100 dark:text-neutral-600 rounded"
+                className="rounded bg-green-500 px-4 py-2 text-white dark:bg-gray-100 dark:text-neutral-600"
               >
-                <div className="flex gap-1 justify-center items-center">
+                <div className="flex items-center justify-center gap-1">
                   <p className="mt-0.5">Add</p>
-                  <PlusIcon className="w-5 h-5" />
+                  <PlusIcon className="h-5 w-5" />
                 </div>
               </button>
               <input
                 id="file-input"
                 accept=".html"
-                className=" block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding text-bk-blue border border-solid border-gray-300 rounded transition ease-in-out m-0
-                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                className=" m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-bk-blue transition ease-in-out
+                focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                 onChange={handleSelectFile}
                 type="file"
               />
@@ -166,7 +166,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
           )}
           <button
             onClick={() => signOut()}
-            className="h-max text-white px-4 py-2.5 bg-neutral-600 dark:bg-bk-blue rounded"
+            className="h-max rounded bg-neutral-600 px-4 py-2.5 text-white dark:bg-bk-blue"
           >
             Log out
           </button>
@@ -181,7 +181,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
           addBookmark={addBookmark}
         />
       </Modal>
-      <div className="flex justify-start items-start">
+      <div className="flex items-start justify-start">
         <MenuBar selected={menuOption} setSelected={setMenuOption} />
         {menuOption === "Commands" && (
           <CommandTable
@@ -209,7 +209,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
               },
             }}
             exit={{ opacity: 0, x: -20 }}
-            className="w-full m-auto lg:w-2/4 bg-white dark:bg-neutral-800 rounded shadow"
+            className="m-auto w-full rounded bg-white shadow dark:bg-neutral-800 lg:w-2/4"
           >
             <BrowserSetup />
           </motion.div>

@@ -1,15 +1,15 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import {
-  QueryClientProvider,
-  QueryClient,
   Hydrate,
+  QueryClient,
+  QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ThemeProvider } from "next-themes";
-import { ReactElement, ReactNode, useState } from "react";
-import Layout from "../src/components/Layout";
 import { NextPage } from "next";
+import { ThemeProvider } from "next-themes";
+import type { AppProps } from "next/app";
+import { ReactElement, ReactNode, useState } from "react";
+import Layout from "../src/components/layout";
+import "../styles/globals.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   import("../src/mocks/setupMocks").then(({ setupMocks }) => {

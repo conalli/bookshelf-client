@@ -19,8 +19,11 @@
     "jsx": "preserve",
     "incremental": true,
     "types": [
+      "node",
       "cypress",
-      "@testing-library/cypress"
+      "jest",
+      "@testing-library/cypress",
+      "@testing-library/jest-dom"
     ]
   },
   "include": [
@@ -29,6 +32,7 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "./cypress.config.ts"
   ]
 }

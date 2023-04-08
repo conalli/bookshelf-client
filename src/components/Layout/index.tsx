@@ -3,9 +3,9 @@ import { useTheme } from "next-themes";
 import React, { ReactNode, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useMessages } from "../../hooks/useMessages";
-import ErrorNotification from "../ErrorNotification";
-import Loading from "../Loading";
-import Nav from "../Nav";
+import ErrorNotification from "../ui/ErrorNotification";
+import Header from "../ui/header";
+import Loading from "../ui/Loading";
 
 type LayoutProps = {
   children: ReactNode;
@@ -47,9 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         variants={variants}
         className=" bk-background max-w-screen min-h-screen"
       >
-        <header className="w-full border-b border-bk-blue px-8 py-2 dark:border-bk-orange">
-          <Nav />
-        </header>
+        <Header />
         <div className="col-start-2 row-start-2">{children}</div>
         <ul className="fixed bottom-0 right-0 top-0 flex flex-col justify-end">
           <AnimatePresence initial={false}>

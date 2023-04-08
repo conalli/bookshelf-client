@@ -1,4 +1,4 @@
-import BookmarkTable from "../../../src/components/BookmarkTable";
+import BookmarkTable from "../../../src/components/dashboard/BookmarkTable";
 import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
 import { useGetUser } from "../../../src/hooks/useUser";
 import { getUserAndBookmarksOrRedirect } from "../../../src/utils/api/props";
@@ -18,7 +18,7 @@ const Bookmark = ({
 
   return (
     <div>
-      <h1 className="text-4xl py-3">WebCLI Bookmarks:</h1>
+      <h1 className="py-3 text-4xl">WebCLI Bookmarks:</h1>
       <BookmarkTable folder={folderData} isLoading={false} isError={false} />
     </div>
   );
