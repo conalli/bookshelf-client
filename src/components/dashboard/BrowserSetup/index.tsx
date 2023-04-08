@@ -1,6 +1,6 @@
+import { SearchURL } from "@utils/api/endpoints";
+import { copyToClipboard } from "@utils/copyToClipboard";
 import { useState } from "react";
-import { SearchURL } from "../../../utils/api/endpoints";
-import { copyToClipboard } from "../../../utils/copyToClipboard";
 
 const BrowserSetup = () => {
   const [isCopied, setIsCopied] = useState(false);

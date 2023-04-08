@@ -1,11 +1,13 @@
-import { QueryKey, useQuery, UseQueryOptions } from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { removeUserAtom, userAtom } from "@store/user";
+import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { APIURL } from "@utils/api/endpoints";
+import type { ErrorResponse } from "@utils/api/response";
+import type { User } from "@utils/api/types";
+import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
+import type { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
-import { removeUserAtom, userAtom } from "../store/user";
-import { APIURL } from "../utils/api/endpoints";
-import { ErrorResponse } from "../utils/api/response";
-import { User } from "../utils/api/types";
-import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const USER_KEY = "user";

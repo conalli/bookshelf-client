@@ -1,5 +1,5 @@
+import type { User } from "@utils/api/types";
 import Link from "next/link";
-import { User } from "../../../../utils/api/types";
 import ThemeToggleButton from "../ThemeToggleButton";
 
 const linkStyles =

@@ -1,14 +1,15 @@
+import Layout from "@components/layout";
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
-import { ReactElement, ReactNode, useState } from "react";
-import Layout from "../src/components/layout";
+import type { ReactElement, ReactNode } from "react";
+import { useState } from "react";
 import "../styles/globals.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {

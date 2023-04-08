@@ -1,8 +1,8 @@
+import { About } from "@components/home";
 import { motion } from "framer-motion";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import About from "../src/components/home/About";
 
 const Home: NextPage = () => {
   return (

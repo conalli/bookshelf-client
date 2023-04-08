@@ -1,32 +1,34 @@
+import type { MenuOption } from "@components/dashboard";
+import {
+  BookmarkTable,
+  BrowserSetup,
+  CommandTable,
+  MenuBar,
+  Modal,
+  ModalOverlay,
+} from "@components/dashboard";
+import Loading from "@components/ui/Loading";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { motion } from "framer-motion";
-import { ChangeEvent, useState } from "react";
-import Loading from "../../src/components/Loading";
-import BookmarkTable from "../../src/components/dashboard/BookmarkTable";
-import BrowserSetup from "../../src/components/dashboard/BrowserSetup";
-import CommandTable from "../../src/components/dashboard/CommandTable";
-import MenuBar, { MenuOption } from "../../src/components/dashboard/MenuBar";
-import Modal from "../../src/components/dashboard/Modal";
-import ModalOverlay from "../../src/components/dashboard/Modal/ModalOverlay";
-import { useAuth } from "../../src/hooks/useAuth";
 import {
   BOOKMARKS_FILE_FORM_KEY,
   useAddBookmark,
   useAddBookmarkFromFile,
-  useGetBookmarks,
-} from "../../src/hooks/useBookmarks";
-import {
   useAddCommand,
+  useAuth,
   useDeleteCommand,
+  useGetBookmarks,
   useGetCommands,
-} from "../../src/hooks/useCommands";
-import { useModal } from "../../src/hooks/useModal";
-import { useRefreshTokens } from "../../src/hooks/useRefreshTokens";
-import { useGetUser } from "../../src/hooks/useUser";
-import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "../../src/store/modal";
-import { getUserOrRedirect } from "../../src/utils/api/props";
-import { User } from "../../src/utils/api/types";
-import { NextPageWithLayoutAndProps } from "../_app";
+  useGetUser,
+  useModal,
+  useRefreshTokens,
+} from "@hooks";
+import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "@store/modal";
+import { getUserOrRedirect } from "@utils/api/props";
+import type { User } from "@utils/api/types";
+import { motion } from "framer-motion";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
+import type { NextPageWithLayoutAndProps } from "../_app";
 
 export type UpdateCommandStatus = {
   add: {

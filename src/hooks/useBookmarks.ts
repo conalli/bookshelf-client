@@ -1,17 +1,18 @@
+import { selectedBookmarkAtom } from "@store/bookmark";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { useAtomValue, useSetAtom } from "jotai";
-import { selectedBookmarkAtom } from "../store/bookmark";
-import { APIURL } from "../utils/api/endpoints";
-import { AddBookmarkRequest } from "../utils/api/request";
-import {
-  AddBookmarkResponse,
-  ErrorResponse,
+import { APIURL } from "@utils/api/endpoints";
+import type { AddBookmarkRequest } from "@utils/api/request";
+import type {
   AddBookmarkFileResponse,
+  AddBookmarkResponse,
   DeleteBookmarkResponse,
-} from "../utils/api/response";
-import { Folder } from "../utils/api/types";
-import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
+  ErrorResponse,
+} from "@utils/api/response";
+import type { Folder } from "@utils/api/types";
+import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
+import type { AxiosError, AxiosResponse } from "axios";
+import axios, { isAxiosError } from "axios";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useMessages } from "./useMessages";
 
 export const BOOKMARKS_FILE_FORM_KEY = "bookmarks_file";
@@ -48,7 +49,7 @@ export const useAddBookmark = (userKey?: string) => {
       queryClient.invalidateQueries([createQueryKey(BOOKMARKS_KEY, userKey)]);
     },
     onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
+      if (isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
@@ -86,7 +87,7 @@ export const useAddBookmarkFromFile = (userKey?: string) => {
       queryClient.invalidateQueries([createQueryKey(BOOKMARKS_KEY, userKey)]);
     },
     onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
+      if (isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
@@ -146,7 +147,7 @@ export const useDeleteBookmark = (userKey?: string) => {
       queryClient.invalidateQueries([createQueryKey(BOOKMARKS_KEY, userKey)]);
     },
     onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
+      if (isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
@@ -176,7 +177,7 @@ export const useGetBookmarks = (
     retryDelay: exponentialBackoff,
     onSuccess,
     onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
+      if (isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }

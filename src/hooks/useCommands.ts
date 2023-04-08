@@ -1,16 +1,20 @@
+import { selectedCommandAtom } from "@store/command";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { useAtomValue, useSetAtom } from "jotai";
-import { selectedCommandAtom } from "../store/command";
-import { APIURL } from "../utils/api/endpoints";
-import { AddCommandRequest, DeleteCommandRequest } from "../utils/api/request";
-import {
+import { APIURL } from "@utils/api/endpoints";
+import type {
+  AddCommandRequest,
+  DeleteCommandRequest,
+} from "@utils/api/request";
+import type {
   AddCommandResponse,
   DeleteCommandResponse,
   ErrorResponse,
-} from "../utils/api/response";
-import { CommandList } from "../utils/api/types";
-import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
+} from "@utils/api/response";
+import type { CommandList } from "@utils/api/types";
+import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
+import type { AxiosError, AxiosResponse } from "axios";
+import axios, { isAxiosError } from "axios";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useMessages } from "./useMessages";
 
 export const COMMAND_KEY = "cmds";
@@ -41,7 +45,7 @@ export const useGetCommands = (
       retryDelay: exponentialBackoff,
       onSuccess,
       onError: (err) => {
-        if (axios.isAxiosError(err) && err.response) {
+        if (isAxiosError(err) && err.response) {
           const errRes = err.response.data as ErrorResponse;
           addMessage(`${errRes.title} -- ${errRes.detail}`, true);
         }
@@ -91,7 +95,7 @@ export const useAddCommand = (userKey?: string) => {
       queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
     },
     onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
+      if (isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }
@@ -127,7 +131,7 @@ export const useDeleteCommand = (userKey?: string) => {
       queryClient.invalidateQueries([createQueryKey(COMMAND_KEY, userKey)]);
     },
     onError: (err) => {
-      if (axios.isAxiosError(err) && err.response) {
+      if (isAxiosError(err) && err.response) {
         const errRes = err.response.data as ErrorResponse;
         addMessage(`${errRes.title} -- ${errRes.detail}`, true);
       }

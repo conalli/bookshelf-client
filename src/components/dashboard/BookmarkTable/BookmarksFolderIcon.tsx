@@ -3,7 +3,6 @@ import {
   FolderMinusIcon,
   FolderPlusIcon,
 } from "@heroicons/react/24/outline";
-import React from "react";
 
 const BookmarksFolderIcon = ({
   hasContents,
@@ -14,14 +13,14 @@ const BookmarksFolderIcon = ({
 }) => {
   if (hasContents) {
     return isOpen ? (
-      <FolderMinusIcon className="text-gray-400 dark:text-gray-300 w-2 h-2 md:w-3 md:h-3 lg:w-5 lg:h-5" />
+      <FolderMinusIcon className="h-2 w-2 text-gray-400 dark:text-gray-300 md:h-3 md:w-3 lg:h-5 lg:w-5" />
     ) : (
-      <FolderPlusIcon className="text-gray-900 dark:text-gray-100 w-2 h-2 md:w-3 md:h-3 lg:w-5 lg:h-5" />
+      <FolderPlusIcon className="h-2 w-2 text-gray-900 dark:text-gray-100 md:h-3 md:w-3 lg:h-5 lg:w-5" />
     );
   }
 
   return (
-    <FolderIcon className="text-gray-400 dark:text-gray-300 w-2 h-2 md:w-3 md:h-3 lg:w-5 lg:h-5" />
+    <FolderIcon className="h-2 w-2 text-gray-400 dark:text-gray-300 md:h-3 md:w-3 lg:h-5 lg:w-5" />
   );
 };
 

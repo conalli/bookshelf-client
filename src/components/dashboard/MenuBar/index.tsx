@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import React from "react";
 
 export type MenuOption = "Commands" | "Bookmarks" | "Setup guide" | "Settings";
 
@@ -17,7 +18,7 @@ const generateStyles = (selected: MenuOption, option: MenuOption): string => {
 
 const MenuBar: React.FC<MenuBarProps> = ({ selected, setSelected }) => {
   return (
-    <nav className="h-full p-2 md:mr-4 bg-white dark:bg-neutral-800 rounded-l-md md:rounded-md shadow-lg">
+    <nav className="h-full rounded-l-md bg-white p-2 shadow-lg dark:bg-neutral-800 md:mr-4 md:rounded-md">
       <ul className="flex flex-col gap-2">
         <li
           className={generateStyles(selected, "Commands")}

@@ -1,9 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { APIURL } from "@utils/api/endpoints";
+import type { ErrorResponse } from "@utils/api/response";
+import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
+import type { AxiosError, AxiosResponse } from "axios";
+import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/router";
-import { APIURL } from "../utils/api/endpoints";
-import { ErrorResponse } from "../utils/api/response";
-import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const REFRESH_KEY = "refresh";
@@ -35,7 +36,7 @@ export const useRefreshTokens = (userKey?: string) => {
     retryDelay: exponentialBackoff,
     staleTime: REFRESH_INTERVAL,
     onError: (error) => {
-      if (axios.isAxiosError(error)) {
+      if (isAxiosError(error)) {
         const err = error as AxiosError<ErrorResponse, null>;
         if (err.response !== undefined) {
           addMessage(`${err.response?.data.title}`, true);

@@ -1,11 +1,12 @@
-import { AnimatePresence, motion, useAnimation, Variants } from "framer-motion";
+import { useAuth, useMessages } from "@hooks";
+import type { Variants } from "framer-motion";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useTheme } from "next-themes";
-import React, { ReactNode, useEffect } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { useMessages } from "../../hooks/useMessages";
+import type { ReactNode } from "react";
+import React, { useEffect } from "react";
 import ErrorNotification from "../ui/ErrorNotification";
-import Header from "../ui/header";
 import Loading from "../ui/Loading";
+import Header from "../ui/header";
 
 type LayoutProps = {
   children: ReactNode;

@@ -1,12 +1,12 @@
+import Spinner from "@components/ui/Spinner";
 import {
   CheckCircleIcon,
   CheckIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
+import type { UpdateCommandStatus } from "@pages/dashboard";
+import type { Command } from "@store/command";
 import { useEffect, useState } from "react";
-import { UpdateCommandStatus } from "../../../../pages/dashboard";
-import { Command } from "../../../store/command";
-import Spinner from "../../ui/Spinner";
 
 type StatusIconProps = {
   cmd: string;

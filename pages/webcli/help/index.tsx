@@ -1,6 +1,6 @@
-import { useGetUser } from "../../../src/hooks/useUser";
-import { getUserIfPossible } from "../../../src/utils/api/props";
-import { User } from "../../../src/utils/api/types";
+import { useGetUser } from "@hooks";
+import { getUserIfPossible } from "@utils/api/props";
+import type { User } from "@utils/api/types";
 
 export const getServerSideProps = getUserIfPossible;
 
@@ -12,7 +12,7 @@ const Help = ({ userData }: { userData: User | null }) => {
   );
   return (
     <div>
-      <h1 className="text-4xl py-3">WebCLI Help:</h1>
+      <h1 className="py-3 text-4xl">WebCLI Help:</h1>
       <table>
         <thead>
           <tr>
@@ -37,27 +37,27 @@ const Help = ({ userData }: { userData: User | null }) => {
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-b</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-b</td>
             <td>Create bookmark. (-url required)</td>
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-c</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-c</td>
             <td>Create command with given name. (-url required)</td>
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-url</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-url</td>
             <td>Url for given bookmark/command.</td>
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-name</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-name</td>
             <td>Name for given bookmark to provide context.</td>
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-path</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-path</td>
             <td>Folder path for given bookmark. (default: none)</td>
           </tr>
           <tr>
@@ -72,17 +72,17 @@ const Help = ({ userData }: { userData: User | null }) => {
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-b</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-b</td>
             <td>List bookmarks.</td>
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-bf</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-bf</td>
             <td>List bookmarks for a given bookmark folder.</td>
           </tr>
           <tr>
             <td></td>
-            <td className="text-bk-blue dark:text-bk-orange py-1">-c</td>
+            <td className="py-1 text-bk-blue dark:text-bk-orange">-c</td>
             <td>List commands.</td>
           </tr>
           <tr>

@@ -1,9 +1,9 @@
+import { useMessages } from "@hooks";
+import { addOpenFoldersAtom, foldersAtom } from "@store/folders";
+import type { Folder as APIFolder } from "@utils/api/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSetAtom } from "jotai";
 import React, { useEffect } from "react";
-import { useMessages } from "../../../hooks/useMessages";
-import { addOpenFoldersAtom, foldersAtom } from "../../../store/folders";
-import { Folder as APIFolder } from "../../../utils/api/types";
 import Spinner from "../../ui/Spinner";
 import Folder from "./Folder";
 

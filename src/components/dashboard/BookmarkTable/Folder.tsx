@@ -1,8 +1,9 @@
+import { openFoldersAtom, updateOpenFoldersAtom } from "@store/folders";
+import type { Folder as APIFolder } from "@utils/api/types";
 import { motion } from "framer-motion";
 import { useAtomValue, useSetAtom } from "jotai";
-import { MouseEvent, useState } from "react";
-import { openFoldersAtom, updateOpenFoldersAtom } from "../../../store/folders";
-import { Folder as APIFolder } from "../../../utils/api/types";
+import type { MouseEvent } from "react";
+import { useState } from "react";
 import Bookmark from "./Bookmark";
 import BookmarksFolderIcon from "./BookmarksFolderIcon";
 

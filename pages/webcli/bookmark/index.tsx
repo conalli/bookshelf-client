@@ -1,8 +1,7 @@
-import BookmarkTable from "../../../src/components/dashboard/BookmarkTable";
-import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
-import { useGetUser } from "../../../src/hooks/useUser";
-import { getUserAndBookmarksOrRedirect } from "../../../src/utils/api/props";
-import { Folder, User } from "../../../src/utils/api/types";
+import { BookmarkTable } from "@components/dashboard";
+import { useGetUser, useRefreshTokens } from "@hooks";
+import { getUserAndBookmarksOrRedirect } from "@utils/api/props";
+import type { Folder, User } from "@utils/api/types";
 
 export const getServerSideProps = getUserAndBookmarksOrRedirect;
 

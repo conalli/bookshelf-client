@@ -1,20 +1,23 @@
-import {
+import type { SignInFormVariant } from "@components/auth/SignInForm";
+import type { AuthStatus } from "@store/auth";
+import { statusAtom } from "@store/auth";
+import type {
   MutationFunction,
   QueryClient,
-  useMutation,
   UseMutationOptions,
-  useQueryClient,
 } from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { SetStateAction, useAtomValue, useSetAtom } from "jotai";
-import { NextRouter, useRouter } from "next/router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { APIURL } from "@utils/api/endpoints";
+import type { AuthRequest } from "@utils/api/request";
+import type { ErrorResponse } from "@utils/api/response";
+import type { User } from "@utils/api/types";
+import type { AxiosError, AxiosResponse } from "axios";
+import axios, { isAxiosError } from "axios";
+import type { SetStateAction } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
+import type { NextRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useCallback } from "react";
-import { SignInFormVariant } from "../components/auth/SignInForm";
-import { AuthStatus, statusAtom } from "../store/auth";
-import { APIURL } from "../utils/api/endpoints";
-import { AuthRequest } from "../utils/api/request";
-import { ErrorResponse } from "../utils/api/response";
-import { User } from "../utils/api/types";
 import { useMessages } from "./useMessages";
 import { USER_KEY, useRemoveUser } from "./useUser";
 
@@ -87,7 +90,7 @@ const authRequest = (
   },
   onError: (error): void => {
     setAuthStatus({ success: false, loading: false, error: true });
-    if (axios.isAxiosError(error) && error.response?.data) {
+    if (isAxiosError(error) && error.response?.data) {
       const errRes = error.response.data as ErrorResponse;
       addMessage(`${errRes.title}`, true);
     } else {
@@ -124,7 +127,7 @@ export const useAuth = () => {
       setAuthStatus(null);
     },
     onError: (error) => {
-      if (axios.isAxiosError(error) && error.response?.data) {
+      if (isAxiosError(error) && error.response?.data) {
         const errRes = error.response.data as ErrorResponse;
         addMessage(`${errRes.title}`, true);
       } else {

@@ -1,5 +1,4 @@
-import React from "react";
-import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
+import { useRefreshTokens } from "@hooks";
 
 const Success = () => {
   useRefreshTokens();

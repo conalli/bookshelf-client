@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import React from "react";
 
 const CommandPlaceholder = () => {
   return (
-    <motion.div className="relative text-3xl w-full h-full flex items-center justify-center">
+    <motion.div className="relative flex h-full w-full items-center justify-center text-3xl">
       Stacking shelves
       <motion.p
         className="inline-block"

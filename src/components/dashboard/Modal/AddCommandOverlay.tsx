@@ -1,12 +1,13 @@
-import { UseMutationResult } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import type { Command } from "@store/command";
+import type { UseMutationResult } from "@tanstack/react-query";
+import type { AddCommandRequest } from "@utils/api/request";
+import type { AddCommandResponse, ErrorResponse } from "@utils/api/response";
+import type { User } from "@utils/api/types";
+import type { AxiosError } from "axios";
 import { motion } from "framer-motion";
-import { SetStateAction } from "jotai";
-import { ChangeEvent, useState } from "react";
-import { Command } from "../../../store/command";
-import { AddCommandRequest } from "../../../utils/api/request";
-import { AddCommandResponse, ErrorResponse } from "../../../utils/api/response";
-import { User } from "../../../utils/api/types";
+import type { SetStateAction } from "jotai";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
 
 type AddCommandOverlayProps = {
   user: User;

@@ -1,11 +1,10 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { useModal, useSelectCommand } from "@hooks";
+import type { UpdateCommandStatus } from "@pages/dashboard";
+import { DELETE_COMMAND_MODAL } from "@store/modal";
+import type { CommandList, User } from "@utils/api/types";
 import { motion } from "framer-motion";
 import React from "react";
-import { UpdateCommandStatus } from "../../../../pages/dashboard";
-import { useSelectCommand } from "../../../hooks/useCommands";
-import { useModal } from "../../../hooks/useModal";
-import { DELETE_COMMAND_MODAL } from "../../../store/modal";
-import { CommandList, User } from "../../../utils/api/types";
 import CommandPlaceholder from "./CommandPlaceholder";
 import StatusIcon from "./StatusIcon";
 

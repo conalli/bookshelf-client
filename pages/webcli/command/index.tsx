@@ -1,18 +1,20 @@
-import CommandTable from "../../../src/components/dashboard/CommandTable";
-import Modal from "../../../src/components/dashboard/Modal";
-import DeleteCommandOverlay from "../../../src/components/dashboard/Modal/DeleteCommandOverlay";
+import {
+  CommandTable,
+  DeleteCommandOverlay,
+  Modal,
+} from "@components/dashboard";
 import {
   useDeleteCommand,
   useGetCommands,
+  useGetUser,
+  useModal,
+  useRefreshTokens,
   useSelectCommand,
-} from "../../../src/hooks/useCommands";
-import { useModal } from "../../../src/hooks/useModal";
-import { useRefreshTokens } from "../../../src/hooks/useRefreshTokens";
-import { useGetUser } from "../../../src/hooks/useUser";
-import { DELETE_COMMAND_MODAL } from "../../../src/store/modal";
-import { getUserOrRedirect } from "../../../src/utils/api/props";
-import { User } from "../../../src/utils/api/types";
-import { UpdateCommandStatus } from "../../dashboard";
+} from "@hooks";
+import { DELETE_COMMAND_MODAL } from "@store/modal";
+import { getUserOrRedirect } from "@utils/api/props";
+import type { User } from "@utils/api/types";
+import type { UpdateCommandStatus } from "../../dashboard";
 
 export const getServerSideProps = getUserOrRedirect;
 
