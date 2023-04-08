@@ -49,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         className=" bk-background max-w-screen min-h-screen"
       >
         <Header />
-        <div className="col-start-2 row-start-2">{children}</div>
+        {children}
         <ul className="fixed bottom-0 right-0 top-0 flex flex-col justify-end">
           <AnimatePresence initial={false}>
             {messages

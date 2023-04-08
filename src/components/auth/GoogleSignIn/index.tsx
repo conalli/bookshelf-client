@@ -6,6 +6,7 @@ import type { SignInFormVariant } from "../SignInForm";
 const GoogleIcon = () => {
   return (
     <svg
+      className="h-[16px] w-[16px] md:h-[24px] md:w-[24px]"
       xmlns="http://www.w3.org/2000/svg"
       height="24"
       viewBox="0 0 24 24"
@@ -39,8 +40,11 @@ const GoogleSignInButton: React.FC<{ authType: SignInFormVariant }> = ({
     authType === "Sign up" ? "signup" : "login"
   }`;
   return (
-    <button className="flex justify-center rounded bg-gray-100 px-5 py-2 shadow-md hover:opacity-90 dark:bg-white dark:text-black">
-      <Link className="flex items-center justify-center gap-2" href={href}>
+    <button className="flex justify-center rounded bg-gray-100 px-3 py-2 shadow-md hover:opacity-90 dark:bg-white dark:text-black sm:px-5">
+      <Link
+        className="sm:text-md flex items-center justify-center gap-2 text-sm"
+        href={href}
+      >
         <GoogleIcon />
         {`${authType} with Google`}
       </Link>

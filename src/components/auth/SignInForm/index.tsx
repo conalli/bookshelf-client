@@ -42,7 +42,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form className="w-32 md:w-80">
+          <Form className="">
             <div className="text-md w-full py-2 md:text-xl">
               <label htmlFor="email" className="py-2 pl-1">
                 Email:
@@ -58,7 +58,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
                 }
                 autoCorrect="off"
                 length={50}
-                className="block w-full  appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md focus:border-bk-blue focus:ring-bk-blue dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-bk-orange dark:focus:ring-bk-orange"
+                className="block appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md focus:border-bk-blue focus:ring-bk-blue dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-bk-orange dark:focus:ring-bk-orange md:text-xl"
               />
               <p className="md:text-md py-2 pl-1 text-xs font-semibold text-bk-blue dark:text-bk-orange">
                 <ErrorMessage name="email" />
@@ -79,7 +79,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
                 }
                 autoCorrect="off"
                 length={50}
-                className="block w-full  appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md focus:border-bk-blue focus:ring-bk-blue dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-bk-orange dark:focus:ring-bk-orange"
+                className="block appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md focus:border-bk-blue focus:ring-bk-blue dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-bk-orange dark:focus:ring-bk-orange md:text-xl"
               />
               <p className="md:text-md py-2 pl-1 text-xs font-semibold text-bk-blue dark:text-bk-orange">
                 <ErrorMessage name="password" />

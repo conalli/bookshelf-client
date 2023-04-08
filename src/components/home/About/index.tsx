@@ -5,11 +5,13 @@ const About = () => {
   return (
     <article
       id="learn"
-      className="w-full my-4 md:my-10 lg:my-20 p-4 flex flex-col bg-white dark:bg-neutral-800 rounded-md shadow-md"
+      className="flex w-full flex-col rounded-md bg-white px-8 py-4 shadow-md dark:bg-neutral-800 md:py-8"
     >
       <section className="flex flex-col py-1 sm:py-6">
-        <h2 className="text-5xl font-bold py-4">About Bookshelf.</h2>
-        <p className="text-xl">
+        <h2 className="py-4 text-3xl font-bold sm:text-5xl">
+          About Bookshelf.
+        </h2>
+        <p className="sm:text-xl">
           Bookshelf helps you to keep your bookmarks up to date across browsers,
           manage and assign commands for quick and easy access and gives you a
           tool to use them in your browser of choice. Bookshelf Search also
@@ -18,12 +20,12 @@ const About = () => {
         </p>
       </section>
       <section>
-        <h2 className="text-4xl font-bold py-4">How?</h2>
-        <ul className="pt-4 text-xl">
+        <h2 className="py-4 text-2xl font-bold sm:text-4xl">How?</h2>
+        <ul className="sm:pt-4 sm:text-xl">
           <li className="py-1 md:py-2">
             &rarr; &nbsp;
             <Link
-              className="underline decoration-bk-blue dark:decoration-bk-orange decoration-2 hover:text-bk-blue dark:hover:text-bk-orange"
+              className="underline decoration-bk-blue decoration-2 hover:text-bk-blue dark:decoration-bk-orange dark:hover:text-bk-orange"
               href="/signin"
             >
               Sign up
@@ -46,7 +48,7 @@ const About = () => {
       </section>
       <motion.a
         href="#top"
-        className="underline py-6 decoration-bk-blue decoration-2 text-xl hover:text-bk-blue"
+        className="py-6 text-xl underline decoration-bk-blue decoration-2 hover:text-bk-blue"
       >
         To top
       </motion.a>

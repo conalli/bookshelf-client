@@ -22,22 +22,20 @@ const SignIn = () => {
         },
       }}
       exit={{ opacity: 0, x: -20 }}
-      className="flex h-4/5 items-center justify-center py-4 md:h-full md:items-start md:py-10"
+      className="flex h-4/5 items-center justify-center py-10 md:h-full md:items-start"
     >
       <Head>
         <title>Sign in</title>
       </Head>
-      <div className="grid h-4/5 w-4/5 grid-cols-6 grid-rows-4 rounded-md bg-white shadow-md dark:bg-neutral-800 md:w-3/4 xl:w-2/4">
-        <h1 className="col-span-4 col-start-2 self-start justify-self-center py-2 text-xl md:col-span-4 md:col-start-2 md:self-center md:text-3xl lg:py-10 lg:text-6xl">
+      <div className="flex h-4/5 w-4/5 flex-col items-center justify-center rounded-md bg-white py-10 shadow-md dark:bg-neutral-800 md:w-3/4 xl:w-2/4">
+        <h1 className="py-2 text-xl md:text-3xl lg:py-10 lg:text-6xl">
           {formType}
         </h1>
-        <div className="col-span-4 col-start-2 row-span-2 row-start-2 self-center justify-self-center md:col-span-2 md:col-start-3">
-          <SignInForm type={formType} />
-          <div className="flex justify-center">
-            <GoogleSignInButton authType={formType} />
-          </div>
+        <SignInForm type={formType} />
+        <div className="flex justify-center">
+          <GoogleSignInButton authType={formType} />
         </div>
-        <p className="col-span-6 col-start-1 row-start-4 self-end justify-self-center py-4 text-xs md:col-span-4 md:col-start-2 md:self-center md:text-xl lg:py-10">
+        <p className="py-4 text-xs md:text-xl lg:py-10">
           {"Don't have an account? "}
           <Link
             className="rounded-sm px-1 underline decoration-bk-blue decoration-2 dark:decoration-bk-orange"

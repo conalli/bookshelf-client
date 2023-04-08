@@ -19,38 +19,36 @@ const Home: NextPage = () => {
             duration: 0.6,
           },
         }}
-        exit={{ opacity: 0, x: -20 }}
         id="home"
-        className=""
       >
-        <main className="min-w-sceen m-0 h-4/5">
-          <section className="grid grid-cols-6 grid-rows-6 py-6 md:py-0">
+        <main className="min-w-sceen px-8">
+          <section className="grid grid-cols-mobile grid-rows-mobile py-10 sm:grid-cols-6 sm:grid-rows-6 md:py-0">
             <div className="bk-rotate-text align-self-center col-span-2 col-start-3 row-span-3 row-start-1 flex flex-auto flex-col items-end justify-self-center text-white md:row-start-2">
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="  rounded bg-bk-orange px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
+                className="  rounded bg-bk-orange px-1 py-4 text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Store.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="rounded bg-bk-red px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
+                className="rounded bg-bk-red px-1 py-4 text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Use.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="rounded bg-bk-blue px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
+                className="rounded bg-bk-blue px-1 py-4 text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Update.
               </motion.h2>
               <motion.h2
                 initial={{ rotate: 180 }}
                 whileHover={{ scaleY: 1.1 }}
-                className="group rounded bg-bk-orange px-1 py-4 text-2xl md:text-4xl lg:text-6xl xl:text-7xl"
+                className="group rounded bg-bk-orange px-1 py-4 text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
               >
                 Collaborate.&lowast;
               </motion.h2>
