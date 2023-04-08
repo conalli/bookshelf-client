@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
 
 const Loading = ({ isPage = false }: { isPage?: boolean }) => {
   return (

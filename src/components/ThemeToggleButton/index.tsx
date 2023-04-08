@@ -1,4 +1,4 @@
-import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";

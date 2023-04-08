@@ -1,8 +1,8 @@
 import { AnimatePresence, motion, useAnimation, Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import React, { ReactNode, useEffect } from "react";
-import { useMessages } from "../../hooks/useMessages";
 import { useAuth } from "../../hooks/useAuth";
+import { useMessages } from "../../hooks/useMessages";
 import ErrorNotification from "../ErrorNotification";
 import Loading from "../Loading";
 import Nav from "../Nav";
@@ -10,6 +10,9 @@ import Nav from "../Nav";
 type LayoutProps = {
   children: ReactNode;
 };
+
+const MESSAGE_DURATION_MS = 3000;
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { status } = useAuth();
   const { messages, removeMessage, removeMessageFIFO } = useMessages();
@@ -19,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const variants: Variants = {
     themeTransition: {
       opacity: [0, 1],
-      transition: { duration: 1.5 },
+      transition: { duration: 0.2 },
     },
   };
 
@@ -30,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     let time: NodeJS.Timer;
     if (messages.length) {
-      time = setInterval(removeMessageFIFO, 3000);
+      time = setInterval(removeMessageFIFO, MESSAGE_DURATION_MS);
     }
     return () => clearInterval(time);
   }, [messages, removeMessageFIFO]);
@@ -42,9 +45,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         id="top"
         animate={controls}
         variants={variants}
-        className="grid grid-cols-[1fr_90%_1fr] md:grid-cols-[1fr_80%_1fr] lg:grid-cols-[1fr_70%_1fr] grid-rows-[10vh_auto] bk-background min-h-screen max-w-screen"
+        className=" bk-background max-w-screen min-h-screen"
       >
-        <header className="w-full col-start-2 row-start-1 m-auto">
+        <header className="w-full border-b border-bk-blue px-8 py-2 dark:border-bk-orange">
           <Nav />
         </header>
         <div className="col-start-2 row-start-2">{children}</div>
