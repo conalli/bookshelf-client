@@ -1,3 +1,6 @@
+.github
+.vscode
+.vercel
 .next
 .swc
 node_modules
