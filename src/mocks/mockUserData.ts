@@ -1,4 +1,4 @@
-import { User } from "../utils/api/types";
+import type { User } from "../utils/api/types";
 
 export type MockUser = User & {
   password: string;

@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import ThemeToggleButton from ".";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 describe("Bookshelf Logo", () => {
   beforeEach(() => {

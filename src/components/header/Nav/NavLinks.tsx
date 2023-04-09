@@ -1,7 +1,7 @@
 import { useAuth } from "@hooks";
 import type { User } from "@utils/api/types";
 import Link from "next/link";
-import ThemeToggleButton from "../ThemeToggleButton";
+import ThemeToggleButton from "../ThemeToggleButton/ThemeToggleButton";
 
 const linkStyles =
   /*tw*/ "py-1 px-2 hover:text-bk-blue hover:dark:text-orange-300";

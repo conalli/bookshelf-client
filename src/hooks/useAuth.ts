@@ -8,9 +8,7 @@ import type {
 } from "@tanstack/react-query";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { APIURL } from "@utils/api/endpoints";
-import type { AuthRequest } from "@utils/api/request";
-import type { ErrorResponse } from "@utils/api/response";
-import type { User } from "@utils/api/types";
+import type { AuthRequest, ErrorResponse, User } from "@utils/api/types";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import type { SetStateAction } from "jotai";

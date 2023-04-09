@@ -1,7 +1,7 @@
-import { PathParams, rest } from "msw";
-import { APIURL } from "../../utils/api/endpoints";
-import { ErrorResponse } from "../../utils/api/response";
-import { User } from "../../utils/api/types";
+import { APIURL } from "@utils/api/endpoints";
+import type { ErrorResponse, User } from "@utils/api/types";
+import type { PathParams } from "msw";
+import { rest } from "msw";
 import { mockUsers } from "../mockUserData";
 
 export const user = [

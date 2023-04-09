@@ -6,7 +6,7 @@ import {
 } from "@hooks";
 import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "@store/modal";
 import type { ChangeEvent } from "react";
-import type { MenuOption } from "../MenuBar";
+import type { MenuOption } from "./MenuBar";
 
 type ActionBarProps = {
   menuOption: MenuOption;

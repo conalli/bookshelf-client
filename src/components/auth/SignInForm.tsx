@@ -1,6 +1,6 @@
 import type { AuthRequestData } from "@hooks";
 import { useAuth } from "@hooks";
-import type { AuthRequest } from "@utils/api/request";
+import type { AuthRequest } from "@utils/api/types";
 import type { FormikHelpers } from "formik";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { motion } from "framer-motion";

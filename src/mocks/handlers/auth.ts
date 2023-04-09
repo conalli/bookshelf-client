@@ -1,9 +1,9 @@
-import { PathParams, rest } from "msw";
-import { AuthRequest } from "../../utils/api/request";
-import { mockUsers, MockUser } from "../mockUserData";
-import { APIURL } from "../../utils/api/endpoints";
-import { User } from "../../utils/api/types";
-import { ErrorResponse } from "../../utils/api/response";
+import { APIURL } from "@utils/api/endpoints";
+import type { AuthRequest, ErrorResponse, User } from "@utils/api/types";
+import type { PathParams } from "msw";
+import { rest } from "msw";
+import type { MockUser } from "../mockUserData";
+import { mockUsers } from "../mockUserData";
 
 export const auth = [
   rest.post<AuthRequest, PathParams, User | ErrorResponse>(

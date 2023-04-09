@@ -3,14 +3,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { APIURL } from "@utils/api/endpoints";
 import type {
   AddCommandRequest,
-  DeleteCommandRequest,
-} from "@utils/api/request";
-import type {
   AddCommandResponse,
+  CommandList,
+  DeleteCommandRequest,
   DeleteCommandResponse,
   ErrorResponse,
-} from "@utils/api/response";
-import type { CommandList } from "@utils/api/types";
+} from "@utils/api/types";
 import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
