@@ -36,7 +36,7 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
     <div className="pb-0.5 pt-1">
       {folder.name !== FOLDER_BASE_PATH && (
         <div
-          className="flex gap-2 truncate hover:cursor-pointer"
+          className="flex items-center gap-2 truncate hover:cursor-pointer"
           onClick={(e) => handleToggleFolder(e, folder.name)}
         >
           <BookmarksFolderIcon hasContents={hasContents} isOpen={isOpen} />
@@ -44,30 +44,7 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
         </div>
       )}
       {isOpen && (
-        <motion.ul
-          className="mx-4"
-          layout
-          variants={{
-            open: {
-              transition: {
-                type: "spring",
-                bounce: 0,
-                duration: 0.7,
-                delayChildren: 0.5,
-                staggerChildren: 0.1,
-              },
-            },
-            closed: {
-              transition: {
-                type: "spring",
-                bounce: 0,
-                duration: 0.3,
-              },
-            },
-          }}
-          initial={false}
-          animate={isOpen ? "open" : "closed"}
-        >
+        <motion.ul key={folder.id} className="mx-4">
           {bookmarks &&
             bookmarks.map((b) => (
               <motion.li
@@ -76,25 +53,6 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                   setShowDelete(b.id);
                 }}
                 onHoverEnd={() => setShowDelete(null)}
-                whileHover={{ scale: 1.1, x: 25, transition: { delay: 0.05 } }}
-                variants={{
-                  open: {
-                    transition: {
-                      type: "spring",
-                      bounce: 0,
-                      duration: 0.7,
-                      delayChildren: 0.5,
-                      staggerChildren: 0.1,
-                    },
-                  },
-                  closed: {
-                    transition: {
-                      type: "spring",
-                      bounce: 0,
-                      duration: 0.3,
-                    },
-                  },
-                }}
               >
                 <Bookmark bookmark={b} showDelete={showDelete} />
               </motion.li>
@@ -107,27 +65,7 @@ const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
                 .filter((p) => p.length)
                 .reduce((prev, curr) => prev && isFolderOpen[curr], currOpen);
               return (
-                <motion.li
-                  key={f.id}
-                  variants={{
-                    open: {
-                      transition: {
-                        type: "spring",
-                        bounce: 0,
-                        duration: 0.7,
-                        delayChildren: 0.3,
-                        staggerChildren: 0.05,
-                      },
-                    },
-                    closed: {
-                      transition: {
-                        type: "spring",
-                        bounce: 0,
-                        duration: 0.3,
-                      },
-                    },
-                  }}
-                >
+                <motion.li key={f.id}>
                   <Folder folder={f} isOpen={isOpen} />
                 </motion.li>
               );

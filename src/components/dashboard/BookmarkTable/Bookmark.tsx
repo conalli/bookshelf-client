@@ -2,7 +2,6 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { useModal, useSelectBookmark } from "@hooks";
 import { DELETE_BOOKMARK_MODAL } from "@store/modal";
 import type { Bookmark as APIBookmark } from "@utils/api/types";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
 
@@ -15,9 +14,9 @@ const Bookmark: React.FC<BookmarkProps> = ({ bookmark, showDelete }) => {
   const { setIsOpen, setModalType } = useModal();
   const { setSelectedBookmark } = useSelectBookmark();
   return (
-    <motion.div className="w-full truncate hover:py-2">
-      <div className="flex justify-between">
-        <Link className="ml-2" href={bookmark.url}>
+    <div className=" truncate">
+      <div className="flex w-[200px] justify-between hover:text-bk-blue dark:hover:text-bk-orange sm:w-[350px] md:w-[400px]">
+        <Link className="truncate pl-2" href={bookmark.url}>
           {bookmark.name !== "" ? bookmark.name : bookmark.url}
         </Link>
         {showDelete && showDelete === bookmark.id && (
@@ -33,7 +32,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ bookmark, showDelete }) => {
           </button>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

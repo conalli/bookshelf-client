@@ -33,14 +33,14 @@ function ActionBar({ menuOption, userKey }: ActionBarProps) {
     e.target.files = null;
   };
   return (
-    <div className="flex justify-end p-4">
+    <div className="flex w-full justify-end px-8 py-4 sm:pr-8">
       {menuOption === "Commands" && (
         <button
           onClick={() => {
             setModalType(ADD_COMMAND_MODAL);
             setIsOpen(true);
           }}
-          className="rounded bg-green-500 px-4 py-2 text-white dark:bg-gray-100 dark:text-neutral-600"
+          className="rounded bg-green-500 px-2 py-1 text-white dark:bg-gray-100 dark:text-neutral-600 sm:px-4 sm:py-2"
         >
           <div className="flex items-center justify-center gap-1">
             <p className="mt-0.5">Add</p>
@@ -55,17 +55,17 @@ function ActionBar({ menuOption, userKey }: ActionBarProps) {
               setModalType(ADD_BOOKMARK_MODAL);
               setIsOpen(true);
             }}
-            className="rounded bg-green-500 px-4 py-2 text-white dark:bg-gray-100 dark:text-neutral-600"
+            className="rounded bg-green-500 px-2 py-1 text-white dark:bg-gray-100 dark:text-neutral-600 sm:px-4 sm:py-2"
           >
             <div className="flex items-center justify-center gap-1">
               <p className="mt-0.5">Add</p>
-              <PlusIcon className="h-5 w-5" />
+              <PlusIcon className="h-4 w-4" />
             </div>
           </button>
           <input
             id="file-input"
             accept=".html"
-            className=" m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-bk-blue transition ease-in-out
+            className="m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-2 py-1 text-base font-normal text-bk-blue transition ease-in-out
               focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
             onChange={handleSelectFile}
             type="file"

@@ -13,21 +13,22 @@ type SignInFormProps = {
   type: SignInFormVariant;
 };
 
+const schema = object().shape({
+  email: string()
+    .min(3, "Email: minimum 3 characters")
+    .max(50, "Email cannot be longer than 50 characters")
+    .required("Please enter your email"),
+  password: string()
+    .min(5, "Password: min 5 characters")
+    .max(20, "Password cannot be longer than 20 characters")
+    .required("Please enter your password"),
+});
+
 const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
   const {
     signIn: { isLoading: isSignInLoading, mutate: signin },
     signUp: { isLoading: isSignUpLoading, mutate: signup },
   } = useAuth();
-  const schema = object().shape({
-    email: string()
-      .min(3, "Email: minimum 3 characters")
-      .max(50, "Email cannot be longer than 50 characters")
-      .required("Please enter your email"),
-    password: string()
-      .min(5, "Password: min 5 characters")
-      .max(20, "Password cannot be longer than 20 characters")
-      .required("Please enter your password"),
-  });
   return (
     <>
       <Formik

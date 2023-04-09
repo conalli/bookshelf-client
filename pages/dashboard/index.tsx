@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from "@components/dashboard";
 import ActionBar from "@components/dashboard/ActionBar";
-import Loading from "@components/ui/Loading";
+import { Loading } from "@components/ui";
 import {
   useAddBookmark,
   useAddBookmarkFromFile,
@@ -79,15 +79,15 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   if (status && status.loading) return <Loading isPage />;
   else setStatus(null);
   return (
-    <section className="flex min-h-full grow">
-      <section className="min-h-full w-1/4">
+    <section className="flex min-h-full grow flex-col sm:flex-row">
+      <section className="w-full sm:min-h-full sm:w-1/4">
         <MenuBar
           selected={menuOption}
           setSelected={setMenuOption}
           user={user}
         />
       </section>
-      <section className="flex min-h-full w-3/4 flex-col p-4">
+      <section className="flex min-h-full w-full flex-col items-center sm:w-3/4 sm:gap-4">
         <ActionBar menuOption={menuOption} userKey={userKey} />
         {menuOption === "Commands" && (
           <CommandTable
@@ -115,7 +115,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
               },
             }}
             exit={{ opacity: 0, x: -20 }}
-            className="m-auto w-full rounded bg-white shadow dark:bg-neutral-800 lg:w-2/4"
+            className="mx-auto w-full rounded px-8 shadow sm:bg-white sm:dark:bg-neutral-800 lg:w-2/4"
           >
             <BrowserSetup />
           </motion.div>

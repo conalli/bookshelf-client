@@ -18,7 +18,6 @@ const BrowserSetup = () => {
           browsers.
         </p>
         <br />
-        <br />
         <ol>
           <li>
             <p>

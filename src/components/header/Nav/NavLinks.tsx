@@ -25,7 +25,10 @@ function NavLinks({ user }: { user: User | null }) {
         </Link>
       )}
       {user && (
-        <button onClick={() => signOut()} className={linkStyles}>
+        <button
+          onClick={() => signOut()}
+          className={linkStyles + " flex justify-start"}
+        >
           Log out
         </button>
       )}

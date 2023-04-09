@@ -22,7 +22,7 @@ const SignIn = () => {
         },
       }}
       exit={{ opacity: 0, x: -20 }}
-      className="flex h-4/5 items-center justify-center py-10 md:h-full md:items-start"
+      className="flex h-4/5 w-full items-center justify-center py-10 md:h-full md:items-start"
     >
       <Head>
         <title>Sign in</title>

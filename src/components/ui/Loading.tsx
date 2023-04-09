@@ -13,7 +13,9 @@ const Loading = ({ isPage = false }: { isPage?: boolean }) => {
         }}
         exit={{ opacity: 0 }}
         className={`${
-          isPage ? "fixed left-0 top-0 h-screen w-screen" : "h-full w-full"
+          isPage
+            ? "fixed left-0 top-0 z-10 min-h-screen min-w-full"
+            : "h-full w-full"
         } flex items-center justify-center`}
       >
         <motion.svg

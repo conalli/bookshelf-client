@@ -12,7 +12,7 @@ type MenuBarProps = {
 
 const generateStyles = (selected: MenuOption, option: MenuOption): string => {
   const selectedStyles =
-    /*tw*/ "p-1 rounded bg-bk-blue text-white  dark:bg-neutral-600";
+    /*tw*/ "p-1 underline decoration-bk-blue dark:text-white  dark:decoration-bk-orange";
   const unSelectedStyles = /*tw*/ "p-1 hover:cursor-pointer";
 
   return selected == option ? selectedStyles : unSelectedStyles;
@@ -27,11 +27,11 @@ const generateDisplayName = (user: User): string => {
 
 const MenuBar: React.FC<MenuBarProps> = ({ selected, setSelected, user }) => {
   return (
-    <nav className="flex min-h-full w-full flex-col bg-white p-2 shadow-lg dark:bg-bk-primary-dark">
-      <h1 className="py-4 pl-8 text-xl underline decoration-bk-blue dark:decoration-bk-orange md:text-2xl lg:text-3xl">
+    <nav className="flex w-full bg-white p-2 shadow-lg dark:bg-bk-primary-dark sm:min-h-full sm:flex-col">
+      <h1 className="hidden py-4 pl-8 underline decoration-bk-blue dark:decoration-bk-orange sm:flex sm:text-xl md:text-2xl lg:text-3xl">
         {generateDisplayName(user)}&apos;s Bookshelf
       </h1>
-      <ul className="flex flex-col items-center justify-center gap-14 pt-[25vh] text-lg lg:text-xl">
+      <ul className="flex w-full justify-center gap-2 sm:flex-col sm:items-center sm:gap-14 sm:pt-[25vh] sm:text-lg lg:text-xl">
         <li
           className={generateStyles(selected, "Commands")}
           onClick={() => setSelected("Commands")}
