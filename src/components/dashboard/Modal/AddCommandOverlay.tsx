@@ -1,8 +1,11 @@
 import type { Command } from "@store/command";
 import type { UseMutationResult } from "@tanstack/react-query";
-import type { AddCommandRequest } from "@utils/api/request";
-import type { AddCommandResponse, ErrorResponse } from "@utils/api/response";
-import type { User } from "@utils/api/types";
+import type {
+  AddCommandRequest,
+  AddCommandResponse,
+  ErrorResponse,
+  User,
+} from "@utils/api/types";
 import type { AxiosError } from "axios";
 import { motion } from "framer-motion";
 import type { SetStateAction } from "jotai";

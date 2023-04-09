@@ -1,8 +1,11 @@
 import type { Command } from "@store/command";
 import type { UseMutationResult } from "@tanstack/react-query";
-import type { DeleteCommandRequest } from "@utils/api/request";
-import type { DeleteCommandResponse, ErrorResponse } from "@utils/api/response";
-import type { User } from "@utils/api/types";
+import type {
+  DeleteCommandRequest,
+  DeleteCommandResponse,
+  ErrorResponse,
+  User,
+} from "@utils/api/types";
 import type { AxiosError } from "axios";
 import type { SetStateAction } from "jotai";
 

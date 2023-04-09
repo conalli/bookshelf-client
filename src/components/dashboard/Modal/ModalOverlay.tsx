@@ -8,16 +8,15 @@ import {
 import type { UseMutationResult } from "@tanstack/react-query";
 import type {
   AddBookmarkRequest,
-  AddCommandRequest,
-  DeleteCommandRequest,
-} from "@utils/api/request";
-import type {
   AddBookmarkResponse,
+  AddCommandRequest,
   AddCommandResponse,
+  DeleteCommandRequest,
   DeleteCommandResponse,
   ErrorResponse,
-} from "@utils/api/response";
-import type { Folder, User } from "@utils/api/types";
+  Folder,
+  User,
+} from "@utils/api/types";
 import type { AxiosError } from "axios";
 import AddBookmarkOverlay from "./AddBookmarkOverlay";
 import AddCommandOverlay from "./AddCommandOverlay";
