@@ -27,7 +27,7 @@ const SignIn = () => {
       <Head>
         <title>Sign in</title>
       </Head>
-      <div className="flex h-4/5 w-4/5 flex-col items-center justify-center rounded-md bg-white py-10 shadow-md dark:bg-neutral-800 md:w-3/4 xl:w-2/4">
+      <div className="flex h-4/5 w-4/5 flex-col items-center justify-center rounded-md bg-white py-10 shadow-md dark:bg-neutral-800 md:w-3/4 lg:w-3/5 xl:w-2/4">
         <h1 className="py-2 text-xl md:text-3xl lg:py-10 lg:text-6xl">
           {formType}
         </h1>

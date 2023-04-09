@@ -4,9 +4,9 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useTheme } from "next-themes";
 import type { ReactNode } from "react";
 import React, { useEffect } from "react";
+import Header from "../header";
 import ErrorNotification from "../ui/ErrorNotification";
 import Loading from "../ui/Loading";
-import Header from "../ui/header";
 
 type LayoutProps = {
   children: ReactNode;
@@ -15,7 +15,10 @@ type LayoutProps = {
 const MESSAGE_DURATION_MS = 3000;
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { status } = useAuth();
+  const {
+    status,
+    signOut: { isLoading: isSignOutLoading },
+  } = useAuth();
   const { messages, removeMessage, removeMessageFIFO } = useMessages();
   const { theme } = useTheme();
   const controls = useAnimation();
@@ -39,17 +42,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => clearInterval(time);
   }, [messages, removeMessageFIFO]);
 
-  if (status && status.loading) return <Loading isPage />;
+  if ((status && status.loading) || isSignOutLoading) return <Loading isPage />;
   return (
     <AnimatePresence>
       <motion.div
         id="top"
         animate={controls}
         variants={variants}
-        className=" bk-background max-w-screen min-h-screen"
+        className="bk-background flex flex-col"
       >
         <Header />
-        {children}
+        <main className="flex min-h-[92vh] grow">{children}</main>
         <ul className="fixed bottom-0 right-0 top-0 flex flex-col justify-end">
           <AnimatePresence initial={false}>
             {messages

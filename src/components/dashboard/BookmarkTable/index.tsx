@@ -33,12 +33,12 @@ const BookmarkTable: React.FC<BookmarkTableProps> = ({
     addMessage("error getting bookmarks", true);
   }
   return (
-    <AnimatePresence mode="sync">
-      <motion.div className="m-auto flex w-full flex-col rounded bg-white pb-2 pt-4 shadow dark:bg-neutral-800 md:py-1.5 md:pb-3 lg:w-2/4 lg:pb-6">
-        {(isLoading || isError) && <Spinner />}
-        {folder && <Folder folder={folder} isOpen={true} />}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div className="m-auto max-h-full w-full flex-col rounded bg-white pb-2 pt-4 shadow dark:bg-neutral-800 md:py-1.5 md:pb-3 lg:w-3/4 lg:pb-6">
+      <AnimatePresence mode="sync">
+        {(isLoading || isError) && <Spinner key="spinner" />}
+        {folder && <Folder key="folder" folder={folder} isOpen={true} />}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 

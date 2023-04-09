@@ -56,7 +56,7 @@ const CommandTable: React.FC<CommandTableProps> = ({
           },
         }}
         exit={{ opacity: 0, x: -20 }}
-        className="mx-auto mt-1 h-full w-full rounded bg-white shadow dark:bg-neutral-800 md:mt-1.5 lg:w-2/4"
+        className="mx-auto w-full rounded bg-white py-2 shadow dark:bg-neutral-800 md:mt-1.5 lg:w-2/4"
       >
         <thead className="rounded-lg border-b-2 border-b-bk-blue bg-white text-left text-bk-blue dark:border-b-bk-orange dark:bg-neutral-800 dark:text-bk-orange">
           <tr>

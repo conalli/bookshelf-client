@@ -1,3 +1,4 @@
+import { useAuth } from "@hooks";
 import type { User } from "@utils/api/types";
 import Link from "next/link";
 import ThemeToggleButton from "../ThemeToggleButton";
@@ -6,6 +7,9 @@ const linkStyles =
   /*tw*/ "py-1 px-2 hover:text-bk-blue hover:dark:text-orange-300";
 
 function NavLinks({ user }: { user: User | null }) {
+  const {
+    signOut: { mutate: signOut },
+  } = useAuth();
   return (
     <>
       <Link className={linkStyles} href="/#learn">
@@ -19,6 +23,11 @@ function NavLinks({ user }: { user: User | null }) {
         <Link className={linkStyles} href="/signin">
           Sign In
         </Link>
+      )}
+      {user && (
+        <button onClick={() => signOut()} className={linkStyles}>
+          Log out
+        </button>
       )}
       <div className="flex px-2 sm:place-content-center md:px-4">
         <ThemeToggleButton

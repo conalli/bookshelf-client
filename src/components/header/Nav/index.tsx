@@ -20,7 +20,7 @@ function Nav() {
   };
 
   return (
-    <nav className="flex flex-row justify-between py-2">
+    <nav className="flex min-h-[8vh] flex-row justify-between py-2">
       <motion.button
         whileHover={{ scale: 1.1 }}
         onClick={() => navigateHome(router)}

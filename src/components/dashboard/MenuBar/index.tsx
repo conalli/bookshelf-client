@@ -1,3 +1,4 @@
+import type { User } from "@utils/api/types";
 import type { Dispatch, SetStateAction } from "react";
 import React from "react";
 
@@ -6,6 +7,7 @@ export type MenuOption = "Commands" | "Bookmarks" | "Setup guide" | "Settings";
 type MenuBarProps = {
   selected: MenuOption;
   setSelected: Dispatch<SetStateAction<MenuOption>>;
+  user: User;
 };
 
 const generateStyles = (selected: MenuOption, option: MenuOption): string => {
@@ -16,10 +18,20 @@ const generateStyles = (selected: MenuOption, option: MenuOption): string => {
   return selected == option ? selectedStyles : unSelectedStyles;
 };
 
-const MenuBar: React.FC<MenuBarProps> = ({ selected, setSelected }) => {
+const generateDisplayName = (user: User): string => {
+  if (user.given_name) return user.given_name;
+  if (user.name) return user.name;
+  if (user.family_name) return user.family_name;
+  return user.email.split("@")[0];
+};
+
+const MenuBar: React.FC<MenuBarProps> = ({ selected, setSelected, user }) => {
   return (
-    <nav className="h-full rounded-l-md bg-white p-2 shadow-lg dark:bg-neutral-800 md:mr-4 md:rounded-md">
-      <ul className="flex flex-col gap-2">
+    <nav className="flex min-h-full w-full flex-col bg-white p-2 shadow-lg dark:bg-bk-primary-dark">
+      <h1 className="py-4 pl-8 text-xl underline decoration-bk-blue dark:decoration-bk-orange md:text-2xl lg:text-3xl">
+        {generateDisplayName(user)}&apos;s Bookshelf
+      </h1>
+      <ul className="flex flex-col items-center justify-center gap-14 pt-[25vh] text-lg lg:text-xl">
         <li
           className={generateStyles(selected, "Commands")}
           onClick={() => setSelected("Commands")}
@@ -41,7 +53,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ selected, setSelected }) => {
         {/* <li
           className={
             selected === "Settings"
-              ? "underline  decoration-2 decoration-bk-blue dark:decoration-bk-orange"
+              ? "underline  decoration-bk-blue decoration-2 dark:decoration-bk-orange"
               : "hover:cursor-pointer"
           }
           onClick={() => setSelected("Settings")}
