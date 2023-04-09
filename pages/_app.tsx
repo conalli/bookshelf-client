@@ -1,4 +1,4 @@
-import Layout from "@components/layout1";
+import Layout from "@components/layout";
 import {
   Hydrate,
   QueryClient,
