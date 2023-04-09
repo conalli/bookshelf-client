@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { NextRouter } from "next/router";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import BookshelfLogo from "../../BookshelfLogo";
+import BookshelfLogo from "../../ui/BookshelfLogo";
 import MobileMenu from "./MobileMenu";
 import NavLinks from "./NavLinks";
 
