@@ -36,12 +36,13 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
       onClick={toggleTheme}
       className={buttonClass}
       type="button"
+      title="theme-toggle"
       aria-pressed
     >
       {currentIcon === "dark" ? (
-        <SunIcon className={iconClass.dark} />
+        <SunIcon title="light-mode" className={iconClass.dark} />
       ) : (
-        <MoonIcon className={iconClass.light} />
+        <MoonIcon title="dark-mode" className={iconClass.light} />
       )}
     </motion.button>
   );
