@@ -75,7 +75,6 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     },
   };
   if (!user) return null;
-
   if (status && status.loading) return <Loading isPage />;
   else setStatus(null);
   return (

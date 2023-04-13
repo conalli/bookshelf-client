@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Head from "next/head";
 import Link from "next/link";
 
-const SignIn = () => {
+const SignUp = () => {
   const formType: SignInFormVariant = "Sign up";
   const altType: SignInFormVariant = "Sign in";
   return (
@@ -47,4 +47,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

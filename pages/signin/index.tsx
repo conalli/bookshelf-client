@@ -1,6 +1,6 @@
 import { GoogleSignInButton, SignInForm } from "@components/auth";
 import type { SignInFormVariant } from "@components/auth/SignInForm";
-import LoadingPage from "@components/ui/Loading";
+import { Loading } from "@components/ui";
 import { useAuth } from "@hooks/useAuth";
 import { motion } from "framer-motion";
 import Head from "next/head";
@@ -10,7 +10,7 @@ const SignIn = () => {
   const { status } = useAuth();
   const formType: SignInFormVariant = "Sign in";
   const altType: SignInFormVariant = "Sign up";
-  if (status && (status.loading || status.success)) return <LoadingPage />;
+  if (status && (status.loading || status.success)) return <Loading isPage />;
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}

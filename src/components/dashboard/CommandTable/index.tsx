@@ -15,6 +15,13 @@ type CommandTableProps = {
   cmdStatus: UpdateCommandStatus;
 };
 
+const formatLink = (link: string) => {
+  if (link.startsWith("http://") || link.startsWith("https://")) {
+    return link;
+  }
+  return `http://${link}`;
+};
+
 const CommandTable: React.FC<CommandTableProps> = ({
   commands,
   isLoadingCommands,
@@ -25,12 +32,6 @@ const CommandTable: React.FC<CommandTableProps> = ({
   const { selectedCommand, setSelectedCommand } = useSelectCommand();
   if (!user) return null;
 
-  const formatLink = (link: string) => {
-    if (link.startsWith("http://") || link.startsWith("https://")) {
-      return link;
-    }
-    return `http://${link}`;
-  };
   // Refactor logic?
   if (commands && Object.keys(commands).length === 0) {
     return (
