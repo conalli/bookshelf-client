@@ -45,7 +45,7 @@ const Command = ({ userData }: { userData: User }) => {
   useRefreshTokens(userData.api_key);
 
   return (
-    <div>
+    <div className="w-full px-8">
       <h1 className="py-3 text-4xl">WebCLI Commands:</h1>
       <Modal>
         {modalType === DELETE_COMMAND_MODAL && (

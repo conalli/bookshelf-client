@@ -11,7 +11,7 @@ const Help = ({ userData }: { userData: User | null }) => {
     true
   );
   return (
-    <div>
+    <div className="px-8">
       <h1 className="py-3 text-4xl">WebCLI Help:</h1>
       <table>
         <thead>

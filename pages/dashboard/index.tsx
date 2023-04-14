@@ -78,7 +78,7 @@ const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   if (status && status.loading) return <Loading isPage />;
   else setStatus(null);
   return (
-    <section className="flex min-h-full grow flex-col sm:flex-row">
+    <section className="flex min-h-full grow flex-col px-8 sm:flex-row">
       <section className="w-full sm:min-h-full sm:w-1/4">
         <MenuBar
           selected={menuOption}

@@ -16,9 +16,11 @@ const Bookmark = ({
   useRefreshTokens(userData.api_key);
 
   return (
-    <div>
+    <div className="flex w-full flex-col px-8">
       <h1 className="py-3 text-4xl">WebCLI Bookmarks:</h1>
-      <BookmarkTable folder={folderData} isLoading={false} isError={false} />
+      <div className="w-full">
+        <BookmarkTable folder={folderData} isLoading={false} isError={false} />
+      </div>
     </div>
   );
 };

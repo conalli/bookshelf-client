@@ -4,7 +4,7 @@ const Error = () => {
   useRefreshTokens();
 
   return (
-    <div>
+    <div className="px-8">
       <h1 className="py-3 text-4xl">WebCLI Error:</h1>
       <h2 className="text-red-500">
         Error occured while processing webcli request
