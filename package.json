@@ -24,7 +24,7 @@
     "framer-motion": "^10.13.1",
     "jotai": "^2.1.0",
     "nanoid": "^4.0.2",
-    "next": "^13.4.10",
+    "next": "^13.4.12",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
