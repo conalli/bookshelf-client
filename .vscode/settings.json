@@ -1,0 +1,7 @@
+{
+    "dotenv.enableAutocloaking": false,
+    "tailwindCSS.experimental.classRegex": [
+        "/\\*\\s*tw\\s*\\*/\\s*'([^']*)'",
+        "/\\*\\s*tw\\s*\\*/\\s*\"([^\"]*)\"",
+    ]
+}
