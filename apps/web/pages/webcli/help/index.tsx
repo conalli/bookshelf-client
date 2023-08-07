@@ -1,6 +1,6 @@
-import { useGetUser } from "@hooks";
-import { getUserIfPossible } from "@utils/api/props";
-import type { User } from "@utils/api/types";
+import { useGetUser } from "../../../src/hooks";
+import { getUserIfPossible } from "../../../src/utils/api/props";
+import type { User } from "../../../src/utils/api/types";
 
 export const getServerSideProps = getUserIfPossible;
 

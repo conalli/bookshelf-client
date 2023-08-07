@@ -1,7 +1,7 @@
-import { APIURL } from "@utils/api/endpoints";
-import type { AuthRequest, ErrorResponse, User } from "@utils/api/types";
 import type { PathParams } from "msw";
 import { rest } from "msw";
+import { APIURL } from "../../utils/api/endpoints";
+import type { AuthRequest, ErrorResponse, User } from "../../utils/api/types";
 import type { MockUser } from "../mockUserData";
 import { mockUsers } from "../mockUserData";
 

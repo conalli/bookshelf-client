@@ -1,6 +1,6 @@
-import type { User } from "@utils/api/types";
 import type { Dispatch, SetStateAction } from "react";
 import React from "react";
+import type { User } from "../../utils/api/types";
 
 export type MenuOption = "Commands" | "Bookmarks" | "Setup guide" | "Settings";
 

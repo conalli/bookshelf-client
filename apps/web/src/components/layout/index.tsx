@@ -1,9 +1,9 @@
-import { useAuth, useMessages } from "@hooks";
 import type { Variants } from "framer-motion";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useTheme } from "next-themes";
 import type { ReactNode } from "react";
 import React, { useEffect } from "react";
+import { useAuth, useMessages } from "../../hooks";
 import Header from "../header";
 import ErrorNotification from "../ui/ErrorNotification";
 import Loading from "../ui/Loading";

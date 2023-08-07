@@ -1,7 +1,7 @@
-import { SearchURL } from "@utils/api/endpoints";
-import { copyToClipboard } from "@utils/copyToClipboard";
 import type { Dispatch, SetStateAction } from "react";
 import React, { useState } from "react";
+import { SearchURL } from "../../../utils/api/endpoints";
+import { copyToClipboard } from "../../../utils/copyToClipboard";
 
 type BrowserSetupOverlayProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;

@@ -1,11 +1,11 @@
-import type { AuthRequestData } from "@hooks";
-import { useAuth } from "@hooks";
-import type { AuthRequest } from "@utils/api/types";
 import type { FormikHelpers } from "formik";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { motion } from "framer-motion";
 import React from "react";
 import { object, string } from "yup";
+import type { AuthRequestData } from "../../hooks";
+import { useAuth } from "../../hooks";
+import type { AuthRequest } from "../../utils/api/types";
 
 export type SignInFormVariant = "Sign up" | "Sign in";
 

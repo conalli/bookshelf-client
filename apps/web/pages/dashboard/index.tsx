@@ -1,4 +1,6 @@
-import type { MenuOption } from "@components/dashboard";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import type { MenuOption } from "../../src/components/dashboard";
 import {
   BookmarkTable,
   BrowserSetup,
@@ -6,9 +8,9 @@ import {
   MenuBar,
   Modal,
   ModalOverlay,
-} from "@components/dashboard";
-import ActionBar from "@components/dashboard/ActionBar";
-import { Loading } from "@components/ui";
+} from "../../src/components/dashboard";
+import ActionBar from "../../src/components/dashboard/ActionBar";
+import { Loading } from "../../src/components/ui";
 import {
   useAddBookmark,
   useAddBookmarkFromFile,
@@ -19,11 +21,9 @@ import {
   useGetCommands,
   useGetUser,
   useRefreshTokens,
-} from "@hooks";
-import { getUserOrRedirect } from "@utils/api/props";
-import type { User } from "@utils/api/types";
-import { motion } from "framer-motion";
-import { useState } from "react";
+} from "../../src/hooks";
+import { getUserOrRedirect } from "../../src/utils/api/props";
+import type { User } from "../../src/utils/api/types";
 import type { NextPageWithLayoutAndProps } from "../_app";
 
 export type UpdateCommandStatus = {

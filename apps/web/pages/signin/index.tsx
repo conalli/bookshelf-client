@@ -1,10 +1,10 @@
-import { GoogleSignInButton, SignInForm } from "@components/auth";
-import type { SignInFormVariant } from "@components/auth/SignInForm";
-import { Loading } from "@components/ui";
-import { useAuth } from "@hooks/useAuth";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Link from "next/link";
+import { GoogleSignInButton, SignInForm } from "../../src/components/auth";
+import type { SignInFormVariant } from "../../src/components/auth/SignInForm";
+import { Loading } from "../../src/components/ui";
+import { useAuth } from "../../src/hooks/useAuth";
 
 const SignIn = () => {
   const { status } = useAuth();

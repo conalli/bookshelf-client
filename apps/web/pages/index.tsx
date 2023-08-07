@@ -1,8 +1,8 @@
-import { About } from "@components/home";
 import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { About } from "../src/components/home";
 
 const Home: NextPage = () => {
   return (
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
         id="home"
       >
         <main className="min-w-sceen px-8">
-          <section className="grid grid-cols-mobile grid-rows-mobile py-10 sm:grid-cols-6 sm:grid-rows-6 md:py-0">
+          <section className="grid-cols-mobile grid-rows-mobile grid py-10 sm:grid-cols-6 sm:grid-rows-6 md:py-0">
             <div className="bk-rotate-text align-self-center col-span-2 col-start-3 row-span-3 row-start-1 flex flex-auto flex-col items-end justify-self-center text-white md:row-start-2">
               <motion.h2
                 initial={{ rotate: 180 }}

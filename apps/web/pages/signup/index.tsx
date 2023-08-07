@@ -1,8 +1,8 @@
-import type { SignInFormVariant } from "@components/auth";
-import { GoogleSignInButton, SignInForm } from "@components/auth";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Link from "next/link";
+import type { SignInFormVariant } from "../../src/components/auth";
+import { GoogleSignInButton, SignInForm } from "../../src/components/auth";
 
 const SignUp = () => {
   const formType: SignInFormVariant = "Sign up";

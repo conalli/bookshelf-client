@@ -1,6 +1,6 @@
-import { useAuth } from "@hooks";
-import type { User } from "@utils/api/types";
 import Link from "next/link";
+import { useAuth } from "../../../hooks";
+import type { User } from "../../../utils/api/types";
 import ThemeToggleButton from "../ThemeToggleButton";
 
 const linkStyles =

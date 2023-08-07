@@ -1,6 +1,9 @@
-import { selectedBookmarkAtom } from "@store/bookmark";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { APIURL } from "@utils/api/endpoints";
+import type { AxiosError, AxiosResponse } from "axios";
+import axios, { isAxiosError } from "axios";
+import { useAtomValue, useSetAtom } from "jotai";
+import { selectedBookmarkAtom } from "../store/bookmark";
+import { APIURL } from "../utils/api/endpoints";
 import type {
   AddBookmarkFileResponse,
   AddBookmarkRequest,
@@ -8,11 +11,8 @@ import type {
   DeleteBookmarkResponse,
   ErrorResponse,
   Folder,
-} from "@utils/api/types";
-import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
-import type { AxiosError, AxiosResponse } from "axios";
-import axios, { isAxiosError } from "axios";
-import { useAtomValue, useSetAtom } from "jotai";
+} from "../utils/api/types";
+import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const BOOKMARKS_FILE_FORM_KEY = "bookmarks_file";

@@ -44,7 +44,7 @@ describe("Theme Toggle Button", () => {
     );
   });
   test("should render the button correctly", () => {
-    const button = screen.getByRole("button", { name: /theme\-toggle/i });
+    const button = screen.getByRole("button", { name: /theme-toggle/i });
     expect(button).toBeInTheDocument();
   });
   test("should default to moon icon in light mode", () => {

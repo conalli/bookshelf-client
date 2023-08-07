@@ -1,14 +1,9 @@
-import type { SignInFormVariant } from "@components/auth/SignInForm";
-import type { AuthStatus } from "@store/auth";
-import { statusAtom } from "@store/auth";
 import type {
   MutationFunction,
   QueryClient,
   UseMutationOptions,
 } from "@tanstack/react-query";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { APIURL } from "@utils/api/endpoints";
-import type { AuthRequest, ErrorResponse, User } from "@utils/api/types";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import type { SetStateAction } from "jotai";
@@ -16,6 +11,11 @@ import { useAtomValue, useSetAtom } from "jotai";
 import type { NextRouter } from "next/router";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
+import type { SignInFormVariant } from "../components/auth/SignInForm";
+import type { AuthStatus } from "../store/auth";
+import { statusAtom } from "../store/auth";
+import { APIURL } from "../utils/api/endpoints";
+import type { AuthRequest, ErrorResponse, User } from "../utils/api/types";
 import { useMessages } from "./useMessages";
 import { USER_KEY, useRemoveUser } from "./useUser";
 

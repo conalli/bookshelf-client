@@ -1,5 +1,5 @@
-import { modalOpenAtom, modalTypeAtom } from "@store/modal";
 import { useAtomValue, useSetAtom } from "jotai";
+import { modalOpenAtom, modalTypeAtom } from "../store/modal";
 
 export const useModal = () => {
   const isOpen = useAtomValue(modalOpenAtom);

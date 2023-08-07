@@ -1,11 +1,11 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
+import type { ChangeEvent } from "react";
 import {
   BOOKMARKS_FILE_FORM_KEY,
   useAddBookmarkFromFile,
   useModal,
-} from "@hooks";
-import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "@store/modal";
-import type { ChangeEvent } from "react";
+} from "../../hooks";
+import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "../../store/modal";
 import type { MenuOption } from "./MenuBar";
 
 type ActionBarProps = {

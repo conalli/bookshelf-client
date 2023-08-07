@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { APIURL } from "@utils/api/endpoints";
-import type { ErrorResponse } from "@utils/api/types";
-import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/router";
+import { APIURL } from "../utils/api/endpoints";
+import type { ErrorResponse } from "../utils/api/types";
+import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const REFRESH_KEY = "refresh";

@@ -1,6 +1,9 @@
-import { selectedCommandAtom } from "@store/command";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { APIURL } from "@utils/api/endpoints";
+import type { AxiosError, AxiosResponse } from "axios";
+import axios, { isAxiosError } from "axios";
+import { useAtomValue, useSetAtom } from "jotai";
+import { selectedCommandAtom } from "../store/command";
+import { APIURL } from "../utils/api/endpoints";
 import type {
   AddCommandRequest,
   AddCommandResponse,
@@ -8,11 +11,8 @@ import type {
   DeleteCommandRequest,
   DeleteCommandResponse,
   ErrorResponse,
-} from "@utils/api/types";
-import { createQueryKey, exponentialBackoff } from "@utils/query/helpers";
-import type { AxiosError, AxiosResponse } from "axios";
-import axios, { isAxiosError } from "axios";
-import { useAtomValue, useSetAtom } from "jotai";
+} from "../utils/api/types";
+import { createQueryKey, exponentialBackoff } from "../utils/query/helpers";
 import { useMessages } from "./useMessages";
 
 export const COMMAND_KEY = "cmds";

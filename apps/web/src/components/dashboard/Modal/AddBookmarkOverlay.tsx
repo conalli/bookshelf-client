@@ -1,15 +1,15 @@
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import type { UseMutationResult } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import { motion } from "framer-motion";
+import type { ChangeEvent, SetStateAction } from "react";
+import { useState } from "react";
 import type {
   AddBookmarkRequest,
   AddBookmarkResponse,
   ErrorResponse,
   Folder,
-} from "@utils/api/types";
-import type { AxiosError } from "axios";
-import { motion } from "framer-motion";
-import type { ChangeEvent, SetStateAction } from "react";
-import { useState } from "react";
+} from "../../../utils/api/types";
 
 type AddBookmarkOverlayProps = {
   folder: Folder | undefined;

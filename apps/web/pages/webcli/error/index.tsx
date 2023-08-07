@@ -1,4 +1,4 @@
-import { useRefreshTokens } from "@hooks";
+import { useRefreshTokens } from "../../../src/hooks";
 
 const Error = () => {
   useRefreshTokens();

@@ -1,6 +1,6 @@
-import type { Message } from "@hooks/useMessages";
 import { motion } from "framer-motion";
 import React from "react";
+import type { Message } from "../../hooks/useMessages";
 
 type ErrorNotificationProps = {
   errorMessage: Message;

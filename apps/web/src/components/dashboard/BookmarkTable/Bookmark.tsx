@@ -1,9 +1,9 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { useModal, useSelectBookmark } from "@hooks";
-import { DELETE_BOOKMARK_MODAL } from "@store/modal";
-import type { Bookmark as APIBookmark } from "@utils/api/types";
 import Link from "next/link";
 import React from "react";
+import { useModal, useSelectBookmark } from "../../../hooks";
+import { DELETE_BOOKMARK_MODAL } from "../../../store/modal";
+import type { Bookmark as APIBookmark } from "../../../utils/api/types";
 
 type BookmarkProps = {
   showDelete: string | null;

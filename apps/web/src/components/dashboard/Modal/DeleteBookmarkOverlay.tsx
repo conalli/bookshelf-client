@@ -1,6 +1,9 @@
-import { useDeleteBookmark, useSelectBookmark } from "@hooks/useBookmarks";
-import type { Bookmark } from "@utils/api/types";
 import type { SetStateAction } from "jotai";
+import {
+  useDeleteBookmark,
+  useSelectBookmark,
+} from "../../../hooks/useBookmarks";
+import type { Bookmark } from "../../../utils/api/types";
 import Loading from "../../ui/Loading";
 
 type DeleteBookmarkOverlayProps = {

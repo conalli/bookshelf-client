@@ -1,4 +1,3 @@
-import Layout from "@components/layout";
 import {
   Hydrate,
   QueryClient,
@@ -10,6 +9,7 @@ import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 import { useState } from "react";
+import Layout from "../src/components/layout";
 import "../styles/globals.css";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {

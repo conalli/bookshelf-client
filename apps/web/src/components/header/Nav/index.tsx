@@ -1,9 +1,9 @@
 import { Bars3Icon } from "@heroicons/react/24/solid";
-import { useUser } from "@hooks/useUser";
 import { motion } from "framer-motion";
 import type { NextRouter } from "next/router";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useUser } from "../../../hooks/useUser";
 import BookshelfLogo from "../../ui/BookshelfLogo";
 import MobileMenu from "./MobileMenu";
 import NavLinks from "./NavLinks";
