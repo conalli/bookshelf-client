@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from 'framer-motion';
 
-const Loading = ({ isPage = false }: { isPage?: boolean }) => {
+export function Loading({ isPage = false }: { isPage?: boolean }) {
   return (
     <AnimatePresence>
       <motion.div
@@ -14,8 +14,8 @@ const Loading = ({ isPage = false }: { isPage?: boolean }) => {
         exit={{ opacity: 0 }}
         className={`${
           isPage
-            ? "absolute left-0 top-0 z-10 min-h-screen min-w-full"
-            : "h-full w-full"
+            ? 'absolute left-0 top-0 z-10 min-h-screen min-w-full'
+            : 'h-full w-full'
         } flex items-center justify-center`}
       >
         <motion.svg
@@ -30,10 +30,10 @@ const Loading = ({ isPage = false }: { isPage?: boolean }) => {
             animate={{
               y: [-20, 0],
               transition: {
-                type: "spring",
+                type: 'spring',
                 duration: 0.5,
                 repeat: Infinity,
-                repeatType: "mirror",
+                repeatType: 'mirror',
                 repeatDelay: 0.1,
               },
             }}
@@ -48,11 +48,11 @@ const Loading = ({ isPage = false }: { isPage?: boolean }) => {
             animate={{
               y: [-20, 0],
               transition: {
-                type: "spring",
+                type: 'spring',
                 delay: 0.2,
                 duration: 0.5,
                 repeat: Infinity,
-                repeatType: "mirror",
+                repeatType: 'mirror',
                 repeatDelay: 0.1,
               },
             }}
@@ -67,11 +67,11 @@ const Loading = ({ isPage = false }: { isPage?: boolean }) => {
             animate={{
               y: [-20, 0],
               transition: {
-                type: "spring",
+                type: 'spring',
                 delay: 0.4,
                 duration: 0.5,
                 repeat: Infinity,
-                repeatType: "mirror",
+                repeatType: 'mirror',
                 repeatDelay: 0.1,
               },
             }}
@@ -85,6 +85,4 @@ const Loading = ({ isPage = false }: { isPage?: boolean }) => {
       </motion.div>
     </AnimatePresence>
   );
-};
-
-export default Loading;
+}
