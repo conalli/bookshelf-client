@@ -1,18 +1,3 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { getUserOrRedirect } from "../../../../libs/utils/src/lib/api/props";
-import type { User } from "../../../../libs/utils/src/lib/api/types";
-import type { MenuOption } from "../../src/components/dashboard";
-import {
-  BookmarkTable,
-  BrowserSetup,
-  CommandTable,
-  MenuBar,
-  Modal,
-  ModalOverlay,
-} from "../../src/components/dashboard";
-import ActionBar from "../../src/components/dashboard/ActionBar";
-import { Loading } from "../../src/components/ui";
 import {
   useAddBookmark,
   useAddBookmarkFromFile,
@@ -23,21 +8,23 @@ import {
   useGetCommands,
   useGetUser,
   useRefreshTokens,
-} from "../../src/hooks";
+} from "@bookshelf-client/hooks";
+import { Loading } from "@bookshelf-client/ui";
+import type { UpdateCommandStatus, User } from "@bookshelf-client/utils";
+import { getUserOrRedirect } from "@bookshelf-client/utils";
+import type { MenuOption } from "@bookshelf-client/web/components";
+import {
+  ActionBar,
+  BookmarkTable,
+  BrowserSetup,
+  CommandTable,
+  MenuBar,
+  Modal,
+  ModalOverlay,
+} from "@bookshelf-client/web/components";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import type { NextPageWithLayoutAndProps } from "../_app";
-
-export type UpdateCommandStatus = {
-  add: {
-    success: boolean;
-    loading: boolean;
-    error: boolean;
-  };
-  del: {
-    success: boolean;
-    loading: boolean;
-    error: boolean;
-  };
-};
 
 export const getServerSideProps = getUserOrRedirect;
 

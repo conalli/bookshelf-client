@@ -1,6 +1,6 @@
+import { BookshelfLogo } from "@bookshelf-client/ui";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { BookshelfLogo } from "../src/components/ui";
 
 const Four04 = () => {
   const router = useRouter();

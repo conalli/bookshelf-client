@@ -1,10 +1,3 @@
-import { getUserOrRedirect } from "../../../../../libs/utils/src/lib/api/props";
-import type { User } from "../../../../../libs/utils/src/lib/api/types";
-import {
-  CommandTable,
-  DeleteCommandOverlay,
-  Modal,
-} from "../../../src/components/dashboard";
 import {
   useDeleteCommand,
   useGetCommands,
@@ -12,9 +5,15 @@ import {
   useModal,
   useRefreshTokens,
   useSelectCommand,
-} from "../../../src/hooks";
-import { DELETE_COMMAND_MODAL } from "../../../src/store/modal";
-import type { UpdateCommandStatus } from "../../dashboard";
+} from "@bookshelf-client/hooks";
+import { DELETE_COMMAND_MODAL } from "@bookshelf-client/store";
+import type { UpdateCommandStatus, User } from "@bookshelf-client/utils";
+import { getUserOrRedirect } from "@bookshelf-client/utils";
+import {
+  CommandTable,
+  DeleteCommandOverlay,
+  Modal,
+} from "@bookshelf-client/web/components";
 
 export const getServerSideProps = getUserOrRedirect;
 

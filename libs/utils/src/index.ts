@@ -4,3 +4,4 @@ export * from "./lib/api/props";
 export * from "./lib/api/types";
 export * from "./lib/copyToClipboard";
 export * from "./lib/query/helpers";
+export * from "./lib/types";

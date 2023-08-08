@@ -1,4 +1,4 @@
-import { useRefreshTokens } from "../../../src/hooks";
+import { useRefreshTokens } from "@bookshelf-client/hooks";
 
 const Error = () => {
   useRefreshTokens();

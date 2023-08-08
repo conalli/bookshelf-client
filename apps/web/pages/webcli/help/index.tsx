@@ -1,6 +1,6 @@
-import { getUserIfPossible } from "../../../../../libs/utils/src/lib/api/props";
-import type { User } from "../../../../../libs/utils/src/lib/api/types";
-import { useGetUser } from "../../../src/hooks";
+import { useGetUser } from "@bookshelf-client/hooks";
+import type { User } from "@bookshelf-client/utils";
+import { getUserIfPossible } from "@bookshelf-client/utils";
 
 export const getServerSideProps = getUserIfPossible;
 

@@ -1,7 +1,7 @@
+import type { AuthRequest, ErrorResponse, User } from "@bookshelf-client/utils";
+import { APIURL } from "@bookshelf-client/utils";
 import type { PathParams } from "msw";
 import { rest } from "msw";
-import { APIURL } from "../../utils/api/endpoints";
-import type { AuthRequest, ErrorResponse, User } from "../../utils/api/types";
 import type { MockUser } from "../mockUserData";
 import { mockUsers } from "../mockUserData";
 

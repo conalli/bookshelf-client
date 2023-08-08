@@ -1,8 +1,8 @@
+import { About } from "@bookshelf-client/web/components";
 import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { About } from "../src/components/home";
 
 const Home: NextPage = () => {
   return (

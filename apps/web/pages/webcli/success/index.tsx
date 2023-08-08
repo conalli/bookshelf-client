@@ -1,6 +1,6 @@
+import { useRefreshTokens } from "@bookshelf-client/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useRefreshTokens } from "../../../src/hooks";
 
 const Success = () => {
   const [counter, setCounter] = useState(3);

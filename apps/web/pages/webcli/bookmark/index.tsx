@@ -1,7 +1,7 @@
-import { getUserAndBookmarksOrRedirect } from "../../../../../libs/utils/src/lib/api/props";
-import type { Folder, User } from "../../../../../libs/utils/src/lib/api/types";
-import { BookmarkTable } from "../../../src/components/dashboard";
-import { useGetUser, useRefreshTokens } from "../../../src/hooks";
+import { useGetUser, useRefreshTokens } from "@bookshelf-client/hooks";
+import type { Folder, User } from "@bookshelf-client/utils";
+import { getUserAndBookmarksOrRedirect } from "@bookshelf-client/utils";
+import { BookmarkTable } from "@bookshelf-client/web/components";
 
 export const getServerSideProps = getUserAndBookmarksOrRedirect;
 
