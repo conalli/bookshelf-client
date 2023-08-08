@@ -1,3 +1,5 @@
+export type SignInFormVariant = "Sign up" | "Sign in";
+
 export type UpdateCommandStatus = {
   add: {
     success: boolean;

@@ -1,6 +1,11 @@
 import type { AuthStatus } from "@bookshelf-client/store";
 import { statusAtom } from "@bookshelf-client/store";
-import type { AuthRequest, ErrorResponse, User } from "@bookshelf-client/utils";
+import type {
+  AuthRequest,
+  ErrorResponse,
+  SignInFormVariant,
+  User,
+} from "@bookshelf-client/utils";
 import { APIURL } from "@bookshelf-client/utils";
 import type {
   MutationFunction,
@@ -15,7 +20,6 @@ import { useAtomValue, useSetAtom } from "jotai";
 import type { NextRouter } from "next/router";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import type { SignInFormVariant } from "../components/auth/SignInForm";
 import { useMessages } from "./useMessages";
 import { USER_KEY, useRemoveUser } from "./useUser";
 

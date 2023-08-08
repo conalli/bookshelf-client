@@ -1,5 +1,5 @@
+import { modalOpenAtom, modalTypeAtom } from "@bookshelf-client/store";
 import { useAtomValue, useSetAtom } from "jotai";
-import { modalOpenAtom, modalTypeAtom } from "../store/modal";
 
 export const useModal = () => {
   const isOpen = useAtomValue(modalOpenAtom);

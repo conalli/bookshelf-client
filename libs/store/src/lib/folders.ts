@@ -1,5 +1,5 @@
+import type { Folder } from "@bookshelf-client/utils";
 import { atom } from "jotai";
-import type { Folder } from "../../../../libs/utils/src/lib/api/types";
 
 export type FolderOpenState = { [name: string]: boolean };
 
