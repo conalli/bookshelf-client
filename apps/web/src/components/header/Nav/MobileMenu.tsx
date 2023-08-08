@@ -1,6 +1,6 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import type { User } from "../../../utils/api/types";
+import type { User } from "../../../../../../libs/utils/src/lib/api/types";
 import NavLinks from "./NavLinks";
 
 type MobileMenuProps = {

@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { getUserOrRedirect } from "../../../../libs/utils/src/lib/api/props";
+import type { User } from "../../../../libs/utils/src/lib/api/types";
 import type { MenuOption } from "../../src/components/dashboard";
 import {
   BookmarkTable,
@@ -22,8 +24,6 @@ import {
   useGetUser,
   useRefreshTokens,
 } from "../../src/hooks";
-import { getUserOrRedirect } from "../../src/utils/api/props";
-import type { User } from "../../src/utils/api/types";
 import type { NextPageWithLayoutAndProps } from "../_app";
 
 export type UpdateCommandStatus = {

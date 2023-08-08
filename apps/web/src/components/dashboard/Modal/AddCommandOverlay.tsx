@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import type { SetStateAction } from "jotai";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
-import type { Command } from "../../../store/command";
 import type {
   AddCommandRequest,
   AddCommandResponse,
   ErrorResponse,
   User,
-} from "../../../utils/api/types";
+} from "../../../../../../libs/utils/src/lib/api/types";
+import type { Command } from "../../../store/command";
 
 type AddCommandOverlayProps = {
   user: User;

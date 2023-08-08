@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SearchURL } from "../../utils/api/endpoints";
+import { SearchURL } from "../../../../../libs/utils/src/lib/api/endpoints";
 import { copyToClipboard } from "../../utils/copyToClipboard";
 
 const BrowserSetup = () => {

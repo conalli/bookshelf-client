@@ -1,12 +1,5 @@
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { useModal, useSelectBookmark, useSelectCommand } from "../../../hooks";
-import {
-  ADD_BOOKMARK_MODAL,
-  ADD_COMMAND_MODAL,
-  DELETE_BOOKMARK_MODAL,
-  DELETE_COMMAND_MODAL,
-} from "../../../store/modal";
 import type {
   AddBookmarkRequest,
   AddBookmarkResponse,
@@ -17,7 +10,14 @@ import type {
   ErrorResponse,
   Folder,
   User,
-} from "../../../utils/api/types";
+} from "../../../../../../libs/utils/src/lib/api/types";
+import { useModal, useSelectBookmark, useSelectCommand } from "../../../hooks";
+import {
+  ADD_BOOKMARK_MODAL,
+  ADD_COMMAND_MODAL,
+  DELETE_BOOKMARK_MODAL,
+  DELETE_COMMAND_MODAL,
+} from "../../../store/modal";
 import AddBookmarkOverlay from "./AddBookmarkOverlay";
 import AddCommandOverlay from "./AddCommandOverlay";
 import DeleteBookmarkOverlay from "./DeleteBookmarkOverlay";

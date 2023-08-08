@@ -9,7 +9,7 @@ import type {
   AddBookmarkResponse,
   ErrorResponse,
   Folder,
-} from "../../../utils/api/types";
+} from "../../../../../../libs/utils/src/lib/api/types";
 
 type AddBookmarkOverlayProps = {
   folder: Folder | undefined;

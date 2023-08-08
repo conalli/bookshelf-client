@@ -1,3 +1,5 @@
+import { getUserOrRedirect } from "../../../../../libs/utils/src/lib/api/props";
+import type { User } from "../../../../../libs/utils/src/lib/api/types";
 import {
   CommandTable,
   DeleteCommandOverlay,
@@ -12,8 +14,6 @@ import {
   useSelectCommand,
 } from "../../../src/hooks";
 import { DELETE_COMMAND_MODAL } from "../../../src/store/modal";
-import { getUserOrRedirect } from "../../../src/utils/api/props";
-import type { User } from "../../../src/utils/api/types";
 import type { UpdateCommandStatus } from "../../dashboard";
 
 export const getServerSideProps = getUserOrRedirect;

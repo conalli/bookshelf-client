@@ -1,13 +1,13 @@
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import type { SetStateAction } from "jotai";
-import type { Command } from "../../../store/command";
 import type {
   DeleteCommandRequest,
   DeleteCommandResponse,
   ErrorResponse,
   User,
-} from "../../../utils/api/types";
+} from "../../../../../../libs/utils/src/lib/api/types";
+import type { Command } from "../../../store/command";
 
 type DeleteCommandOverlayProps = {
   user: User;

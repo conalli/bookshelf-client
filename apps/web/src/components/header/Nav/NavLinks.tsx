@@ -1,6 +1,6 @@
 import Link from "next/link";
+import type { User } from "../../../../../../libs/utils/src/lib/api/types";
 import { useAuth } from "../../../hooks";
-import type { User } from "../../../utils/api/types";
 import ThemeToggleButton from "../ThemeToggleButton";
 
 const linkStyles =
