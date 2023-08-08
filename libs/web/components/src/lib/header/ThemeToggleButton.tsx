@@ -11,10 +11,10 @@ type ThemeToggleButtonProps = {
   };
 };
 
-const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
+export function ThemeToggleButton({
   buttonClass,
   iconClass,
-}) => {
+}: ThemeToggleButtonProps) {
   const { resolvedTheme: theme, setTheme } = useTheme();
   const [currentIcon, setCurrentIcon] = useState<"light" | "dark">("light");
   const toggleTheme = () => {
@@ -46,6 +46,4 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
       )}
     </motion.button>
   );
-};
-
-export default ThemeToggleButton;
+}

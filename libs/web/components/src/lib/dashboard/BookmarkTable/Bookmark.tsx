@@ -3,14 +3,13 @@ import { DELETE_BOOKMARK_MODAL } from "@bookshelf-client/store";
 import type { Bookmark as APIBookmark } from "@bookshelf-client/utils";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React from "react";
 
 type BookmarkProps = {
   showDelete: string | null;
   bookmark: APIBookmark;
 };
 
-export const Bookmark: React.FC<BookmarkProps> = ({ bookmark, showDelete }) => {
+export function Bookmark({ bookmark, showDelete }: BookmarkProps) {
   const { setIsOpen, setModalType } = useModal();
   const { setSelectedBookmark } = useSelectBookmark();
   return (
@@ -34,4 +33,4 @@ export const Bookmark: React.FC<BookmarkProps> = ({ bookmark, showDelete }) => {
       </div>
     </div>
   );
-};
+}

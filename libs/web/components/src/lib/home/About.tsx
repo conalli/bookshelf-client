@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-export const About = () => {
+export function About() {
   return (
     <article
       id="learn"
@@ -54,4 +54,4 @@ export const About = () => {
       </motion.a>
     </article>
   );
-};
+}

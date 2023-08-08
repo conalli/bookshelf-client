@@ -1,6 +1,6 @@
 import { useRefreshTokens } from "@bookshelf-client/hooks";
 
-const Error = () => {
+export default function Error() {
   useRefreshTokens();
 
   return (
@@ -11,6 +11,4 @@ const Error = () => {
       </h2>
     </div>
   );
-};
-
-export default Error;
+}

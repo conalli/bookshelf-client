@@ -1,6 +1,5 @@
 import type { User } from "@bookshelf-client/utils";
 import type { Dispatch, SetStateAction } from "react";
-import React from "react";
 
 export type MenuOption = "Commands" | "Bookmarks" | "Setup guide" | "Settings";
 
@@ -25,11 +24,7 @@ const generateDisplayName = (user: User): string => {
   return user.email.split("@")[0];
 };
 
-export const MenuBar: React.FC<MenuBarProps> = ({
-  selected,
-  setSelected,
-  user,
-}) => {
+export function MenuBar({ selected, setSelected, user }: MenuBarProps) {
   return (
     <nav className="dark:bg-bk-primary-dark flex w-full bg-white p-2 shadow-lg sm:min-h-full sm:flex-col">
       <h1 className="decoration-bk-blue dark:decoration-bk-orange hidden py-4 pl-8 underline sm:flex sm:text-xl md:text-2xl lg:text-3xl">
@@ -67,4 +62,4 @@ export const MenuBar: React.FC<MenuBarProps> = ({
       </ul>
     </nav>
   );
-};
+}

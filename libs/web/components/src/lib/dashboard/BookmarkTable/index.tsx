@@ -13,11 +13,11 @@ type BookmarkTableProps = {
   isError: boolean;
 };
 
-export const BookmarkTable: React.FC<BookmarkTableProps> = ({
+export function BookmarkTable({
   folder,
   isLoading,
   isError,
-}) => {
+}: BookmarkTableProps) {
   const { addMessage } = useMessages();
   const setFolders = useSetAtom(foldersAtom);
   const setOpenFolders = useSetAtom(addOpenFoldersAtom);
@@ -40,4 +40,4 @@ export const BookmarkTable: React.FC<BookmarkTableProps> = ({
       </AnimatePresence>
     </motion.div>
   );
-};
+}

@@ -9,11 +9,11 @@ type DeleteBookmarkOverlayProps = {
   setIsOpen: (update: SetStateAction<boolean>) => void;
 };
 
-export const DeleteBookmarkOverlay: React.FC<DeleteBookmarkOverlayProps> = ({
+export function DeleteBookmarkOverlay({
   apiKey,
   selected,
   setIsOpen,
-}) => {
+}: DeleteBookmarkOverlayProps) {
   const { mutate, isSuccess, isLoading, isError } = useDeleteBookmark(apiKey);
   const { setSelectedBookmark } = useSelectBookmark();
   if (isSuccess || isError) {
@@ -53,4 +53,4 @@ export const DeleteBookmarkOverlay: React.FC<DeleteBookmarkOverlayProps> = ({
       </div>
     </div>
   );
-};
+}

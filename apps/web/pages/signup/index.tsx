@@ -1,10 +1,10 @@
-import type { SignInFormVariant } from "@bookshelf-client/ui";
 import { GoogleSignInButton, SignInForm } from "@bookshelf-client/ui";
+import type { SignInFormVariant } from "@bookshelf-client/utils";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Link from "next/link";
 
-const SignUp = () => {
+export default function SignUp() {
   const formType: SignInFormVariant = "Sign up";
   const altType: SignInFormVariant = "Sign in";
   return (
@@ -45,6 +45,4 @@ const SignUp = () => {
       </div>
     </motion.div>
   );
-};
-
-export default SignUp;
+}

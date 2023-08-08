@@ -50,13 +50,13 @@ type ModalOverlayProps = {
   >;
 };
 
-export const ModalOverlay: React.FC<ModalOverlayProps> = ({
+export function ModalOverlay({
   user,
   folder,
   addCommand,
   deleteCommand,
   addBookmark,
-}) => {
+}: ModalOverlayProps) {
   const { setIsOpen, modalType } = useModal();
   const { selectedCommand, setSelectedCommand } = useSelectCommand();
   const { selectedBookmark } = useSelectBookmark();
@@ -98,4 +98,4 @@ export const ModalOverlay: React.FC<ModalOverlayProps> = ({
     default:
       return null;
   }
-};
+}

@@ -23,12 +23,12 @@ type AddCommandOverlayProps = {
   setIsOpen: (update: SetStateAction<boolean>) => void;
 };
 
-export const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
+export function AddCommandOverlay({
   user,
   add,
   setSelected,
   setIsOpen,
-}) => {
+}: AddCommandOverlayProps) {
   const [cmd, setCmd] = useState<string>("");
   const [url, setUrl] = useState<string>("");
   const updateData = (
@@ -102,4 +102,4 @@ export const AddCommandOverlay: React.FC<AddCommandOverlayProps> = ({
       </div>
     </div>
   );
-};
+}

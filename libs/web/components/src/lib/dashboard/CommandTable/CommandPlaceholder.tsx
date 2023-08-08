@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export const CommandPlaceholder = () => {
+export function CommandPlaceholder() {
   return (
     <motion.div className="relative flex h-full w-full items-center justify-center text-3xl">
       Stacking shelves
@@ -54,6 +54,4 @@ export const CommandPlaceholder = () => {
       </motion.p>
     </motion.div>
   );
-};
-
-export default CommandPlaceholder;
+}

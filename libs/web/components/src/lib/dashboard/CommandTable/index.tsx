@@ -7,8 +7,7 @@ import type {
 } from "@bookshelf-client/utils";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import React from "react";
-import CommandPlaceholder from "./CommandPlaceholder";
+import { CommandPlaceholder } from "./CommandPlaceholder";
 import { StatusIcon } from "./StatusIcon";
 
 type CommandTableProps = {
@@ -25,12 +24,12 @@ const formatLink = (link: string) => {
   return `http://${link}`;
 };
 
-export const CommandTable: React.FC<CommandTableProps> = ({
+export function CommandTable({
   commands,
   isLoadingCommands,
   user,
   cmdStatus,
-}) => {
+}: CommandTableProps) {
   const { setIsOpen, setModalType } = useModal();
   const { selectedCommand, setSelectedCommand } = useSelectCommand();
   if (!user) return null;
@@ -112,4 +111,4 @@ export const CommandTable: React.FC<CommandTableProps> = ({
         </tbody>
       </motion.table>
     );
-};
+}

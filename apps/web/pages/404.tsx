@@ -2,7 +2,7 @@ import { BookshelfLogo } from "@bookshelf-client/ui";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-const Four04 = () => {
+export default function Four04() {
   const router = useRouter();
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
@@ -30,6 +30,4 @@ const Four04 = () => {
       </div>
     </div>
   );
-};
-
-export default Four04;
+}

@@ -4,4 +4,5 @@ export * from "./lib/BookshelfLogo";
 export * from "./lib/ErrorNotification";
 export * from "./lib/Loading";
 export * from "./lib/Spinner";
-export * from "./lib/auth";
+export * from "./lib/auth/GoogleSignIn";
+export * from "./lib/auth/SignInForm";

@@ -51,11 +51,11 @@ const sanitizePath = (path: string): string => {
   return path.replace("/", ",");
 };
 
-export const AddBookmarkOverlay: React.FC<AddBookmarkOverlayProps> = ({
+export function AddBookmarkOverlay({
   folder,
   add,
   setIsOpen,
-}) => {
+}: AddBookmarkOverlayProps) {
   const [isFolder, setIsFolder] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [path, setPath] = useState<string>("");
@@ -184,4 +184,4 @@ export const AddBookmarkOverlay: React.FC<AddBookmarkOverlayProps> = ({
       </div>
     </div>
   );
-};
+}

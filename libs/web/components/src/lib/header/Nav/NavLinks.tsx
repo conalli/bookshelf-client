@@ -1,12 +1,16 @@
 import { useAuth } from "@bookshelf-client/hooks";
 import type { User } from "@bookshelf-client/utils";
 import Link from "next/link";
-import ThemeToggleButton from "../ThemeToggleButton";
+import { ThemeToggleButton } from "../ThemeToggleButton";
 
 const linkStyles =
   /*tw*/ "py-1 px-2 hover:text-bk-blue hover:dark:text-orange-300";
 
-export function NavLinks({ user }: { user: User | null }) {
+type NavLinksProps = {
+  user: User | null;
+};
+
+export function NavLinks({ user }: NavLinksProps) {
   const {
     signOut: { mutate: signOut },
   } = useAuth();

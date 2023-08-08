@@ -17,7 +17,11 @@ import {
 
 export const getServerSideProps = getUserOrRedirect;
 
-const Command = ({ userData }: { userData: User }) => {
+type CommandProps = {
+  userData: User;
+};
+
+export default function Command({ userData }: CommandProps) {
   const { data: user } = useGetUser(
     userData.api_key,
     {
@@ -64,6 +68,4 @@ const Command = ({ userData }: { userData: User }) => {
       />
     </div>
   );
-};
-
-export default Command;
+}

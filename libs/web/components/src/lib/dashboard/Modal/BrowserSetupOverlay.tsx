@@ -1,14 +1,12 @@
 import { SearchURL, copyToClipboard } from "@bookshelf-client/utils";
 import type { Dispatch, SetStateAction } from "react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 type BrowserSetupOverlayProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
-  setIsOpen,
-}) => {
+export function BrowserSetupOverlay({ setIsOpen }: BrowserSetupOverlayProps) {
   const [isCopied, setIsCopied] = useState(false);
   const handleCopyURL = () => {
     copyToClipboard(`${SearchURL}/%s`);
@@ -96,4 +94,4 @@ export const BrowserSetupOverlay: React.FC<BrowserSetupOverlayProps> = ({
       </div>
     </div>
   );
-};
+}

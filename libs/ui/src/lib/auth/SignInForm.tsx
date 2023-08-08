@@ -4,7 +4,6 @@ import type { AuthRequest, SignInFormVariant } from "@bookshelf-client/utils";
 import type { FormikHelpers } from "formik";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { motion } from "framer-motion";
-import React from "react";
 import { object, string } from "yup";
 
 type SignInFormProps = {
@@ -22,7 +21,7 @@ const schema = object().shape({
     .required("Please enter your password"),
 });
 
-const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
+export function SignInForm({ type }: SignInFormProps) {
   const {
     signIn: { isLoading: isSignInLoading, mutate: signin },
     signUp: { isLoading: isSignUpLoading, mutate: signup },
@@ -101,6 +100,4 @@ const SignInForm: React.FC<SignInFormProps> = ({ type }) => {
       )}
     </Formik>
   );
-};
-
-export default SignInForm;
+}

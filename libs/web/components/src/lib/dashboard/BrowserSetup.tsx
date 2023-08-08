@@ -1,7 +1,7 @@
 import { SearchURL, copyToClipboard } from "@bookshelf-client/utils";
 import { useState } from "react";
 
-export const BrowserSetup = () => {
+export function BrowserSetup() {
   const [isCopied, setIsCopied] = useState(false);
   const handleCopyURL = () => {
     copyToClipboard(`${SearchURL}/%s`);
@@ -79,4 +79,4 @@ export const BrowserSetup = () => {
       </div>
     </div>
   );
-};
+}

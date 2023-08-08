@@ -1,9 +1,9 @@
+import type { SignInFormVariant } from "@bookshelf-client/utils";
+import { APIURL } from "@bookshelf-client/utils";
 import Link from "next/link";
 import React from "react";
-import { APIURL } from "../../../../utils/src/lib/api/endpoints";
-import type { SignInFormVariant } from "./SignInForm";
 
-const GoogleIcon = () => {
+export function GoogleIcon() {
   return (
     <svg
       className="h-[16px] w-[16px] md:h-[24px] md:w-[24px]"
@@ -31,9 +31,9 @@ const GoogleIcon = () => {
       <path d="M1 1h22v22H1z" fill="none" />
     </svg>
   );
-};
+}
 
-const GoogleSignInButton: React.FC<{ authType: SignInFormVariant }> = ({
+export const GoogleSignInButton: React.FC<{ authType: SignInFormVariant }> = ({
   authType,
 }) => {
   const href = `${APIURL.AUTH}/oauth?provider=google&type=${
@@ -51,5 +51,3 @@ const GoogleSignInButton: React.FC<{ authType: SignInFormVariant }> = ({
     </button>
   );
 };
-
-export default GoogleSignInButton;

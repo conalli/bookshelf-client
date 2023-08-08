@@ -17,7 +17,7 @@ type FolderProps = {
   isOpen: boolean;
 };
 
-export const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
+export function Folder({ folder, isOpen }: FolderProps) {
   const { bookmarks, folders } = folder;
   const [showDelete, setShowDelete] = useState<string | null>(folder.id);
   const isFolderOpen = useAtomValue(openFoldersAtom);
@@ -77,4 +77,4 @@ export const Folder: React.FC<FolderProps> = ({ folder, isOpen }) => {
       )}
     </div>
   );
-};
+}

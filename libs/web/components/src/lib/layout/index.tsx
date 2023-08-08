@@ -4,7 +4,7 @@ import type { Variants } from "framer-motion";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useTheme } from "next-themes";
 import type { ReactNode } from "react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Header from "../header";
 
 type LayoutProps = {
@@ -13,7 +13,7 @@ type LayoutProps = {
 
 const MESSAGE_DURATION_MS = 3000;
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export function Layout({ children }: LayoutProps) {
   const {
     status,
     signOut: { isLoading: isSignOutLoading },
@@ -68,4 +68,4 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </motion.div>
     </AnimatePresence>
   );
-};
+}

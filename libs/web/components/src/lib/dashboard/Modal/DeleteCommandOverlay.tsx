@@ -20,12 +20,12 @@ type DeleteCommandOverlayProps = {
   setIsOpen: (update: SetStateAction<boolean>) => void;
 };
 
-export const DeleteCommandOverlay: React.FC<DeleteCommandOverlayProps> = ({
+export function DeleteCommandOverlay({
   user,
   del,
   selected,
   setIsOpen,
-}) => {
+}: DeleteCommandOverlayProps) {
   return (
     <div className="flex flex-col p-3 lg:p-6">
       <h1 className="py-1 text-3xl md:py-2 lg:py-3">Delete Command: </h1>
@@ -61,4 +61,4 @@ export const DeleteCommandOverlay: React.FC<DeleteCommandOverlayProps> = ({
       </div>
     </div>
   );
-};
+}

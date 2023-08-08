@@ -5,13 +5,12 @@ import { BookmarkTable } from "@bookshelf-client/web/components";
 
 export const getServerSideProps = getUserAndBookmarksOrRedirect;
 
-const Bookmark = ({
-  userData,
-  folderData,
-}: {
+type BookmarkProps = {
   userData: User;
   folderData: Folder;
-}) => {
+};
+
+export default function Bookmark({ userData, folderData }: BookmarkProps) {
   useGetUser(userData.api_key);
   useRefreshTokens(userData.api_key);
 
@@ -23,6 +22,4 @@ const Bookmark = ({
       </div>
     </div>
   );
-};
-
-export default Bookmark;
+}

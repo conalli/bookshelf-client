@@ -14,11 +14,7 @@ type StatusIconProps = {
   cmdStatus: UpdateCommandStatus;
 };
 
-export const StatusIcon: React.FC<StatusIconProps> = ({
-  cmdStatus,
-  cmd,
-  selected,
-}) => {
+export function StatusIcon({ cmdStatus, cmd, selected }: StatusIconProps) {
   const { add, del } = cmdStatus;
   const [iconType, setIconType] = useState<
     "success" | "loading" | "error" | "default"
@@ -49,4 +45,4 @@ export const StatusIcon: React.FC<StatusIconProps> = ({
     <ExclamationCircleIcon className="text-bk-red h-4 w-4  md:h-6 md:w-6" />;
   }
   return <CheckIcon className="text-bk-blue h-4 w-4 md:h-6 md:w-6" />;
-};
+}

@@ -4,7 +4,11 @@ import { getUserIfPossible } from "@bookshelf-client/utils";
 
 export const getServerSideProps = getUserIfPossible;
 
-const Help = ({ userData }: { userData: User | null }) => {
+type HelpProps = {
+  userData: User | null;
+};
+
+export default function Help({ userData }: HelpProps) {
   useGetUser(
     userData?.api_key,
     userData ? { initialData: userData } : undefined,
@@ -99,6 +103,4 @@ const Help = ({ userData }: { userData: User | null }) => {
       </table>
     </div>
   );
-};
-
-export default Help;
+}

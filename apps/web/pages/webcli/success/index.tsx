@@ -2,7 +2,7 @@ import { useRefreshTokens } from "@bookshelf-client/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const Success = () => {
+export default function Success() {
   const [counter, setCounter] = useState(3);
   const router = useRouter();
   useRefreshTokens();
@@ -26,6 +26,4 @@ const Success = () => {
       <h2 className="text-2xl">Redirecting in {counter}</h2>
     </div>
   );
-};
-
-export default Success;
+}

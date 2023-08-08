@@ -9,7 +9,7 @@ type ModalProps = {
   children: ReactNode;
 };
 
-export const Modal: React.FC<ModalProps> = ({ children }) => {
+export function Modal({ children }: ModalProps) {
   const { isOpen, setIsOpen } = useModal();
   return (
     <ReactModal
@@ -29,4 +29,4 @@ export const Modal: React.FC<ModalProps> = ({ children }) => {
       )}
     />
   );
-};
+}
