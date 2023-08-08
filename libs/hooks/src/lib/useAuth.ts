@@ -1,3 +1,7 @@
+import type { AuthStatus } from "@bookshelf-client/store";
+import { statusAtom } from "@bookshelf-client/store";
+import type { AuthRequest, ErrorResponse, User } from "@bookshelf-client/utils";
+import { APIURL } from "@bookshelf-client/utils";
 import type {
   MutationFunction,
   QueryClient,
@@ -12,10 +16,6 @@ import type { NextRouter } from "next/router";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 import type { SignInFormVariant } from "../components/auth/SignInForm";
-import type { AuthStatus } from "../store/auth";
-import { statusAtom } from "../store/auth";
-import { APIURL } from "../utils/api/endpoints";
-import type { AuthRequest, ErrorResponse, User } from "../utils/api/types";
 import { useMessages } from "./useMessages";
 import { USER_KEY, useRemoveUser } from "./useUser";
 
