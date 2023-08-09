@@ -28,7 +28,7 @@ import type { NextPageWithLayoutAndProps } from "../_app";
 
 export const getServerSideProps = getUserOrRedirect;
 
-export const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
+const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
   userData,
 }) => {
   const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
@@ -119,3 +119,5 @@ export const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
     </section>
   );
 };
+
+export default Dashboard;
