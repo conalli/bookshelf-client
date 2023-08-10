@@ -1,3 +1,5 @@
+"use client";
+
 import type { AuthStatus } from "@bookshelf-client/store";
 import { statusAtom } from "@bookshelf-client/store";
 import type {
@@ -17,8 +19,8 @@ import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import type { SetStateAction } from "jotai";
 import { useAtomValue, useSetAtom } from "jotai";
-import type { NextRouter } from "next/router";
-import { useRouter } from "next/router";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useMessages } from "./useMessages";
 import { USER_KEY, useRemoveUser } from "./useUser";
@@ -66,7 +68,7 @@ const logout = async () => {
 const authRequest = (
   mutationFn: MutationFunction<User, AuthRequestData>,
   queryClient: QueryClient,
-  router: NextRouter,
+  router: AppRouterInstance,
   setAuthStatus: (update: SetStateAction<AuthStatus | null>) => void,
   addMessage: (message: string, isError?: boolean) => void
 ): UseMutationOptions<

@@ -1,3 +1,5 @@
+"use client";
+
 import type { Folder } from "@bookshelf-client/utils";
 import { atom } from "jotai";
 

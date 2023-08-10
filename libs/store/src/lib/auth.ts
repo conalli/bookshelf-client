@@ -1,3 +1,5 @@
+"use client";
+
 import { atom } from "jotai";
 
 export type AuthStatus = { success: boolean; loading: boolean; error: boolean };

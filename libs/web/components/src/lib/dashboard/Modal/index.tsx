@@ -1,3 +1,5 @@
+"use client";
+
 import { useModal } from "@bookshelf-client/hooks";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";

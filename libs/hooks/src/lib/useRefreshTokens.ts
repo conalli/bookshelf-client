@@ -1,3 +1,5 @@
+"use client";
+
 import type { ErrorResponse } from "@bookshelf-client/utils";
 import {
   APIURL,
@@ -7,7 +9,7 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useMessages } from "./useMessages";
 
 export const REFRESH_KEY = "refresh";

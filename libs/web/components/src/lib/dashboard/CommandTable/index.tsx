@@ -1,3 +1,5 @@
+"use client";
+
 import { useModal, useSelectCommand } from "@bookshelf-client/hooks";
 import { DELETE_COMMAND_MODAL } from "@bookshelf-client/store";
 import type {

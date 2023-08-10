@@ -1,3 +1,5 @@
+"use client";
+
 import type { Command } from "@bookshelf-client/store";
 import { Spinner } from "@bookshelf-client/ui";
 import { UpdateCommandStatus } from "@bookshelf-client/utils";

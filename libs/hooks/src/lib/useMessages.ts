@@ -1,3 +1,5 @@
+"use client";
+
 import { atom, useAtom } from "jotai";
 import { nanoid } from "nanoid";
 import { useCallback } from "react";

@@ -1,3 +1,5 @@
+"use client";
+
 import { removeUserAtom, userAtom } from "@bookshelf-client/store";
 import type { ErrorResponse, User } from "@bookshelf-client/utils";
 import {

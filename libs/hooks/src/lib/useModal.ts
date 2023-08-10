@@ -1,3 +1,5 @@
+"use client";
+
 import { modalOpenAtom, modalTypeAtom } from "@bookshelf-client/store";
 import { useAtomValue, useSetAtom } from "jotai";
 

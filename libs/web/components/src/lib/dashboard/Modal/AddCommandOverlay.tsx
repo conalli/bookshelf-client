@@ -1,3 +1,5 @@
+"use client";
+
 import type { Command } from "@bookshelf-client/store";
 import type {
   AddCommandRequest,

@@ -1,3 +1,5 @@
+"use client";
+
 import { selectedBookmarkAtom } from "@bookshelf-client/store";
 import type {
   AddBookmarkFileResponse,

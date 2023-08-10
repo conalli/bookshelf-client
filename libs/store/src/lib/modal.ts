@@ -1,3 +1,5 @@
+"use client";
+
 import { atom } from "jotai";
 
 export const ADD_COMMAND_MODAL = "addCommand";

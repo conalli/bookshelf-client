@@ -1,3 +1,5 @@
+"use client";
+
 import type { Message } from "@bookshelf-client/hooks";
 import { motion } from "framer-motion";
 

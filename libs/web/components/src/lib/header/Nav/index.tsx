@@ -1,14 +1,16 @@
+"use client";
+
 import { useUser } from "@bookshelf-client/hooks";
 import { BookshelfLogo } from "@bookshelf-client/ui";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
-import type { NextRouter } from "next/router";
-import { useRouter } from "next/router";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 
-const navigateHome = (router: NextRouter) => router.push("/");
+const navigateHome = (router: AppRouterInstance) => router.push("/");
 
 export function Nav() {
   const [open, setOpen] = useState(false);

@@ -1,3 +1,5 @@
+"use client";
+
 import { selectedCommandAtom } from "@bookshelf-client/store";
 import type {
   AddCommandRequest,

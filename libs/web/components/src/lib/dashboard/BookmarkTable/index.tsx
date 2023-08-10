@@ -1,3 +1,5 @@
+"use client";
+
 import { useMessages } from "@bookshelf-client/hooks";
 import { addOpenFoldersAtom, foldersAtom } from "@bookshelf-client/store";
 import { Spinner } from "@bookshelf-client/ui";

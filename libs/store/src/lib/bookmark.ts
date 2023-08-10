@@ -1,3 +1,5 @@
+"use client";
+
 import type { Bookmark } from "@bookshelf-client/utils";
 import { atom } from "jotai";
 

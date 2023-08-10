@@ -1,3 +1,5 @@
+"use client";
+
 import type { AuthRequestData } from "@bookshelf-client/hooks";
 import { useAuth } from "@bookshelf-client/hooks";
 import type { AuthRequest, SignInFormVariant } from "@bookshelf-client/utils";

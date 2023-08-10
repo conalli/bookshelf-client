@@ -1,8 +1,9 @@
+"use client";
+
 import { useAuth } from "@bookshelf-client/hooks";
 import { GoogleSignInButton, Loading, SignInForm } from "@bookshelf-client/ui";
 import type { SignInFormVariant } from "@bookshelf-client/utils";
 import { motion } from "framer-motion";
-import Head from "next/head";
 import Link from "next/link";
 
 export default function SignIn() {
@@ -23,9 +24,6 @@ export default function SignIn() {
       exit={{ opacity: 0, x: -20 }}
       className="flex h-4/5 w-full items-center justify-center py-10 md:h-full md:items-start"
     >
-      <Head>
-        <title>Sign in</title>
-      </Head>
       <div className="flex h-4/5 w-4/5 flex-col items-center justify-center rounded-md bg-white py-10 shadow-md dark:bg-neutral-800 md:w-3/4 lg:w-3/5 xl:w-2/4">
         <h1 className="py-2 text-xl md:text-3xl lg:py-10 lg:text-6xl">
           {formType}

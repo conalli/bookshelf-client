@@ -1,3 +1,5 @@
+"use client";
+
 import type {
   AddBookmarkRequest,
   AddBookmarkResponse,

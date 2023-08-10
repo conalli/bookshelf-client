@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchURL, copyToClipboard } from "@bookshelf-client/utils";
 import { useState } from "react";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth, useMessages } from "@bookshelf-client/hooks";
 import { ErrorNotification, Loading } from "@bookshelf-client/ui";
 import type { Variants } from "framer-motion";
