@@ -1,3 +1,5 @@
+"use client";
+
 import { GoogleSignInButton, SignInForm } from "@bookshelf-client/ui";
 import type { SignInFormVariant } from "@bookshelf-client/utils";
 import { motion } from "framer-motion";

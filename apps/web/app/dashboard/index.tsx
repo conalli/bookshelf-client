@@ -1,3 +1,5 @@
+"use client";
+
 import {
   useAddBookmark,
   useAddBookmarkFromFile,
@@ -11,7 +13,6 @@ import {
 } from "@bookshelf-client/hooks";
 import { Loading } from "@bookshelf-client/ui";
 import type { UpdateCommandStatus, User } from "@bookshelf-client/utils";
-import { getUserOrRedirect } from "@bookshelf-client/utils";
 import type { MenuOption } from "@bookshelf-client/web/components";
 import {
   ActionBar,
@@ -24,13 +25,8 @@ import {
 } from "@bookshelf-client/web/components";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type { NextPageWithLayoutAndProps } from "../_app";
 
-export const getServerSideProps = getUserOrRedirect;
-
-const Dashboard: NextPageWithLayoutAndProps<{ userData: User }> = ({
-  userData,
-}) => {
+const Dashboard = ({ userData }: { userData: User }) => {
   const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
   const userKey = userData.api_key;
   const { status, setStatus } = useAuth();

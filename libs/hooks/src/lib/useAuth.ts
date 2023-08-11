@@ -8,7 +8,7 @@ import type {
   SignInFormVariant,
   User,
 } from "@bookshelf-client/utils";
-import { APIURL } from "@bookshelf-client/utils";
+import { APIURL, USER_KEY } from "@bookshelf-client/utils";
 import type {
   MutationFunction,
   QueryClient,
@@ -23,7 +23,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useMessages } from "./useMessages";
-import { USER_KEY, useRemoveUser } from "./useUser";
+import { useRemoveUser } from "./useUser";
 
 export type AuthRequestData = {
   data: AuthRequest;

@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetUser } from "@bookshelf-client/hooks";
 import type { User } from "@bookshelf-client/utils";
 import { getUserIfPossible } from "@bookshelf-client/utils";

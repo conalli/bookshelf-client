@@ -4,6 +4,7 @@ import { removeUserAtom, userAtom } from "@bookshelf-client/store";
 import type { ErrorResponse, User } from "@bookshelf-client/utils";
 import {
   APIURL,
+  USER_KEY,
   createQueryKey,
   exponentialBackoff,
 } from "@bookshelf-client/utils";
@@ -13,8 +14,6 @@ import type { AxiosError, AxiosResponse } from "axios";
 import axios from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useMessages } from "./useMessages";
-
-export const USER_KEY = "user";
 
 export const useUser = () => {
   return useAtomValue(userAtom);

@@ -11,3 +11,4 @@ export * from "./lib/dashboard/ModalOverlay";
 export * from "./lib/header";
 export * from "./lib/home/About";
 export * from "./lib/layout";
+export * from "./lib/providers";

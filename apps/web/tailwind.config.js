@@ -11,7 +11,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Overpass", "Murecho", ...fontFamily.sans],
+      sans: ["var(--font-overpass)", "var(--font-murecho)", ...fontFamily.sans],
     },
     extend: {
       colors: {

@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetUser, useRefreshTokens } from "@bookshelf-client/hooks";
 import type { Folder, User } from "@bookshelf-client/utils";
 import { getUserAndBookmarksOrRedirect } from "@bookshelf-client/utils";

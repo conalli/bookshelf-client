@@ -1,3 +1,5 @@
+"use client";
+
 import { useRefreshTokens } from "@bookshelf-client/hooks";
 
 export default function Error() {

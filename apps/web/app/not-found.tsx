@@ -1,8 +1,10 @@
+"use client";
+
 import { BookshelfLogo } from "@bookshelf-client/ui";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-export default function Four04() {
+export default function NotFound() {
   const router = useRouter();
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
