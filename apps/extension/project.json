@@ -18,6 +18,19 @@
         "production": {}
       }
     },
+    "bundle": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf dist/apps/extension/extension",
+          "nx build extension",
+          "mv dist/apps/extension/.next/_next dist/apps/extension/.next/next",
+          "mv dist/apps/extension/.next dist/apps/extension/extension",
+          "grep -rli '_next' ./dist/apps/extension/extension/* | xargs -I@ sed -i '' 's|/next|/next|g' @;"
+        ],
+        "parallel": false
+      }
+    },
     "serve": {
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
@@ -34,12 +47,6 @@
           "buildTarget": "extension:build:production",
           "dev": false
         }
-      }
-    },
-    "export": {
-      "executor": "@nx/next:export",
-      "options": {
-        "buildTarget": "extension:build:production"
       }
     },
     "test": {
