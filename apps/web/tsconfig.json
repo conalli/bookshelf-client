@@ -24,26 +24,6 @@
       "node"
     ]
   },
-  "paths": {
-    "@components/*": [
-      "/apps/web/src/components/*"
-    ],
-    "@hooks": [
-      "/apps/web/src/hooks/index.ts"
-    ],
-    "@hooks/*": [
-      "/apps/web/src/hooks/*"
-    ],
-    "@pages/*": [
-      "/apps/web/pages/*"
-    ],
-    "@store/*": [
-      "/apps/web/src/store/*"
-    ],
-    "@utils/*": [
-      "/apps/web/src/utils/*"
-    ]
-  },
   "include": [
     "**/*.ts",
     "**/*.tsx",

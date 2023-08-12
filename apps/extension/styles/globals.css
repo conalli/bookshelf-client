@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  height: 480px;
+  width: 360px;
+}
+
+.bk-rotate-text {
+  writing-mode: vertical-lr;
+  text-orientation: sideways;
+}
+
+html.light .bk-background {
+  background-color: #ffffff01;
+}
+
+html.dark .bk-background {
+  background-color: #21212180;
+}
