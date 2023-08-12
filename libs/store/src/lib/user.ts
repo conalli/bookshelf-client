@@ -1,6 +1,6 @@
 "use client";
 
-import type { User } from "@bookshelf-client/utils";
+import type { User } from "@bookshelf-client/api";
 import { atom } from "jotai";
 
 export const userAtom = atom<User | null>(null);

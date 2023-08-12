@@ -1,6 +1,7 @@
 "use client";
 
-import { SearchURL, copyToClipboard } from "@bookshelf-client/utils";
+import { SearchURL } from "@bookshelf-client/api";
+import { copyToClipboard } from "@bookshelf-client/utils";
 import { useState } from "react";
 
 export function BrowserSetup() {

@@ -1,11 +1,7 @@
 "use client";
 
-import type { ErrorResponse } from "@bookshelf-client/utils";
-import {
-  APIURL,
-  createQueryKey,
-  exponentialBackoff,
-} from "@bookshelf-client/utils";
+import { APIURL, type ErrorResponse } from "@bookshelf-client/api";
+import { createQueryKey, exponentialBackoff } from "@bookshelf-client/utils";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";

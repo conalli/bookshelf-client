@@ -1,6 +1,6 @@
+import type { Bookmark as APIBookmark } from "@bookshelf-client/api";
 import { useModal, useSelectBookmark } from "@bookshelf-client/hooks";
 import { DELETE_BOOKMARK_MODAL } from "@bookshelf-client/store";
-import type { Bookmark as APIBookmark } from "@bookshelf-client/utils";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 

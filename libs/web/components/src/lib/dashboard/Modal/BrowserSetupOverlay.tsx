@@ -1,4 +1,5 @@
-import { SearchURL, copyToClipboard } from "@bookshelf-client/utils";
+import { SearchURL } from "@bookshelf-client/api";
+import { copyToClipboard } from "@bookshelf-client/utils";
 import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 

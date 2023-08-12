@@ -1,12 +1,12 @@
 "use client";
 
-import type { Command } from "@bookshelf-client/store";
 import type {
   AddCommandRequest,
   AddCommandResponse,
   ErrorResponse,
   User,
-} from "@bookshelf-client/utils";
+} from "@bookshelf-client/api";
+import type { Command } from "@bookshelf-client/store";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { motion } from "framer-motion";

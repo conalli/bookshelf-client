@@ -1,3 +1,14 @@
+import type {
+  AddBookmarkRequest,
+  AddBookmarkResponse,
+  AddCommandRequest,
+  AddCommandResponse,
+  DeleteCommandRequest,
+  DeleteCommandResponse,
+  ErrorResponse,
+  Folder,
+  User,
+} from "@bookshelf-client/api";
 import {
   useModal,
   useSelectBookmark,
@@ -9,17 +20,6 @@ import {
   DELETE_BOOKMARK_MODAL,
   DELETE_COMMAND_MODAL,
 } from "@bookshelf-client/store";
-import type {
-  AddBookmarkRequest,
-  AddBookmarkResponse,
-  AddCommandRequest,
-  AddCommandResponse,
-  DeleteCommandRequest,
-  DeleteCommandResponse,
-  ErrorResponse,
-  Folder,
-  User,
-} from "@bookshelf-client/utils";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { AddBookmarkOverlay } from "./Modal/AddBookmarkOverlay";

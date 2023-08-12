@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "@bookshelf-client/api";
 import {
   useDeleteCommand,
   useGetCommands,
@@ -9,15 +10,12 @@ import {
   useSelectCommand,
 } from "@bookshelf-client/hooks";
 import { DELETE_COMMAND_MODAL } from "@bookshelf-client/store";
-import type { UpdateCommandStatus, User } from "@bookshelf-client/utils";
-import { getUserOrRedirect } from "@bookshelf-client/utils";
+import type { UpdateCommandStatus } from "@bookshelf-client/utils";
 import {
   CommandTable,
   DeleteCommandOverlay,
   Modal,
 } from "@bookshelf-client/web/components";
-
-export const getServerSideProps = getUserOrRedirect;
 
 type CommandProps = {
   userData: User;

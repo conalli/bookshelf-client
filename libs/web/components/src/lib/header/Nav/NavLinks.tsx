@@ -1,5 +1,5 @@
+import type { User } from "@bookshelf-client/api";
 import { useAuth } from "@bookshelf-client/hooks";
-import type { User } from "@bookshelf-client/utils";
 import Link from "next/link";
 import { ThemeToggleButton } from "../ThemeToggleButton";
 

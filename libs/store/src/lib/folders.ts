@@ -1,6 +1,6 @@
 "use client";
 
-import type { Folder } from "@bookshelf-client/utils";
+import type { Folder } from "@bookshelf-client/api";
 import { atom } from "jotai";
 
 export type FolderOpenState = { [name: string]: boolean };

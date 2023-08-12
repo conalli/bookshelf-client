@@ -1,12 +1,9 @@
 "use client";
 
+import { CommandList, User } from "@bookshelf-client/api";
 import { useModal, useSelectCommand } from "@bookshelf-client/hooks";
 import { DELETE_COMMAND_MODAL } from "@bookshelf-client/store";
-import type {
-  CommandList,
-  UpdateCommandStatus,
-  User,
-} from "@bookshelf-client/utils";
+import type { UpdateCommandStatus } from "@bookshelf-client/utils";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { CommandPlaceholder } from "./CommandPlaceholder";

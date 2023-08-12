@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "@bookshelf-client/api";
 import {
   useAddBookmark,
   useAddBookmarkFromFile,
@@ -12,7 +13,7 @@ import {
   useRefreshTokens,
 } from "@bookshelf-client/hooks";
 import { Loading } from "@bookshelf-client/ui";
-import type { UpdateCommandStatus, User } from "@bookshelf-client/utils";
+import type { UpdateCommandStatus } from "@bookshelf-client/utils";
 import type { MenuOption } from "@bookshelf-client/web/components";
 import {
   ActionBar,

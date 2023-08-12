@@ -1,4 +1,4 @@
-import type { User } from "@bookshelf-client/utils";
+import type { User } from "@bookshelf-client/api";
 import type { Dispatch, SetStateAction } from "react";
 
 export type MenuOption = "Commands" | "Bookmarks" | "Setup guide" | "Settings";

@@ -1,9 +1,9 @@
 "use client";
 
+import type { Folder as APIFolder } from "@bookshelf-client/api";
 import { useMessages } from "@bookshelf-client/hooks";
 import { addOpenFoldersAtom, foldersAtom } from "@bookshelf-client/store";
 import { Spinner } from "@bookshelf-client/ui";
-import type { Folder as APIFolder } from "@bookshelf-client/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";

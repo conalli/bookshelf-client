@@ -1,9 +1,6 @@
-import {
-  getBookshelfCookies,
-  getFolder,
-  getUser,
-} from "@bookshelf-client/utils";
+import { getBookshelfCookies, getFolder, getUser } from "@bookshelf-client/api";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import Bookmark from ".";
 
 export default async function BookmarkPage() {
@@ -15,5 +12,6 @@ export default async function BookmarkPage() {
     return <Bookmark userData={userData} folderData={folderData} />;
   } catch (error) {
     console.log(error);
+    redirect("/webcli/error");
   }
 }

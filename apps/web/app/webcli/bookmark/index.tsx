@@ -1,11 +1,8 @@
 "use client";
 
+import type { Folder, User } from "@bookshelf-client/api";
 import { useGetUser, useRefreshTokens } from "@bookshelf-client/hooks";
-import type { Folder, User } from "@bookshelf-client/utils";
-import { getUserAndBookmarksOrRedirect } from "@bookshelf-client/utils";
 import { BookmarkTable } from "@bookshelf-client/web/components";
-
-export const getServerSideProps = getUserAndBookmarksOrRedirect;
 
 type BookmarkProps = {
   userData: User;
@@ -13,7 +10,7 @@ type BookmarkProps = {
 };
 
 export default function Bookmark({ userData, folderData }: BookmarkProps) {
-  useGetUser(userData.api_key);
+  useGetUser(userData.api_key, { initialData: userData });
   useRefreshTokens(userData.api_key);
 
   return (

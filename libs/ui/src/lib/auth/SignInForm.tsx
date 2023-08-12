@@ -1,8 +1,9 @@
 "use client";
 
+import { AuthRequest } from "@bookshelf-client/api";
 import type { AuthRequestData } from "@bookshelf-client/hooks";
 import { useAuth } from "@bookshelf-client/hooks";
-import type { AuthRequest, SignInFormVariant } from "@bookshelf-client/utils";
+import type { SignInFormVariant } from "@bookshelf-client/utils";
 import type { FormikHelpers } from "formik";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { motion } from "framer-motion";

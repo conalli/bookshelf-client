@@ -1,6 +1,6 @@
+import type { Bookmark } from "@bookshelf-client/api";
 import { useDeleteBookmark, useSelectBookmark } from "@bookshelf-client/hooks";
 import { Loading } from "@bookshelf-client/ui";
-import type { Bookmark } from "@bookshelf-client/utils";
 import type { SetStateAction } from "jotai";
 
 type DeleteBookmarkOverlayProps = {

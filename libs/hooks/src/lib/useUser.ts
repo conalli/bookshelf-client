@@ -1,9 +1,8 @@
 "use client";
 
+import { APIURL, type ErrorResponse, type User } from "@bookshelf-client/api";
 import { removeUserAtom, userAtom } from "@bookshelf-client/store";
-import type { ErrorResponse, User } from "@bookshelf-client/utils";
 import {
-  APIURL,
   USER_KEY,
   createQueryKey,
   exponentialBackoff,

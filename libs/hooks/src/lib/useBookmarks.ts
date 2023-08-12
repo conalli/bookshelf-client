@@ -1,19 +1,16 @@
 "use client";
 
-import { selectedBookmarkAtom } from "@bookshelf-client/store";
-import type {
-  AddBookmarkFileResponse,
-  AddBookmarkRequest,
-  AddBookmarkResponse,
-  DeleteBookmarkResponse,
-  ErrorResponse,
-  Folder,
-} from "@bookshelf-client/utils";
 import {
   APIURL,
-  createQueryKey,
-  exponentialBackoff,
-} from "@bookshelf-client/utils";
+  type AddBookmarkFileResponse,
+  type AddBookmarkRequest,
+  type AddBookmarkResponse,
+  type DeleteBookmarkResponse,
+  type ErrorResponse,
+  type Folder,
+} from "@bookshelf-client/api";
+import { selectedBookmarkAtom } from "@bookshelf-client/store";
+import { createQueryKey, exponentialBackoff } from "@bookshelf-client/utils";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";

@@ -5,7 +5,7 @@ import type {
   AddBookmarkResponse,
   ErrorResponse,
   Folder,
-} from "@bookshelf-client/utils";
+} from "@bookshelf-client/api";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";

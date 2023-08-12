@@ -1,8 +1,8 @@
+import type { Folder as APIFolder } from "@bookshelf-client/api";
 import {
   openFoldersAtom,
   updateOpenFoldersAtom,
 } from "@bookshelf-client/store";
-import type { Folder as APIFolder } from "@bookshelf-client/utils";
 import { motion } from "framer-motion";
 import { useAtomValue, useSetAtom } from "jotai";
 import type { MouseEvent } from "react";

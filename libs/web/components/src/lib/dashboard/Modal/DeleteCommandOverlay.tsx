@@ -1,10 +1,10 @@
-import type { Command } from "@bookshelf-client/store";
 import type {
   DeleteCommandRequest,
   DeleteCommandResponse,
   ErrorResponse,
   User,
-} from "@bookshelf-client/utils";
+} from "@bookshelf-client/api";
+import type { Command } from "@bookshelf-client/store";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import type { SetStateAction } from "jotai";

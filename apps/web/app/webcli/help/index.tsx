@@ -1,10 +1,7 @@
 "use client";
 
+import type { User } from "@bookshelf-client/api";
 import { useGetUser } from "@bookshelf-client/hooks";
-import type { User } from "@bookshelf-client/utils";
-import { getUserIfPossible } from "@bookshelf-client/utils";
-
-export const getServerSideProps = getUserIfPossible;
 
 type HelpProps = {
   userData: User | null;
