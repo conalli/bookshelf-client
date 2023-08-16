@@ -5,5 +5,5 @@ module.exports = {
     "../../libs/ui/**/*.{js,ts,jsx,tsx}",
     "../../libs/web/components/**/*.{js,ts,jsx,tsx}",
   ],
-  presets: [require("../../tailwind-workspace-preset.js")],
+  presets: [require("../../tailwind.preset.js")],
 };
