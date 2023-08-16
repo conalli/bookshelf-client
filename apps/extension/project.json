@@ -22,11 +22,11 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "rm -rf dist/apps/extension/extension",
+          "rm -rf dist/apps/extension/chrome",
           "nx build extension",
           "mv dist/apps/extension/.next/_next dist/apps/extension/.next/next",
-          "mv dist/apps/extension/.next dist/apps/extension/extension",
-          "grep -rli '_next' ./dist/apps/extension/extension/* | xargs -I@ sed -i '' 's|/next|/next|g' @;"
+          "mv dist/apps/extension/.next dist/apps/extension/chrome",
+          "grep -rli '_next' ./dist/apps/extension/chrome/* | xargs -I@ sed -i '' 's|/next|/next|g' @;"
         ],
         "parallel": false
       }
