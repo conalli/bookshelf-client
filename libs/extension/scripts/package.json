@@ -1,0 +1,8 @@
+{
+  "name": "@bookshelf-client/extension/scripts",
+  "version": "0.0.1",
+  "dependencies": {},
+  "type": "commonjs",
+  "main": "./index.cjs",
+  "module": "./index.js"
+}
