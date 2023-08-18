@@ -5,14 +5,14 @@
   "version": "0.0.1",
   "action": {
     "default_title": "Bookshelf | Extension",
-    "default_popup": "index.html"
+    "default_popup": "extension.html"
   },
   "icons": {
     "16": "favicon-16x16.png",
     "32": "favicon-32x32.png"
   },
   "background": {
-    "service_worker": "service-worker.js",
+    "service_worker": "scripts/background.esm.js",
     "type": "module"
   },
   "omnibox": {
@@ -20,5 +20,6 @@
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; child-src 'self';"
-  }
+  },
+  "permissions": ["storage"]
 }

@@ -1,14 +1,21 @@
-export * from "./lib/extension-scripts";
+import { defaultSuggestions } from "./lib/search";
+import { watchChanges } from "./lib/storage";
 
-// DEFAULT BUILD OPTIONS
-// "options": {
-//   "outputPath": "dist/libs/extension/scripts",
-//   "main": "libs/extension/scripts/src/index.ts",
-//   "tsConfig": "libs/extension/scripts/tsconfig.lib.json",
-//   "assets": [],
-//   "project": "libs/extension/scripts/package.json",
-//   "compiler": "swc",
-//   "format": ["cjs", "esm"]
-// }
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason !== "install") {
+    return;
+  }
+  console.log("HELLO FROM BOOKSHELF");
+});
 
-console.log("HELLO BOOKSHELF");
+chrome.omnibox.onInputChanged.addListener((text, suggest) => {
+  console.log(text);
+  suggest(defaultSuggestions);
+});
+
+chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
+  console.log(disposition);
+  await chrome.tabs.update({ url: text });
+});
+
+chrome.storage.local.onChanged.addListener(watchChanges);

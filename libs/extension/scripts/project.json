@@ -8,13 +8,15 @@
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "outputFileName": "background.js",
         "outputPath": "apps/extension/public/scripts",
         "main": "libs/extension/scripts/src/index.ts",
         "tsConfig": "libs/extension/scripts/tsconfig.lib.json",
         "assets": [],
         "project": "libs/extension/scripts/package.json",
         "compiler": "swc",
-        "format": ["esm"]
+        "format": ["esm"],
+        "watch": true
       }
     },
     "lint": {

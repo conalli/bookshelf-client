@@ -1,0 +1,8 @@
+{
+  "name": "@bookshelf-client/extension/scripts",
+  "version": "0.0.1",
+  "dependencies": {},
+  "type": "module",
+  "main": "./index.cjs",
+  "module": "./background.esm.js"
+}
