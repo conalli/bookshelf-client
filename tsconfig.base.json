@@ -17,8 +17,17 @@
     "paths": {
       "@bookshelf-client/api": ["libs/api/src/index.ts"],
       "@bookshelf-client/api/server": ["libs/api/src/server.ts"],
+      "@bookshelf-client/extension/components": [
+        "libs/extension/components/src/index.ts"
+      ],
+      "@bookshelf-client/extension/components/server": [
+        "libs/extension/components/src/server.ts"
+      ],
       "@bookshelf-client/extension/scripts": [
         "libs/extension/scripts/src/index.ts"
+      ],
+      "@bookshelf-client/extension/utils": [
+        "libs/extension/utils/src/index.ts"
       ],
       "@bookshelf-client/hooks": ["libs/hooks/src/index.ts"],
       "@bookshelf-client/hooks/server": ["libs/hooks/src/server.ts"],
