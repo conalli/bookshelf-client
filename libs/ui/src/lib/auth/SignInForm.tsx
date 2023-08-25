@@ -1,5 +1,4 @@
 "use client";
-
 import { AuthRequest } from "@bookshelf-client/api";
 import type { AuthRequestData } from "@bookshelf-client/hooks";
 import { useAuth } from "@bookshelf-client/hooks";
@@ -7,6 +6,7 @@ import type { SignInFormVariant } from "@bookshelf-client/utils";
 import type { FormikHelpers } from "formik";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import { object, string } from "yup";
 
 type SignInFormProps = {
@@ -29,15 +29,18 @@ export function SignInForm({ type }: SignInFormProps) {
     signIn: { isLoading: isSignInLoading, mutate: signin },
     signUp: { isLoading: isSignUpLoading, mutate: signup },
   } = useAuth();
+  const params = useSearchParams();
+  const from = params.get("from");
+
   return (
     <Formik
       validationSchema={schema}
       initialValues={{ email: "", password: "" }}
       onSubmit={async (
         values,
-        { setSubmitting }: FormikHelpers<AuthRequest>
+        { setSubmitting }: FormikHelpers<AuthRequest>,
       ) => {
-        const authData: AuthRequestData = { data: values, setSubmitting };
+        const authData: AuthRequestData = { data: values, setSubmitting, from: from };
         type === "Sign in" ? signin(authData) : signup(authData);
       }}
     >
