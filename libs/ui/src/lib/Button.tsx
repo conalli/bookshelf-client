@@ -1,39 +1,35 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { motion } from "framer-motion";
 import { PropsWithChildren } from "react";
 
-const button = cva("", {
-  variants: {
-    variant: {
-      primary:
-        "bg-bk-blue outline-bk-blue dark:bg-bk-orange dark:outline-bk-orange w-28 rounded px-5 py-2 text-sm shadow-md outline hover:opacity-90 lg:w-40 lg:text-xl",
-      secondary: "",
+const button = cva(
+  " shadow-md outline hover:opacity-90 rounded transition ease-in-out delay-100 hover:scale-110",
+  {
+    variants: {
+      variant: {
+        primary:
+          "bg-bk-blue outline-bk-blue dark:bg-bk-orange dark:outline-bk-orange",
+        secondary:
+          "bg-bk-orange outline-bk-orange dark:bg-bk-blue dark:outline-bk-blue",
+        "outline-primary":
+          "underline decoration-bk-blue dark:decoration-bk-orange decoration-2 outline-bk-blue dark:outline-bk-orange",
+        "outline-secondary":
+          "underline decoration-bk-orange dark:decoration-bk-blue decoration-2 outline-bk-orange dark:outline-bk-blue",
+      },
+      size: {
+        sm: "",
+        md: "w-28 px-5 py-2 text-sm lg:w-40 lg:text-xl",
+      },
     },
-    size: {
-      sm: "",
-      md: "",
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
     },
-  },
-  defaultVariants: {
-    variant: "primary",
-    size: "md",
-  },
-});
+  }
+);
 
 type ButtonProps = PropsWithChildren<HTMLButtonElement> &
   VariantProps<typeof button>;
 
 export function Button({ children, variant, size }: ButtonProps) {
   return <button className={button({ variant, size })}>{children}</button>;
-}
-
-export function AnimatedButton({ children }: ButtonProps) {
-  return (
-    <motion.button
-      whileHover={{ scale: 1.1 }}
-      className="bg-bk-blue outline-bk-blue dark:bg-bk-orange dark:outline-bk-orange w-28 rounded  px-5 py-2 text-sm shadow-md outline hover:opacity-90 lg:w-40 lg:text-xl"
-    >
-      {children}
-    </motion.button>
-  );
 }
