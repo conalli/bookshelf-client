@@ -7,9 +7,9 @@ import type {
   User,
 } from "@bookshelf-client/api";
 import type { Command } from "@bookshelf-client/store";
+import { Button } from "@bookshelf-client/ui/server";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { motion } from "framer-motion";
 import type { SetStateAction } from "jotai";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
@@ -78,15 +78,8 @@ export function AddCommandOverlay({
         </div>
       </div>
       <div className="flex w-full gap-2 py-2 lg:py-4 ">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          onClick={() => setIsOpen(false)}
-          className="bg-bk-blue dark:bg-bk-orange w-24 rounded px-5 py-2 text-sm shadow-md hover:opacity-90 md:w-40 md:text-xl"
-        >
-          Cancel
-        </motion.button>
-        <motion.button
-          whileHover={cmd.length && url.length ? { scale: 1.05 } : { scale: 1 }}
+        <Button onClick={() => setIsOpen(false)}>Cancel</Button>
+        <Button
           onClick={() => {
             add.mutate({
               id: user.id,
@@ -97,10 +90,10 @@ export function AddCommandOverlay({
             setIsOpen(false);
           }}
           disabled={!cmd.length || !url.length}
-          className="w-24 rounded bg-green-400 px-5 py-2 text-sm shadow-md hover:opacity-90 disabled:bg-gray-300 disabled:text-opacity-50  disabled:opacity-50 dark:bg-gray-100 dark:text-neutral-600 md:w-40 md:text-xl"
+          variant={"add"}
         >
           Add
-        </motion.button>
+        </Button>
       </div>
     </div>
   );

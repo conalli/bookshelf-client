@@ -5,6 +5,7 @@ import type {
   User,
 } from "@bookshelf-client/api";
 import type { Command } from "@bookshelf-client/store";
+import { Button } from "@bookshelf-client/ui/server";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import type { SetStateAction } from "jotai";
@@ -38,14 +39,9 @@ export function DeleteCommandOverlay({
         </p>
       )}
       <div className="flex w-full items-center justify-between py-2 lg:py-4">
-        <button
-          onClick={() => setIsOpen(false)}
-          className="bg-bk-blue dark:bg-bk-orange w-24 rounded px-5 py-2 text-sm shadow-md hover:opacity-90 md:w-40 md:text-xl"
-        >
-          Cancel
-        </button>
+        <Button onClick={() => setIsOpen(false)}>Cancel</Button>
         {selected && (
-          <button
+          <Button
             onClick={() => {
               del.mutate({
                 id: user.id,
@@ -53,10 +49,10 @@ export function DeleteCommandOverlay({
               });
               setIsOpen(false);
             }}
-            className="dark:gray-50 bg-bk-red w-24 rounded px-5 py-2 text-sm shadow-md hover:opacity-90 md:w-40 md:text-xl"
+            variant={"destructive"}
           >
             Delete
-          </button>
+          </Button>
         )}
       </div>
     </div>

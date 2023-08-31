@@ -14,6 +14,8 @@ const button = cva(
           "underline decoration-bk-blue dark:decoration-bk-orange decoration-2 outline-bk-blue dark:outline-bk-orange",
         "outline-secondary":
           "underline decoration-bk-orange dark:decoration-bk-blue decoration-2 outline-bk-orange dark:outline-bk-blue",
+        add: "bg-green-400 disabled:bg-gray-300 disabled:text-opacity-50 disabled:opacity-50 dark:bg-gray-100 dark:text-neutral-600",
+        destructive: "dark:gray-50 bg-bk-red",
       },
       size: {
         sm: "",

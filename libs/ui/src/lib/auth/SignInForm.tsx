@@ -5,9 +5,9 @@ import { useAuth } from "@bookshelf-client/hooks";
 import type { SignInFormVariant } from "@bookshelf-client/utils";
 import type { FormikHelpers } from "formik";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { object, string } from "yup";
+import { Button } from "../Button";
 
 type SignInFormProps = {
   type: SignInFormVariant;
@@ -38,9 +38,13 @@ export function SignInForm({ type }: SignInFormProps) {
       initialValues={{ email: "", password: "" }}
       onSubmit={async (
         values,
-        { setSubmitting }: FormikHelpers<AuthRequest>,
+        { setSubmitting }: FormikHelpers<AuthRequest>
       ) => {
-        const authData: AuthRequestData = { data: values, setSubmitting, from: from };
+        const authData: AuthRequestData = {
+          data: values,
+          setSubmitting,
+          from: from,
+        };
         type === "Sign in" ? signin(authData) : signup(authData);
       }}
     >
@@ -88,18 +92,16 @@ export function SignInForm({ type }: SignInFormProps) {
               <ErrorMessage name="password" />
             </p>
             <div className="flex justify-center py-2 md:py-10">
-              <motion.button
+              <Button
                 data-cy={type}
-                whileHover={{ scale: 1.1 }}
                 type="submit"
                 disabled={
                   isSubmitting ||
                   (type === "Sign in" ? isSignInLoading : isSignUpLoading)
                 }
-                className="bg-bk-blue dark:bg-bk-orange w-24 rounded px-5 py-2 text-sm shadow-md hover:opacity-90 md:w-40 md:text-xl"
               >
                 {type}
-              </motion.button>
+              </Button>
             </div>
           </div>
         </Form>
