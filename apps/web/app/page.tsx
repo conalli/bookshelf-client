@@ -29,7 +29,7 @@ export default function Home() {
               <Button>Sign up</Button>
             </Link>
             <Link href="#learn">
-              <Button variant="outline-secondary">Learn more</Button>
+              <Button variant="outline">Learn more</Button>
             </Link>
           </div>
           <section className="col-span-6 col-start-1 row-start-6 flex place-self-center text-center sm:text-left md:col-span-4 md:col-start-2">
