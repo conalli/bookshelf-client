@@ -6,10 +6,10 @@ import type {
   ErrorResponse,
   Folder,
 } from "@bookshelf-client/api";
+import { Button } from "@bookshelf-client/ui/server";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { motion } from "framer-motion";
 import type { ChangeEvent, SetStateAction } from "react";
 import { useState } from "react";
 
@@ -158,16 +158,12 @@ export function AddBookmarkOverlay({
         </div>
       </div>
       <div className="flex w-full gap-2 py-2 lg:py-4 ">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          onClick={() => setIsOpen(false)}
-          className="bg-bk-blue dark:bg-bk-orange w-24 rounded px-5 py-2 text-sm shadow-md hover:opacity-90 md:w-40 md:text-xl"
-        >
+        <Button className="hover:scale-105" onClick={() => setIsOpen(false)}>
           Cancel
-        </motion.button>
-        <motion.button
-          whileHover={
-            name.length && url.length ? { scale: 1.05 } : { scale: 1 }
+        </Button>
+        <Button
+          className={
+            name.length && url.length ? "hover:scale-105" : "hover:scale-100"
           }
           onClick={() => {
             add.mutate({
@@ -179,10 +175,10 @@ export function AddBookmarkOverlay({
             setIsOpen(false);
           }}
           disabled={(!isFolder && !url.length) || (isFolder && !name.length)}
-          className="w-24 rounded bg-green-400 px-5 py-2 text-sm shadow-md hover:opacity-90 disabled:bg-gray-300 disabled:text-opacity-50  disabled:opacity-50 dark:bg-gray-100 dark:text-neutral-600 md:w-40 md:text-xl"
+          variant={"add"}
         >
           Add
-        </motion.button>
+        </Button>
       </div>
     </div>
   );
