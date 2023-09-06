@@ -1,4 +1,5 @@
 import { SearchURL } from "@bookshelf-client/api";
+import { Button } from "@bookshelf-client/ui/server";
 import { copyToClipboard } from "@bookshelf-client/utils";
 import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
@@ -85,12 +86,7 @@ export function BrowserSetupOverlay({ setIsOpen }: BrowserSetupOverlayProps) {
         </ol>
 
         <div className="flex w-full items-center justify-between py-2 lg:py-4">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="bg-bk-blue dark:bg-bk-orange w-24 rounded px-5 py-2 text-sm shadow-md hover:opacity-90 md:w-40 md:text-xl"
-          >
-            back
-          </button>
+          <Button onClick={() => setIsOpen(false)}>back</Button>
         </div>
       </div>
     </div>

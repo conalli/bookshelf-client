@@ -29,6 +29,7 @@ import { useRemoveUser } from "./useUser";
 export type AuthRequestData = {
   data: AuthRequest;
   setSubmitting: (isSubmitting: boolean) => void;
+  from?: string | null
 };
 
 type AuthRequestWithType = AuthRequestData & {
@@ -80,9 +81,9 @@ const authRequest = (
 > => ({
   mutationKey: [USER_KEY],
   mutationFn,
-  onSuccess: (): void => {
+  onSuccess: (_data, {from}): void => {
     setAuthStatus({ success: true, loading: false, error: false });
-    router.push("/dashboard");
+    from === "extension" ? window.close() : router.push("/dashboard");
   },
   onMutate: async ({ setSubmitting }): Promise<void> => {
     setAuthStatus({ success: false, loading: true, error: false });
