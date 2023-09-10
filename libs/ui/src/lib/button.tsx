@@ -32,6 +32,11 @@ type ButtonProps = PropsWithChildren<
     VariantProps<typeof button>
 >;
 
-export function Button({ children, variant, size }: ButtonProps) {
-  return <button className={button({ variant, size })}>{children}</button>;
+export function Button(props: ButtonProps) {
+  const { variant, size, children } = props;
+  return (
+    <button className={button({ variant, size })} {...props}>
+      {children}
+    </button>
+  );
 }
