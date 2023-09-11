@@ -1,28 +1,30 @@
 "use client";
-import { AuthRequest } from "@bookshelf-client/api";
-import type { AuthRequestData } from "@bookshelf-client/hooks";
 import { useAuth } from "@bookshelf-client/hooks";
 import type { SignInFormVariant } from "@bookshelf-client/utils";
-import type { FormikHelpers } from "formik";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
-import { object, string } from "yup";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "../button";
+import { ErrorMessage } from "./error-message";
+
+const schema = z.object({
+  email: z
+    .string()
+    .email()
+    .min(5, "Email: minimum 5 characters")
+    .max(50, "Email cannot be longer than 50 characters"),
+  password: z
+    .string()
+    .min(5, "Password: min 5 characters")
+    .max(50, "Password cannot be longer than 50 characters"),
+});
+
+export type AuthFormData = z.infer<typeof schema>;
 
 type SignInFormProps = {
   type: SignInFormVariant;
 };
-
-const schema = object().shape({
-  email: string()
-    .min(3, "Email: minimum 3 characters")
-    .max(50, "Email cannot be longer than 50 characters")
-    .required("Please enter your email"),
-  password: string()
-    .min(5, "Password: min 5 characters")
-    .max(20, "Password cannot be longer than 20 characters")
-    .required("Please enter your password"),
-});
 
 export function SignInForm({ type }: SignInFormProps) {
   const {
@@ -31,81 +33,60 @@ export function SignInForm({ type }: SignInFormProps) {
   } = useAuth();
   const params = useSearchParams();
   const from = params.get("from");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isLoading },
+  } = useForm<AuthFormData>({
+    resolver: zodResolver(schema),
+  });
+
+  const submitForm = (data: AuthFormData) => {
+    type === "Sign in" ? signin({ data, from }) : signup({ data, from });
+  };
+
+  const isDisabled =
+    isLoading || (type === "Sign in" ? isSignInLoading : isSignUpLoading);
+
+  console.log("V", isValid);
 
   return (
-    <Formik
-      validationSchema={schema}
-      initialValues={{ email: "", password: "" }}
-      onSubmit={async (
-        values,
-        { setSubmitting }: FormikHelpers<AuthRequest>
-      ) => {
-        const authData: AuthRequestData = {
-          data: values,
-          setSubmitting,
-          from: from,
-        };
-        type === "Sign in" ? signin(authData) : signup(authData);
-      }}
-    >
-      {({ isSubmitting }) => (
-        <Form className="">
-          <div className="text-md w-full py-2 md:text-xl">
-            <label htmlFor="email" className="py-2 pl-1">
-              Email:
-            </label>
-            <Field
-              id="email"
-              name="email"
-              placeholder="email"
-              type="email"
-              disabled={
-                isSubmitting ||
-                (type === "Sign in" ? isSignInLoading : isSignUpLoading)
-              }
-              autoCorrect="off"
-              length={50}
-              className="focus:border-bk-blue focus:ring-bk-blue dark:focus:border-bk-orange dark:focus:ring-bk-orange block appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 md:text-xl"
-            />
-            <p className="md:text-md text-bk-blue dark:text-bk-orange py-2 pl-1 text-xs font-semibold">
-              <ErrorMessage name="email" />
-            </p>
-          </div>
-          <div className="text-md py-2 md:text-xl">
-            <label htmlFor="password" className="py-2 pl-1">
-              Password:
-            </label>
-            <Field
-              id="password"
-              name="password"
-              placeholder="password"
-              type="password"
-              disabled={
-                isSubmitting ||
-                (type === "Sign in" ? isSignInLoading : isSignUpLoading)
-              }
-              autoCorrect="off"
-              length={50}
-              className="focus:border-bk-blue focus:ring-bk-blue dark:focus:border-bk-orange dark:focus:ring-bk-orange block appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 md:text-xl"
-            />
-            <p className="md:text-md text-bk-blue dark:text-bk-orange py-2 pl-1 text-xs font-semibold">
-              <ErrorMessage name="password" />
-            </p>
-            <div className="flex justify-center py-2 md:py-10">
-              <Button
-                data-cy={type}
-                type="submit"
-                disabled={
-                  isSubmitting ||
-                  (type === "Sign in" ? isSignInLoading : isSignUpLoading)
-                }
-              >
-                {type}
-              </Button>
-            </div>
-          </div>
-        </Form>
-      )}
-    </Formik>
+    <form onSubmit={handleSubmit(submitForm)}>
+      <div className="text-md w-full py-2 md:text-xl">
+        <label htmlFor="email" className="py-2 pl-1">
+          Email:
+        </label>
+        <input
+          id="email"
+          placeholder="email"
+          type="email"
+          disabled={isDisabled}
+          autoCorrect="off"
+          {...register("email")}
+          className="focus:border-bk-blue focus:ring-bk-blue dark:focus:border-bk-orange dark:focus:ring-bk-orange block appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 md:text-xl"
+        />
+        <ErrorMessage error={errors.email} />
+      </div>
+      <div className="text-md py-2 md:text-xl">
+        <label htmlFor="password" className="py-2 pl-1">
+          Password:
+        </label>
+        <input
+          id="password"
+          placeholder="password"
+          type="password"
+          disabled={isDisabled}
+          autoCorrect="off"
+          {...register("password")}
+          className="focus:border-bk-blue focus:ring-bk-blue dark:focus:border-bk-orange dark:focus:ring-bk-orange block appearance-none rounded-lg bg-gray-100 p-2.5 text-sm text-gray-900 shadow-md dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 md:text-xl"
+        />
+        <ErrorMessage error={errors.password} />
+      </div>
+      <div className="flex justify-center py-2 md:py-10">
+        <Button data-cy={type} type="submit" disabled={isDisabled}>
+          {type}
+        </Button>
+      </div>
+    </form>
   );
 }

@@ -1,4 +1,4 @@
-import { defaultSuggestions } from "./lib/search";
+import { generateSuggestions } from "./lib/search";
 import { watchChanges } from "./lib/storage";
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
@@ -10,7 +10,7 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
 
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
   console.log(text);
-  suggest(defaultSuggestions);
+  suggest(generateSuggestions());
 });
 
 chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
