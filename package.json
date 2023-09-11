@@ -20,7 +20,7 @@
     "react-hook-form": "^7.46.1",
     "react-modal": "^3.16.1",
     "tslib": "^2.6.2",
-    "zod": "^3.21.4"
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@nx/cypress": "^16.7.4",
