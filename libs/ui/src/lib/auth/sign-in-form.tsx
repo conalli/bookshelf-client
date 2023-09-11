@@ -7,7 +7,7 @@ import type { FormikHelpers } from "formik";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useSearchParams } from "next/navigation";
 import { object, string } from "yup";
-import { Button } from "../Button";
+import { Button } from "../button";
 
 type SignInFormProps = {
   type: SignInFormVariant;
