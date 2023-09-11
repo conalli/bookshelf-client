@@ -28,8 +28,7 @@ import { useRemoveUser } from "./useUser";
 
 export type AuthRequestData = {
   data: AuthRequest;
-  setSubmitting: (isSubmitting: boolean) => void;
-  from?: string | null
+  from?: string | null;
 };
 
 type AuthRequestWithType = AuthRequestData & {
@@ -50,11 +49,9 @@ const auth = async ({ type, data }: AuthRequestWithType): Promise<User> => {
   return res.data;
 };
 
-const signUp = ({ data, setSubmitting }: AuthRequestData) =>
-  auth({ type: "Sign up", data, setSubmitting });
+const signUp = ({ data }: AuthRequestData) => auth({ type: "Sign up", data });
 
-const logIn = ({ data, setSubmitting }: AuthRequestData) =>
-  auth({ type: "Sign in", data, setSubmitting });
+const logIn = ({ data }: AuthRequestData) => auth({ type: "Sign in", data });
 
 const logout = async () => {
   const res = await axios.post<null, AxiosResponse<null, null>, null>(
@@ -81,17 +78,16 @@ const authRequest = (
 > => ({
   mutationKey: [USER_KEY],
   mutationFn,
-  onSuccess: (_data, {from}): void => {
+  onSuccess: (_data, { from }): void => {
     setAuthStatus({ success: true, loading: false, error: false });
     from === "extension" ? window.close() : router.push("/dashboard");
+    window.localStorage.setItem("BOOKSHELF_USER_STATUS", "true");
   },
-  onMutate: async ({ setSubmitting }): Promise<void> => {
+  onMutate: async (): Promise<void> => {
     setAuthStatus({ success: false, loading: true, error: false });
-    setSubmitting(true);
     await queryClient.cancelQueries([USER_KEY]);
   },
-  onSettled: (_data, _err, { setSubmitting }): void => {
-    setSubmitting(false);
+  onSettled: (_data, _err): void => {
     queryClient.invalidateQueries([USER_KEY]);
   },
   onError: (error): void => {
