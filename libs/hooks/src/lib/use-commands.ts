@@ -1,5 +1,3 @@
-"use client";
-
 import {
   APIURL,
   type AddCommandRequest,
@@ -15,7 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
-import { useMessages } from "./useMessages";
+import { useMessages } from "./use-messages";
 
 export const COMMAND_KEY = "cmds";
 

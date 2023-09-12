@@ -1,5 +1,3 @@
-"use client";
-
 import {
   APIURL,
   type AddBookmarkFileResponse,
@@ -15,7 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
-import { useMessages } from "./useMessages";
+import { useMessages } from "./use-messages";
 
 export const BOOKMARKS_FILE_FORM_KEY = "bookmarks_file";
 export const BOOKMARKS_KEY = "bookmarks";

@@ -1,5 +1,3 @@
-"use client";
-
 import { APIURL, type ErrorResponse, type User } from "@bookshelf-client/api";
 import { removeUserAtom, userAtom } from "@bookshelf-client/store";
 import {
@@ -12,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios from "axios";
 import { useAtomValue, useSetAtom } from "jotai";
-import { useMessages } from "./useMessages";
+import { useMessages } from "./use-messages";
 
 export const useUser = () => {
   return useAtomValue(userAtom);
