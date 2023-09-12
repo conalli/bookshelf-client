@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div id="home" className="transition-opacity">
+    <div id="home" className="bg-neutral-900 transition-opacity">
       <main className="min-w-sceen px-8">
         <section className="grid-cols-mobile grid-rows-mobile grid py-10 sm:grid-cols-6 sm:grid-rows-6 md:py-0">
           <div className="bk-rotate-text align-self-center col-span-2 col-start-3 row-span-3 row-start-1 flex flex-auto flex-col items-end justify-self-center text-white md:row-start-2">
