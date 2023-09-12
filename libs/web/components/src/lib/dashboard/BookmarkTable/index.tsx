@@ -35,7 +35,7 @@ export function BookmarkTable({
     addMessage("error getting bookmarks", true);
   }
   return (
-    <motion.div className="max-h-full max-w-full flex-col rounded bg-white pt-4 shadow dark:bg-neutral-800 sm:mx-0 sm:pb-2 md:py-1.5 md:pb-3 lg:w-3/4 lg:pb-6">
+    <motion.div className="max-h-full max-w-full flex-col rounded bg-white pt-4 shadow dark:bg-neutral-800 sm:mx-0 sm:pb-2 md:py-1.5 md:pb-3 lg:w-1/2 lg:pb-6">
       <AnimatePresence mode="sync">
         {(isLoading || isError) && <Spinner key="spinner" />}
         {folder && <Folder key="folder" folder={folder} isOpen={true} />}

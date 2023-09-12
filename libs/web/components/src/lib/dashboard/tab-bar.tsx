@@ -8,17 +8,17 @@ import {
   BookmarkIcon as BookmarkIconSolid,
   WrenchScrewdriverIcon as WrenchScredriverIconSolid,
 } from "@heroicons/react/24/solid";
-import { MenuBarItem, MenuBarOption } from "./menu-bar-item";
+import { TabBarItem, type DashboardTab } from "./tab-bar-item";
 
 type MenuBarProps = {
-  selected: MenuBarOption;
+  selected: DashboardTab;
 };
 
-export function MenuBar({ selected }: MenuBarProps) {
+export function TabBar({ selected }: MenuBarProps) {
   return (
-    <nav className="flex w-full bg-white p-2 shadow dark:bg-neutral-900 sm:min-h-full sm:flex-col">
+    <nav className="bg-white p-2 shadow dark:bg-neutral-900 sm:min-h-full sm:flex-col">
       <ul className="flex w-full justify-center gap-2 sm:flex-col sm:items-center sm:gap-6 sm:pt-2">
-        <MenuBarItem
+        <TabBarItem
           selected={selected}
           option="Commands"
           icon={{
@@ -26,7 +26,7 @@ export function MenuBar({ selected }: MenuBarProps) {
             outline: <BookmarkIconOutline />,
           }}
         />
-        <MenuBarItem
+        <TabBarItem
           selected={selected}
           option="Bookmarks"
           icon={{
@@ -34,7 +34,7 @@ export function MenuBar({ selected }: MenuBarProps) {
             outline: <BookOpenIconOutline />,
           }}
         />
-        <MenuBarItem
+        <TabBarItem
           selected={selected}
           option="Setup"
           icon={{
@@ -42,16 +42,6 @@ export function MenuBar({ selected }: MenuBarProps) {
             outline: <WrenchScrewdriverIconOutline />,
           }}
         />
-        {/* <li
-          className={
-            selected === "Settings"
-              ? "underline  decoration-bk-blue decoration-2 dark:decoration-bk-orange"
-              : "hover:cursor-pointer"
-          }
-          onClick={() => setSelected("Settings")}
-        >
-          Settings
-        </li> */}
       </ul>
     </nav>
   );

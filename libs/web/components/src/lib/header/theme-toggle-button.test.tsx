@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ThemeProvider } from "next-themes";
-import ThemeToggleButton from "./ThemeToggleButton";
+import React from "react";
+import { ThemeToggleButton } from "./theme-toggle-button";
 
 let localStorageMock: { [key: string]: string } = {};
 
@@ -52,7 +53,7 @@ describe("Theme Toggle Button", () => {
     expect(moon).toBeInTheDocument();
   });
   test("should toggle to dark mode on click", async () => {
-    const button = screen.getByRole("button", { name: /theme\-toggle/i });
+    const button = screen.getByRole("button", { name: /theme-toggle/i });
     fireEvent.click(button);
     const sun = screen.getByText("light-mode");
     expect(sun).toBeInTheDocument();

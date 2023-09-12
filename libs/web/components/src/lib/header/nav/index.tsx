@@ -3,18 +3,13 @@
 import { useUser } from "@bookshelf-client/hooks";
 import { BookshelfLogo } from "@bookshelf-client/ui";
 import { Bars3Icon } from "@heroicons/react/24/solid";
-import { motion } from "framer-motion";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
-import { MobileMenu } from "./MobileMenu";
-import { NavLinks } from "./NavLinks";
-
-const navigateHome = (router: AppRouterInstance) => router.push("/");
+import { MobileMenu } from "./mobile-menu";
+import { NavLinks } from "./nav-links";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
   const user = useUser();
 
   const closeMobileNav = () => {
@@ -22,16 +17,13 @@ export function Nav() {
   };
 
   return (
-    <nav className="flex min-h-[8vh] flex-row justify-between py-2">
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        onClick={() => navigateHome(router)}
-        className="flex items-center rounded-md bg-white px-2 py-1 shadow-lg dark:bg-neutral-800"
-      >
-        <BookshelfLogo className={{ main: "h-10 w-20 lg:h-14 lg:w-28" }} />
-      </motion.button>
-
-      <div className="hidden rounded-md bg-white px-2 shadow-lg dark:bg-neutral-800 sm:flex sm:flex-row sm:items-center sm:gap-1">
+    <nav className="flex min-h-[8vh] flex-row justify-between px-8 py-2">
+      <Link href="/">
+        <button className="flex items-center rounded-md px-2 py-1 shadow-lg transition-transform hover:scale-110">
+          <BookshelfLogo className={{ main: "h-10 w-20 lg:h-14 lg:w-28" }} />
+        </button>
+      </Link>
+      <div className="hidden px-2 sm:flex sm:flex-row sm:items-center sm:gap-1">
         <NavLinks user={user} />
       </div>
       <div className="flex items-center sm:hidden">

@@ -1,5 +1,6 @@
 import { VariantProps, cva } from "class-variance-authority";
 import { AriaAttributes, ButtonHTMLAttributes, PropsWithChildren } from "react";
+import { twMerge } from "tailwind-merge";
 
 const button = cva(
   "shadow-md hover:opacity-90 rounded transition delay-100 hover:scale-110",
@@ -15,7 +16,7 @@ const button = cva(
       },
       size: {
         sm: "",
-        md: "w-28 px-5 py-2 text-sm lg:w-40 lg:text-xl",
+        md: "w-28 px-5 py-2 text-sm lg:w-40 sm:text-md",
       },
     },
     defaultVariants: {
@@ -34,7 +35,10 @@ type ButtonProps = PropsWithChildren<
 export function Button(props: ButtonProps) {
   const { variant, size, children } = props;
   return (
-    <button className={button({ variant, size })} {...props}>
+    <button
+      className={twMerge(button({ variant, size }), props.className)}
+      {...props}
+    >
       {children}
     </button>
   );

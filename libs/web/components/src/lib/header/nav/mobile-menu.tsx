@@ -1,7 +1,7 @@
 import type { User } from "@bookshelf-client/api";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import { NavLinks } from "./NavLinks";
+import { NavLinks } from "./nav-links";
 
 type MobileMenuProps = {
   open: boolean;

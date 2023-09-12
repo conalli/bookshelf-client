@@ -1,10 +1,10 @@
 import type { User } from "@bookshelf-client/api";
 import { useAuth } from "@bookshelf-client/hooks";
 import Link from "next/link";
-import { ThemeToggleButton } from "../ThemeToggleButton";
+import { ThemeToggleButton } from "../theme-toggle-button";
 
 const linkStyles =
-  /*tw*/ "py-1 px-2 hover:text-bk-blue hover:dark:text-orange-300";
+  /*tw*/ "py-1 px-2 text-black/50 dark:text-white/50 hover:text-bk-blue hover:dark:text-orange-300";
 
 type NavLinksProps = {
   user: User | null;

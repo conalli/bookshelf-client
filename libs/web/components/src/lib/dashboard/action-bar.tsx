@@ -9,10 +9,10 @@ import {
 import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "@bookshelf-client/store";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import type { ChangeEvent } from "react";
-import type { MenuBarOption } from "./menu-bar-item";
+import type { DashboardTab } from "./tab-bar-item";
 
 type ActionBarProps = {
-  menuOption: MenuBarOption;
+  menuOption: DashboardTab;
   user: User;
 };
 

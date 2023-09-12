@@ -1,13 +1,14 @@
 import { cva } from "class-variance-authority";
 import Link from "next/link";
 import { AriaAttributes, LiHTMLAttributes, ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
-export type MenuBarOption = "Commands" | "Bookmarks" | "Setup" | "Settings";
+export type DashboardTab = "Commands" | "Bookmarks" | "Setup" | "Settings";
 
 type MenuBarItemProps = {
   icon: { solid: ReactNode; outline: ReactNode };
-  option: MenuBarOption;
-  selected: MenuBarOption;
+  option: DashboardTab;
+  selected: DashboardTab;
 } & LiHTMLAttributes<HTMLLIElement> &
   AriaAttributes;
 
@@ -23,13 +24,16 @@ const menubaritem = cva(
   }
 );
 
-export function MenuBarItem(props: MenuBarItemProps) {
+export function TabBarItem(props: MenuBarItemProps) {
   const isSelected = props.option === props.selected;
   const variant = isSelected ? "selected" : "background";
   const url = new URLSearchParams({ tab: props.option.toLowerCase() });
   return (
-    <Link className="min-w-full" href={`/dashboard?${url}`}>
-      <li className={menubaritem({ variant })} {...props}>
+    <Link className="sm:min-w-full" href={`/dashboard?${url}`}>
+      <li
+        className={twMerge(menubaritem({ variant }), props.className)}
+        {...props}
+      >
         <div className="hidden h-6 w-6 sm:block">
           {isSelected ? props.icon.solid : props.icon.outline}
         </div>
