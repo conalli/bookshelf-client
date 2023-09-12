@@ -158,13 +158,10 @@ export function AddBookmarkOverlay({
         </div>
       </div>
       <div className="flex w-full gap-2 py-2 lg:py-4 ">
-        <Button className="hover:scale-105" onClick={() => setIsOpen(false)}>
+        <Button variant={"primary"} onClick={() => setIsOpen(false)}>
           Cancel
         </Button>
         <Button
-          className={
-            name.length && url.length ? "hover:scale-105" : "hover:scale-100"
-          }
           onClick={() => {
             add.mutate({
               name,

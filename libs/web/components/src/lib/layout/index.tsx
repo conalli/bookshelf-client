@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useTheme } from "next-themes";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
-import Header from "../header";
+import { Header } from "../header";
 
 type LayoutProps = {
   children: ReactNode;
@@ -50,7 +50,7 @@ export function Layout({ children }: LayoutProps) {
         id="top"
         animate={controls}
         variants={variants}
-        className="bk-background flex flex-col"
+        className="bk-background dark:bg-bk-bg-dark flex flex-col"
       >
         <Header />
         <main className="flex min-h-[92vh] grow">{children}</main>
