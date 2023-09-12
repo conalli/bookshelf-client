@@ -25,10 +25,14 @@ import {
   ModalOverlay,
 } from "@bookshelf-client/web/components";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
-const Dashboard = ({ userData }: { userData: User }) => {
-  const [menuOption, setMenuOption] = useState<MenuBarOption>("Commands");
+const Dashboard = ({
+  userData,
+  menuOption,
+}: {
+  userData: User;
+  menuOption: MenuBarOption;
+}) => {
   const userKey = userData.api_key;
   const { status, setStatus } = useAuth();
   const { data: user } = useGetUser(userKey, {
@@ -64,14 +68,10 @@ const Dashboard = ({ userData }: { userData: User }) => {
   return (
     <section className="flex min-h-full grow flex-col sm:flex-row">
       <section className="w-full sm:min-h-full sm:w-24">
-        <MenuBar
-          selected={menuOption}
-          setSelected={setMenuOption}
-          user={user}
-        />
+        <MenuBar selected={menuOption} />
       </section>
-      <section className="flex min-h-full w-full flex-col items-center sm:w-3/4 sm:gap-4">
-        <ActionBar menuOption={menuOption} userKey={userKey} />
+      <section className="flex min-h-full w-full flex-col items-center bg-neutral-50 dark:bg-bk-bg-dark sm:w-full sm:gap-4">
+        <ActionBar menuOption={menuOption} user={user} />
         {menuOption === "Commands" && (
           <CommandTable
             commands={data}

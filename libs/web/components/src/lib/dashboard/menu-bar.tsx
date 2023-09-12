@@ -1,4 +1,3 @@
-import type { User } from "@bookshelf-client/api";
 import {
   BookOpenIcon as BookOpenIconOutline,
   BookmarkIcon as BookmarkIconOutline,
@@ -9,28 +8,15 @@ import {
   BookmarkIcon as BookmarkIconSolid,
   WrenchScrewdriverIcon as WrenchScredriverIconSolid,
 } from "@heroicons/react/24/solid";
-import type { Dispatch, SetStateAction } from "react";
 import { MenuBarItem, MenuBarOption } from "./menu-bar-item";
 
 type MenuBarProps = {
   selected: MenuBarOption;
-  setSelected: Dispatch<SetStateAction<MenuBarOption>>;
-  user: User;
 };
 
-const generateDisplayName = (user: User): string => {
-  if (user.given_name) return user.given_name;
-  if (user.name) return user.name;
-  if (user.family_name) return user.family_name;
-  return user.email.split("@")[0];
-};
-
-export function MenuBar({ selected, setSelected, user }: MenuBarProps) {
+export function MenuBar({ selected }: MenuBarProps) {
   return (
-    <nav className="flex w-full bg-white p-2 shadow-lg dark:bg-neutral-900 sm:min-h-full sm:flex-col">
-      {/* <h1 className="decoration-bk-blue dark:decoration-bk-orange hidden py-4 pl-8 underline sm:flex sm:text-xl md:text-2xl lg:text-3xl">
-        {generateDisplayName(user)}&apos;s Bookshelf
-      </h1> */}
+    <nav className="flex w-full bg-white p-2 shadow dark:bg-neutral-900 sm:min-h-full sm:flex-col">
       <ul className="flex w-full justify-center gap-2 sm:flex-col sm:items-center sm:gap-6 sm:pt-2">
         <MenuBarItem
           selected={selected}
@@ -39,7 +25,6 @@ export function MenuBar({ selected, setSelected, user }: MenuBarProps) {
             solid: <BookmarkIconSolid />,
             outline: <BookmarkIconOutline />,
           }}
-          onClick={() => setSelected("Commands")}
         />
         <MenuBarItem
           selected={selected}
@@ -48,7 +33,6 @@ export function MenuBar({ selected, setSelected, user }: MenuBarProps) {
             solid: <BookOpenIconSolid />,
             outline: <BookOpenIconOutline />,
           }}
-          onClick={() => setSelected("Bookmarks")}
         />
         <MenuBarItem
           selected={selected}
@@ -57,7 +41,6 @@ export function MenuBar({ selected, setSelected, user }: MenuBarProps) {
             solid: <WrenchScredriverIconSolid />,
             outline: <WrenchScrewdriverIconOutline />,
           }}
-          onClick={() => setSelected("Setup")}
         />
         {/* <li
           className={
