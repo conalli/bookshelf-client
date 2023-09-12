@@ -23,8 +23,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { useMessages } from "./useMessages";
-import { useRemoveUser } from "./useUser";
+import { useMessages } from "./use-messages";
+import { useRemoveUser } from "./use-user";
 
 export type AuthRequestData = {
   data: AuthRequest;
