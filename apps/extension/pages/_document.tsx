@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body style={{ fontFamily: "var(--font-murecho),var(--font-overpass)" }}>
         <Main />
         <NextScript />
       </body>

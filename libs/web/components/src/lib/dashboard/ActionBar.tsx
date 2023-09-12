@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BOOKMARKS_FILE_FORM_KEY,
   useAddBookmarkFromFile,

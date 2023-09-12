@@ -1,2 +1,2 @@
 // Use this file to export React server components
-export * from "./lib/Button";
+export * from "./lib/button";

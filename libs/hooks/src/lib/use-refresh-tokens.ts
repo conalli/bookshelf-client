@@ -1,12 +1,10 @@
-"use client";
-
 import { APIURL, type ErrorResponse } from "@bookshelf-client/api";
 import { createQueryKey, exponentialBackoff } from "@bookshelf-client/utils";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { useMessages } from "./useMessages";
+import { useMessages } from "./use-messages";
 
 export const REFRESH_KEY = "refresh";
 const REFRESH_INTERVAL = 1000 * 60 * 9;

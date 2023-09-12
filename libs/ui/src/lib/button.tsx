@@ -1,5 +1,5 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { PropsWithChildren } from "react";
+import { AriaAttributes, ButtonHTMLAttributes, PropsWithChildren } from "react";
 
 const button = cva(
   "shadow-md outline hover:opacity-90 rounded transition delay-100 hover:scale-110",
@@ -27,9 +27,16 @@ const button = cva(
 );
 
 type ButtonProps = PropsWithChildren<
-  HTMLButtonElement & VariantProps<typeof button>
+  ButtonHTMLAttributes<HTMLButtonElement> &
+    AriaAttributes &
+    VariantProps<typeof button>
 >;
 
-export function Button({ children, variant, size }: ButtonProps) {
-  return <button className={button({ variant, size })}>{children}</button>;
+export function Button(props: ButtonProps) {
+  const { variant, size, children } = props;
+  return (
+    <button className={button({ variant, size })} {...props}>
+      {children}
+    </button>
+  );
 }
