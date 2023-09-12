@@ -14,7 +14,7 @@ import {
 } from "@bookshelf-client/hooks";
 import { Loading } from "@bookshelf-client/ui";
 import type { UpdateCommandStatus } from "@bookshelf-client/utils";
-import type { MenuOption } from "@bookshelf-client/web/components";
+import type { MenuBarOption } from "@bookshelf-client/web/components";
 import {
   ActionBar,
   BookmarkTable,
@@ -28,7 +28,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const Dashboard = ({ userData }: { userData: User }) => {
-  const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
+  const [menuOption, setMenuOption] = useState<MenuBarOption>("Commands");
   const userKey = userData.api_key;
   const { status, setStatus } = useAuth();
   const { data: user } = useGetUser(userKey, {
@@ -62,8 +62,8 @@ const Dashboard = ({ userData }: { userData: User }) => {
   if (status && status.loading) return <Loading isPage />;
   else setStatus(null);
   return (
-    <section className="flex min-h-full grow flex-col px-8 sm:flex-row">
-      <section className="w-full sm:min-h-full sm:w-1/4">
+    <section className="flex min-h-full grow flex-col sm:flex-row">
+      <section className="w-full sm:min-h-full sm:w-24">
         <MenuBar
           selected={menuOption}
           setSelected={setMenuOption}
@@ -87,7 +87,7 @@ const Dashboard = ({ userData }: { userData: User }) => {
             isError={isFolderError}
           />
         )}
-        {menuOption === "Setup guide" && (
+        {menuOption === "Setup" && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{
