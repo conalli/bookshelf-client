@@ -7,7 +7,7 @@ export function About() {
       className="flex flex-col rounded-md bg-white px-8 py-4 shadow-md dark:bg-neutral-800 md:py-8"
     >
       <section className="mx-auto flex flex-col py-1 sm:w-2/3 sm:py-6">
-        <h2 className="py-4 text-3xl font-bold sm:text-5xl">
+        <h2 className="text-bk-blue dark:text-bk-orange py-4 text-3xl font-bold sm:text-5xl">
           About Bookshelf.
         </h2>
         <p className="sm:text-xl">
@@ -19,7 +19,9 @@ export function About() {
         </p>
       </section>
       <section className="mx-auto flex flex-col sm:w-2/3 ">
-        <h2 className="py-4 text-2xl font-bold sm:text-4xl">How?</h2>
+        <h2 className="text-bk-blue dark:text-bk-orange py-4 text-2xl font-bold sm:text-4xl">
+          How?
+        </h2>
         <ul className="sm:pt-4 sm:text-xl">
           <li className="py-1 md:py-2">
             &rarr; &nbsp;
@@ -47,7 +49,7 @@ export function About() {
       </section>
       <Link
         href="#top"
-        className="decoration-bk-blue hover:text-bk-blue py-6 text-xl underline decoration-2 sm:mx-auto sm:w-2/3"
+        className="decoration-bk-blue text-bk-blue py-6 text-xl underline decoration-2 hover:text-white sm:mx-auto sm:w-2/3"
       >
         To top
       </Link>
