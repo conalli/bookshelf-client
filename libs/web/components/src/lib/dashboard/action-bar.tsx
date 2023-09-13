@@ -1,5 +1,6 @@
 "use client";
 
+import { User } from "@bookshelf-client/api";
 import {
   BOOKMARKS_FILE_FORM_KEY,
   useAddBookmarkFromFile,
@@ -8,11 +9,11 @@ import {
 import { ADD_BOOKMARK_MODAL, ADD_COMMAND_MODAL } from "@bookshelf-client/store";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import type { ChangeEvent } from "react";
-import type { MenuOption } from "./MenuBar";
+import type { DashboardTab } from "./tab-bar-item";
 
 type ActionBarProps = {
-  menuOption: MenuOption;
-  userKey: string;
+  menuOption: DashboardTab;
+  user: User;
 };
 
 const createBookmarksFileFormData = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,9 +26,16 @@ const createBookmarksFileFormData = (e: ChangeEvent<HTMLInputElement>) => {
   return formData;
 };
 
-export function ActionBar({ menuOption, userKey }: ActionBarProps) {
+const generateDisplayName = (user: User): string => {
+  if (user.given_name) return user.given_name;
+  if (user.name) return user.name;
+  if (user.family_name) return user.family_name;
+  return user.email.split("@")[0];
+};
+
+export function ActionBar({ menuOption, user }: ActionBarProps) {
   const { setIsOpen, setModalType } = useModal();
-  const addBookmarkFile = useAddBookmarkFromFile(userKey);
+  const addBookmarkFile = useAddBookmarkFromFile(user.api_key);
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     const formData = createBookmarksFileFormData(e);
     if (!formData) return;
@@ -35,7 +43,7 @@ export function ActionBar({ menuOption, userKey }: ActionBarProps) {
     e.target.files = null;
   };
   return (
-    <div className="flex w-full justify-end px-8 py-4 sm:pr-8">
+    <div className="flex w-full items-center justify-end px-8 py-4 sm:pr-8">
       {menuOption === "Commands" && (
         <button
           onClick={() => {
@@ -74,6 +82,9 @@ export function ActionBar({ menuOption, userKey }: ActionBarProps) {
           />
         </div>
       )}
+      <h1 className="decoration-bk-blue dark:decoration-bk-orange hidden pl-8 underline sm:flex sm:text-xl md:text-2xl lg:text-3xl">
+        {generateDisplayName(user)}&apos;s Bookshelf
+      </h1>
     </div>
   );
 }

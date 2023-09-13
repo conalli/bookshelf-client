@@ -14,21 +14,25 @@ import {
 } from "@bookshelf-client/hooks";
 import { Loading } from "@bookshelf-client/ui";
 import type { UpdateCommandStatus } from "@bookshelf-client/utils";
-import type { MenuOption } from "@bookshelf-client/web/components";
+import type { DashboardTab } from "@bookshelf-client/web/components";
 import {
   ActionBar,
   BookmarkTable,
   BrowserSetup,
   CommandTable,
-  MenuBar,
   Modal,
   ModalOverlay,
+  TabBar,
 } from "@bookshelf-client/web/components";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
-const Dashboard = ({ userData }: { userData: User }) => {
-  const [menuOption, setMenuOption] = useState<MenuOption>("Commands");
+const Dashboard = ({
+  userData,
+  currentTab,
+}: {
+  userData: User;
+  currentTab: DashboardTab;
+}) => {
   const userKey = userData.api_key;
   const { status, setStatus } = useAuth();
   const { data: user } = useGetUser(userKey, {
@@ -62,17 +66,13 @@ const Dashboard = ({ userData }: { userData: User }) => {
   if (status && status.loading) return <Loading isPage />;
   else setStatus(null);
   return (
-    <section className="flex min-h-full grow flex-col px-8 sm:flex-row">
-      <section className="w-full sm:min-h-full sm:w-1/4">
-        <MenuBar
-          selected={menuOption}
-          setSelected={setMenuOption}
-          user={user}
-        />
+    <section className="flex min-h-full grow flex-col sm:flex-row">
+      <section className="w-full sm:min-h-full sm:w-24">
+        <TabBar selected={currentTab} />
       </section>
-      <section className="flex min-h-full w-full flex-col items-center sm:w-3/4 sm:gap-4">
-        <ActionBar menuOption={menuOption} userKey={userKey} />
-        {menuOption === "Commands" && (
+      <section className="flex min-h-full w-full flex-col items-center bg-neutral-50 dark:bg-bk-bg-dark sm:w-full sm:gap-4">
+        <ActionBar menuOption={currentTab} user={user} />
+        {currentTab === "Commands" && (
           <CommandTable
             commands={data}
             isLoadingCommands={isLoading}
@@ -80,14 +80,14 @@ const Dashboard = ({ userData }: { userData: User }) => {
             cmdStatus={updateStatus}
           />
         )}
-        {menuOption === "Bookmarks" && (
+        {currentTab === "Bookmarks" && (
           <BookmarkTable
             folder={folder}
             isLoading={isFolderLoading || addBookmarkFile.isLoading}
             isError={isFolderError}
           />
         )}
-        {menuOption === "Setup guide" && (
+        {currentTab === "Setup" && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{

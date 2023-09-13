@@ -58,7 +58,7 @@ export function CommandTable({
           },
         }}
         exit={{ opacity: 0, x: -20 }}
-        className="mx-auto w-full rounded bg-white py-2 shadow dark:bg-neutral-800 md:mt-1.5 lg:w-2/4"
+        className="rounded bg-white px-8 py-2 shadow dark:bg-neutral-800 md:mt-1.5 lg:w-2/4"
       >
         <thead className="border-b-bk-blue text-bk-blue dark:border-b-bk-orange dark:text-bk-orange rounded-lg border-b-2 bg-white text-left dark:bg-neutral-800">
           <tr>
@@ -76,7 +76,7 @@ export function CommandTable({
           {commands &&
             Object.keys(commands).map((key: string) => {
               return (
-                <tr key={key}>
+                <tr key={key} className="hover:bg-neutral-700">
                   <td className="p-2 text-xs md:text-sm  lg:text-base">
                     {key}
                   </td>
