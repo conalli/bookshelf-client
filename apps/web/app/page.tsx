@@ -24,7 +24,7 @@ export default function Home() {
               (&lowast;coming soon)
             </h3>
           </div>
-          <div className="col-span-4 col-start-2 row-span-2 row-start-4 flex flex-1 items-center justify-center gap-2 place-self-center md:row-span-1 md:row-start-5 lg:gap-20">
+          <div className="col-span-4 col-start-2 row-span-2 row-start-4 flex flex-1 items-center justify-center gap-4 place-self-center py-4 sm:py-0 md:row-span-1 md:row-start-5 lg:gap-20">
             <Link href="/signup">
               <Button>Sign up</Button>
             </Link>
