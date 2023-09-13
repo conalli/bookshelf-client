@@ -17,7 +17,7 @@ export default function Home() {
             <h2 className="rotate-180 rounded bg-bk-blue px-1 py-4 text-3xl transition delay-100 ease-in-out hover:scale-y-110 md:text-4xl lg:text-6xl xl:text-7xl">
               Update.
             </h2>
-            <h2 className="group rotate-180 rounded bg-bk-orange px-1 py-4 text-3xl transition delay-100 ease-in-out hover:scale-y-110 md:text-4xl lg:text-6xl xl:text-7xl">
+            <h2 className="rotate-180 rounded bg-bk-orange px-1 py-4 text-3xl transition delay-100 ease-in-out hover:scale-y-110 md:text-4xl lg:text-6xl xl:text-7xl">
               Collaborate.&lowast;
             </h2>
             <h3 className="rotate-180 rounded bg-bk-red px-1 py-4 text-sm transition delay-100 ease-in-out hover:scale-y-110 lg:text-3xl xl:text-4xl">

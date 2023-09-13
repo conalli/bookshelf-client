@@ -36,7 +36,7 @@ export function NavLinks({ user }: NavLinksProps) {
           Log out
         </button>
       )}
-      <div className="flex px-2 sm:place-content-center md:px-4">
+      <div className="flex px-1 sm:place-content-center sm:px-2 md:px-4">
         <ThemeToggleButton
           buttonClass="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 focus:shadow-outline"
           iconClass={{
