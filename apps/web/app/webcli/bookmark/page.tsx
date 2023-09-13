@@ -5,10 +5,12 @@ import Bookmark from ".";
 
 export default async function BookmarkPage() {
   try {
-    const bookshelfCookies = getBookshelfCookies(cookies());
-    const u = getUser(bookshelfCookies);
-    const f = getFolder(bookshelfCookies);
-    const [userData, folderData] = await Promise.all([u, f]);
+    const cookieData = cookies();
+    const bookshelfCookies = getBookshelfCookies(cookieData);
+    const [userData, folderData] = await Promise.all([
+      getUser(bookshelfCookies),
+      getFolder(bookshelfCookies),
+    ]);
     return <Bookmark userData={userData} folderData={folderData} />;
   } catch (error) {
     console.log(error);

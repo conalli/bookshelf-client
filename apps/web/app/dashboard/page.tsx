@@ -1,12 +1,12 @@
 import { getBookshelfCookies, getUser } from "@bookshelf-client/api";
-import type { MenuBarOption } from "@bookshelf-client/web/components";
+import type { DashboardTab } from "@bookshelf-client/web/components";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Dashboard from ".";
 
 type SearchParams = { [key: string]: string | string[] | undefined };
 
-function getMenuOption(s: SearchParams): MenuBarOption {
+function getMenuOption(s: SearchParams): DashboardTab {
   const m = s.tab || "commands";
   if (Array.isArray(m)) return getMenuOption({ menu: m[0] });
   switch (m) {
@@ -33,7 +33,7 @@ export default async function DashboardPage({
   try {
     const bookshelfCookies = getBookshelfCookies(cookies());
     const userData = await getUser(bookshelfCookies);
-    return <Dashboard userData={userData} menuOption={selectedMenuOption} />;
+    return <Dashboard userData={userData} currentTab={selectedMenuOption} />;
   } catch (error) {
     console.log("error: no cookies in request");
     redirect("/signin");

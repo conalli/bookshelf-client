@@ -1,4 +1,4 @@
-import type { User } from "@bookshelf-client/utils";
+import { type User } from "@bookshelf-client/api";
 
 export type MockUser = User & {
   password: string;

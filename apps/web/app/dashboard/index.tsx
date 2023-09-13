@@ -14,7 +14,6 @@ import {
 } from "@bookshelf-client/hooks";
 import { Loading } from "@bookshelf-client/ui";
 import type { UpdateCommandStatus } from "@bookshelf-client/utils";
-import type { DashboardTab } from "@bookshelf-client/web/components";
 import {
   ActionBar,
   BookmarkTable,
@@ -23,6 +22,7 @@ import {
   Modal,
   ModalOverlay,
   TabBar,
+  type DashboardTab,
 } from "@bookshelf-client/web/components";
 import { motion } from "framer-motion";
 

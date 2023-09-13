@@ -2,7 +2,7 @@ import { Button } from "@bookshelf-client/ui/server";
 import { About } from "@bookshelf-client/web/components";
 import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div id="home" className="bg-neutral-900 transition-opacity">
       <main className="min-w-sceen px-8">
