@@ -1669,12 +1669,12 @@
   dependencies:
     "@nx/react" "16.8.0"
 
-"@nrwl/rollup@16.8.0":
-  version "16.8.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/rollup/-/rollup-16.8.0.tgz#d97841a913d15c9d42abdf671de36c685e161962"
-  integrity sha512-DJnGPk3BZ135GOZuEYU19VMZw0Bha9a7oChOPTClhHbV75UZbniKeN/FM7sYBBfUOVC0rovZ6RraB4QbJXvwRg==
+"@nrwl/rollup@16.8.1":
+  version "16.8.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/rollup/-/rollup-16.8.1.tgz#0f75288971937d69e2120e508e9c362fad5939fe"
+  integrity sha512-cX7c3G7sk0CSDvHXnTF+rU6gVyCobrCx5bKmux1/WCZ/bK5ODdTl31F8OOFOSIyWr4YXPQM4CNgPWqX43kZIOA==
   dependencies:
-    "@nx/rollup" "16.8.0"
+    "@nx/rollup" "16.8.1"
 
 "@nrwl/tao@16.7.4":
   version "16.7.4"
@@ -1796,7 +1796,7 @@
     resolve.exports "1.1.0"
     tslib "^2.3.0"
 
-"@nx/js@16.8.0", "@nx/js@^16.7.4":
+"@nx/js@16.8.0":
   version "16.8.0"
   resolved "https://registry.yarnpkg.com/@nx/js/-/js-16.8.0.tgz#642df132779ff0147400652603dca5ec4ba8fa27"
   integrity sha512-PFBlS8gd0lwS8DX92wEVVZfDaDFq+lKj7VPLMCLK1jEnKeKWmuDL2sZVFTlD3KzqXQxfOi5vQZu25z0FH0KI8A==
@@ -1828,7 +1828,7 @@
     tsconfig-paths "^4.1.2"
     tslib "^2.3.0"
 
-"@nx/js@16.8.1":
+"@nx/js@16.8.1", "@nx/js@^16.7.4":
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/@nx/js/-/js-16.8.1.tgz#9f7199a5b923ec089956f50f900ce0deba35203a"
   integrity sha512-SznU6GH/yxj2ro1pgUWDSaoiSiP7UgxMvb2qlyhU1iRB9sdOBhduzVq6+yTgrje2sVSnAWSGbWiQaYkxFLaKWw==
@@ -2076,14 +2076,14 @@
     minimatch "3.0.5"
     tslib "^2.3.0"
 
-"@nx/rollup@16.8.0", "@nx/rollup@^16.7.4":
-  version "16.8.0"
-  resolved "https://registry.yarnpkg.com/@nx/rollup/-/rollup-16.8.0.tgz#e6e9a52f8906b04b97f9809cc1c0c782698ab63e"
-  integrity sha512-835rFRZQWY2HaIqqMUXxCPnGNxBUIwai/FXDprAYQ6X6mt9ZG8KzuiC7m9NSMjRIOXbRPJxERq6CKveKQxSOFA==
+"@nx/rollup@16.8.1", "@nx/rollup@^16.8.1":
+  version "16.8.1"
+  resolved "https://registry.yarnpkg.com/@nx/rollup/-/rollup-16.8.1.tgz#d1a4304b121f1b38ade88f9c46ed68b93cdb82b9"
+  integrity sha512-sHPd6xOI11lncG47+d4XnURlsVvfOq4IHbYBGrOu8sJUZRWISNhGD/HSagR3aR+4epFN3UyDTOnqQBolPPMKEg==
   dependencies:
-    "@nrwl/rollup" "16.8.0"
-    "@nx/devkit" "16.8.0"
-    "@nx/js" "16.8.0"
+    "@nrwl/rollup" "16.8.1"
+    "@nx/devkit" "16.8.1"
+    "@nx/js" "16.8.1"
     "@rollup/plugin-babel" "^5.3.0"
     "@rollup/plugin-commonjs" "^20.0.0"
     "@rollup/plugin-image" "^2.1.0"
