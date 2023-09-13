@@ -1,18 +1,4 @@
-"use client";
-
-import type { User } from "@bookshelf-client/api";
-import { useGetUser } from "@bookshelf-client/hooks";
-
-type HelpProps = {
-  userData: User | null;
-};
-
-export default function Help({ userData }: HelpProps) {
-  useGetUser(
-    userData?.api_key,
-    userData ? { initialData: userData } : undefined,
-    true
-  );
+export default function Help() {
   return (
     <div className="px-8">
       <h1 className="py-3 text-4xl">WebCLI Help:</h1>

@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import { SignInForm } from "./SignInForm";
+import React, { render, screen } from "@testing-library/react";
+import { SignInForm } from "./sign-in-form";
 
 describe("Bookshelf Logo", () => {
   beforeEach(() => {

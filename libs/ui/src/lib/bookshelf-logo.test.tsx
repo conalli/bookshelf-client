@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import { BookshelfLogo } from "./BookshelfLogo";
+import { BookshelfLogo } from "./bookshelf-logo";
 
 describe("Bookshelf Logo", () => {
   beforeEach(() => {

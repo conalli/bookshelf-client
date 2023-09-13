@@ -1,9 +1,11 @@
-import type { AuthRequest, ErrorResponse, User } from "@bookshelf-client/utils";
-import { APIURL } from "@bookshelf-client/utils";
-import type { PathParams } from "msw";
-import { rest } from "msw";
-import type { MockUser } from "../mockUserData";
-import { mockUsers } from "../mockUserData";
+import {
+  APIURL,
+  type AuthRequest,
+  type ErrorResponse,
+  type User,
+} from "@bookshelf-client/api";
+import { rest, type PathParams } from "msw";
+import { mockUsers, type MockUser } from "../mockUserData";
 
 export const auth = [
   rest.post<AuthRequest, PathParams, User | ErrorResponse>(
