@@ -1,15 +1,12 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 export function About() {
   return (
     <article
       id="learn"
-      className="flex w-full flex-col rounded-md bg-white px-8 py-4 shadow-md dark:bg-neutral-800 md:py-8"
+      className="flex flex-col rounded-md bg-white px-8 py-4 shadow-md dark:bg-neutral-800 md:py-8"
     >
-      <section className="flex flex-col py-1 sm:py-6">
+      <section className="mx-auto flex flex-col py-1 sm:w-2/3 sm:py-6">
         <h2 className="py-4 text-3xl font-bold sm:text-5xl">
           About Bookshelf.
         </h2>
@@ -21,7 +18,7 @@ export function About() {
           search engine.
         </p>
       </section>
-      <section>
+      <section className="mx-auto flex flex-col sm:w-2/3 ">
         <h2 className="py-4 text-2xl font-bold sm:text-4xl">How?</h2>
         <ul className="sm:pt-4 sm:text-xl">
           <li className="py-1 md:py-2">
@@ -48,12 +45,12 @@ export function About() {
           </li>
         </ul>
       </section>
-      <motion.a
+      <Link
         href="#top"
-        className="decoration-bk-blue hover:text-bk-blue py-6 text-xl underline decoration-2"
+        className="decoration-bk-blue hover:text-bk-blue py-6 text-xl underline decoration-2 sm:mx-auto sm:w-2/3"
       >
         To top
-      </motion.a>
+      </Link>
     </article>
   );
 }
