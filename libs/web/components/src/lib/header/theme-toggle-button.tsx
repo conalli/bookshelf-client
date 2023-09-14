@@ -1,5 +1,4 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -31,8 +30,7 @@ export function ThemeToggleButton({
   }, [theme]);
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.1 }}
+    <button
       onClick={toggleTheme}
       className={buttonClass}
       type="button"
@@ -44,6 +42,6 @@ export function ThemeToggleButton({
       ) : (
         <MoonIcon title="dark-mode" className={iconClass.light} />
       )}
-    </motion.button>
+    </button>
   );
 }

@@ -25,6 +25,7 @@ import {
   type DashboardTab,
 } from "@bookshelf-client/web/components";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const Dashboard = ({
   userData,
@@ -62,9 +63,15 @@ const Dashboard = ({
       error: deleteCommand.isError,
     },
   };
+
+  useEffect(() => {
+    if (user && !(status && status.loading)) {
+      setStatus(null);
+    }
+  }, [setStatus, status, user]);
+
   if (!user) return null;
   if (status && status.loading) return <Loading isPage />;
-  else setStatus(null);
   return (
     <section className="flex min-h-full grow flex-col sm:flex-row">
       <section className="w-full sm:min-h-full sm:w-24">
