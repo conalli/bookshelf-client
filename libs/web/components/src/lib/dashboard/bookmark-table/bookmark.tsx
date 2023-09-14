@@ -13,7 +13,7 @@ export function Bookmark({ bookmark, showDelete }: BookmarkProps) {
   const { setIsOpen, setModalType } = useModal();
   const { setSelectedBookmark } = useSelectBookmark();
   return (
-    <div className=" truncate">
+    <div className="truncate">
       <div className="hover:text-bk-blue dark:hover:text-bk-orange flex w-[200px] justify-between sm:w-[350px] md:w-[400px]">
         <Link className="truncate pl-2" href={bookmark.url}>
           {bookmark.name !== "" ? bookmark.name : bookmark.url}

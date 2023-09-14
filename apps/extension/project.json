@@ -21,7 +21,7 @@
     "bundle": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "make extension"
+        "command": "make bundle-extension"
       }
     },
     "serve": {
