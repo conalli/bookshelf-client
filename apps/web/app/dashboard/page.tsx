@@ -29,7 +29,6 @@ export default async function DashboardPage({
   searchParams,
 }: DashboardPageProps) {
   const selectedMenuOption = getMenuOption(searchParams);
-  console.log("s", selectedMenuOption);
   try {
     const bookshelfCookies = getBookshelfCookies(cookies());
     const userData = await getUser(bookshelfCookies);

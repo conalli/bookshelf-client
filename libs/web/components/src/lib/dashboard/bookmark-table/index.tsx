@@ -7,7 +7,7 @@ import { Spinner } from "@bookshelf-client/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { Folder } from "./Folder";
+import { Folder } from "./folder";
 
 type BookmarkTableProps = {
   folder: APIFolder | undefined;

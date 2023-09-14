@@ -10,8 +10,7 @@ import { Button } from "@bookshelf-client/ui/server";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import type { ChangeEvent, SetStateAction } from "react";
-import { useState } from "react";
+import { useState, type ChangeEvent, type SetStateAction } from "react";
 
 type AddBookmarkOverlayProps = {
   folder: Folder | undefined;

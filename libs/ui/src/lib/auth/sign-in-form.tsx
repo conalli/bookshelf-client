@@ -48,8 +48,6 @@ export function SignInForm({ type }: SignInFormProps) {
   const isDisabled =
     isLoading || (type === "Sign in" ? isSignInLoading : isSignUpLoading);
 
-  console.log("V", isValid);
-
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       <div className="text-md w-full py-2 md:text-xl">
@@ -83,7 +81,7 @@ export function SignInForm({ type }: SignInFormProps) {
         <ErrorMessage error={errors.password} />
       </div>
       <div className="flex justify-center py-2 md:py-10">
-        <Button data-cy={type} type="submit" disabled={isDisabled}>
+        <Button data-cy={type} type="submit" disabled={isDisabled || !isValid}>
           {type}
         </Button>
       </div>

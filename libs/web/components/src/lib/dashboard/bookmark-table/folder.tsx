@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 import { useAtomValue, useSetAtom } from "jotai";
 import type { MouseEvent } from "react";
 import { useState } from "react";
-import { Bookmark } from "./Bookmark";
-import { BookmarksFolderIcon } from "./BookmarksFolderIcon";
+import { Bookmark } from "./bookmark";
+import { BookmarksFolderIcon } from "./bookmarks-folder-icon";
 
 const FOLDER_BASE_PATH = "";
 

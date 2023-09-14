@@ -3,13 +3,14 @@ import { AriaAttributes, ButtonHTMLAttributes, PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
 const button = cva(
-  "shadow-md hover:opacity-90 rounded transition delay-100 hover:scale-110",
+  "shadow-md hover:opacity-90 disabled:hover:opacity-100 rounded transition delay-100 hover:scale-110 disabled:hover:scale-100",
   {
     variants: {
       variant: {
-        primary: "bg-bk-blue dark:bg-bk-orange",
+        primary:
+          "bg-bk-blue dark:bg-bk-orange disabled:bg-bk-blue/90 dark:disabled:bg-bk-orange/90",
         secondary:
-          "bg-bk-orange outline-bk-orange dark:bg-bk-blue dark:outline-bk-blue",
+          "bg-bk-orange dark:bg-bk-blue disabled:bg-bk-orange/90 disabled:dark:bg-bk-blue/90",
         outline:
           "underline outline decoration-2 decoration-bk-blue outline-bk-blue",
         add: "bg-green-400 disabled:bg-gray-300 disabled:text-opacity-50 disabled:opacity-50 dark:bg-gray-100 dark:text-neutral-600",

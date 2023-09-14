@@ -24,10 +24,10 @@ import {
 } from "@bookshelf-client/store";
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { AddBookmarkOverlay } from "./Modal/AddBookmarkOverlay";
-import { AddCommandOverlay } from "./Modal/AddCommandOverlay";
-import { DeleteBookmarkOverlay } from "./Modal/DeleteBookmarkOverlay";
-import { DeleteCommandOverlay } from "./Modal/DeleteCommandOverlay";
+import { AddBookmarkOverlay } from "./modal/add-bookmark-overlay";
+import { AddCommandOverlay } from "./modal/add-command-overlay";
+import { DeleteBookmarkOverlay } from "./modal/delete-bookmark-overlay";
+import { DeleteCommandOverlay } from "./modal/delete-command-overlay";
 
 type ModalOverlayProps = {
   user: User;

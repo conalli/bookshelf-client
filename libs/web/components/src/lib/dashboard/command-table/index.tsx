@@ -6,8 +6,8 @@ import { DELETE_COMMAND_MODAL } from "@bookshelf-client/store";
 import type { UpdateCommandStatus } from "@bookshelf-client/utils";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import { CommandPlaceholder } from "./CommandPlaceholder";
-import { StatusIcon } from "./StatusIcon";
+import { CommandPlaceholder } from "./command-placeholder";
+import { StatusIcon } from "./status-icon";
 
 type CommandTableProps = {
   commands: CommandList | undefined;
