@@ -10,6 +10,6 @@ export * from "./lib/dashboard/modal/delete-command-overlay";
 export * from "./lib/dashboard/tab-bar";
 export * from "./lib/dashboard/tab-bar-item";
 export * from "./lib/header";
-export * from "./lib/home/About";
+export * from "./lib/home/about";
 export * from "./lib/layout";
 export * from "./lib/providers";
