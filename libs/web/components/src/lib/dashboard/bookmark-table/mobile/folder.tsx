@@ -1,28 +1,25 @@
-import { type Folder as APIFolder } from "@bookshelf-client/api";
+import type { Folder as APIFolder } from "@bookshelf-client/api";
 import {
   openFoldersAtom,
   updateOpenFoldersAtom,
 } from "@bookshelf-client/store";
-import { useAtomValue, useSetAtom } from "jotai/react";
-import { Dispatch, SetStateAction, type MouseEvent } from "react";
-import { FolderIcon } from "./folder-icon";
+import { motion } from "framer-motion";
+import { useAtomValue, useSetAtom } from "jotai";
+import type { MouseEvent } from "react";
+import { useState } from "react";
+import { Bookmark } from "../bookmark";
+import { FolderIcon } from "../folder-icon";
 
 const FOLDER_BASE_PATH = "";
 
 type FolderProps = {
   folder: APIFolder;
   isOpen: boolean;
-  selectedFolder: APIFolder | null;
-  setSelectedFolder: Dispatch<SetStateAction<APIFolder | null>>; // update later
 };
 
-export function Folder({
-  folder,
-  isOpen,
-  selectedFolder,
-  setSelectedFolder,
-}: FolderProps) {
-  const { folders } = folder;
+export function Folder({ folder, isOpen }: FolderProps) {
+  const { bookmarks, folders } = folder;
+  const [showDelete, setShowDelete] = useState<string | null>(folder.id);
   const isFolderOpen = useAtomValue(openFoldersAtom);
   const setIsFolderOpen = useSetAtom(updateOpenFoldersAtom);
   const handleToggleFolder = (
@@ -32,7 +29,6 @@ export function Folder({
     e.preventDefault();
     e.stopPropagation();
     setIsFolderOpen(name);
-    setSelectedFolder(folder);
   };
 
   const hasContents =
@@ -49,13 +45,25 @@ export function Folder({
           <FolderIcon
             hasContents={hasContents}
             isOpen={isOpen}
-            isSelected={folder.id === selectedFolder?.id}
+            isSelected={false}
           />
           <h3 className="text-bk-blue dark:text-bk-orange">{folder.name}</h3>
         </div>
       )}
       {isOpen && (
-        <ul key={folder.id} className="mx-4">
+        <motion.ul key={folder.id} className="mx-4">
+          {bookmarks &&
+            bookmarks.map((b) => (
+              <motion.li
+                key={b.id}
+                onHoverStart={() => {
+                  setShowDelete(b.id);
+                }}
+                onHoverEnd={() => setShowDelete(null)}
+              >
+                <Bookmark bookmark={b} showDelete={showDelete} />
+              </motion.li>
+            ))}
           {folders &&
             folders.map((f) => {
               const currOpen = isFolderOpen[f.name];
@@ -64,17 +72,12 @@ export function Folder({
                 .filter((p) => p.length)
                 .reduce((prev, curr) => prev && isFolderOpen[curr], currOpen);
               return (
-                <li key={f.id}>
-                  <Folder
-                    folder={f}
-                    isOpen={isOpen}
-                    selectedFolder={selectedFolder}
-                    setSelectedFolder={setSelectedFolder}
-                  />
-                </li>
+                <motion.li key={f.id}>
+                  <Folder folder={f} isOpen={isOpen} />
+                </motion.li>
               );
             })}
-        </ul>
+        </motion.ul>
       )}
     </div>
   );
