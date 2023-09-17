@@ -1,5 +1,5 @@
 import { type Folder as APIFolder } from "@bookshelf-client/api";
-import { Dispatch, SetStateAction } from "react";
+import { type MouseEvent } from "react";
 import { Folder } from "./folder";
 
 export function FolderList({
@@ -11,16 +11,20 @@ export function FolderList({
   folder: APIFolder;
   isOpen: boolean;
   selectedFolder: APIFolder | null;
-  setSelectedFolder: Dispatch<SetStateAction<APIFolder | null>>;
+  setSelectedFolder: (
+    e: MouseEvent<HTMLDivElement>,
+    clickedFolder: APIFolder
+  ) => void;
 }) {
   return (
     <ul>
-      <Folder
-        folder={folder}
-        isOpen={isOpen}
-        selectedFolder={selectedFolder}
-        setSelectedFolder={setSelectedFolder}
-      />
+      <li>
+        <Folder
+          folder={folder}
+          selectedFolder={selectedFolder}
+          setSelectedFolder={setSelectedFolder}
+        />
+      </li>
     </ul>
   );
 }

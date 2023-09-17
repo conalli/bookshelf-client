@@ -1,36 +1,36 @@
 import type { Bookmark as APIBookmark } from "@bookshelf-client/api";
-import { useModal, useSelectBookmark } from "@bookshelf-client/hooks";
-import { DELETE_BOOKMARK_MODAL } from "@bookshelf-client/store";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { type MouseEvent } from "react";
 
 type BookmarkProps = {
-  showDelete: string | null;
   bookmark: APIBookmark;
+  isSelected: boolean;
+  selectBookmark: (b: APIBookmark | null) => void;
 };
 
-export function Bookmark({ bookmark, showDelete }: BookmarkProps) {
-  const { setIsOpen, setModalType } = useModal();
-  const { setSelectedBookmark } = useSelectBookmark();
+export function Bookmark({
+  bookmark,
+  isSelected,
+  selectBookmark,
+}: BookmarkProps) {
+  const bookmarkClickHandler = (e: MouseEvent<HTMLDivElement>): void => {
+    e.preventDefault();
+    e.preventDefault();
+    console.log("clicked", bookmark);
+    isSelected ? selectBookmark(null) : selectBookmark(bookmark);
+  };
+  const styles =
+    "hover:text-bk-blue dark:hover:text-bk-orange flex w-full justify-between truncate hover:cursor-pointer" +
+    (isSelected ? "bg-neutral-700" : "");
   return (
-    <div className="truncate">
-      <div className="hover:text-bk-blue dark:hover:text-bk-orange flex w-[200px] justify-between sm:w-[350px] md:w-[400px]">
-        <Link className="truncate pl-2" href={bookmark.url}>
-          {bookmark.name !== "" ? bookmark.name : bookmark.url}
-        </Link>
-        {showDelete && showDelete === bookmark.id && (
-          <button
-            onClick={() => {
-              setModalType(DELETE_BOOKMARK_MODAL);
-              setSelectedBookmark(bookmark);
-              setIsOpen(true);
-            }}
-            className="flex w-full items-center justify-center"
-          >
-            <TrashIcon className="h-4 w-4 text-red-400 hover:text-red-500" />
-          </button>
-        )}
-      </div>
+    <div className={styles} onClick={bookmarkClickHandler}>
+      <Link className="pl-2" href={bookmark.url}>
+        {bookmark.name !== "" ? bookmark.name : bookmark.url}
+      </Link>
+      <button className="rounded-full hover:bg-neutral-700/90">
+        <EllipsisVerticalIcon className="w-6 text-gray-400 " />
+      </button>
     </div>
   );
 }

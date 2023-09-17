@@ -1,81 +1,62 @@
 import { type Folder as APIFolder } from "@bookshelf-client/api";
-import {
-  openFoldersAtom,
-  updateOpenFoldersAtom,
-} from "@bookshelf-client/store";
-import { useAtomValue, useSetAtom } from "jotai/react";
-import { Dispatch, SetStateAction, type MouseEvent } from "react";
+import { type MouseEvent } from "react";
 import { FolderIcon } from "./folder-icon";
 
 const FOLDER_BASE_PATH = "";
 
 type FolderProps = {
   folder: APIFolder;
-  isOpen: boolean;
   selectedFolder: APIFolder | null;
-  setSelectedFolder: Dispatch<SetStateAction<APIFolder | null>>; // update later
+  setSelectedFolder: (
+    e: MouseEvent<HTMLDivElement>,
+    clickedFolder: APIFolder
+  ) => void;
 };
 
 export function Folder({
   folder,
-  isOpen,
   selectedFolder,
   setSelectedFolder,
 }: FolderProps) {
   const { folders } = folder;
-  const isFolderOpen = useAtomValue(openFoldersAtom);
-  const setIsFolderOpen = useSetAtom(updateOpenFoldersAtom);
-  const handleToggleFolder = (
-    e: MouseEvent<HTMLDivElement>,
-    name: string | number
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsFolderOpen(name);
-    setSelectedFolder(folder);
-  };
-
-  const hasContents =
-    (folder.bookmarks && folder.bookmarks.length > 0) ||
-    (folder.folders !== null && folder.folders.length > 0);
-
+  const selectFolder = (e: MouseEvent<HTMLDivElement>) =>
+    setSelectedFolder(e, folder);
+  const hasContents = folder.bookmarks ? folder.bookmarks.length > 0 : false;
+  const selected =
+    selectedFolder?.id === folder.id
+      ? "text-bk-blue dark:text-bk-orange"
+      : "text-bk-blue/90 dark:text-bk-orange/50";
   return (
     <div className="pb-0.5 pt-1">
       {folder.name !== FOLDER_BASE_PATH && (
         <div
-          className="flex items-center gap-2 truncate hover:cursor-pointer"
-          onClick={(e) => handleToggleFolder(e, folder.name)}
+          className={
+            "flex items-center gap-2 truncate" +
+            (hasContents ? "hover:cursor-pointer" : "")
+          }
+          onClick={selectFolder}
         >
           <FolderIcon
             hasContents={hasContents}
-            isOpen={isOpen}
             isSelected={folder.id === selectedFolder?.id}
           />
-          <h3 className="text-bk-blue dark:text-bk-orange">{folder.name}</h3>
+          <h3 className={selected}>{folder.name}</h3>
         </div>
       )}
-      {isOpen && (
-        <ul key={folder.id} className="mx-4">
-          {folders &&
-            folders.map((f) => {
-              const currOpen = isFolderOpen[f.name];
-              const isOpen = f.path
-                .split(",")
-                .filter((p) => p.length)
-                .reduce((prev, curr) => prev && isFolderOpen[curr], currOpen);
-              return (
-                <li key={f.id}>
-                  <Folder
-                    folder={f}
-                    isOpen={isOpen}
-                    selectedFolder={selectedFolder}
-                    setSelectedFolder={setSelectedFolder}
-                  />
-                </li>
-              );
-            })}
-        </ul>
-      )}
+      <ul key={folder.id} className="mx-4">
+        {folders &&
+          folders.map((f) => {
+            return (
+              <li key={f.id}>
+                <Folder
+                  folder={f}
+                  selectedFolder={selectedFolder}
+                  setSelectedFolder={setSelectedFolder}
+                />
+              </li>
+            );
+          })}
+      </ul>
     </div>
   );
 }

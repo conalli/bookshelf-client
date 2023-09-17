@@ -3,10 +3,8 @@ import {
   openFoldersAtom,
   updateOpenFoldersAtom,
 } from "@bookshelf-client/store";
-import { motion } from "framer-motion";
 import { useAtomValue, useSetAtom } from "jotai";
 import type { MouseEvent } from "react";
-import { useState } from "react";
 import { Bookmark } from "../bookmark";
 import { FolderIcon } from "../folder-icon";
 
@@ -19,7 +17,6 @@ type FolderProps = {
 
 export function Folder({ folder, isOpen }: FolderProps) {
   const { bookmarks, folders } = folder;
-  const [showDelete, setShowDelete] = useState<string | null>(folder.id);
   const isFolderOpen = useAtomValue(openFoldersAtom);
   const setIsFolderOpen = useSetAtom(updateOpenFoldersAtom);
   const handleToggleFolder = (
@@ -42,27 +39,23 @@ export function Folder({ folder, isOpen }: FolderProps) {
           className="flex items-center gap-2 truncate hover:cursor-pointer"
           onClick={(e) => handleToggleFolder(e, folder.name)}
         >
-          <FolderIcon
-            hasContents={hasContents}
-            isOpen={isOpen}
-            isSelected={false}
-          />
+          <FolderIcon hasContents={hasContents} isSelected={false} />
           <h3 className="text-bk-blue dark:text-bk-orange">{folder.name}</h3>
         </div>
       )}
       {isOpen && (
-        <motion.ul key={folder.id} className="mx-4">
+        <ul key={folder.id} className="mx-4">
           {bookmarks &&
             bookmarks.map((b) => (
-              <motion.li
-                key={b.id}
-                onHoverStart={() => {
-                  setShowDelete(b.id);
-                }}
-                onHoverEnd={() => setShowDelete(null)}
-              >
-                <Bookmark bookmark={b} showDelete={showDelete} />
-              </motion.li>
+              <li key={b.id}>
+                <Bookmark
+                  bookmark={b}
+                  selectBookmark={(_b) => {
+                    return;
+                  }}
+                  isSelected={false}
+                />
+              </li>
             ))}
           {folders &&
             folders.map((f) => {
@@ -72,12 +65,12 @@ export function Folder({ folder, isOpen }: FolderProps) {
                 .filter((p) => p.length)
                 .reduce((prev, curr) => prev && isFolderOpen[curr], currOpen);
               return (
-                <motion.li key={f.id}>
+                <li key={f.id}>
                   <Folder folder={f} isOpen={isOpen} />
-                </motion.li>
+                </li>
               );
             })}
-        </motion.ul>
+        </ul>
       )}
     </div>
   );
