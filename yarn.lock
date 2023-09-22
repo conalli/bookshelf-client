@@ -2254,7 +2254,7 @@
     http-server "^14.1.0"
     tslib "^2.3.0"
 
-"@nx/workspace@16.8.0", "@nx/workspace@^16.7.4":
+"@nx/workspace@16.8.0":
   version "16.8.0"
   resolved "https://registry.yarnpkg.com/@nx/workspace/-/workspace-16.8.0.tgz#ede5b14ef79b6ade58dd87b28fe6ba595628dd4a"
   integrity sha512-cS8ahfV/MYof9AQ7ofdhwbc4NkAtgrHGem1vG/TqyWYxSNYgP5TiJ5CuN8XIIpXet9tTtQc/Cml1xSjEAd7qMQ==
@@ -2269,7 +2269,7 @@
     tslib "^2.3.0"
     yargs-parser "21.1.1"
 
-"@nx/workspace@16.8.1":
+"@nx/workspace@16.8.1", "@nx/workspace@^16.8.1":
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/@nx/workspace/-/workspace-16.8.1.tgz#c73f11a4eb78c04e442d973c2558bbb08d206753"
   integrity sha512-wz5AwqdmRU80slva/Q3UmJAqDRYiPluEcqoBJcr2qW8zhoKYX/uDsYuAdCqr4uP5RokZca3LcXqNdpkOfFJtXg==
