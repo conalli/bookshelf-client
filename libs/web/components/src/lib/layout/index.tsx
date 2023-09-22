@@ -36,7 +36,7 @@ export function Layout({ children }: LayoutProps) {
   }, [controls, theme]);
 
   useEffect(() => {
-    let time: NodeJS.Timer;
+    let time: NodeJS.Timeout;
     if (messages.length) {
       time = setInterval(removeMessageFIFO, MESSAGE_DURATION_MS);
     }
