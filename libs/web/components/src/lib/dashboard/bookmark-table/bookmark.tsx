@@ -1,8 +1,5 @@
 import type { Bookmark as APIBookmark } from "@bookshelf-client/api";
-import {
-  ArrowTopRightOnSquareIcon,
-  EllipsisVerticalIcon,
-} from "@heroicons/react/24/outline";
+import { EllipsisVerticalIcon, LinkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { type MouseEvent } from "react";
 
@@ -36,7 +33,7 @@ export function Bookmark({
             href={bookmark.url}
           >
             {bookmark.url}
-            <ArrowTopRightOnSquareIcon width={16} height={16} />
+            <LinkIcon width={16} height={16} />
           </Link>
         )}
       </div>
