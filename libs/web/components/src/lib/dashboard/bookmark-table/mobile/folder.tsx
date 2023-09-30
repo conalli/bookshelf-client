@@ -5,8 +5,8 @@ import {
 } from "@bookshelf-client/store";
 import { useAtomValue, useSetAtom } from "jotai";
 import type { MouseEvent } from "react";
-import { Bookmark } from "../bookmark";
 import { FolderIcon } from "../folder-icon";
+import { Bookmark } from "./bookmark";
 
 const FOLDER_BASE_PATH = "";
 

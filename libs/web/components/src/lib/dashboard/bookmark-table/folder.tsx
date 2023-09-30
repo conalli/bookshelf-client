@@ -10,7 +10,7 @@ const folderVariants = cva("flex items-center gap-2 truncate", {
   variants: {
     variant: {
       hasContents:
-        "hover:cursor-pointer text-bk-blue/90 dark:text-bk-orange/50",
+        "hover:cursor-pointer text-bk-blue/90 dark:text-bk-orange/50 hover:text-bk-blue hover:dark:text-bk-orange",
       isEmpty: "hover:cursor-default text-neutral-300/50",
     },
     selected: {
