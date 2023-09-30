@@ -6,15 +6,16 @@ import { FolderIcon } from "./folder-icon";
 
 const FOLDER_BASE_PATH = "";
 
-const folderVariants = cva("", {
+const folderVariants = cva("flex items-center gap-2 truncate", {
   variants: {
     variant: {
-      hasContents: "hover:cursor-pointer",
-      isEmpty: "hover:cursor-default",
+      hasContents:
+        "hover:cursor-pointer text-bk-blue/90 dark:text-bk-orange/50",
+      isEmpty: "hover:cursor-default text-neutral-300/50",
     },
     selected: {
       true: "text-bk-blue dark:text-bk-orange",
-      false: "text-bk-blue/90 dark:text-bk-orange/50",
+      false: "",
     },
   },
   defaultVariants: {
@@ -49,16 +50,14 @@ export function Folder({
     <div className="pb-0.5 pt-1">
       {folder.name !== FOLDER_BASE_PATH && (
         <div
-          className={"flex items-center gap-2 truncate"}
+          className={twMerge(folderVariants({ variant, selected }))}
           onClick={(e) => selectFolder(e, hasContents)}
         >
           <FolderIcon
             hasContents={hasContents}
             isSelected={folder.id === selectedFolder?.id}
           />
-          <h3 className={twMerge(folderVariants({ variant, selected }))}>
-            {folder.name}
-          </h3>
+          <h3>{folder.name}</h3>
         </div>
       )}
       <ul key={folder.id} className="mx-4">

@@ -35,12 +35,14 @@ export function BookmarkTable({
     addMessage("error getting bookmarks", true);
   }
   return (
-    <div className="max-h-full max-w-full flex-col rounded pt-4 shadow sm:mx-0 sm:pb-2 md:py-1.5 md:pb-3 lg:w-2/3 lg:pb-6">
+    <div className="rounded pt-4 sm:mx-0 sm:pb-2 md:py-1.5 md:pb-3 lg:w-2/3 lg:p-4">
       {(isLoading || isError) && <Spinner key="spinner" />}
       {folder && (
-        <BookmarksTableMobile key="folder" folder={folder} isOpen={true} />
+        <>
+          <BookmarksTableMobile key="folder" folder={folder} isOpen={true} />
+          <BookmarksTable folder={folder} isError={isError} />
+        </>
       )}
-      {folder && <BookmarksTable folder={folder} isError={isError} />}
     </div>
   );
 }
