@@ -48,7 +48,7 @@
     "@types/chrome": "^0.0.243",
     "@types/firefox-webext-browser": "^111.0.2",
     "@types/jest": "^29.5.4",
-    "@types/node": "^20.6.3",
+    "@types/node": "^20.8.4",
     "@types/react": "^18.2.23",
     "@types/react-dom": "^18.2.7",
     "@types/react-modal": "^3.16.1",
