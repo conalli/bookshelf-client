@@ -46,7 +46,7 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "^14.5.1",
     "@types/chrome": "^0.0.243",
-    "@types/firefox-webext-browser": "^111.0.2",
+    "@types/firefox-webext-browser": "^111.0.3",
     "@types/jest": "^29.5.4",
     "@types/node": "^20.8.7",
     "@types/react": "^18.2.23",

@@ -3243,10 +3243,10 @@
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.29.tgz#a48795ecadf957f6c0d10e0c34af86c098fa5bee"
   integrity sha512-BsPXH/irW0ht0Ji6iw/jJaK8Lj3FJemon2gvEqHKpCdDCeemHa+rI3WBGq5z7cDMZgoLjY40oninGxqk+8NzNQ==
 
-"@types/firefox-webext-browser@^111.0.2":
-  version "111.0.2"
-  resolved "https://registry.yarnpkg.com/@types/firefox-webext-browser/-/firefox-webext-browser-111.0.2.tgz#e042438656ad946f88a446812d3d37dfdc1a9a74"
-  integrity sha512-NS7izfYOnQI/Opf3YdZSKkI5Ox89SqEffJHK2zfGY2BYEVuWuM6pSwDRglGl4W0SM84oUQfvLyYH4X6EQZAJ2w==
+"@types/firefox-webext-browser@^111.0.3":
+  version "111.0.3"
+  resolved "https://registry.yarnpkg.com/@types/firefox-webext-browser/-/firefox-webext-browser-111.0.3.tgz#98b0b32721b2d54611e2fbd03dd610c5ca80f833"
+  integrity sha512-yboaUEJfY6AGB1hJIWzRGNa/qQUCC/2CAgBSWkdJ8rml4k0bXIyxlWYLSRTr6jHT29gdHkdHsPVuF5McSNERfw==
 
 "@types/fs-extra@^8.0.1":
   version "8.1.2"
