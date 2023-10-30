@@ -1823,6 +1823,13 @@
   dependencies:
     "@nx/js" "16.9.1"
 
+"@nrwl/js@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/js/-/js-17.0.2.tgz#d9338b58b063b96f02fb12241f83d743d9e9378c"
+  integrity sha512-qHqZ6V6IP3piyzb9s7HUlcV3X2O/BDmqikg0yoZGitRpyugY5K1BNZITGRmFEzLklfHxVUqI1qsURnClgax+pA==
+  dependencies:
+    "@nx/js" "17.0.2"
+
 "@nrwl/linter@16.8.0":
   version "16.8.0"
   resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-16.8.0.tgz#e28ba871ef5edeb30deffd39de6ae008aa6c02ee"
@@ -1851,12 +1858,12 @@
   dependencies:
     "@nx/react" "16.8.0"
 
-"@nrwl/rollup@16.10.0":
-  version "16.10.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/rollup/-/rollup-16.10.0.tgz#b62b6dd9f102ee42b3ffb4bf1f19906f279bfce9"
-  integrity sha512-ygTHAc18xnkSUa3gOb+K3cpQcbSFl07rgWS6a8q/+HOQa+ZaiuNkEYBtoADlszjDw/uwaOVaGitc2WFO74oisA==
+"@nrwl/rollup@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/rollup/-/rollup-17.0.2.tgz#1007e86c07aae3dceef77d611be14ede61a2bbf4"
+  integrity sha512-1DTj9W4kvFt7cVrZyNnyOJpFALJ0OMBF59jpeKY6PNj2RerSA7zyTlZqDQOlKssthvxEttC4CoD/lxuAhrKWqg==
   dependencies:
-    "@nx/rollup" "16.10.0"
+    "@nx/rollup" "17.0.2"
 
 "@nrwl/tao@16.10.0":
   version "16.10.0"
@@ -2117,6 +2124,41 @@
     "@nrwl/js" "16.9.1"
     "@nx/devkit" "16.9.1"
     "@nx/workspace" "16.9.1"
+    "@phenomnomnominal/tsquery" "~5.0.1"
+    babel-plugin-const-enum "^1.0.1"
+    babel-plugin-macros "^2.8.0"
+    babel-plugin-transform-typescript-metadata "^0.3.1"
+    chalk "^4.1.0"
+    columnify "^1.6.0"
+    detect-port "^1.5.1"
+    fast-glob "3.2.7"
+    fs-extra "^11.1.0"
+    ignore "^5.0.4"
+    js-tokens "^4.0.0"
+    minimatch "3.0.5"
+    npm-package-arg "11.0.1"
+    npm-run-path "^4.0.1"
+    ora "5.3.0"
+    semver "7.5.3"
+    source-map-support "0.5.19"
+    ts-node "10.9.1"
+    tsconfig-paths "^4.1.2"
+    tslib "^2.3.0"
+
+"@nx/js@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@nx/js/-/js-17.0.2.tgz#5d277ab4439c3245abb246e0aedda241844de0a5"
+  integrity sha512-dYvWDd0jwNF4h4V8yjd1ZMSJ38GcpvwrDUVYGYNkZmDqYzkBvqykpY00hRLUYZspiR+iG7uWmyxItZYpCk0WyA==
+  dependencies:
+    "@babel/core" "^7.22.9"
+    "@babel/plugin-proposal-decorators" "^7.22.7"
+    "@babel/plugin-transform-runtime" "^7.22.9"
+    "@babel/preset-env" "^7.22.9"
+    "@babel/preset-typescript" "^7.22.5"
+    "@babel/runtime" "^7.22.6"
+    "@nrwl/js" "17.0.2"
+    "@nx/devkit" "17.0.2"
+    "@nx/workspace" "17.0.2"
     "@phenomnomnominal/tsquery" "~5.0.1"
     babel-plugin-const-enum "^1.0.1"
     babel-plugin-macros "^2.8.0"
@@ -2454,14 +2496,14 @@
     minimatch "3.0.5"
     tslib "^2.3.0"
 
-"@nx/rollup@16.10.0", "@nx/rollup@^16.10.0":
-  version "16.10.0"
-  resolved "https://registry.yarnpkg.com/@nx/rollup/-/rollup-16.10.0.tgz#ef2c4b284bfd159ffdfb2e14003b0626f9e943fb"
-  integrity sha512-KpRchKN/4LzBU3Gfurhm0EDrxOBNPC3ICHfBt4gD8n5/FQWjMjrPh2ZOjN3ovytgjpjG6GRCmH7T5x4g34vFpQ==
+"@nx/rollup@17.0.2", "@nx/rollup@^17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@nx/rollup/-/rollup-17.0.2.tgz#c3194aa4304b0e1e16f98f8ff2a6ac7ce575e248"
+  integrity sha512-jvl71qEpvCsFC+Iea9KCE+thOjnS7l+EYCTZY5WGAbDSeXuQYYmbWZUAQKvItB5CS5ReAj8XoeDVy//9QB0CvQ==
   dependencies:
-    "@nrwl/rollup" "16.10.0"
-    "@nx/devkit" "16.10.0"
-    "@nx/js" "16.10.0"
+    "@nrwl/rollup" "17.0.2"
+    "@nx/devkit" "17.0.2"
+    "@nx/js" "17.0.2"
     "@rollup/plugin-babel" "^5.3.0"
     "@rollup/plugin-commonjs" "^20.0.0"
     "@rollup/plugin-image" "^2.1.0"
