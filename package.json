@@ -56,7 +56,7 @@
     "@typescript-eslint/parser": "^5.60.1",
     "autoprefixer": "^10.4.14",
     "babel-jest": "^29.4.1",
-    "chrome-types": "^0.1.223",
+    "chrome-types": "^0.1.244",
     "cypress": "^13.4.0",
     "eslint": "~8.52.0",
     "eslint-config-next": "13.5.4",
