@@ -4920,10 +4920,10 @@ chokidar@^3.4.2, chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chrome-types@^0.1.223:
-  version "0.1.223"
-  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.223.tgz#ae27c280a449fd5d87db6362b39b487dac704b33"
-  integrity sha512-/QCSU4s6L4mIEM2rLYv8eEl+7sTEorLnaPbn0KbuBvxM5uQuzdL99zDkqzoxSUFixouWnG+1+lflgP0L+CABog==
+chrome-types@^0.1.244:
+  version "0.1.244"
+  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.244.tgz#04e081017d99f9c3e0df977348c41984b015b3da"
+  integrity sha512-5whFpume9JCwLqYo2mR5RJhzmeNCmtTFwYLxAxGyhg+aZ+E+Sps5vSSSmQlcQ0tKEu6lNGJLcmpK4v/BmZKeVw==
 
 ci-info@^3.2.0:
   version "3.8.0"
