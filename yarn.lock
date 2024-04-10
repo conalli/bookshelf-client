@@ -3531,10 +3531,10 @@
     "@types/node" "*"
     "@types/responselike" "^1.0.0"
 
-"@types/chrome@^0.0.254":
-  version "0.0.254"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.254.tgz#f1caadc129134f71bfaa29f9f0295939048da173"
-  integrity sha512-svkOGKwA+6ZZuk9xtrYun8MYpNY/9hD17rgZ19v3KunhsK1ZOKaMESw12/1AXLh1u3UPA8jQIRi2370DXv9wgw==
+"@types/chrome@^0.0.266":
+  version "0.0.266"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.266.tgz#1ef0c3076ea05489db2a04a057657587920d2390"
+  integrity sha512-QSQWJTL7NjZElvq/6/E5C1+pHgEP8UAJzwoz7M4vSJ7AECt6NNehJ+tU6snnvuTqZOBjFCivvitYo5+8tNPmhg==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
