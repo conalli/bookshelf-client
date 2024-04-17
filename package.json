@@ -19,7 +19,7 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.49.2",
+    "react-hook-form": "^7.51.3",
     "react-modal": "^3.16.1",
     "tailwind-merge": "^1.14.0",
     "tslib": "^2.6.2",
