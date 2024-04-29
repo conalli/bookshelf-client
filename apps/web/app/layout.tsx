@@ -1,15 +1,19 @@
 import { Layout, Providers } from "@bookshelf-client/web/components";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Murecho, Overpass } from "next/font/google";
 import "../styles/globals.css";
 
-export const metadata: Metadata = {
-  title: "Bookshelf",
-  description: "Add your bookmarks and manage or access them anywhere.",
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#5bbad5" },
     { media: "(prefers-color-scheme: dark)", color: "#da532c" },
   ],
+};
+
+export const metadata: Metadata = {
+  title: "Bookshelf",
+  description: "Add your bookmarks and manage or access them anywhere.",
+
   icons: {
     icon: [
       { url: "/favicon/favicon-32x32.png", type: "image/png", sizes: "32x32" },

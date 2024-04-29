@@ -1,8 +1,8 @@
 {
-"name": "bookshelf-web",
+  "name": "bookshelf-web",
   "private": true,
   "engines": {
-    "node": "18.16.1"
+    "node": "20.12.2"
   },
   "scripts": {
     "dev": "next dev",
