@@ -42,8 +42,16 @@ export const metadata: Metadata = {
   manifest: "/favicon/site.webmanifest",
 };
 
-const overpass = Overpass({ subsets: ["latin"], variable: "--font-overpass" });
-const murecho = Murecho({ subsets: ["latin"], variable: "--font-murecho" });
+const overpass = Overpass({
+  subsets: ["latin"],
+  variable: "--font-overpass",
+  display: "swap",
+});
+const murecho = Murecho({
+  subsets: ["latin"],
+  variable: "--font-murecho",
+  display: "swap",
+});
 
 export default function RootLayout({
   children,

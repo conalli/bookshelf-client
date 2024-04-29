@@ -5,6 +5,7 @@ import type { SignInFormVariant } from "@bookshelf-client/utils";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function SignUp() {
   const formType: SignInFormVariant = "Sign up";
@@ -30,7 +31,9 @@ export default function SignUp() {
           {formType}
         </h1>
         <div className="col-span-4 col-start-2 row-span-2 row-start-2 self-center justify-self-center md:col-span-2 md:col-start-3">
-          <SignInForm type={formType} />
+          <Suspense>
+            <SignInForm type={formType} />
+          </Suspense>
           <div className="flex justify-center">
             <GoogleSignInButton authType={formType} />
           </div>

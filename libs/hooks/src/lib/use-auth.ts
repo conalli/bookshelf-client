@@ -20,7 +20,6 @@ import type { AxiosError, AxiosResponse } from "axios";
 import axios, { isAxiosError } from "axios";
 import type { SetStateAction } from "jotai";
 import { useAtomValue, useSetAtom } from "jotai";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useMessages } from "./use-messages";
@@ -59,7 +58,7 @@ const logout = async () => {
     null,
     {
       withCredentials: true,
-    }
+    },
   );
   return res.data;
 };
@@ -67,9 +66,8 @@ const logout = async () => {
 const authRequest = (
   mutationFn: MutationFunction<User, AuthRequestData>,
   queryClient: QueryClient,
-  router: AppRouterInstance,
   setAuthStatus: (update: SetStateAction<AuthStatus | null>) => void,
-  addMessage: (message: string, isError?: boolean) => void
+  addMessage: (message: string, isError?: boolean) => void,
 ): UseMutationOptions<
   User,
   AxiosError<ErrorResponse, AuthRequest>,
@@ -80,8 +78,6 @@ const authRequest = (
   mutationFn,
   onSuccess: (_data, { from }): void => {
     setAuthStatus({ success: true, loading: false, error: false });
-    from === "extension" ? window.close() : router.push("/dashboard");
-    window.localStorage.setItem("BOOKSHELF_USER_STATUS", "true");
   },
   onMutate: async (): Promise<void> => {
     setAuthStatus({ success: false, loading: true, error: false });
@@ -111,12 +107,12 @@ export const useAuth = () => {
   const setStatus = useSetAtom(statusAtom);
 
   const signUpOptions = useCallback(
-    () => authRequest(signUp, queryClient, router, setAuthStatus, addMessage),
-    [addMessage, queryClient, router, setAuthStatus]
+    () => authRequest(signUp, queryClient, setAuthStatus, addMessage),
+    [addMessage, queryClient, setAuthStatus],
   );
   const signInOptions = useCallback(
-    () => authRequest(logIn, queryClient, router, setAuthStatus, addMessage),
-    [addMessage, queryClient, router, setAuthStatus]
+    () => authRequest(logIn, queryClient, setAuthStatus, addMessage),
+    [addMessage, queryClient, setAuthStatus],
   );
 
   const signOut = useMutation([USER_KEY], logout, {

@@ -5,6 +5,7 @@ import { GoogleSignInButton, Loading, SignInForm } from "@bookshelf-client/ui";
 import type { SignInFormVariant } from "@bookshelf-client/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function SignIn() {
   const { status } = useAuth();
@@ -28,7 +29,9 @@ export default function SignIn() {
         <h1 className="py-2 text-xl md:text-3xl lg:py-10 lg:text-6xl">
           {formType}
         </h1>
-        <SignInForm type={formType} />
+        <Suspense>
+          <SignInForm type={formType} />
+        </Suspense>
         <div className="flex justify-center">
           <GoogleSignInButton authType={formType} />
         </div>
