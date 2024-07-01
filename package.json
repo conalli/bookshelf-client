@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@nx/cypress": "^17.2.8",
-    "@nx/eslint-plugin": "^17.0.3",
+    "@nx/eslint-plugin": "^17.0.6",
     "@nx/jest": "^18.3.3",
     "@nx/js": "^16.7.4",
     "@nx/linter": "^17.2.6",
