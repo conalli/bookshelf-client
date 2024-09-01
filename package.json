@@ -43,7 +43,7 @@
     "@testing-library/cypress": "^10.0.1",
     "@testing-library/dom": "^10.0.0",
     "@testing-library/jest-dom": "^6.1.5",
-    "@testing-library/react": "14.1.2",
+    "@testing-library/react": "16.0.1",
     "@testing-library/user-event": "^14.5.1",
     "@types/chrome": "^0.0.269",
     "@types/firefox-webext-browser": "^120.0.0",
