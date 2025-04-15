@@ -81,3 +81,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 .nx
+.vscode
+.turbo
