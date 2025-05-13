@@ -13,7 +13,7 @@
     "axios": "^1.6.1",
     "class-variance-authority": "^0.7.0",
     "framer-motion": "^11.0.3",
-    "jotai": "^2.6.3",
+    "jotai": "^2.12.3",
     "nanoid": "^5.0.1",
     "next": "^14.2.3",
     "next-themes": "^0.2.1",
